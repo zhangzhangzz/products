@@ -1,7 +1,5 @@
 {{--继承 admin/back.blade.php	文件--}}
 @extends('admin.back')
-{{--继承标题--}}
-@section('title','后台登录页')
 {{--继承内容区--}}
 @section('content')
 <!doctype html>
