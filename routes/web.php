@@ -16,8 +16,10 @@
  * 陈绪
  */
 
-Route::group(['prefix' => ''],function (){
+Route::group(['namespace'=>'home'],function (){
 
+    /*TODO:前端首页*/
+    Route::any('/','IndexController@index');
 
 });
 
