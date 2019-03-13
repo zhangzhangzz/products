@@ -9,9 +9,9 @@
     <script src="{{ asset('static/admin/layui/layui.js') }}"></script>
 </head>
 <body class="layui-layout-body">
-@include("template._header")
+@include("admin.template._header")
 
-@include("template._menu")
+@include("admin.template._menu")
 
 <div class="layui-body">
     <!-- 内容主体区域 -->
@@ -29,6 +29,6 @@
     © layui.com - 底部固定区域
 </div>
 </div>
-@include("template._footer")
+@include("admin.template._footer")
 </body>
 </html>

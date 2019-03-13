@@ -28,11 +28,11 @@ Route::group(['prefix' => ''],function (){
  * 陈绪
  */
 
-Route::group(['prefix' => 'admin'] ,function (){
+Route::group(['prefix' => 'admin','namespace'=>'admin'] ,function (){
 
 
     /*TODO:后台首页*/
-    Route::any("/","IndexController@index");
+    Route::any('/','AdminController@index');
 
 
     /*TODO:后台登录*/
