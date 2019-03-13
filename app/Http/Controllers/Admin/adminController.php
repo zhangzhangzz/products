@@ -17,6 +17,7 @@ class adminController extends Controller
         return view("admin.user.index");
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
