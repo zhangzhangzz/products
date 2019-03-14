@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
 <html>
-    @include("admin.template._meta")
-    <link rel="stylesheet" href="{{ asset('css/adduser.css') }}">
+    <?php echo $__env->make("admin.template._meta", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('css/adduser.css')); ?>">
 <body class="layui-layout-body">
-    @include("admin.template._header")
+    <?php echo $__env->make("admin.template._header", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-    @include("admin.template._menu")
+    <?php echo $__env->make("admin.template._menu", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div class="main" > 
             <div class="tree">
-                <img src="{{ asset('image/1.jpg') }}" alt=""> 
+                <img src="<?php echo e(asset('image/1.jpg')); ?>" alt=""> 
             </div>
             
             <form class="layui-form layui-form-pane fmain" action="">
@@ -80,7 +80,7 @@
         © layui.com - 底部固定区域
     </div>
 </div>
-    @include("admin.template._footer")
+    <?php echo $__env->make("admin.template._footer", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </body>
 <script>
 
