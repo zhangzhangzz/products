@@ -1,0 +1,43 @@
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#wrongMsg{
+}
+
+
+.tree{
+    width: 35%;
+    padding: 5%;
+    position: absolute;
+    text-align: center;
+    top: 5%;
+}
+
+.tree > img{
+    width: 100%;
+}
+
+.fmain{
+    width: 40%;
+    position: absolute;
+    left:45%;
+    text-align: left;
+    padding: 5% 0;
+    top: 5%;
+}
+
+.fmain > div{
+    margin: 30px 0;
+}
+
+.iBox{
+    border: none!important;
+}
+
+.rootList{
+    width: 190px;
+}
