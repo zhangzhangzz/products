@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>layout 后台大布局 - Layui</title>
   <!-- <link rel="stylesheet" href="./static/admin/layui/css/layui.css"> -->
-  <link rel="stylesheet" href="{{ asset('static/admin/layui/css/layui.css') }}">
-  <script src="{{ asset('static/admin/layui/layui.js') }}"></script>
+  <link rel="stylesheet" href="<?php echo e(asset('static/admin/layui/css/layui.css')); ?>">
+  <script src="<?php echo e(asset('static/admin/layui/layui.js')); ?>"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -71,8 +71,8 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
-    @section('content')
-    @show
+    <?php $__env->startSection('content'); ?>
+    <?php echo $__env->yieldSection(); ?>
       <!-- <iframe src="__HTML_ADMIN__/view/index/main1.html" frameborder="0"></iframe> -->
     </div>
   </div>

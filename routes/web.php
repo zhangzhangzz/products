@@ -11,8 +11,34 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/**
+ * 前端路由
+ * 陈绪
+ */
+
+Route::group(['namespace'=>'home'],function (){
+
+    /*TODO:前端首页*/
+    Route::any('/','IndexController@index');
+
 });
-Route::get('/admin',"Admin\adminController@index");
-Route::get('/admin/create',"Admin\adminController@create");
+
+
+
+/**
+ * 后端路由
+ * 陈绪
+ */
+
+Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.validate', 'admin.index']] ,function (){
+
+
+    /*TODO:后台首页*/
+    Route::any('/','AdminController@index');
+
+
+    /*TODO:后台登录*/
+    Route::any('login','Login\LoginController@index');
+
+
+});
