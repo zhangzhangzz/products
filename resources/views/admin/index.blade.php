@@ -3,6 +3,7 @@
 <html>
     @include("admin.template._meta")
     <link rel="stylesheet" href="{{ asset('css/adduser.css') }}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <body class="layui-layout-body">
     @include("admin.template._header")
 
@@ -20,14 +21,14 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label iBox">用户名：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input username">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label iBox">真实姓名：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="realname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input realname">
                     </div>
                 </div>
             
@@ -42,21 +43,21 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label iBox">确认密码：</label>
                     <div class="layui-input-inline">
-                    <input type="password" name="password" placeholder="请输入密码" lay-verify="pass2" autocomplete="off" class="layui-input">
+                    <input type="password" name="password" placeholder="请输入密码" lay-verify="pass2" autocomplete="off" class="layui-input pwd2">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label iBox">联系电话：</label>
                     <div class="layui-input-inline ">
-                        <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                        <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input mobile">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label iBox">权限</label>
                     <div class="layui-input-block rootList">
-                        <select name="interest" lay-filter="aihao">
+                        <select name="interest" lay-filter="aihao" id="right">
                             <option value=""></option>
                             <option value="0">管理员</option>
                             <option value="1" selected="">开启</option>
@@ -66,10 +67,11 @@
                 </div>
                 
                 <div class="layui-form-item">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1" style="width:300px;border-radius:5px;">跳转式提交</button>
+                    <button class="layui-btn adduser" lay-submit="" lay-filter="formDemo" style="width:300px;border-radius:5px;">跳转式提交</button>
                 </div>
             </form>
 
+            
 
         <!-- <iframe src="__HTML_ADMIN__/view/index/main1.html" frameborder="0"></iframe> -->
         </div>
@@ -83,11 +85,7 @@
     @include("admin.template._footer")
 </body>
 <script>
-
-    
-
-
-    layui.use(['form', 'layedit', 'laydate'], function(){
+    layui.use(['form'], function(){
         var form = layui.form,
          $ = layui.$ //重点处
         ,layer = layui.layer;
@@ -103,41 +101,38 @@
             /^[\S]{6,12}$/
             ,'密码必须6到12位，且不能出现空格'
             ]
-            ,content: function(value){
-            layedit.sync(editIndex);
+            ,pass2:function(value){
+                var pwd1 = $(".pwd1").val();
+                if(value!=pwd1){
+                    return '两次密码不一致，请重新输入';
+                }
             }
-        });
-        
-        //监听指定开关
-        form.on('switch(switchTest)', function(data){
-            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
-            offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-        
-        //监听提交
-        form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-            title: '最终的提交信息'
-            })
-            return false;
-        });
-        
-        //表单初始赋值
-        form.val('example', {
-            "username": "贤心" // "name": "value"
-            ,"password": "123456"
-            ,"interest": 1
-            ,"like[write]": true //复选框选中状态
-            ,"close": true //开关状态
-            ,"sex": "女"
-            ,"desc": "我爱 layui"
-        });
-
-        $(function(){
             
         });
+               
+        
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            var uname = $(".username").val();
+            var realname = $(".realname").val();
+            var pwd = $(".pwd1").val();
+            var mobile = $(".mobile").val();
+            var right = $("#right").val();
+            // console.log(uname+"--"+realname+"--"+pwd+"--"+mobile+"--"+right);
+            // return false;
+            //BUG???
+            $.post("",{
+                uname:uname,
+                realname:realname,
+                pwd:pwd,
+                mobile:mobile,
+                right:right
+            },function(data){
+
+            });
+        });
+        
+        
     
     });
     
