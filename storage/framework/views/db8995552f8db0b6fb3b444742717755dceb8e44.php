@@ -1,13 +1,4 @@
-<<<<<<< HEAD:resources/views/admin/user/add.blade.php
-{{--继承 admin/back.blade.php	文件--}}
-@extends('admin.back')
-{{--继承内容区--}}
-@section('content')
-=======
-<?php $__env->startSection('title','后台登录页'); ?>
-
 <?php $__env->startSection('content'); ?>
->>>>>>> ffc85e4be57766dd5c1c300d74fedb69da6d44f3:storage/framework/views/37097c23a34ae04e08349b179d0dedd8aea090e9.php
 <!doctype html>
 <html lang="en">
 <head>
