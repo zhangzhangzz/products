@@ -7,15 +7,15 @@
                 <a href="javascript:;">管理(默认展开)</a>
                 <dl class="layui-nav-child">
                     <dd><a href="/admin">账号管理</a></dd>
-                    <dd><a href="/admin/role">角色管理</a></dd>
+                    <dd><a href="/admin/role/index">角色管理</a></dd>
                     <dd><a href="">菜单管理</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item layui-nav-itemed">
                 <a href="javascript:;">会员</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/admin/user">会员列表</a></dd>
-                    <dd><a href="/admin/user/create">会员添加</a></dd>
+                    <dd><a href="/admin/user/index">会员列表</a></dd>
+                    <dd><a href="/admin/user/save">会员添加</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item">

@@ -254,8 +254,6 @@
                     };
                 if(tdata != ""){
                     console.log(tdata != "");
-                    
-                    console.log(tdata != "");
                     return dataobj;
                 }
 

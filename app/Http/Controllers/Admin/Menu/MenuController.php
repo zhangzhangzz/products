@@ -1,40 +1,39 @@
 <?php
-
-namespace App\Http\Controllers\Admin\Role;
-
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Admin\Menu;
 use App\Http\Controllers\Controller;
 
-class RoleController extends Controller
-{
+class MenuController extends Controller{
+
+
 
     /**
-     * 角色显示
+     * 菜单显示
      * 苏鹏
      */
     public function index()
     {
-        return view("admin.Role.index");
+        return view("admin.menu.index");
     }
 
 
     /**
-     * 角色添加
+     * 菜单添加
      * 苏鹏
      */
     public function save()
     {
-        return view("admin.role.save");
+    
+        return view("admin.menu.save");
     }
 
 
     /**
-     * 角色修改
+     * 菜单修改
      * 苏鹏
      */
     public function edit()
     {
-        return view("admin.role.edit");
+        return view("admin.menu.edit");
     }
 
 
@@ -59,4 +58,6 @@ class RoleController extends Controller
     }
 
     
+
 }
+
