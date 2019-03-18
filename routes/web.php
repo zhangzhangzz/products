@@ -30,7 +30,7 @@ Route::group(['namespace'=>'home'],function (){
  * 陈绪
  */
 
-Route::group(['prefix' => 'admin','namespace'=>'admin'] ,function (){
+Route::group(['prefix' => 'admin','namespace'=>'Admin'] ,function (){
 
 
     /*TODO:后台首页*/
@@ -39,6 +39,13 @@ Route::group(['prefix' => 'admin','namespace'=>'admin'] ,function (){
 
     /*TODO:后台登录*/
     Route::any('login','Login\LoginController@index');
+
+
+    Route::any('role','Role\RoleController@index');
+
+
+    Route::any('user/create','User\UserController@create');
+
 
 
 });
