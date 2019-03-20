@@ -1,5 +1,6 @@
-<link rel="stylesheet" href="<?php echo e(asset('css/user.css')); ?>">
-<?php $__env->startSection('content'); ?>
+@extends('admin.template.default')
+<link rel="stylesheet" href="{{ asset('css/user.css') }}">
+@section('content')
     <div class="main" > 
         <div class="layui-tab bigbox">
             <ul class="layui-tab-title">
@@ -42,11 +43,11 @@
     </script>
 
     <script type="text/html" id="headDemo">
-        <img src="{{d.headimg}}" alt="">
+        <img src="@{{d.headimg}}" alt="">
     </script>
 
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('js'); ?>
+@endsection
+@section('js')
 <script>
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
     layui.use(['table','form','element'], function(){
@@ -56,8 +57,8 @@
 
 
         var data = [
-                {headimg:"<?php echo e(asset('image/logo.png')); ?>",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'},
-                {headimg:"<?php echo e(asset('image/1.jpg')); ?>",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'}
+                {headimg:"{{ asset('image/logo.png') }}",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'},
+                {headimg:"{{ asset('image/1.jpg') }}",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'}
                     ];               
                     
     
@@ -128,6 +129,4 @@
     
     });
 </script>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

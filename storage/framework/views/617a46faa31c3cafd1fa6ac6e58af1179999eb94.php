@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-
-<html>
-    <?php echo $__env->make("admin.template._meta", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('css/adduser.css')); ?>">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<body class="layui-layout-body">
-    <?php echo $__env->make("admin.template._header", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
-    <?php echo $__env->make("admin.template._menu", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div class="main" > 
+<link rel="stylesheet" href="<?php echo e(asset('css/adduser.css')); ?>">
+<?php $__env->startSection('content'); ?>
+<div class="main" > 
             <div class="tree">
                 <img src="<?php echo e(asset('image/1.jpg')); ?>" alt=""> 
             </div>
@@ -75,15 +64,9 @@
 
         <!-- <iframe src="__HTML_ADMIN__/view/index/main1.html" frameborder="0"></iframe> -->
         </div>
-    </div>
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-    </div>
-</div>
-    <?php echo $__env->make("admin.template._footer", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-</body>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
 <script>
     layui.use(['form'], function(){
         var form = layui.form,
@@ -131,11 +114,8 @@
 
             });
         });
-        
-        
-    
     });
-    
-   
 </script>
-</html>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

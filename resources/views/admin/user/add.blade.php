@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-
-<html>
-    <?php echo $__env->make("admin.template._meta", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('css/adduser.css')); ?>">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<body class="layui-layout-body">
-    <?php echo $__env->make("admin.template._header", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
-    <?php echo $__env->make("admin.template._menu", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div class="main" > 
+@extends('admin.template.default')
+<link rel="stylesheet" href="{{ asset('css/adduser.css') }}">
+@section('content')
+<div class="main" > 
             <div class="tree">
-                <img src="<?php echo e(asset('image/1.jpg')); ?>" alt=""> 
+                <img src="{{ asset('image/1.jpg') }}" alt=""> 
             </div>
             
             <form class="layui-form layui-form-pane fmain" action="">
@@ -75,15 +65,9 @@
 
         <!-- <iframe src="__HTML_ADMIN__/view/index/main1.html" frameborder="0"></iframe> -->
         </div>
-    </div>
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-    </div>
-</div>
-    <?php echo $__env->make("admin.template._footer", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-</body>
+@endsection
+@section('js')
 <script>
     layui.use(['form'], function(){
         var form = layui.form,
@@ -113,29 +97,11 @@
         
         //监听提交
         form.on('submit(formDemo)', function(data){
-            var uname = $(".username").val();
-            var realname = $(".realname").val();
-            var pwd = $(".pwd1").val();
-            var mobile = $(".mobile").val();
-            var right = $("#right").val();
-            // console.log(uname+"--"+realname+"--"+pwd+"--"+mobile+"--"+right);
-            // return false;
-            //BUG???
-            $.post("",{
-                uname:uname,
-                realname:realname,
-                pwd:pwd,
-                mobile:mobile,
-                right:right
-            },function(data){
-
-            });
+            layer.msg(JSON.stringify(data.field));
+            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+            console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
         });
-        
-        
-    
     });
-    
-   
 </script>
-</html>
+@endsection

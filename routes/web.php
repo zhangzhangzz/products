@@ -38,7 +38,49 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
 
     /*TODO:后台登录*/
-    Route::any('login','Login\LoginController@index');
+    Route::any('login/index','Login\LoginController@index');
+
+
+    /*TODO:账号管理*/
+    Route::any('admin/index','Admin\AdminController@index');
+    Route::any('admin/save','Admin\AdminController@save');
+    Route::any('admin/add','Admin\AdminController@add'); 
+    Route::any('admin/edit','Admin\AdminController@edit');
+    Route::any('admin/del','Admin\AdminController@del');
+    Route::any('admin/status','Admin\AdminController@stauts');
+    Route::any('admin/updata','Admin\AdminController@updata');
+
+
+    /*TODO:角色管理*/
+    Route::any('role/index','Role\RoleController@index');
+    Route::any('role/save','Role\RoleController@save');
+    Route::any('role/edit','Role\RoleController@edit');
+    Route::any('role/add','Role\RoleController@add');
+    Route::any('role/del','Role\RoleController@del');
+    Route::any('role/status','Role\RoleController@status');
+
+
+    /*TODO:菜单管理*/
+    Route::any('menu/index','Menu\MenuController@index');
+    Route::any('menu/save','Menu\MenuController@save');
+    Route::any('menu/edit','Menu\MenuController@edit');
+    Route::any('menu/del','Menu\MenuController@del');
+
+
+    /*TODO:会员管理*/
+    Route::any('user/index','User\UserController@index');
+    Route::any('user/status','User\UserController@status');
+    Route::any('user/add','User\UserController@add');
+    Route::any('user/look','User\UserController@look');
+
+    /*TODO:店铺管理*/
+    Route::any('shop/index','Shop\ShopController@index');
+
+    /*TODO:商品*/
+    Route::any('goods/index','Goods\GoodsController@index');
+    Route::any('goods/add','Goods\GoodsController@add');
+    Route::any('goods/classify','Goods\GoodsController@classify'); 
+
 
 
 });
