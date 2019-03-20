@@ -37,6 +37,15 @@ class RoleController extends Controller
         return view("admin.role.edit");
     }
 
+    /**
+     * 角色修改
+     * 苏鹏
+     */
+    public function add()
+    {
+        return view("admin.role.add");
+    }
+
 
     /**
      * 角色删除

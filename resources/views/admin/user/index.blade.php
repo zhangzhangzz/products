@@ -1,120 +1,132 @@
 @extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/adduser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/user.css') }}">
 @section('content')
-<div class="main" > 
-            <div class="tree">
-                <img src="{{ asset('image/1.jpg') }}" alt=""> 
+    <div class="main" > 
+        <div class="layui-tab bigbox">
+            <ul class="layui-tab-title">
+                <li class="layui-this">普通用户</li>
+                <li>禁用用户</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form form" action="">
+                        <input type="text" name="name" required lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
+                        <input type="text" name="phone" required lay-verify="required" placeholder="手机号" autocomplete="off" class="layui-input">
+                        <input type="text" name="wxqq" required lay-verify="required" placeholder="微信/QQ" autocomplete="off" class="layui-input">
+                        <input type="text" name="address" required lay-verify="required" placeholder="收货地址" autocomplete="off" class="layui-input">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">搜索</button>
+                    </form>
+
+                    <table id="demo" lay-filter="test"></table>
+
+                </div>
+                <div class="layui-tab-item">
+                    <form class="layui-form form" action="">
+                    <input type="text" name="name" required lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
+                        <input type="text" name="phone" required lay-verify="required" placeholder="手机号" autocomplete="off" class="layui-input">
+                        <input type="text" name="wxqq" required lay-verify="required" placeholder="微信/QQ" autocomplete="off" class="layui-input">
+                        <input type="text" name="address" required lay-verify="required" placeholder="收货地址" autocomplete="off" class="layui-input">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">搜索</button>
+                    </form>
+
+                    <table id="demo2" lay-filter="test"></table>
+                </div>
             </div>
-            
-            <form class="layui-form layui-form-pane fmain" action="">
-                
-                <div class="layui-form-item">
-                    <label class="layui-form-label iBox">用户名：</label>
-                    <div class="layui-input-inline">
-                    <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input username">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label iBox">真实姓名：</label>
-                    <div class="layui-input-inline">
-                    <input type="text" name="realname" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input realname">
-                    </div>
-                </div>
-            
-                <div class="layui-form-item">
-                    <label class="layui-form-label iBox">输入密码：</label>
-                    <div class="layui-input-inline">
-                        <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input pwd1">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label iBox">确认密码：</label>
-                    <div class="layui-input-inline">
-                    <input type="password" name="password" placeholder="请输入密码" lay-verify="pass2" autocomplete="off" class="layui-input pwd2">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label iBox">联系电话：</label>
-                    <div class="layui-input-inline ">
-                        <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input mobile">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label iBox">权限</label>
-                    <div class="layui-input-block rootList">
-                        <select name="interest" lay-filter="aihao" id="right">
-                            <option value=""></option>
-                            <option value="0">管理员</option>
-                            <option value="1" selected="">开启</option>
-                            <option value="2">关闭</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="layui-form-item">
-                    <button class="layui-btn adduser" lay-submit="" lay-filter="formDemo" style="width:300px;border-radius:5px;">跳转式提交</button>
-                </div>
-            </form>
-
-            
-
-        <!-- <iframe src="__HTML_ADMIN__/view/index/main1.html" frameborder="0"></iframe> -->
         </div>
+ 
+
+    </div>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit" >详情</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">禁用</a>
+    </script>
+
+    <script type="text/html" id="headDemo">
+        <img src="@{{d.headimg}}" alt="">
+    </script>
 
 @endsection
 @section('js')
 <script>
-    layui.use(['form'], function(){
-        var form = layui.form,
-         $ = layui.$ //重点处
-        ,layer = layui.layer;
-        
-        //自定义验证规则
-        form.verify({
-            title: function(value){
-            if(value.length < 5){
-                return '标题至少得5个字符啊';
-            }
-            }
-            ,pass: [
-            /^[\S]{6,12}$/
-            ,'密码必须6到12位，且不能出现空格'
-            ]
-            ,pass2:function(value){
-                var pwd1 = $(".pwd1").val();
-                if(value!=pwd1){
-                    return '两次密码不一致，请重新输入';
-                }
-            }
-            
-        });
-               
-        
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-            var uname = $(".username").val();
-            var realname = $(".realname").val();
-            var pwd = $(".pwd1").val();
-            var mobile = $(".mobile").val();
-            var right = $("#right").val();
-            // console.log(uname+"--"+realname+"--"+pwd+"--"+mobile+"--"+right);
-            // return false;
-            //BUG???
-            $.post("",{
-                uname:uname,
-                realname:realname,
-                pwd:pwd,
-                mobile:mobile,
-                right:right
-            },function(data){
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['table','form','element'], function(){
+        var element = layui.element
+            table = layui.table
+            form = layui.form;
 
-            });
+
+        var data = [
+                {headimg:"{{ asset('image/logo.png') }}",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'},
+                {headimg:"{{ asset('image/1.jpg') }}",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'}
+                    ];               
+                    
+    
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,limit:999999
+            ,width:1208
+            ,cols: [[ //表头
+            {field: 'headimg', title: '头像', width:150,  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+            ,{field: 'name', title: '名称' , width:150 , align:'center'}
+            ,{field: 'phone', title: '电话' , width:150 , align:'center'}
+            ,{field: 'wxqq', title: '微信/QQ', width:130 , align:'center'} 
+            ,{field: 'address', title: '地址', width: 300 , align:'center'}
+            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
+            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+            ]]
+            ,data:data
         });
+
+
+        //第二个实例
+        table.render({
+            elem: '#demo2'
+            ,limit:999999
+            ,width:1208
+            ,cols: [[ //表头
+            {field: 'headimg', title: '头像', width:150,  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+            ,{field: 'name', title: '名称' , width:150 , align:'center'}
+            ,{field: 'phone', title: '电话' , width:150 , align:'center'}
+            ,{field: 'wxORqq', title: '微信/QQ', width:130 , align:'center'} 
+            ,{field: 'address', title: '地址', width: 300 , align:'center'}
+            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
+            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+            ]]
+            ,data:data
+        });
+
+
+        // #table操作事件
+        table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            let tdata = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+            console.log(tdata);
+            da = obj.data;
+
+            // #数据删除
+
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                layer.close(index);
+                //向服务端发送删除指令
+                console.log("删除");
+
+                $.post("",{
+                        id:id
+                    },function(data){
+
+                    });
+
+                });
+            } else if(layEvent === 'edit'){
+                window.location.href="/admin/admin/add"; 
+            }
+        });
+    
     });
 </script>
 @endsection

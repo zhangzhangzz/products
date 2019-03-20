@@ -1,8 +1,9 @@
-<link rel="stylesheet" href="<?php echo e(asset('css/adduser.css')); ?>">
-<?php $__env->startSection('content'); ?>
+@extends('admin.template.default')
+<link rel="stylesheet" href="{{ asset('css/adduser.css') }}">
+@section('content')
 <div class="main" > 
             <div class="tree">
-                <img src="<?php echo e(asset('image/1.jpg')); ?>" alt=""> 
+                <img src="{{ asset('image/1.jpg') }}" alt=""> 
             </div>
             
             <form class="layui-form layui-form-pane fmain" action="">
@@ -65,8 +66,8 @@
         <!-- <iframe src="__HTML_ADMIN__/view/index/main1.html" frameborder="0"></iframe> -->
         </div>
 
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('js'); ?>
+@endsection
+@section('js')
 <script>
     layui.use(['form'], function(){
         var form = layui.form,
@@ -103,6 +104,4 @@
         });
     });
 </script>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

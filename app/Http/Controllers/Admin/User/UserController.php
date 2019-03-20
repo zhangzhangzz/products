@@ -29,6 +29,16 @@ class UserController extends Controller
 
     }
 
+    /**
+     * 会员添加
+     * 陈绪
+     */
+    public function add(){
+
+        return view("admin.user.add");
+
+    }
+
     
  
 }
