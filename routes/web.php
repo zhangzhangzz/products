@@ -78,6 +78,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('user/add','User\UserController@add');
     Route::any('user/look','User\UserController@look');
 
+
     /*TODO:店铺管理*/
     Route::any('shop/index','Shop\ShopController@index');
 
