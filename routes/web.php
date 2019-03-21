@@ -14,6 +14,7 @@
 /**
  * 前端路由
  * 陈绪
+ * 苏鹏
  */
 
 Route::group(['namespace'=>'home'],function (){
@@ -28,6 +29,7 @@ Route::group(['namespace'=>'home'],function (){
 /**
  * 后端路由
  * 陈绪
+ * 苏鹏
  */
 
 Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.validate', 'admin.index'],'middleware'=>'role'] ,function (){
@@ -54,17 +56,20 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:角色管理*/
     Route::any('role/index','Role\RoleController@index');
     Route::any('role/save','Role\RoleController@save');
+    Route::any('role/insert','Role\RoleController@insert');
     Route::any('role/edit','Role\RoleController@edit');
     Route::any('role/add','Role\RoleController@add');
-    Route::any('role/del','Role\RoleController@del');
+    Route::any('role/del/{id}','Role\RoleController@del');
     Route::any('role/status','Role\RoleController@status');
 
 
     /*TODO:菜单管理*/
     Route::any('menu/index','Menu\MenuController@index');
     Route::any('menu/save','Menu\MenuController@save');
-    Route::any('menu/edit','Menu\MenuController@edit');
-    Route::any('menu/del','Menu\MenuController@del');
+    Route::any('menu/insert','Menu\MenuController@insert');
+    Route::any('menu/edit/{id}','Menu\MenuController@edit');
+    Route::any('menu/update/{id}','Menu\MenuController@update');
+    Route::any('menu/del/{id}','Menu\MenuController@del');
 
 
     /*TODO:会员管理*/

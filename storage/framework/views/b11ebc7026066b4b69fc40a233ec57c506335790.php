@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/action.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/action.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -15,19 +14,19 @@
         
 
         <script type="text/html" id="titleTpl">
-            @{{#  if(d.status ==1 ){ }}
+            {{#  if(d.status ==1 ){ }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
                         <input type="checkbox" checked lay-skin="switch" lay-filter="filter" >
                     </div>
                 </div>
-            @{{#  } else { }}
+            {{#  } else { }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
                         <input type="checkbox" lay-skin="switch" lay-filter="filter" >
                     </div>
                 </div>
-            @{{#  } }}
+            {{#  } }}
         </script>
 
 
@@ -41,13 +40,12 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
  <script>
-
      function addRole(){
-         window.location.href="/admin/role/save";
+         window.location.href="/admin/menu/save";
      }
 
 
@@ -87,20 +85,25 @@
 
         if(layEvent === 'del'){ //删除
             layer.confirm('真的删除行么', function(index){
-            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-            layer.close(index);
+//            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+
             //向服务端发送删除指令
-            console.log("删除");
+            $.get("/admin/menu/del/"+tdata.id,{
 
-            $.post("",{
-                
                 },function(data){
+                    if(data == 1)
+                    {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    }else{
+                        alert("删除失败");
+                    }
 
+                layer.close(index);
                 });
 
             });
         } else if(layEvent === 'edit'){
-            window.location.href="/admin/role/edit";
+            window.location.href="/admin/menu/edit/"+tdata.id;
         }
         });
     });
@@ -110,6 +113,7 @@
         ,laytpl = layui.laytpl;
 
         var list = <?php echo $list; ?>;
+
         var data = [];
         if(list.length == 1)
         {
@@ -123,18 +127,16 @@
                 data.push(list[i]);
             }
         }
-                
-
         //第一个实例
         table.render({
             elem: '#demo'
             ,limit:999999
             ,width:666
             ,cols: [[ //表头
-            {field: 'name', title: '角色名称', width:80, sort: true, fixed: 'left' , align:'center'}
-            ,{field: 'descript', title: '角色描述' , width:150 , align:'center'}
-            ,{field: 'boss', title: '上级名称' , width:150 , align:'center'}
-            ,{field: 'state', title: '状态', width:100 , align:'center' ,  templet: '#titleTpl'}
+            {field: 'sort', title: '排序', width:80, sort: true, fixed: 'left' , align:'center'}
+            ,{field: 'name', title: '名称' , width:150 , align:'center'}
+            ,{field: 'url', title: '路径' , width:150 , align:'center'}
+            ,{field: 'boss', title: '上级ID', width:100 , align:'center' }
             ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data
@@ -143,4 +145,5 @@
 
  
  </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

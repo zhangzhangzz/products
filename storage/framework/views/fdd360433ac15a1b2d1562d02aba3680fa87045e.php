@@ -1,11 +1,11 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/menuedit.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/menuedit.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div class="bigbox">
-            <form id="formmy" class="layui-form" action="{{url('admin/menu/insert')}}" method="post">
-                {{ csrf_field()  }}
+            <form id="formmy" class="layui-form" action="<?php echo e(url('admin/menu/insert')); ?>" method="post">
+                <?php echo e(csrf_field()); ?>
+
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
@@ -25,13 +25,13 @@
                     <div class="layui-input-block" style="width: 190px;">
                     <select name="boss" lay-verify="required">
                         <option value="0">/</option>
-                        @foreach ($list as $v)
+                        <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php
                             $nbsp = str_repeat("&nbsp;", substr_count($v -> path, ",")*5);
                             ?>
 
-                            <option value="{{ $v -> id }}">{{$nbsp}}|--{{ $v -> name }}</option>
-                        @endforeach
+                            <option value="<?php echo e($v -> id); ?>"><?php echo e($nbsp); ?>|--<?php echo e($v -> name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                     </div>
                 </div>
@@ -77,9 +77,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
     //Demo
     layui.use('form', function(){
@@ -93,4 +93,5 @@
     });
     });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

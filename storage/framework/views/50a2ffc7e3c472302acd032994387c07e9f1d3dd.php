@@ -1,33 +1,31 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/roleedit.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/roleedit.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             
-            <form id="formmy" class="layui-form formBox" action="{{url('admin/role/insert')}}" method="post">
-                {{ csrf_field()  }}
+            <form class="layui-form formBox" action="">
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="text" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="descript" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
+                    <input type="text" name="text" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="boss" required lay-verify="required" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="text" required lay-verify="required" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">状&emsp;&emsp;态：</label>
                     <div class="layui-input-block">
-                    <select name="state" lay-verify="required">
+                    <select name="city" lay-verify="required">
                         <option value=""></option>
                         <option value="1">启用</option>
                         <option value="0">禁用</option>
@@ -39,14 +37,12 @@
 
                 <div class="quanxian">
                     <div class="tables">
-                    @foreach ($list as $v)
+
                         <div class="list">
-                            @if ($v -> location == 1)
                             <p class="title">
                                 <input type="checkbox" value="" data-id="12" lay-skin="primary" title="管理" name="" lay-filter="allChoose"
                                     class="allChoose">
                             </p>
-                            @endif
                             <div class="ultable">
                                 <ul>
                                     <li>
@@ -66,10 +62,43 @@
                                             </ul>
                                         </div>
                                     </li>
+                                    <li>
+                                        <input type="checkbox" value="" data-id="12" lay-skin="primary" title="角色管理" name="menu_role_id[]" lay-filter="choose"
+                                            class="aaa">
+                                        <div class="list-three">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="添加" name="menu_role_id[]" lay-filter="three-choose">
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="编辑" name="menu_role_id[]" lay-filter="three-choose">
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="删除" name="menu_role_id[]" lay-filter="three-choose">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" value="" data-id="12" lay-skin="primary" title="菜单管理" name="menu_role_id[]" lay-filter="choose"
+                                            class="aaa">
+                                        <div class="list-three">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="添加" name="menu_role_id[]" lay-filter="three-choose">
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="编辑" name="menu_role_id[]" lay-filter="three-choose">
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="删除" name="menu_role_id[]" lay-filter="three-choose">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                        @endforeach
                     </div>
 		        </div>
                 
@@ -93,9 +122,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
 
         layui.use('form', function(){
@@ -162,9 +191,9 @@
 
           //监听提交
           form.on('submit(formDemo)', function(data){
-//            layer.msg(JSON.stringify(data.field));
-//            return false;
-              $("#formmy").submit();
+            layer.msg(JSON.stringify(data.field));
+            return false;
+
           });
         });
 
@@ -173,4 +202,6 @@
 
 
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

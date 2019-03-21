@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/action.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/action.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -15,19 +14,19 @@
         
 
         <script type="text/html" id="titleTpl">
-            @{{#  if(d.status ==1 ){ }}
+            {{#  if(d.status ==1 ){ }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
                         <input type="checkbox" checked lay-skin="switch" lay-filter="filter" >
                     </div>
                 </div>
-            @{{#  } else { }}
+            {{#  } else { }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
                         <input type="checkbox" lay-skin="switch" lay-filter="filter" >
                     </div>
                 </div>
-            @{{#  } }}
+            {{#  } }}
         </script>
 
 
@@ -41,9 +40,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
  <script>
 
      function addRole(){
@@ -143,4 +142,5 @@
 
  
  </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
