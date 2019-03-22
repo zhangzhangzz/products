@@ -9,12 +9,21 @@ class ShopController extends Controller
 {
 
     /**
-     * 角色显示
+     * 店铺管理显示
      * 苏鹏
      */
     public function index()
     {
         return view("admin.Shop.index");
+    }
+
+    /**
+     * 店铺审核
+     * 苏鹏
+     */
+    public function check()
+    {
+        return view("admin.Shop.check");
     }
 
 

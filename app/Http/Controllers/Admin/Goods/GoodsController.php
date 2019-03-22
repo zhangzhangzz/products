@@ -14,7 +14,7 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        return view("admin.Goods.index");
+        return view("admin.goods.index");
     }
 
     /**
@@ -23,7 +23,16 @@ class GoodsController extends Controller
      */
     public function add()
     {
-        return view("admin.Goods.add");
+        return view("admin.goods.add");
+    }
+
+    /**
+     * 角色显示
+     * 苏鹏
+     */
+    public function addclass()
+    {
+        return view("admin.Goods.addclass");
     }
 
     /**
@@ -32,10 +41,27 @@ class GoodsController extends Controller
      */
     public function classify()
     {
-        return view("admin.Goods.classify");
+        return view("admin.goods.classify");
+    }
+    
+    /**
+     * 角色显示
+     * 苏鹏
+     */
+    public function manage()
+    {
+        return view("admin.Goods.manage");
     }
 
-
+    
+    /**
+     * 角色显示
+     * 苏鹏
+     */
+    public function recycle()
+    {
+        return view("admin.Goods.recycle");
+    }
     
 
     

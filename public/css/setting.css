@@ -1,0 +1,39 @@
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.titleBox{
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.titleBox > div{
+    width: 100px;
+    margin-left: 30px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    padding: 3px;
+    border-radius: 5px 5px 0 0;
+}
+
+.mainBox{
+    padding: 20px;
+}
+
+.motai{
+    padding:15px 30px 0 15px;
+}
+
+.slist{
+    padding: 9px 15px;
+    border-color: #e6e6e6;
+}
+
+.layui-layer-btn1 {
+    margin-right: 51px!important;
+} 

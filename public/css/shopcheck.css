@@ -1,0 +1,95 @@
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.bigbox , .msg{
+    padding: 30px;
+}
+
+.msg{
+    width: 100%;
+    overflow: hidden;
+}
+
+.basicMsg > div{
+    float: left;
+    width: 35%;
+}
+
+.titleBox{
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.titleBox > div{
+    width: 100px;
+    margin-left: 30px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    font-size: 16px;
+    color: #555;
+    text-align: center; 
+    padding: 3px;
+    border-radius: 5px 5px 0 0;
+}
+
+label{
+    font-size: 15px;
+    color: #555;
+    float: left;
+    font-weight: 600;
+    width: 100px;
+    padding: 0 10px;
+}
+
+.msgBox > div{
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+}
+
+.msgBox > div > div{
+    font-size: 15px;
+    color: #555;
+    float: left;
+    margin-left: 20px;
+}
+
+.msgBox > div > div > img{
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.rightBox > div > div{
+    padding-left: 20px;
+}
+
+.sptext{
+    display: block;
+    text-align: center;
+    color: #555;
+    margin: 5px 0;
+}
+
+.personMgs > div {
+    padding: 30px 0;
+    overflow: hidden;
+}
+
+.pl{
+    float: left;
+}
+
+.imgBox{
+    overflow: hidden;
+}
+
+.imgBox > div{
+    margin: 0 20px;
+}
+
+.checkMsg{
+    padding: 30px;
+}

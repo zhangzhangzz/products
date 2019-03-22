@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/goodsclassify.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/goodsclassify.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <button class="layui-btn add" lay-submit lay-filter="formDemo" style="margin:30px;" >添加</button>
         <div class="layui-form form">
@@ -22,7 +21,7 @@
                     <li class="">
                         <div class="parentBox">
                             <!--div class="fuhao"><i class="layui-icon layui-icon-up" style="font-size: 20px;"></i></div-->
-                            <div><img src="{{ asset('image/logo.png') }}" alt=""></div>
+                            <div><img src="<?php echo e(asset('image/logo.png')); ?>" alt=""></div>
                             <div>坚果</div>
                             <div>001</div>
                             <div>1</div>
@@ -30,7 +29,7 @@
                         </div>
                         <div class="listdd">
                             <dd>
-                                <div><img src="{{ asset('image/logo.png') }}" alt=""></div>
+                                <div><img src="<?php echo e(asset('image/logo.png')); ?>" alt=""></div>
                                 <div>坚果</div>
                                 <div>001</div>
                                 <div>1</div>
@@ -38,7 +37,7 @@
                             </dd>
                         
                             <dd>
-                                <div><img src="{{ asset('image/logo.png') }}" alt=""></div>
+                                <div><img src="<?php echo e(asset('image/logo.png')); ?>" alt=""></div>
                                 <div>坚果</div>
                                 <div>001</div>
                                 <div>1</div>
@@ -49,7 +48,7 @@
                     </li>
                     <li class="">
                         <div class="parentBox">
-                            <div><img src="{{ asset('image/logo.png') }}" alt=""></div>
+                            <div><img src="<?php echo e(asset('image/logo.png')); ?>" alt=""></div>
                             <div>坚果</div>
                             <div>001</div>
                             <div>1</div>
@@ -57,7 +56,7 @@
                         </div>
                         <div class="listdd">
                             <dd>
-                                <div><img src="{{ asset('image/logo.png') }}" alt=""></div>
+                                <div><img src="<?php echo e(asset('image/logo.png')); ?>" alt=""></div>
                                 <div>坚果</div>
                                 <div>001</div>
                                 <div>1</div>
@@ -65,7 +64,7 @@
                             </dd>
                         
                             <dd>
-                                <div><img src="{{ asset('image/logo.png') }}" alt=""></div>
+                                <div><img src="<?php echo e(asset('image/logo.png')); ?>" alt=""></div>
                                 <div>坚果</div>
                                 <div>001</div>
                                 <div>1</div>
@@ -80,8 +79,8 @@
         
     </div>
 
-@endsection
-@section('js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
 <script>
     layui.use('table', function(){
         var table = layui.table
@@ -89,7 +88,7 @@
               $ = layui.$;
   
         //直接解析字符
-        laytpl('@{{ d.name }}').render({
+        laytpl('{{ d.name }}').render({
             name: `<a class="layui-btn layui-btn-xs" lay-event="edit" >详情</a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">禁用</a>`
         }, function(string){
@@ -111,4 +110,5 @@
 
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
