@@ -15,7 +15,6 @@ class MenuController extends Controller{
      */
     public function index()
     {
-        dd($this -> sort());
         $list = Action::orderBy("sort") -> get();
         return view("admin.menu.index",["list" => $list]);
     }
@@ -43,12 +42,33 @@ class MenuController extends Controller{
             $pid = Action::where("id",$boss) -> first();
             $list['path'] = $pid -> path . $boss . ",";
         }else{
-            $list['path'] = $list['boss'] . ",";
+            $list['path'] = $boss . ",";
         }
         if(empty($list['sort']))
         {
             $list_sort = Action::max("sort");
             $list['sort'] = $list_sort + 1;
+        }else{
+            // 排序改动过,进行从新排序
+            $oy = Action::get();
+            foreach($oy as $v)
+            {
+                $data[] = [
+                    "id" => $v['id'],
+                    "sort" => $v['sort']
+                ];
+            }
+            $sort = [
+                "id" => 0,
+                "sort" => $list['sort']
+            ];
+            $put = $this -> sort($data,$sort);
+            foreach($put as $p)
+            {
+                $up_action = Action::find($p['id']);
+                $up_action -> sort = $p['sort'];
+                $up_action -> save();
+            }
         }
         $re = Action::create($list);
         if($re){
@@ -75,13 +95,44 @@ class MenuController extends Controller{
     public function update(Request $request, $id)
     {
         $input = $request -> except("_token");
+
         $action = Action::find($id);
+        $psort = $action -> sort;
         $action -> name = $input['name'];
         $action -> url = $input['url'];
-        $action -> boss = $input['boss'];
+        if($action -> boss != $input['boss'])
+        {
+            $action -> boss = $input['boss'];
+            $pid = Action::where("id",$input['boss']) -> first();
+            $action -> path = $pid -> path . $input['boss'] . ",";
+        }
         $action -> state = $input['state'];
         $action -> sort = $input['sort'];
         $re = $action -> save();
+        // 判断排序是否改动
+        if($psort != $input['sort'])
+        {
+            // 排序改动过,进行从新排序
+            $oy = Action::get();
+            foreach($oy as $v)
+            {
+                $data[] = [
+                    "id" => $v['id'],
+                    "sort" => $v['sort']
+                ];
+            }
+            $sort = [
+                "id" => $id,
+                "sort" => $input['sort']
+            ];
+            $put = $this -> sort($data,$sort);
+            foreach($put as $p)
+            {
+                $up_action = Action::find($p['id']);
+                $up_action -> sort = $p['sort'];
+                $up_action -> save();
+            }
+        }
         if($re){
             return redirect('admin/menu/index');
         }else{
@@ -92,29 +143,38 @@ class MenuController extends Controller{
      * 菜单排序
      * 苏鹏
      */
-    public function sort($upsort=0, $sort=0)
+    public function sort($sort, $upsort=0)
     {
 
         // 填写的排序$upsort
         // 已存在的排序$sort
         $data = [];
-        $sort = ["1","2","3","4","5","6","7","8"];
-        $upsort = 3;
-        if(in_array($upsort,$sort))
+//        $sort = ["1","2","3","4","5","6","7","8"];
+//        $upsort = [
+//            "id" => 2,
+//            "sort" => 4
+//        ];
+        if(is_array($sort) && is_array($upsort))
         {
+            $num = $upsort['sort'];
             foreach($sort as $v)
             {
-                if($v >= $upsort)
+                if($upsort['id'] == $v['id'])
                 {
-                    $v++;
+                    unset($v);
+                    continue;
                 }
-                echo $v;
-//                $data[] = $v;
+
+                if($upsort['sort'] <= $v['sort'])
+                {
+                    $num++;
+                    $v['sort'] = $num;
+                    $data[] = $v;
+                }
             }
-//            return $data;
-        }else{
-            return "不存在";
+            return $data;
         }
+        return false;
     }
     /**
      * 角色删除
