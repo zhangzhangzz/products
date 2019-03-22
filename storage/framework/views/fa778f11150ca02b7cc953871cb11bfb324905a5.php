@@ -1,11 +1,11 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/roleedit.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/roleedit.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             
-            <form id="formmy" class="layui-form formBox" action="{{url('admin/role/insert')}}" method="post">
-                {{ csrf_field()  }}
+            <form id="formmy" class="layui-form formBox" action="<?php echo e(url('admin/role/insert')); ?>" method="post">
+                <?php echo e(csrf_field()); ?>
+
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
@@ -39,14 +39,14 @@
 
                 <div class="quanxian">
                     <div class="tables">
-                    @foreach ($list as $v)
+                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="list">
-                            @if ($v -> location == 1)
+                            <?php if($v -> location == 1): ?>
                             <p class="title">
                                 <input type="checkbox" value="" data-id="12" lay-skin="primary" title="管理" name="" lay-filter="allChoose"
                                     class="allChoose">
                             </p>
-                            @endif
+                            <?php endif; ?>
                             <div class="ultable">
                                 <ul>
                                     <li>
@@ -69,7 +69,7 @@
                                 </ul>
                             </div>
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
 		        </div>
                 
@@ -93,9 +93,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
 
         layui.use('form', function(){
@@ -173,4 +173,6 @@
 
 
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

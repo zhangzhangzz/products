@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Role;
 
+use App\Http\Model\Admin\Action;
+use App\Http\Model\Admin\Roles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,20 +16,29 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view("admin.Role.index");
+        $list = Roles::get();
+        return view("admin.Role.index",["list" => $list]);
     }
 
 
     /**
-     * 角色添加
+     * 角色添加页面
      * 苏鹏
      */
     public function save()
     {
-        return view("admin.role.save");
+        $list = Action::get();
+        return view("admin.role.save",["list" => $list]);
     }
-
-
+    /**
+     * 角色执行添加
+     * 苏鹏
+     */
+    public function insert(Request $request)
+    {
+        $list = $request -> except("_token");
+        dd($list);
+    }
     /**
      * 角色修改
      * 苏鹏

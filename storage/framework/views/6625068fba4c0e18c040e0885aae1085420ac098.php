@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/action.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/action.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -15,19 +14,19 @@
         
 
         <script type="text/html" id="titleTpl">
-            @{{#  if(d.status ==1 ){ }}
+            {{#  if(d.status ==1 ){ }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
                         <input type="checkbox" checked lay-skin="switch" lay-filter="filter" >
                     </div>
                 </div>
-            @{{#  } else { }}
+            {{#  } else { }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
                         <input type="checkbox" lay-skin="switch" lay-filter="filter" >
                     </div>
                 </div>
-            @{{#  } }}
+            {{#  } }}
         </script>
 
 
@@ -41,13 +40,13 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
  <script>
 
      function addRole(){
-         window.location.href="/admin/role/save";
+         window.location.href="/admin/role/edit";
      }
 
 
@@ -109,20 +108,15 @@
         var table = layui.table
         ,laytpl = layui.laytpl;
 
-        var list = <?php echo $list; ?>;
-        var data = [];
-        if(list.length == 1)
-        {
-            for(var i in  list)
-            {
-                data = [list[i]];
-            }
-        }else{
-            for(var i in  list)
-            {
-                data.push(list[i]);
-            }
-        }
+        
+        var data = [
+            {name:'管理员',descript:'管理员1',boss:'香香是个大撒比',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'群众',descript:'群众2',boss:'香香2',status:1,action:'-'}
+                ];               
                 
 
         //第一个实例
@@ -134,7 +128,7 @@
             {field: 'name', title: '角色名称', width:80, sort: true, fixed: 'left' , align:'center'}
             ,{field: 'descript', title: '角色描述' , width:150 , align:'center'}
             ,{field: 'boss', title: '上级名称' , width:150 , align:'center'}
-            ,{field: 'state', title: '状态', width:100 , align:'center' ,  templet: '#titleTpl'}
+            ,{field: 'status', title: '状态', width:100 , align:'center' ,  templet: '#titleTpl'} 
             ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data
@@ -143,4 +137,5 @@
 
  
  </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

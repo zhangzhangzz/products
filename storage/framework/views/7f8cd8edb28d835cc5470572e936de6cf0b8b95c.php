@@ -6,9 +6,29 @@
             <li class="layui-nav-item layui-nav-itemed">
                 <a href="javascript:;">管理(默认展开)</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/admin">账号管理</a></dd>
-                    <dd><a href="/admin/create">角色管理</a></dd>
-                    <dd><a href="">菜单管理</a></dd>
+                    <dd><a href="/admin/admin/index">账号管理</a></dd>
+                    <dd><a href="/admin/role/index">角色管理</a></dd>
+                    <dd><a href="/admin/menu/index">菜单管理</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;">会员</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/admin/user/index">会员列表</a></dd>
+                    <dd><a href="/admin/user/add">会员添加</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;">店铺管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/admin/shop/index">审核列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;">商品</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/admin/goods/index">商品列表</a></dd>
+                    <dd><a href="/admin/goods/classify">商品分类</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item">

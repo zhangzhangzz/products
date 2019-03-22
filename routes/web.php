@@ -14,6 +14,7 @@
 /**
  * 前端路由
  * 陈绪
+ * 苏鹏
  */
 
 Route::group(['namespace'=>'home'],function (){
@@ -28,9 +29,10 @@ Route::group(['namespace'=>'home'],function (){
 /**
  * 后端路由
  * 陈绪
+ * 苏鹏
  */
 
-Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.validate', 'admin.index']] ,function (){
+Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.validate', 'admin.index'],'middleware'=>'role'] ,function (){
 
 
     /*TODO:后台首页*/
@@ -54,17 +56,20 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:角色管理*/
     Route::any('role/index','Role\RoleController@index');
     Route::any('role/save','Role\RoleController@save');
+    Route::any('role/insert','Role\RoleController@insert');
     Route::any('role/edit','Role\RoleController@edit');
     Route::any('role/add','Role\RoleController@add');
-    Route::any('role/del','Role\RoleController@del');
+    Route::any('role/del/{id}','Role\RoleController@del');
     Route::any('role/status','Role\RoleController@status');
 
  
     /*TODO:菜单管理*/
     Route::any('menu/index','Menu\MenuController@index');
     Route::any('menu/save','Menu\MenuController@save');
-    Route::any('menu/edit','Menu\MenuController@edit');
-    Route::any('menu/del','Menu\MenuController@del');
+    Route::any('menu/insert','Menu\MenuController@insert');
+    Route::any('menu/edit/{id}','Menu\MenuController@edit');
+    Route::any('menu/update/{id}','Menu\MenuController@update');
+    Route::any('menu/del/{id}','Menu\MenuController@del');
 
 
     /*TODO:会员管理*/
@@ -73,6 +78,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('user/add','User\UserController@add');
     Route::any('user/look','User\UserController@look');
 
+
     /*TODO:店铺管理*/
     Route::any('shop/index','Shop\ShopController@index');
     Route::any('shop/check','Shop\ShopController@check');
@@ -80,6 +86,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');
     Route::any('goods/add','Goods\GoodsController@add');
+<<<<<<< HEAD
     Route::any('goods/addclass','Goods\GoodsController@addclass');
     Route::any('goods/classify','Goods\GoodsController@classify'); 
     Route::any('goods/manage','Goods\GoodsController@manage'); 
@@ -88,6 +95,17 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:平台设置*/
     Route::any('setting/index','Setting\SettingController@index');
 
+=======
+
+
+    /*TODO:商品分类*/
+    Route::any('category/index','Goods\CategoryController@index');
+    Route::any('category/add','Goods\CategoryController@add');
+    Route::any('category/save','Goods\CategoryController@save');
+    Route::any('category/edit','Goods\CategoryController@edit');
+    Route::any('category/del','Goods\CategoryController@del');
+    Route::any('category/updata','Goods\CategoryController@updata');
+>>>>>>> 10d56b69952df8ce76daa9bd238198fcc25c05d1
 
 
 

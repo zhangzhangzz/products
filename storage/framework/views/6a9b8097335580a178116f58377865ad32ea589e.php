@@ -1,37 +1,29 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/menuedit.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/menuedit.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div class="bigbox">
-            <form id="formmy" class="layui-form" action="{{url('admin/menu/insert')}}" method="post">
-                {{ csrf_field()  }}
+            <form class="layui-form" action="">
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="text" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">URL</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="url" placeholder="请输入URL" autocomplete="off" class="layui-input">
+                    <input type="text" name="text" required lay-verify="required" placeholder="请输入URL" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称</label>
                     <div class="layui-input-block" style="width: 190px;">
-                    <select name="boss" lay-verify="required">
-                        <option value="0">/</option>
-                        @foreach ($list as $v)
-                            <?php
-                            $nbsp = str_repeat("&nbsp;", substr_count($v -> path, ",")*5);
-                            ?>
-
-                            <option value="{{ $v -> id }}">{{$nbsp}}|--{{ $v -> name }}</option>
-                        @endforeach
+                    <select name="city" lay-verify="required">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                     </select>
                     </div>
                 </div>
@@ -39,16 +31,16 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">排序</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="sort" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="text" required lay-verify="required" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">状态</label>
                     <div class="layui-input-block" style="width: 190px;">
-                    <select name="state" lay-verify="required">
-                        <option value="1">开启</option>
+                    <select name="city" lay-verify="required">
                         <option value="0">禁用</option>
+                        <option value="1">开启</option>
                     </select>
                     </div>
                 </div>
@@ -77,9 +69,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
     //Demo
     layui.use('form', function(){
@@ -87,10 +79,10 @@
     
     //监听提交
     form.on('submit(formDemo)', function(data){
-//        layer.msg(JSON.stringify(data.field));
-//        return false;
-        $("#formmy").submit();
+        layer.msg(JSON.stringify(data.field));
+        return false;
     });
     });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
