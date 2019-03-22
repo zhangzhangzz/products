@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/addgoods.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/addgoods.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div class="titleBox">
@@ -23,13 +22,13 @@
                         <label>商品展示图</label>
                         <div  class="imgBox">
                             <div class="pl">
-                                <img src="{{ asset('image/eg.png') }}">
+                                <img src="<?php echo e(asset('image/eg.png')); ?>">
                             </div>
                             <div class="pl">
-                                <img src="{{ asset('image/eg.png') }}">
+                                <img src="<?php echo e(asset('image/eg.png')); ?>">
                             </div>
                             <div class="pl">
-                                <img src="{{ asset('image/eg.png') }}">
+                                <img src="<?php echo e(asset('image/eg.png')); ?>">
                             </div>
                             <div class="stext">建议尺寸：800 * 800像素，点击图片可设置为商品封面，最多上传10张</div>
                         </div>
@@ -86,9 +85,9 @@
         </div>
     </div> 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
 <script>
     layui.use(['form','upload'], function(){
         var form = layui.form
@@ -174,4 +173,5 @@
 
     });
 </script> 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
