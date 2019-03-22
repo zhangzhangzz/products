@@ -2,18 +2,129 @@
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+.titleBox{
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.titleBox > div{
+    width: 100px;
+    margin-left: 30px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    padding: 3px;
+    border-radius: 5px 5px 0 0;
+}
+
+.imgBox{
+    float: left;
     overflow: hidden;
-    
-}
-.btnbox{
-    margin: 20px 0;
+    position: relative;
 }
 
-.bigbox{
-    width: 400px;
-    height: 400px;
+.imgBox > div{
+    margin: 0 10px;
+    padding-bottom: 25px;
+}
+
+
+.pl{
+    float: left;
+}
+
+label{
+    float: left;
+    padding: 9px 15px;
+}
+
+.stext{
     position: absolute;
-    top: 10%;
-    left: 10%;
+    color: #999;
+    text-align: center;
+    bottom: -25px;
 }
 
+.layui-form-select{
+    float: left;
+    width: 200px;
+    margin: 0 10px;
+}
+.form > div{
+    margin: 20px 0;
+    position: relative;
+}
+.form{
+    padding: 0 10px;
+}
+
+.warn{
+    position: absolute;
+    margin: 0!important;
+    height: 37px;
+    line-height: 37px;
+    color: red;
+}
+
+.goodsImg{
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+.basicBox{
+    color: #555;
+    padding-top: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: -20px!important;
+}
+
+.unitBox{
+    width: calc(100% - 106px);
+    margin-left: 106px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.addBtn{
+    padding: 10px;
+    background-color: #eee;
+}
+.unitname{
+    background-color: #eee;
+    padding: 5px;
+}
+
+.unitdata{
+    padding: 5px;
+}
+
+.inBox{
+    width: 100px!important;
+    display: inline-block!important;
+}
+
+.setUnitBox{
+    display: inline-block;
+}
+
+.remove{
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+    line-height: 16px;
+    background: hsla(0,0%,60%,.6);
+    border-radius: 10px;
+    text-indent: 0;
+}

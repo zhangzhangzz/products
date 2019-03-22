@@ -59,7 +59,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('role/del','Role\RoleController@del');
     Route::any('role/status','Role\RoleController@status');
 
-
+ 
     /*TODO:菜单管理*/
     Route::any('menu/index','Menu\MenuController@index');
     Route::any('menu/save','Menu\MenuController@save');
@@ -75,11 +75,19 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
     /*TODO:店铺管理*/
     Route::any('shop/index','Shop\ShopController@index');
+    Route::any('shop/check','Shop\ShopController@check');
 
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');
     Route::any('goods/add','Goods\GoodsController@add');
+    Route::any('goods/addclass','Goods\GoodsController@addclass');
     Route::any('goods/classify','Goods\GoodsController@classify'); 
+    Route::any('goods/manage','Goods\GoodsController@manage'); 
+    Route::any('goods/recycle','Goods\GoodsController@recycle');
+
+    /*TODO:平台设置*/
+    Route::any('setting/index','Setting\SettingController@index');
+
 
 
 

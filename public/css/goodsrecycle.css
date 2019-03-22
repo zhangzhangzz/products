@@ -1,0 +1,14 @@
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.layui-table-cell {
+    height: 50px!important; 
+    line-height: 50px!important;
+}
+.layui-table-cell > img{
+    width: 100%;
+    height: 100%;
+}

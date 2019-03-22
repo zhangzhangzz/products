@@ -43,7 +43,7 @@
     </script>
 
     <script type="text/html" id="headDemo">
-        <img src="@{{d.headimg}}" alt="">
+        <img src="@{{d.headimg}}" >
     </script>
 
 @endsection
@@ -66,15 +66,14 @@
         table.render({
             elem: '#demo'
             ,limit:999999
-            ,width:1208
             ,cols: [[ //表头
-            {field: 'headimg', title: '头像', width:150,  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
-            ,{field: 'name', title: '名称' , width:150 , align:'center'}
-            ,{field: 'phone', title: '电话' , width:150 , align:'center'}
-            ,{field: 'wxqq', title: '微信/QQ', width:130 , align:'center'} 
-            ,{field: 'address', title: '地址', width: 300 , align:'center'}
-            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+            {field: 'headimg', title: '头像',  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+            ,{field: 'name', title: '名称' , align:'center'}
+            ,{field: 'phone', title: '电话' ,  align:'center'}
+            ,{field: 'wxqq', title: '微信/QQ',  align:'center'} 
+            ,{field: 'address', title: '地址',  align:'center'}
+            ,{field: 'creatdate', title: '创建时间',  sort: true , align:'center'}
+            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data
         });
