@@ -28,7 +28,8 @@
                         <button class="layui-btn" lay-submit lay-filter="formDemo">搜索</button>
                     </form>
 
-                    <table id="demo2" lay-filter="test"></table>
+                    <table id="demo2" lay-filter="test">
+                    </table>
                 </div>
             </div>
         </div>
@@ -114,7 +115,7 @@
                 //向服务端发送删除指令
                 console.log("删除");
 
-                $.post("",{
+                $.ajax("",{
                         id:id
                     },function(data){
 
@@ -127,6 +128,7 @@
         });
 
     });
+
 </script>
 <?php $__env->stopSection(); ?>
 

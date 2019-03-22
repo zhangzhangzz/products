@@ -85,7 +85,15 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');
     Route::any('goods/add','Goods\GoodsController@add');
-    Route::any('goods/classify','Goods\GoodsController@classify'); 
+
+
+    /*TODO:商品分类*/
+    Route::any('category/index','Goods\CategoryController@index');
+    Route::any('category/add','Goods\CategoryController@add');
+    Route::any('category/save','Goods\CategoryController@save');
+    Route::any('category/edit','Goods\CategoryController@edit');
+    Route::any('category/del','Goods\CategoryController@del');
+    Route::any('category/updata','Goods\CategoryController@updata');
 
 
 
