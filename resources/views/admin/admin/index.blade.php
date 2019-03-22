@@ -129,7 +129,7 @@
     $(".selectBtn").click(function(){
         var account = $(".account").val();
         var phone = $(".phone").val();
-        if(account =="" && phone ==""){1
+        if(account =="" && phone ==""){
             alert("至少输入一个查询条件");
             return false;
         }
@@ -141,41 +141,51 @@
             var table = layui.table
             ,laytpl = layui.laytpl;
 
-            
-            var data = [
-                {id:1,account:88888888,shopName:'桂香私厨',name:'香香1',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:1,action:'-'},
-                {id:2,account:88888888,shopName:'桂香私厨',name:'香香2',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:0,action:'-'}
-                    ];               
-                    
-    
-            //第一个实例
-            table.render({
-                elem: '#demo'
-                ,limit:999999
-                ,width:1120
-                ,cols: [[ //表头
-                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
-                ,{field: 'account', title: '账号' , width:150 , align:'center'}
-                ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
-                ,{field: 'name', title: '姓名', width:100 , align:'center'} 
-                ,{field: 'partment', title: '部门', width: 100 , align:'center'}
-                ,{field: 'role', title: '角色', width: 80 , align:'center'}
-                ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
-                ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
-                ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
-                ]]
-                ,data:data
-            });
+            $.ajax({
+                url: '{{url("admin/admin/index")}}',
+                type: 'POST',
+                dataType: 'JSON',
+                data:{"_token":"{{csrf_token()}}"},
+                success:function (data) {
+                    var data = data.data;
+
+                    console.log(data);
+
+
+                    //第一个实例
+                    table.render({
+                        elem: '#demo'
+                        ,limit:999999
+                        ,width:1120
+                        ,cols: [[ //表头
+                            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
+                            ,{field: 'account', title: '账号' , width:150 , align:'center'}
+                            ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
+                            ,{field: 'name', title: '姓名', width:100 , align:'center'}
+                            ,{field: 'partment', title: '部门', width: 100 , align:'center'}
+                            ,{field: 'role', title: '角色', width: 80 , align:'center'}
+                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
+                            ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                        ]]
+                        ,data:data
+                    });
+
+
+
+                },
+                error:function (data) {
+                    console.log("错误")
+                }
+            })
+
         });
 
-        $.post("",{
-            account:account,
-            phone:phone
-            },function(data){
 
-            });
 
     });
+
+
    
 
     
