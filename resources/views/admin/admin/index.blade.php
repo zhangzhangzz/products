@@ -148,10 +148,7 @@
                 data:{"_token":"{{csrf_token()}}"},
                 success:function (data) {
                     var data = data.data;
-
                     console.log(data);
-
-
                     //第一个实例
                     table.render({
                         elem: '#demo'
