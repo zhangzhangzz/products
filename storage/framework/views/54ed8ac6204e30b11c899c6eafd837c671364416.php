@@ -9,22 +9,24 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label iBox">店铺名称 ：</label>
                         <div class="layui-input-inline">
-                        <input type="text" name="account" lay-verify="required" placeholder="" autocomplete="off" class="layui-input account">
+                        <input type="text" name="account" lay-verify="required" required  placeholder="" autocomplete="off" class="layui-input account">
                         </div>
                     </div>
         
                     <div class="layui-form-item">
                         <label class="layui-form-label iBox">手机号 ：</label>
                         <div class="layui-input-inline">
-                        <input type="text" name="phone" lay-verify="required" placeholder="" autocomplete="off" class="layui-input phone">
+                        <input type="text" name="phone" lay-verify="required" required placeholder="" autocomplete="off" class="layui-input phone">
                         </div>
                     </div>
-                    <button class="layui-btn layui-btn-sm selectBtn" style="margin:20px 30px;">查询</button>                    
+                    <button class="layui-btn layui-btn-sm selectBtn" style="margin:20px 30px;" lay-submit lay-filter="formDemo">查询</button>                    
                 </div>
 
                 <table id="demo" lay-filter="test"></table>
 
         </div>  
+
+        
 
         
 
@@ -90,6 +92,57 @@
                     });
 
             }); 
+
+    $(".selectBtn").click(function(){
+        var account = $(".account").val();
+        var phone = $(".phone").val();
+        if(account =="" && phone ==""){
+            alert("至少输入一个查询条件");
+            return false;
+        });
+
+
+
+        layui.use(['table','laytpl'], function(){
+            var table = layui.table
+            ,laytpl = layui.laytpl;
+
+            $.ajax({
+                url: '<?php echo e(url("admin/admin/index")); ?>',
+                type: 'POST',
+                dataType: 'JSON',
+                data:{"_token":"<?php echo e(csrf_token()); ?>"},
+                success:function (data) {
+                    var data = data.data;
+                    console.log(data);
+                    //第一个实例
+                    table.render({
+                        elem: '#demo'
+                        ,limit:999999
+                        ,width:1120
+                        ,cols: [[ //表头
+                            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
+                            ,{field: 'account', title: '账号' , width:150 , align:'center'}
+                            ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
+                            ,{field: 'name', title: '姓名', width:100 , align:'center'}
+                            ,{field: 'partment', title: '部门', width: 100 , align:'center'}
+                            ,{field: 'role', title: '角色', width: 80 , align:'center'}
+                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
+                            ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                        ]]
+                        ,data:data
+                    });
+
+
+
+                },
+                error:function (data) {
+                    console.log("错误")
+                }
+            })
+
+        });
         
         // #table操作事件
         table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
@@ -99,20 +152,6 @@
             console.log(tdata);
             da = obj.data;
 
-            // #数据删除
-
-            if(layEvent === 'del'){ //删除
-                layer.confirm('真的删除行么', function(index){
-                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                layer.close(index);
-                //向服务端发送删除指令
-                console.log("删除");
-
-                $.post("",{
-                        id:id
-                    },function(data){
-
-                    });
 
                 });
             } else if(layEvent === 'edit'){
@@ -122,59 +161,6 @@
         
     });
 
-    
-
-
-    $(".selectBtn").click(function(){
-        var account = $(".account").val();
-        var phone = $(".phone").val();
-        if(account =="" && phone ==""){1
-            alert("至少输入一个查询条件");
-            return false;
-        }
-
-
-       
-
-        layui.use(['table','laytpl'], function(){
-            var table = layui.table
-            ,laytpl = layui.laytpl;
-
-            
-            var data = [
-                {id:1,account:88888888,shopName:'桂香私厨',name:'香香1',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:1,action:'-'},
-                {id:2,account:88888888,shopName:'桂香私厨',name:'香香2',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:0,action:'-'}
-                    ];               
-                    
-    
-            //第一个实例
-            table.render({
-                elem: '#demo'
-                ,limit:999999
-                ,width:1120
-                ,cols: [[ //表头
-                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
-                ,{field: 'account', title: '账号' , width:150 , align:'center'}
-                ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
-                ,{field: 'name', title: '姓名', width:100 , align:'center'} 
-                ,{field: 'partment', title: '部门', width: 100 , align:'center'}
-                ,{field: 'role', title: '角色', width: 80 , align:'center'}
-                ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
-                ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
-                ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
-                ]]
-                ,data:data
-            });
-        });
-
-        $.post("",{
-            account:account,
-            phone:phone
-            },function(data){
-
-            });
-
-    });
    
 
     

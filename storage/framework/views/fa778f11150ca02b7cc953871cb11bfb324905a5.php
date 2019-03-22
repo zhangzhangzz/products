@@ -21,14 +21,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="boss" required lay-verify="required" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="boss" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">状&emsp;&emsp;态：</label>
                     <div class="layui-input-block">
                     <select name="state" lay-verify="required">
-                        <option value=""></option>
                         <option value="1">启用</option>
                         <option value="0">禁用</option>
                     </select>
@@ -36,43 +35,44 @@
                 </div>
             
                 <div style="color:#555;padding: 15px;"><h2>权限设置</h2></div>
-
+                <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="quanxian">
                     <div class="tables">
-                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="list">
-                            <?php if($v -> location == 1): ?>
                             <p class="title">
-                                <input type="checkbox" value="" data-id="12" lay-skin="primary" title="管理" name="" lay-filter="allChoose"
+                                <input type="checkbox" value="<?php echo e($v['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($v['name']); ?>" name="action_id" lay-filter="allChoose"
                                     class="allChoose">
                             </p>
-                            <?php endif; ?>
                             <div class="ultable">
                                 <ul>
+                                    <?php if(is_array($v)): ?>
+                                    <?php $__currentLoopData = $v; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if(is_array($s)): ?>
                                     <li>
-                                        <input type="checkbox" value="" data-id="12" lay-skin="primary" title="账号管理" name="menu_role_id[]" lay-filter="choose"
+                                        <input type="checkbox" value="<?php echo e($s['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($s['name']); ?>" name="action_id" lay-filter="choose"
                                             class="aaa">
+
                                         <div class="list-three">
                                             <ul>
+                                                <?php $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                 <?php if(is_array($c)): ?>
                                                 <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="添加" name="menu_role_id[]" lay-filter="three-choose">
+                                                    <input type="checkbox" value="<?php echo e($c['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($c['name']); ?>" name="action_id" lay-filter="three-choose">
                                                 </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="编辑" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="删除" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </ul>
                                         </div>
                                     </li>
+                                    <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
 		        </div>
-                
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <div class="layui-form-item btnBox">
                     <div class="layui-input-block" style="margin: 0;">
                     <button class="layui-btn pl" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
@@ -80,19 +80,7 @@
                     </div>
                 </div>
             </form>
-                       
-                      
-
-        </div>  
-
-        
-
-        
-   
-
-    
-    
-      
+        </div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('js'); ?>

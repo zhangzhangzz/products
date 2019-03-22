@@ -6,6 +6,7 @@ use App\Http\Model\Admin\Action;
 use App\Http\Model\Admin\Roles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -27,8 +28,35 @@ class RoleController extends Controller
      */
     public function save()
     {
-        $list = Action::get();
-        return view("admin.role.save",["list" => $list]);
+        $sql = "select * from action order by concat(path, id)";
+        $li = DB::select($sql);
+        $data1 = json_decode(json_encode($li), true);
+        $i = [];
+        $data2 = [];
+        $list = [];
+        foreach($data1 as $v)
+        {
+            if(substr_count($v['path'], ",") == 1)
+            {
+                $list[$v['id']] = $v;
+            }
+            if(substr_count($v['path'], ",") == 2)
+            {
+                $i[] = $v['id'];
+                $data2[] = $v;
+            }
+            if(substr_count($v['path'], ",") == 3)
+            {
+                $key = array_search($v['boss'], $i);
+                $data2[$key][] = $v;
+                $key = "";
+            }
+        }
+        foreach($data2 as $p)
+        {
+            $list[$p['boss']][] = $p;
+        }
+            return view("admin.role.save",["list" => $list]);
     }
     /**
      * 角色执行添加
