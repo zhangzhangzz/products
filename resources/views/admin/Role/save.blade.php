@@ -20,8 +20,12 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
-                    <div class="layui-input-inline">
-                    <input type="text" name="boss" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
+                    <div class="layui-input-block">
+                        <select name="boss" lay-verify="required">
+                            @foreach ($name as $v)
+                            <option value="{{ $v -> id }}">{{ $v -> name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -40,7 +44,7 @@
                     <div class="tables">
                         <div class="list">
                             <p class="title">
-                                <input type="checkbox" value="{{ $v['id'] }}" data-id="12" lay-skin="primary" title="{{ $v['name'] }}" name="action_id" lay-filter="allChoose"
+                                <input type="checkbox" value="{{ $v['id'] }}" data-id="12" lay-skin="primary" title="{{ $v['name'] }}" name="action_id[]" lay-filter="allChoose"
                                     class="allChoose">
                             </p>
                             <div class="ultable">
@@ -49,7 +53,7 @@
                                     @foreach ($v as $s)
                                     @if(is_array($s))
                                     <li>
-                                        <input type="checkbox" value="{{ $s['id'] }}" data-id="12" lay-skin="primary" title="{{ $s['name'] }}" name="action_id" lay-filter="choose"
+                                        <input type="checkbox" value="{{ $s['id'] }}" data-id="12" lay-skin="primary" title="{{ $s['name'] }}" name="action_id[]" lay-filter="choose"
                                             class="aaa">
 
                                         <div class="list-three">
@@ -57,7 +61,7 @@
                                                 @foreach ($s as $c)
                                                  @if(is_array($c))
                                                 <li>
-                                                    <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id" lay-filter="three-choose">
+                                                    <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id[]" lay-filter="three-choose">
                                                 </li>
                                                 @endif
                                                 @endforeach

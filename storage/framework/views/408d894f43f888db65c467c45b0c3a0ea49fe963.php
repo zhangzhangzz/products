@@ -91,10 +91,15 @@
             //向服务端发送删除指令
             console.log("删除");
 
-            $.post("",{
+            $.get("/admin/role/del/"+tdata.id,{
                 
                 },function(data){
-
+                    if(data == 1)
+                    {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    }else{
+                        alert("删除失败");
+                    }
                 });
 
             });

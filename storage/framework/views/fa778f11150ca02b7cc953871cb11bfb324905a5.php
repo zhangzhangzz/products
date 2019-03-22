@@ -20,8 +20,12 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
-                    <div class="layui-input-inline">
-                    <input type="text" name="boss" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
+                    <div class="layui-input-block">
+                        <select name="boss" lay-verify="required">
+                            <?php $__currentLoopData = $name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($v -> id); ?>"><?php echo e($v -> name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -40,7 +44,7 @@
                     <div class="tables">
                         <div class="list">
                             <p class="title">
-                                <input type="checkbox" value="<?php echo e($v['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($v['name']); ?>" name="action_id" lay-filter="allChoose"
+                                <input type="checkbox" value="<?php echo e($v['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($v['name']); ?>" name="action_id[]" lay-filter="allChoose"
                                     class="allChoose">
                             </p>
                             <div class="ultable">
@@ -49,7 +53,7 @@
                                     <?php $__currentLoopData = $v; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if(is_array($s)): ?>
                                     <li>
-                                        <input type="checkbox" value="<?php echo e($s['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($s['name']); ?>" name="action_id" lay-filter="choose"
+                                        <input type="checkbox" value="<?php echo e($s['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($s['name']); ?>" name="action_id[]" lay-filter="choose"
                                             class="aaa">
 
                                         <div class="list-three">
@@ -57,7 +61,7 @@
                                                 <?php $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                  <?php if(is_array($c)): ?>
                                                 <li>
-                                                    <input type="checkbox" value="<?php echo e($c['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($c['name']); ?>" name="action_id" lay-filter="three-choose">
+                                                    <input type="checkbox" value="<?php echo e($c['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($c['name']); ?>" name="action_id[]" lay-filter="three-choose">
                                                 </li>
                                                 <?php endif; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
