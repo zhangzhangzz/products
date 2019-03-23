@@ -3,105 +3,102 @@
 @section('content')
     <div class="main">
         <div style="padding:30px;">
-            
-            <form class="layui-form formBox" action="">
+                <div>
+                    <ul>
+                        <li>{{ session('errors') }}</li>
+                    </ul>
+                </div>
+            <form class="layui-form formBox" action="{{url('admin/role/update/'.$lists -> id)}}" method="post">
+                {{ csrf_field()  }}
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="text" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" value="{{ $lists -> name  }}" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="text" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
+                    <input type="text" name="descript" value="{{ $lists -> descript  }}" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
-                    <div class="layui-input-inline">
-                    <input type="text" name="text" required lay-verify="required" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
-                    </div>
+                    <div class="layui-input-block">
+                        <select name="boss">
+                            <option value="{{ $lists -> boss }}" selected>{{ $lists -> boss }}</option>
+                            @foreach($data as $v)
+                            <option value="{{ $v -> boss }}">{{ $v -> boss }}</option>
+                            @endforeach
+                        </select>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">状&emsp;&emsp;态：</label>
                     <div class="layui-input-block">
-                    <select name="city" lay-verify="required">
+                    <select name="state" lay-verify="required">
                         <option value=""></option>
-                        <option value="1">启用</option>
+                        <option value="{{ $lists -> state }}" selected>@if($lists -> state == 1)启用
                         <option value="0">禁用</option>
+                        @else
+                            <option value="1">启用</option>禁用@endif</option>
+
+
                     </select>
                     </div>
                 </div>
-            
-                <div style="color:#555;padding: 15px;"><h2>权限设置</h2></div>
 
-                <div class="quanxian">
-                    <div class="tables">
-
-                        <div class="list">
-                            <p class="title">
-                                <input type="checkbox" value="" data-id="12" lay-skin="primary" title="管理" name="" lay-filter="allChoose"
-                                    class="allChoose">
-                            </p>
-                            <div class="ultable">
-                                <ul>
-                                    <li>
-                                        <input type="checkbox" value="" data-id="12" lay-skin="primary" title="账号管理" name="menu_role_id[]" lay-filter="choose"
-                                            class="aaa">
-                                        <div class="list-three">
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="添加" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="编辑" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="删除" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" value="" data-id="12" lay-skin="primary" title="角色管理" name="menu_role_id[]" lay-filter="choose"
-                                            class="aaa">
-                                        <div class="list-three">
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="添加" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="编辑" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="删除" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" value="" data-id="12" lay-skin="primary" title="菜单管理" name="menu_role_id[]" lay-filter="choose"
-                                            class="aaa">
-                                        <div class="list-three">
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="添加" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="编辑" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" value="" data-id="12" lay-skin="primary" title="删除" name="menu_role_id[]" lay-filter="three-choose">
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
+                    <div style="color:#555;padding: 15px;"><h2>权限设置</h2></div>
+                    @foreach ($list as $v)
+                        <div class="quanxian">
+                            <div class="tables">
+                                <div class="list">
+                                    <p class="title">
+                                        @if(in_array($v['id'], $checkbox))
+                                            <input type="checkbox" value="{{ $v['id'] }}" data-id="12" lay-skin="primary" title="{{ $v['name'] }}" name="action_id[]" lay-filter="allChoose"
+                                                   class="allChoose" checked="checked">
+                                        @else
+                                        <input type="checkbox" value="{{ $v['id'] }}" data-id="12" lay-skin="primary" title="{{ $v['name'] }}" name="action_id[]" lay-filter="allChoose"
+                                               class="allChoose">
+                                        @endif
+                                    </p>
+                                    <div class="ultable">
+                                        <ul>
+                                            @if(is_array($v))
+                                                @foreach ($v as $s)
+                                                    @if(is_array($s))
+                                                        <li>
+                                                            @if(in_array($s['id'], $checkbox))
+                                                            <input type="checkbox" value="{{ $s['id'] }}" data-id="12" lay-skin="primary" title="{{ $s['name'] }}" name="action_id[]" lay-filter="choose"
+                                                                   class="aaa" checked="checked">
+                                                            @else
+                                                                <input type="checkbox" value="{{ $s['id'] }}" data-id="12" lay-skin="primary" title="{{ $s['name'] }}" name="action_id[]" lay-filter="choose"
+                                                                       class="aaa">
+                                                            @endif
+                                                            <div class="list-three">
+                                                                <ul>
+                                                                    @foreach ($s as $c)
+                                                                        @if(is_array($c))
+                                                                            <li>
+                                                                                @if(in_array($s['id'], $checkbox))
+                                                                                <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id[]" lay-filter="three-choose" checked="checked">
+                                                                                @else
+                                                                                <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id[]" lay-filter="three-choose">
+                                                                                @endif
+                                                                            </li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-		        </div>
+                    @endforeach
                 
                 <div class="layui-form-item btnBox">
                     <div class="layui-input-block" style="margin: 0;">

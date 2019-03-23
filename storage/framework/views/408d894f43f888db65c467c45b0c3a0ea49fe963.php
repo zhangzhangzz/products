@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/action.css')); ?>">
 <?php $__env->startSection('content'); ?>
+    <div>
+        <ul>
+            <li><?php echo e(session('errors')); ?></li>
+        </ul>
+    </div>
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -9,10 +14,7 @@
 
                 <table id="demo" lay-filter="test"></table>
 
-        </div>  
-
-        
-
+        </div>
         <script type="text/html" id="titleTpl">
             {{#  if(d.status ==1 ){ }}
                 <div class="layui-form-item">
@@ -104,7 +106,7 @@
 
             });
         } else if(layEvent === 'edit'){
-            window.location.href="/admin/role/edit";
+            window.location.href="/admin/role/edit/"+tdata.id;
         }
         });
     });

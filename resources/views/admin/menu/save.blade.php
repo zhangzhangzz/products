@@ -4,6 +4,11 @@
     <div class="main">
         <div style="padding:30px;">
             <div class="bigbox">
+                <div>
+                    <ul>
+                        <li>{{ session('errors') }}</li>
+                    </ul>
+                </div>
             <form id="formmy" class="layui-form" action="{{url('admin/menu/insert')}}" method="post">
                 {{ csrf_field()  }}
                 <div class="layui-form-item">

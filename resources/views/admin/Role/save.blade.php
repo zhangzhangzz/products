@@ -3,7 +3,11 @@
 @section('content')
     <div class="main">
         <div style="padding:30px;">
-            
+            <div>
+                <ul>
+                    <li>{{ session('errors') }}</li>
+                </ul>
+            </div>
             <form id="formmy" class="layui-form formBox" action="{{url('admin/role/insert')}}" method="post">
                 {{ csrf_field()  }}
                 <div class="layui-form-item">
@@ -23,7 +27,8 @@
                     <div class="layui-input-block">
                         <select name="boss" lay-verify="required">
                             @foreach ($name as $v)
-                            <option value="{{ $v -> id }}">{{ $v -> name }}</option>
+                                <option value="/">/</option>
+                                <option value="{{ $v -> name }}">{{ $v -> name }}</option>
                             @endforeach
                         </select>
                     </div>

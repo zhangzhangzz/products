@@ -23,7 +23,8 @@
                     <div class="layui-input-block">
                         <select name="boss" lay-verify="required">
                             <?php $__currentLoopData = $name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($v -> id); ?>"><?php echo e($v -> name); ?></option>
+                                <option value="/">/</option>
+                                <option value="<?php echo e($v -> name); ?>"><?php echo e($v -> name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>

@@ -57,8 +57,8 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('role/index','Role\RoleController@index');
     Route::any('role/save','Role\RoleController@save');
     Route::any('role/insert','Role\RoleController@insert');
-    Route::any('role/edit','Role\RoleController@edit');
-    Route::any('role/add','Role\RoleController@add');
+    Route::any('role/edit/{id}','Role\RoleController@edit');
+    Route::any('role/update/{id}','Role\RoleController@update');
     Route::any('role/del/{id}','Role\RoleController@del');
     Route::any('role/status','Role\RoleController@status');
 

@@ -74,7 +74,7 @@ class MenuController extends Controller{
         if($re){
             return redirect('admin/menu/index');
         }else{
-            return back();
+            return back() -> with('errors','添加失败');
         }
     }
     /**
@@ -136,7 +136,7 @@ class MenuController extends Controller{
         if($re){
             return redirect('admin/menu/index');
         }else{
-            return back();
+            return back() -> with('errors','修改失败');
         }
     }
     /**
