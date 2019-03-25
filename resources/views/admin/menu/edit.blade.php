@@ -5,13 +5,16 @@
     <div class="main">
         <div style="padding:30px;">
             <div class="bigbox">
-                <div>
-                    <ul>
-                        <li>{{ session('errors') }}</li>
-                    </ul>
-                </div>
             <form id="formmy" class="layui-form" action="{{url('admin/menu/update/'.$list -> id)}}" method="post" lay-filter="example">
                 {{ csrf_field()  }}
+                @if(session('errors'))
+                    <div class="errors">
+                        <h3>警告</h3>
+                        <br/>
+                        {{ session('errors') }}
+                        <br/>
+                    </div>
+                @endif
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">

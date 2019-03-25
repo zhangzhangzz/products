@@ -2,14 +2,18 @@
 <?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
-                <div>
-                    <ul>
-                        <li><?php echo e(session('errors')); ?></li>
-                    </ul>
-                </div>
             <form class="layui-form formBox" action="<?php echo e(url('admin/role/update/'.$lists -> id)); ?>" method="post">
                 <?php echo e(csrf_field()); ?>
 
+                <?php if(session('errors')): ?>
+                    <div class="errors">
+                        <h3>警告</h3>
+                        <br/>
+                        <?php echo e(session('errors')); ?>
+
+                        <br/>
+                    </div>
+                <?php endif; ?>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">

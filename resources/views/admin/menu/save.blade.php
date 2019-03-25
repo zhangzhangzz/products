@@ -4,24 +4,27 @@
     <div class="main">
         <div style="padding:30px;">
             <div class="bigbox">
-                <div>
-                    <ul>
-                        <li>{{ session('errors') }}</li>
-                    </ul>
-                </div>
             <form id="formmy" class="layui-form" action="{{url('admin/menu/insert')}}" method="post">
                 {{ csrf_field()  }}
+                @if(session('errors'))
+                    <div class="errors">
+                        <h3>警告</h3>
+                        <br/>
+                        {{ session('errors') }}
+                        <br/>
+                    </div>
+                @endif
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" value="{{  old('name')  }}" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">URL</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="url" placeholder="请输入URL" autocomplete="off" class="layui-input">
+                    <input type="text" name="url" value="{{  old('url')  }}" placeholder="请输入URL" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
@@ -44,7 +47,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">排序</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="sort" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="sort" value="{{  old('sort')  }}" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
