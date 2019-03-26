@@ -6,6 +6,7 @@
  * Time: 9:06
  */
 
+
 if(!function_exists("ajax_success")){
 
     function ajax_success($msg = '提交成功',$data=array()){
@@ -16,6 +17,7 @@ if(!function_exists("ajax_success")){
     }
 
 }
+
 
 
 

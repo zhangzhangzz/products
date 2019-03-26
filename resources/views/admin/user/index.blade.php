@@ -30,7 +30,6 @@
                     </form>
 
                     <table id="demo2" lay-filter="test">
-
                     </table>
                 </div>
             </div>
@@ -56,6 +55,7 @@
         var element = layui.element
             table = layui.table
             form = layui.form;
+
 
         $.ajax({
             url:"{{url('admin/user/index')}}",

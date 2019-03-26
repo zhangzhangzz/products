@@ -13,12 +13,9 @@ class UserController extends Controller
      * 会员显示
      * 陈绪
      */
+    public function index(Request $request){
 
-    public function index(Request $request)
-    {
-
-        if ($request->isMethod("post")) {
-
+        if($request->isMethod("post")){
             $users = DB::table("account")->where("status", "<>", 0)->get()->toArray();
             foreach ($users as $key => $value) {
                 $users[$key]["create_time"] = date("Y-m-d", $value["create_time"]);

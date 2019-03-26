@@ -44,8 +44,9 @@
 
 <?php $__env->startSection('js'); ?>
  <script>
+
      function addRole(){
-         window.location.href="/admin/menu/save";
+         window.location.href="/admin/role/edit";
      }
 
 
@@ -85,25 +86,20 @@
 
         if(layEvent === 'del'){ //删除
             layer.confirm('真的删除行么', function(index){
-//            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-
+            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+            layer.close(index);
             //向服务端发送删除指令
-            $.get("/admin/menu/del/"+tdata.id,{
+            console.log("删除");
 
+            $.post("",{
+                
                 },function(data){
-                    if(data == 1)
-                    {
-                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                    }else{
-                        alert("删除失败");
-                    }
 
-                layer.close(index);
                 });
 
             });
         } else if(layEvent === 'edit'){
-            window.location.href="/admin/menu/edit/"+tdata.id;
+            window.location.href="/admin/menu/edit";
         }
         });
     });
@@ -112,31 +108,24 @@
         var table = layui.table
         ,laytpl = layui.laytpl;
 
-        var list = <?php echo $list; ?>;
+        
+        var data = [
+            {id:'1',name:'角色管理',url:'香香',url:1,action:'-'},
+            {id:'2',name:'菜单管理',url:'香香',url:1,action:'-'},
+            {id:'3',name:'成员管理',url:'香香',url:1,action:'-'},
+                ];               
+                
 
-        var data = [];
-        if(list.length == 1)
-        {
-            for(var i in  list)
-            {
-                data = [list[i]];
-            }
-        }else{
-            for(var i in  list)
-            {
-                data.push(list[i]);
-            }
-        }
         //第一个实例
         table.render({
             elem: '#demo'
             ,limit:999999
             ,width:666
             ,cols: [[ //表头
-            {field: 'sort', title: '排序', width:80, sort: true, fixed: 'left' , align:'center'}
-            ,{field: 'name', title: '名称' , width:150 , align:'center'}
-            ,{field: 'url', title: '路径' , width:150 , align:'center'}
-            ,{field: 'boss', title: '上级ID', width:100 , align:'center' }
+            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
+            ,{field: 'name', title: '菜单名称' , width:150 , align:'center'}
+            ,{field: 'url', title: 'URL' , width:150 , align:'center'}
+            ,{field: 'boss', title: '上级ID', width:100 , align:'center' } 
             ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data

@@ -72,49 +72,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="UD">
-                        <label>规格明细</label>
-                        <div class="undetail">
-                            <table class="table-sku-stock">
-                                <thead>
-                                    <tr>
-                                        <!--th>颜色</th-->
-                                        <th class="th-price">
-                                            <em class="zent-form__required">*</em>
-                                            <!-- react-text: 687 -->价格（元）<!-- /react-text -->
-                                        </th>
-                                        <th class="th-stock">
-                                            <em class="zent-form__required">*</em><!-- react-text: 690 -->库存<!-- /react-text -->
-                                            <div class="zent-popover-wrapper zent-pop-wrapper" style="display: inline-block;">
-                                                <span class="help-circle">
-                                                    <i class="zenticon zenticon-help-circle"></i>
-                                                </span><!-- react-empty: 694 -->
-                                            </div>
-                                        </th>
-                                        <th class="th-code"><!-- react-text: 696 -->规格编码<!-- /react-text -->
-                                            <div class="zent-popover-wrapper zent-pop-wrapper" style="display: inline-block;">
-                                                <span class="help-circle">
-                                                    <i class="zenticon zenticon-help-circle"></i>
-                                                </span><!-- react-empty: 700 -->
-                                            </div>
-                                        </th>
-                                        <th class="text-cost-price"><!-- react-text: 702 -->成本价<!-- /react-text -->
-                                            <div class="zent-popover-wrapper zent-pop-wrapper" style="display: inline-block;">
-                                                <span class="help-circle">
-                                                    <i class="zenticon zenticon-help-circle"></i>
-                                                </span><!-- react-empty: 706 -->
-                                            </div>
-                                        </th>
-                                        <th class="text-right">销量</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
                    
                     <div class="layui-form-item">
                         <div class="layui-input-block">
@@ -153,48 +110,44 @@
         });
 
         var html = "";
-        var uindex = 0;
         $(".addUnit").click(function(){
-            uindex+=1;
             var ublen = $(".ubBody").find(".ub").length;
             if(ublen ==3 ){
                 layer.msg("最多支持3组规格");
                 return false;
             }
-            
-            html=`<div class="ub1 ub" data-index=${uindex} >
-                    <div class="unitname">
-                        <label class="labelText">规格名：</label>
-                        <input type="text" name="unit" required lay-verify="required" placeholder="净含量" 
-                        autocomplete="off" class="layui-input inBox" onchange="changeUnit(this)" >
-                    </div>
-                    <div class="unitdata">
-                        <div>
-                            <label class="labelText">规格值：</label>
-                            <div class="setUnitBox" >
-                                <a class="addUdata" onclick="addUdata(this)">添加规格值</a>
-                            </div>
-                            
-                        </div>
-                        
-                        <span class="reudata remove">x</span>
-                    </div>
-                </div>`;
-            $(".ubBody").append(html);
+// ------------------------------------------------------------------------
+            html+=`<div class="ub1 ub">
+                                <div class="unitname">
+                                    <label class="labelText">规格名：</label>
+                                    <input type="text" name="unit" required lay-verify="required" placeholder="净含量" autocomplete="off" class="layui-input inBox">
+                                </div>
+                                <div class="unitdata">
+                                    <div>
+                                        <label class="labelText">规格值：</label>
+                                        <div class="setUnitBox">
+                                            <a class="addUdata" style="color:#38f;" onclick="addUdata()">添加规格值</a>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <span class="reudata remove">x</span>
+                                </div>
+                            </div>`;
+            $(".ubBody").html(html);
 
         });
-        var index=0;
 
-        window.addUdata = function(x) {
-            var uuid = $($($($(x).parent()).parent()).parent()).parent().data("index");
-            var flag = $(x).prev().length;
-            index+=1;
-            $(x).before(`<div class="addunBox" onmouseout="reHide(this);" onmouseover="reShow(this);">
-                            <input type="text" name="unit" required lay-verify="required" placeholder="kg" 
-                            autocomplete="off" class="layui-input inBox cudata${uuid}" onchange="changeUdata(this);" data-index=${index} data-flag=${flag}>
-                            <span class="reinput remove" onclick="remInput(this);">x</span>
-                        </div>`);
-
+        window.addUdata = function() {
+            // var inLen = $(".setUnitBox").find("input").length;
+            // if(inLen==3){
+            //     layer.msg("最多支持3组规格");
+            //     return false;
+            // }
+            $(".addUdata").before(`<div class="addunBox" onmouseout="reHide();" mouseover="reShow();">
+                                        <input type="text" name="unit" required lay-verify="required" placeholder="kg" autocomplete="off" class="layui-input inBox">
+                                        <span class="reinput remove">x</span>
+                                    </div>`);
         }
 
         $(".ub").mouseover(function(){
@@ -205,152 +158,17 @@
             $(this).find(".remove").css({display:"none"});
         });
 
-        window.reShow = function(x) {
-            $(x).find(".remove").css({display:"block"});
+        window.reShow = function() {
+            $(this).find(".remove").css({display:"block"});
         }
 
-        window.reHide = function(x) {
-            $(x).find(".remove").css({display:"none"});
-        }
-
-        window.remInput = function(x) {
-            $(x).parent().remove();
+        window.reHide = function() {
+            $(this).find(".remove").css({display:"block"});
         }
 
         $(".reudata").click(function(){
             $($(this).parent()).parent().remove();
         });
-
-        window.changeUnit = function(x) {
-            $($(x).parent()).next().find(".addUdata").css({display:"inline-block"});
-        }
-
-        function addTable(){
-
-        }
-
-        window.changeUdata = function(x) {
-            var id = $(x).data("index");
-            var  unitdata = $($($($(x).parent()).parent()).parent()).parent();
-            var uparent = $(unitdata).parent();
-            var uid = $(uparent).data("index");
-            var text = $(x).val();
-            var flag = $(x).data("flag");
-            console.log("flag--"+flag);
-
-            var thtext = $(unitdata).prev().find("input").val();
-            var th = `<th>${thtext}</th>`;
-
-            //只有一种规格
-            if(id==1 && uid==1){
-                console.log("只有一种规格");
-                $(".th-price").before(th);
-                var tr = `<tr class="hang">
-                            <td rowspan="1" class="up${uid}" >${text}</td>
-                            <td class="addhere${uid}">
-                                <div class="widget-form__group-row">
-                                    <div class="zent-number-input-wrapper input-mini">
-                                        <div class="zent-input-wrapper input-mini">
-                                            <input type="text" class="zent-input" name="price" autocomplete="off" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="widget-form__group-row">
-                                    <div class="zent-number-input-wrapper input-mini">
-                                        <div class="zent-input-wrapper input-mini">
-                                            <input type="text" class="zent-input" name="stock_num" autocomplete="off" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="widget-form__group-row">
-                                    <div class="zent-input-wrapper input-mini2">
-                                        <input type="text" class="zent-input" name="code" autocomplete="off" value="">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="widget-form__group-row">
-                                    <div class="zent-number-input-wrapper input-mini">
-                                        <div class="zent-input-wrapper input-mini">
-                                            <input type="text" class="zent-input" name="cost_price" autocomplete="off" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>0</td>
-                        </tr>`;
-            }else if(uid!=1 && uid-1!=0){
-                console.log("添加列");
-                $(".th-price").before(th);
-                console.log("here");
-                $(`.up${uid-1}`).after(`<th class="up${uid}">${text}</th>`);                
-            }else if(id!=1 && uid==1){
-                console.log("添加行");
-                var lie2 = $(".cudata2").val();
-                var lie3 = $(".cudata3").val();
-                var langlen = $(".hang").length;
-                var html = ``;
-                if(langlen==2){
-                    $(`.up${langlen-1}`).after(`<td rowspan="1" class="up${uid}" >${lie2}</td>`);
-                }else if(langlen==3){
-                    $(`.up${langlen-1}`).after(`<td rowspan="1" class="up${uid}" >${lie3}</td>`);
-                }
-                var tr = `<tr class="hang firTR${uid}">
-                            <td rowspan="1" class="up${uid}" >${text}</td>
-                            <td class="addhere${uid}">
-                                <div class="widget-form__group-row">
-                                    <div class="zent-number-input-wrapper input-mini">
-                                        <div class="zent-input-wrapper input-mini">
-                                            <input type="text" class="zent-input" name="price" autocomplete="off" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="widget-form__group-row">
-                                    <div class="zent-number-input-wrapper input-mini">
-                                        <div class="zent-input-wrapper input-mini">
-                                            <input type="text" class="zent-input" name="stock_num" autocomplete="off" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="widget-form__group-row">
-                                    <div class="zent-input-wrapper input-mini2">
-                                        <input type="text" class="zent-input" name="code" autocomplete="off" value="">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="widget-form__group-row">
-                                    <div class="zent-number-input-wrapper input-mini">
-                                        <div class="zent-input-wrapper input-mini">
-                                            <input type="text" class="zent-input" name="cost_price" autocomplete="off" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>0</td>
-                        </tr>`;
-
-            }else if(uid!=1 && uid-1!=0){
-                console.log("不知道");
-                if(uid==2){
-
-                }
-                console.log("---===");
-                
-            }
-                $(".UD").css({display:"block"});
-                $("tbody").append(tr);
-            
-        }
-
 
 
     });

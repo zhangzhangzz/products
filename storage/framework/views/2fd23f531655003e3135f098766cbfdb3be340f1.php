@@ -175,7 +175,8 @@
                     } else if(childChecked.length==0){
                             $(data.elem).parents('li').find(' input.aaa').get(0).checked = false;
 
-                    }else {
+                        }
+                        else {
                     $(data.elem).parents('li').find(' input.aaa').get(0).checked = true;
 
                     }
@@ -190,8 +191,8 @@
 
           //监听提交
           form.on('submit(formDemo)', function(data){
-             layer.msg(JSON.stringify(data.field));
-             return false;
+            // layer.msg(JSON.stringify(data.field));
+            // return false;
           });
         });
 
