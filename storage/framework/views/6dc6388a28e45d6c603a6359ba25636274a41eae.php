@@ -108,7 +108,7 @@
             ,laytpl = layui.laytpl;
 
             $.ajax({
-                url: '<?php echo e(url("admin/user/index")); ?>',
+                url: '<?php echo e(url("admin/admin/index")); ?>',
                 type: 'POST',
                 dataType: 'JSON',
                 data:{"_token":"<?php echo e(csrf_token()); ?>"},

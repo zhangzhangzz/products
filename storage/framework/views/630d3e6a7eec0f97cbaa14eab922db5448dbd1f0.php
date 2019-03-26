@@ -29,6 +29,7 @@
                     </form>
 
                     <table id="demo2" lay-filter="test">
+
                     </table>
                 </div>
             </div>
@@ -63,7 +64,7 @@
             data: {"_token": "<?php echo e(csrf_token()); ?>"},
             success: function (data) {
                 console.log(data);
-                var data = data.users;
+                var data = data.data;
                 //第一个实例
                 table.render({
                     elem: '#demo'
@@ -81,10 +82,11 @@
                         , {field: 'phone', title: '电话', width: 150, align: 'center'}
                         , {field: 'weixin_qq', title: '微信/QQ', width: 130, align: 'center'}
                         , {field: 'address', title: '地址', width: 300, align: 'center'}
-                        , {field: timetrans('creatdate'), title: '创建时间', width: 140, sort: true, align: 'center'}
+                        , {field: 'create_time', title: '创建时间', width: 140, sort: true, align: 'center'}
                         , {field: 'action', title: '操作', width: 180, align: 'center', toolbar: '#barDemo'}
                     ]]
                     , data: data
+
                 });
             },
             error: function (data) {

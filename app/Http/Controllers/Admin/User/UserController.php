@@ -16,8 +16,13 @@ class UserController extends Controller
     public function index(Request $request){
 
         if($request->isMethod("post")){
-            $users = DB::table("account")->where("status","<>",0)->get();
-            return json_encode(array("users"=>$users),JSON_UNESCAPED_UNICODE);
+
+            $users = DB::table("account")->where("status","<>",0)->get()->toArray();
+            foreach ($users as $key=>$value){
+                $users[$key]["create_time"] = date("Y-m-d H:i:s",$value["create_time"]);
+            }
+            return ajax_success("获取成功",$users);
+
         }
 
         return view("admin.user.index");
