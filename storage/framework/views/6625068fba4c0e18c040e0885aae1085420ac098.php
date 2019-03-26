@@ -46,7 +46,7 @@
  <script>
 
      function addRole(){
-         window.location.href="/admin/role/save";
+         window.location.href="/admin/role/edit";
      }
 
 
@@ -91,15 +91,10 @@
             //向服务端发送删除指令
             console.log("删除");
 
-            $.get("/admin/role/del/"+tdata.id,{
+            $.post("",{
                 
                 },function(data){
-                    if(data == 1)
-                    {
-                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                    }else{
-                        alert("删除失败");
-                    }
+
                 });
 
             });
@@ -113,20 +108,15 @@
         var table = layui.table
         ,laytpl = layui.laytpl;
 
-        var list = <?php echo $list; ?>;
-        var data = [];
-        if(list.length == 1)
-        {
-            for(var i in  list)
-            {
-                data = [list[i]];
-            }
-        }else{
-            for(var i in  list)
-            {
-                data.push(list[i]);
-            }
-        }
+        
+        var data = [
+            {name:'管理员',descript:'管理员1',boss:'香香是个大撒比',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
+            {name:'群众',descript:'群众2',boss:'香香2',status:1,action:'-'}
+                ];               
                 
 
         //第一个实例
@@ -138,7 +128,7 @@
             {field: 'name', title: '角色名称', width:80, sort: true, fixed: 'left' , align:'center'}
             ,{field: 'descript', title: '角色描述' , width:150 , align:'center'}
             ,{field: 'boss', title: '上级名称' , width:150 , align:'center'}
-            ,{field: 'state', title: '状态', width:100 , align:'center' ,  templet: '#titleTpl'}
+            ,{field: 'status', title: '状态', width:100 , align:'center' ,  templet: '#titleTpl'} 
             ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data

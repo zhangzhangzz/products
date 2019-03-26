@@ -7,15 +7,6 @@
             <form id="formmy" class="layui-form" action="<?php echo e(url('admin/menu/update/'.$list -> id)); ?>" method="post" lay-filter="example">
                 <?php echo e(csrf_field()); ?>
 
-                <?php if(session('errors')): ?>
-                    <div class="errors">
-                        <h3>警告</h3>
-                        <br/>
-                        <?php echo e(session('errors')); ?>
-
-                        <br/>
-                    </div>
-                <?php endif; ?>
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">

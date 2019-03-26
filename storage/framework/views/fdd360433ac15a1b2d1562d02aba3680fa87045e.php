@@ -6,26 +6,17 @@
             <form id="formmy" class="layui-form" action="<?php echo e(url('admin/menu/insert')); ?>" method="post">
                 <?php echo e(csrf_field()); ?>
 
-                <?php if(session('errors')): ?>
-                    <div class="errors">
-                        <h3>警告</h3>
-                        <br/>
-                        <?php echo e(session('errors')); ?>
-
-                        <br/>
-                    </div>
-                <?php endif; ?>
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" value="<?php echo e(old('name')); ?>" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">URL</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="url" value="<?php echo e(old('url')); ?>" placeholder="请输入URL" autocomplete="off" class="layui-input">
+                    <input type="text" name="url" placeholder="请输入URL" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
@@ -48,7 +39,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">排序</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="sort" value="<?php echo e(old('sort')); ?>" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="sort" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 

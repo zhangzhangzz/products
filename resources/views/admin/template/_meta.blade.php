@@ -6,5 +6,4 @@
     <link rel="stylesheet" href="{{ asset('static/admin/layui/css/layui.css') }}">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="{{ asset('static/admin/layui/layui.js') }}"></script>
-
 </head>
