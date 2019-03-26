@@ -89,10 +89,10 @@
 
         if(layEvent === 'del'){ //删除
             layer.confirm('真的删除行么', function(index){
-            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+//            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
             layer.close(index);
             //向服务端发送删除指令
-            console.log("删除");
+//            console.log("删除");
 
             $.get("/admin/role/del/"+tdata.id,{
                 
