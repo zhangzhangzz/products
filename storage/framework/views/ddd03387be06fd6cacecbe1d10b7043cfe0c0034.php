@@ -6,4 +6,5 @@
     <link rel="stylesheet" href="<?php echo e(asset('static/admin/layui/css/layui.css')); ?>">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="<?php echo e(asset('static/admin/layui/layui.js')); ?>"></script>
+
 </head>
