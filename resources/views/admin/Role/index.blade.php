@@ -1,11 +1,6 @@
 @extends('admin.template.default')
 <link rel="stylesheet" href="{{ asset('css/action.css') }}">
 @section('content')
-    <div>
-        <ul>
-            <li>{{ session('errors') }}</li>
-        </ul>
-    </div>
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -15,7 +10,10 @@
 
                 <table id="demo" lay-filter="test"></table>
 
-        </div>
+        </div>  
+
+        
+
         <script type="text/html" id="titleTpl">
             @{{#  if(d.status ==1 ){ }}
                 <div class="layui-form-item">
@@ -89,10 +87,10 @@
 
         if(layEvent === 'del'){ //删除
             layer.confirm('真的删除行么', function(index){
-//            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
             layer.close(index);
             //向服务端发送删除指令
-//            console.log("删除");
+            console.log("删除");
 
             $.get("/admin/role/del/"+tdata.id,{
                 
@@ -107,7 +105,7 @@
 
             });
         } else if(layEvent === 'edit'){
-            window.location.href="/admin/role/edit/"+tdata.id;
+            window.location.href="/admin/role/edit";
         }
         });
     });

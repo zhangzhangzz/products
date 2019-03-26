@@ -7,20 +7,11 @@
             <div class="bigbox">
             <form id="formmy" class="layui-form" action="{{url('admin/menu/update/'.$list -> id)}}" method="post" lay-filter="example">
                 {{ csrf_field()  }}
-                @if(session('errors'))
-                    <div class="errors">
-                        <h3>警告</h3>
-                        <br/>
-                        {{ session('errors') }}
-                        <br/>
-                    </div>
-                @endif
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="{{ $list -> name  }}" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
                     </div>
-                    <span class="error name">请填写汉子</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -48,7 +39,6 @@
                     <div class="layui-input-inline">
                     <input type="text" name="sort" value="{{ $list -> sort  }}" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
-                    <span class="error sort">请填写数字</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -105,27 +95,6 @@
 //        return false;
         $("#formmy").submit();
     });
-    });
-
-    $("input").blur(function() {
-        var name = $(this).prop("name");
-        var data = $(this).val();
-        $.ajax({
-            url: '{{url("admin/role/regular")}}',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {"_token": "{{csrf_token()}}", "name": name, "data": data},
-            success: function (data) {
-                if(data)
-                {
-                    $("."+name).css("color","red");
-                    $("."+name).html(data);
-                }else{
-                    $("."+name).css("color","green");
-                    $("."+name).html("√可以使用");
-                }
-            }
-        });
     });
     </script>
 @endsection

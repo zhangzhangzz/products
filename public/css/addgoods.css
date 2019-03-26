@@ -83,7 +83,7 @@ label{
     margin-left: -20px!important;
 }
 
-.unitBox{
+.unitBox {
     width: calc(100% - 106px);
     margin-left: 106px;
     padding: 10px;
@@ -101,6 +101,7 @@ label{
 
 .unitdata{
     padding: 5px;
+    overflow: hidden;
 }
 
 .inBox{
@@ -139,4 +140,95 @@ label{
 .labelText{
     height: 30px;
     line-height: 30px;
+}
+
+.reinput{
+    top: 0;
+    right: 0;
+}
+
+.addUdata{
+    color:#38f;
+    display:none;
+}
+
+.udText{
+    padding: 9px 15px;
+    display: inline-block;
+    margin-left: 15px;
+    text-align: center;
+    
+}
+
+.undetail{
+    padding: 10px 10px 5px;
+    margin-left: 106px;
+}
+
+.table-sku-stock {
+    width: 100%;
+    background-color: #fff;
+    text-align: left;
+    font-size: 12px;
+    border: 1px solid #e5e5e5;
+}
+
+.table-sku-stock tbody {
+    border-top: 1px solid #e5e5e5;
+    border-bottom: none;
+}
+
+.table-sku-stock td {
+    padding: 8px;
+}
+
+.table-sku-stock td:first-of-type {
+    border-left: none;
+}
+
+.table-sku-stock th {
+    padding: 10px 8px;
+    font-weight: 400;
+}
+
+.table-sku-stock > tbody > tr{
+    border-top: 1px solid #e5e5e5;
+}
+
+.table-sku-stock td:last-of-type {
+    border-right: none;
+}
+
+.zent-input{
+    width: 80px;
+    display: inline-block;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    flex: 1;
+    min-width: 80px;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 10px;
+    margin: 0;
+    border: 1px solid #bbb;
+    color: #333;
+    font-size: 12px;
+    border-radius: 2px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.UD{
+    display: none;
+}
+
+.zent-form__required {
+    margin-right: 6px;
+    font-size: 16px;
+    color: #e33;
+    vertical-align: middle;
 }

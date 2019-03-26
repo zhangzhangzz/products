@@ -1,11 +1,11 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/roleedit.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/roleedit.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             
-            <form id="formmy" class="layui-form formBox" action="{{url('admin/role/insert')}}" method="post">
-                {{ csrf_field()  }}
+            <form id="formmy" class="layui-form formBox" action="<?php echo e(url('admin/role/insert')); ?>" method="post">
+                <?php echo e(csrf_field()); ?>
+
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
@@ -20,12 +20,8 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
-                    <div class="layui-input-block">
-                        <select name="boss" lay-verify="required">
-                            @foreach ($name as $v)
-                            <option value="{{ $v -> id }}">{{ $v -> name }}</option>
-                            @endforeach
-                        </select>
+                    <div class="layui-input-inline">
+                    <input type="text" name="boss" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -39,44 +35,44 @@
                 </div>
             
                 <div style="color:#555;padding: 15px;"><h2>权限设置</h2></div>
-                @foreach ($list as $v)
+                <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="quanxian">
                     <div class="tables">
                         <div class="list">
                             <p class="title">
-                                <input type="checkbox" value="{{ $v['id'] }}" data-id="12" lay-skin="primary" title="{{ $v['name'] }}" name="action_id[]" lay-filter="allChoose"
+                                <input type="checkbox" value="<?php echo e($v['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($v['name']); ?>" name="action_id" lay-filter="allChoose"
                                     class="allChoose">
                             </p>
                             <div class="ultable">
                                 <ul>
-                                    @if(is_array($v))
-                                    @foreach ($v as $s)
-                                    @if(is_array($s))
+                                    <?php if(is_array($v)): ?>
+                                    <?php $__currentLoopData = $v; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if(is_array($s)): ?>
                                     <li>
-                                        <input type="checkbox" value="{{ $s['id'] }}" data-id="12" lay-skin="primary" title="{{ $s['name'] }}" name="action_id[]" lay-filter="choose"
+                                        <input type="checkbox" value="<?php echo e($s['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($s['name']); ?>" name="action_id" lay-filter="choose"
                                             class="aaa">
 
                                         <div class="list-three">
                                             <ul>
-                                                @foreach ($s as $c)
-                                                 @if(is_array($c))
+                                                <?php $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                 <?php if(is_array($c)): ?>
                                                 <li>
-                                                    <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id[]" lay-filter="three-choose">
+                                                    <input type="checkbox" value="<?php echo e($c['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($c['name']); ?>" name="action_id" lay-filter="three-choose">
                                                 </li>
-                                                @endif
-                                                @endforeach
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </ul>
                                         </div>
                                     </li>
-                                    @endif
-                                    @endforeach
-                                    @endif
+                                    <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>
                     </div>
 		        </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <div class="layui-form-item btnBox">
                     <div class="layui-input-block" style="margin: 0;">
                     <button class="layui-btn pl" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
@@ -85,9 +81,9 @@
                 </div>
             </form>
         </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
 
         layui.use('form', function(){
@@ -165,4 +161,6 @@
 
 
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

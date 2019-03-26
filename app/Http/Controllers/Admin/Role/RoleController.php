@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
-    // 构造方法
-    public function __construct()
-    {
-        DB::beginTransaction(); //开启事务
-    }
+
     /**
      * 角色显示
      * 苏鹏
@@ -33,18 +29,14 @@ class RoleController extends Controller
      */
     public function save()
     {
-        // 查询菜单分类
         $sql = "select * from action order by concat(path, id)";
         $li = DB::select($sql);
-        // 转换成数组
-        $data1 = arr($li);
+        $data1 = json_decode(json_encode($li), true);
         $i = [];
         $data2 = [];
         $list = [];
         foreach($data1 as $v)
         {
-            // 路径中有几个,号
-            // 组成3维数组
             if(substr_count($v['path'], ",") == 1)
             {
                 $list[$v['id']] = $v;
@@ -74,141 +66,44 @@ class RoleController extends Controller
      */
     public function insert(Request $request)
     {
-        $error = [];
-        $data = [];
-        // 获取所有参数
         $list = $request -> except("_token");
-        // 去除角色中的菜单
         $action = $list['action_id'];
         unset($list['action_id']);
-        // 进行添加
         $re = Roles::create($list);
         if(empty($re)){
-            return back() -> with('errors','添加失败');
+            return back();
         }
-        // 遍历已选中菜单
         foreach($action as $v)
         {
-            $data[] = [
+            $data = [];
+            $data = [
                 "roles_id" => $re -> id,
                 "action_id" => $v
             ];
+            $res = Action_Roles::create($data);
         }
-        // 插入中间表
-        $res = DB::table("action_roles") -> insert($data);
-        if($re && $res){
-            DB::commit();  // 提交事务
+        if($res){
             return redirect('admin/role/index');
         }else{
-            DB::rollback();  // 回滚事务
-            return back() -> with('errors',"添加角色权限关联表失败") -> withInput($list);
+            return back();
         }
     }
     /**
      * 角色修改
      * 苏鹏
      */
-    public function edit($id)
+    public function edit()
     {
-        $checkbox = [];
-        $lists = Roles::where("id", $id) -> first();
-        $data = Roles::get();
-        // 查询所有角色的权限
-        $che = Action_Roles::where("roles_id", $id) -> get();
-        $che2 = arr($che);
-        foreach($che2 as $c)
-        {
-            $checkbox[] = $c['action_id'];
-        }
-        // 菜单分类查询
-        $sql = "select * from action order by concat(path, id)";
-        $li = DB::select($sql);
-        $data1 = arr($li);
-        $i = [];
-        $data2 = [];
-        $list = [];
-        foreach($data1 as $v)
-        {
-            // 路径中有几个,号
-            // 组成3维数组
-            if(substr_count($v['path'], ",") == 1)
-            {
-                $list[$v['id']] = $v;
-            }
-            if(substr_count($v['path'], ",") == 2)
-            {
-                $i[] = $v['id'];
-                $data2[] = $v;
-            }
-            if(substr_count($v['path'], ",") == 3)
-            {
-                $key = array_search($v['boss'], $i);
-                $data2[$key][] = $v;
-                $key = "";
-            }
-        }
-        foreach($data2 as $p)
-        {
-            $list[$p['boss']][] = $p;
-        }
-        return view("admin.role.edit",["list" => $list,"lists" => $lists,"data" => $data,"checkbox" => $checkbox]);
+        return view("admin.role.edit");
     }
 
     /**
      * 角色修改
      * 苏鹏
      */
-    public function update(Request $request, $id)
+    public function add()
     {
-        $data = [];
-        $res = 1;
-        $input = $request -> except("_token");
-        // 查出该角色所有权限
-        $che = Action_Roles::where("roles_id", $id) -> get();
-        $che2 = arr($che);
-        foreach($che2 as $c)
-        {
-            $checkbox[] = $c['action_id'];
-        }
-        // 删除多的权限
-        $diff1 = array_diff($checkbox,$input['action_id']);
-        // 插入新增权限
-        $diff2 = array_diff($input['action_id'],$checkbox);
-        if(!empty($diff1))
-        {
-            // 删除多的权限
-            foreach($diff1 as $ac)
-            {
-                Action_Roles::where('roles_id',$id) -> where("action_id",$ac) -> delete();
-            }
-        }
-        if(!empty($diff2))
-        {
-            // 插入新增权限
-            foreach($diff2 as $ac2)
-            {
-
-                $data[] = [
-                    "roles_id" => $id,
-                    "action_id" => $ac2
-                ];
-            }
-            $res = DB::table("action_roles") -> insert($data);
-        }
-        // 进行修改
-        $roles = Roles::find($id);
-        $roles -> name = $input['name'];
-        $roles -> descript = $input['descript'];
-        $roles -> boss = $input['boss'];
-        $roles -> state = $input['state'];
-        $re = $roles -> save();
-        if($re && $res){
-            DB::commit();  // 提交事务
-            return redirect('admin/role/index');
-        }else{
-            DB::rollback();  // 回滚事务
-            return back() -> with('errors','修改失败');
-        }
+        return view("admin.role.add");
     }
 
 
@@ -220,34 +115,22 @@ class RoleController extends Controller
     {
         $re = Roles::where('id',$id)->delete();
         $re2 = Action_Roles::where('roles_id',$id)->delete();
-        if(!empty($re) && !empty($re2)){
-            DB::commit();  // 提交事务
+        if($re && $re2){
             return "1";
         }else{
-            DB::rollback();  // 回滚事务
             return "0";
         }    }
 
 
     /**
-     * 正则验证
+     * 角色显示
      * 苏鹏
      */
-    public function regular(Request $request)
+    public function status()
     {
-        $input = $request -> except("_token");
-        switch ($input['name']){
-            // 角色名称
-            case "name":
-                $data = 0;
-                if(!preg_match('/^[\x{4e00}-\x{9fa5}]+$/u',$input['data']))
-                {
-                    $data = "汉字组成不可以写其他";
-                }
-                echo json_encode($data);
-                break;
-            default:
-                break;
-        }
+        
+
     }
+
+    
 }

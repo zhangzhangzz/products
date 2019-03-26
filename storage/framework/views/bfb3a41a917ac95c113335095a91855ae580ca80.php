@@ -8,24 +8,6 @@
     <link rel="stylesheet" href="<?php echo e(asset('static/admin/layui/css/layui.css')); ?>">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="<?php echo e(asset('static/admin/layui/layui.js')); ?>"></script>
-    <style>
-        .errors{
-            width: 100%;
-            color:white;
-            text-align: center;
-            font-size: 15px;
-            background-color: red;
-            border: 1px solid red;
-        }
-        .error{
-            color:green;
-        }
-    </style>
-    <script>
-        $(function () {
-            $(".errors").fadeToggle(10000);
-        });
-    </script>
 </head>
 <?php echo $__env->yieldContent('css'); ?>
 <body class="layui-layout-body">

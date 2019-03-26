@@ -104,7 +104,7 @@
         });
 
         $(".add").click(function(){
-            window.location.href="/admin/goods/addclass";
+            window.location.href="/admin/goods/add";
         });
 
 

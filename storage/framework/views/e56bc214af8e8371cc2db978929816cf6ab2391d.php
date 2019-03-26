@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/user.css')); ?>">
 <?php $__env->startSection('content'); ?>
-    <div class="main" >
+    <div class="main" > 
         <div class="layui-tab bigbox">
             <ul class="layui-tab-title">
                 <li class="layui-this">普通用户</li>
@@ -28,12 +28,11 @@
                         <button class="layui-btn" lay-submit lay-filter="formDemo">搜索</button>
                     </form>
 
-                    <table id="demo2" lay-filter="test">
-                    </table>
+                    <table id="demo2" lay-filter="test"></table>
                 </div>
             </div>
         </div>
-
+ 
 
     </div>
 
@@ -43,7 +42,7 @@
     </script>
 
     <script type="text/html" id="headDemo">
-        <img src="{{d.headimg}}" >
+        <img src="{{d.headimg}}" alt="">
     </script>
 
 <?php $__env->stopSection(); ?>
@@ -56,51 +55,46 @@
             form = layui.form;
 
 
-        $.ajax({
-            url: '<?php echo e(url("admin/user/index")); ?>',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {"_token": "<?php echo e(csrf_token()); ?>"},
-            success: function (data) {
-                console.log(data);
-                var data = data.users;
-                //第一个实例
-                table.render({
-                    elem: '#demo'
-                    , limit: 999999
-                    , cols: [[ //表头
-                        {
-                            field: 'headimg',
-                            title: '头像',
-                            width: 150,
-                            fixed: 'left',
-                            align: 'center',
-                            toolbar: '#headDemo'
-                        }
-                        , {field: 'name', title: '名称', width: 150, align: 'center'}
-                        , {field: 'phone', title: '电话', width: 150, align: 'center'}
-                        , {field: 'weixin_qq', title: '微信/QQ', width: 130, align: 'center'}
-                        , {field: 'address', title: '地址', width: 300, align: 'center'}
-                        , {field: 'creatdate', title: '创建时间', width: 140, sort: true, align: 'center'}
-                        , {field: 'action', title: '操作', width: 180, align: 'center', toolbar: '#barDemo'}
-                    ]]
-                    , data: data
-                });
-            },
-            error: function (data) {
-                console.log("错误");
-            }
+        var data = [
+                {headimg:"<?php echo e(asset('image/logo.png')); ?>",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'},
+                {headimg:"<?php echo e(asset('image/1.jpg')); ?>",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'}
+                    ];               
+                    
+    
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,limit:999999
+            ,width:1208
+            ,cols: [[ //表头
+            {field: 'headimg', title: '头像', width:150,  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+            ,{field: 'name', title: '名称' , width:150 , align:'center'}
+            ,{field: 'phone', title: '电话' , width:150 , align:'center'}
+            ,{field: 'wxqq', title: '微信/QQ', width:130 , align:'center'} 
+            ,{field: 'address', title: '地址', width: 300 , align:'center'}
+            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
+            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+            ]]
+            ,data:data
         });
-        function timetrans(date){
-            var date = new Date(date*1000);//如果date为13位不需要乘1000
-            var Y = date.getFullYear() + '-';
-            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-            var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
-            var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-            var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-            var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
-            return Y+M+D+h+m+s;
-        }
+
+
+        //第二个实例
+        table.render({
+            elem: '#demo2'
+            ,limit:999999
+            ,width:1208
+            ,cols: [[ //表头
+            {field: 'headimg', title: '头像', width:150,  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+            ,{field: 'name', title: '名称' , width:150 , align:'center'}
+            ,{field: 'phone', title: '电话' , width:150 , align:'center'}
+            ,{field: 'wxORqq', title: '微信/QQ', width:130 , align:'center'} 
+            ,{field: 'address', title: '地址', width: 300 , align:'center'}
+            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
+            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+            ]]
+            ,data:data
+        });
 
 
         // #table操作事件
@@ -120,7 +114,7 @@
                 //向服务端发送删除指令
                 console.log("删除");
 
-                $.ajax("",{
+                $.post("",{
                         id:id
                     },function(data){
 
@@ -128,12 +122,11 @@
 
                 });
             } else if(layEvent === 'edit'){
-                window.location.href="/admin/admin/add";
+                window.location.href="/admin/admin/add"; 
             }
         });
-
+    
     });
-
 </script>
 <?php $__env->stopSection(); ?>
 
