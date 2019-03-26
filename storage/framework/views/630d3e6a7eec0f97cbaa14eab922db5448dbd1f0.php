@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/user.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/user.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main" >
         <div class="layui-tab bigbox">
             <ul class="layui-tab-title">
@@ -45,11 +44,11 @@
     </script>
 
     <script type="text/html" id="headDemo">
-        <img src="@{{d.headimg}}" >
+        <img src="{{d.headimg}}" >
     </script>
 
-@endsection
-@section('js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
 <script>
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
     layui.use(['table','form','element'], function(){
@@ -58,10 +57,10 @@
             form = layui.form;
 
         $.ajax({
-            url:"{{url('admin/user/index')}}",
+            url:"<?php echo e(url('admin/user/index')); ?>",
             type:"POST",
             dataType:"json",
-            data:{"_token":"{{csrf_token()}}"},
+            data:{"_token":"<?php echo e(csrf_token()); ?>"},
             success:function (data) {
                 console.log(data);
                 var data = data.data;
@@ -137,4 +136,6 @@
     });
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

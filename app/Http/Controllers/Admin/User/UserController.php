@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -20,11 +21,11 @@ class UserController extends Controller
 
             $users = DB::table("account")->where("status", "<>", 0)->get()->toArray();
             foreach ($users as $key => $value) {
-                $users[$key]["create_time"] = date("Y-m-d H:i:s", $value["create_time"]);
+                $users[$key]["create_time"] = date("Y-m-d", $value["create_time"]);
             }
             return ajax_success("获取成功", $users);
-
         }
+        return view("admin.user.index");
     }
 
 
