@@ -16,10 +16,6 @@
         </div>
     </div>
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-    </div>
 </div>
     <?php echo $__env->make("admin.template._footer", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </body>
