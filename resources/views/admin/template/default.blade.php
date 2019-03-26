@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="{{ asset('static/admin/layui/css/layui.css') }}">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="{{ asset('static/admin/layui/layui.js') }}"></script>
+    <style>
+        .errors{
+            width: 100%;
+            color:white;
+            text-align: center;
+            font-size: 15px;
+            background-color: red;
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+        $(function () {
+            $(".errors").fadeToggle(10000);
+        });
+    </script>
 </head>
 @yield('css')
 <body class="layui-layout-body">

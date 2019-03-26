@@ -2,20 +2,28 @@
 <?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
-            
             <form id="formmy" class="layui-form formBox" action="<?php echo e(url('admin/role/insert')); ?>" method="post">
                 <?php echo e(csrf_field()); ?>
 
+                <?php if(session('errors')): ?>
+                    <div class="errors">
+                        <h3>警告</h3>
+                        <br/>
+                        <?php echo e(session('errors')); ?>
+
+                        <br/>
+                    </div>
+                <?php endif; ?>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" value="<?php echo e(old('name')); ?>" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="descript" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
+                    <input type="text" name="descript" value="<?php echo e(old('descript')); ?>" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -23,7 +31,8 @@
                     <div class="layui-input-block">
                         <select name="boss" lay-verify="required">
                             <?php $__currentLoopData = $name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($v -> id); ?>"><?php echo e($v -> name); ?></option>
+                                <option value="/">/</option>
+                                <option value="<?php echo e($v -> name); ?>"><?php echo e($v -> name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
@@ -91,7 +100,8 @@
     <script>
 
         layui.use('form', function(){
-            var form = layui.form;
+            var form = layui.form
+            $ = layui.$;
             
             //全选选单选      ----------------------------------------
    			form.on('checkbox(allChoose)', function(data) {
@@ -104,6 +114,9 @@
                 });
                 form.render('checkbox');
                 });
+
+
+
 
 
                 //全部选中来确定全选按钮是否选中

@@ -45,8 +45,7 @@
     </div>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit" >详情</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">禁用</a>
+        <a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/check">审核</a>
     </script>
 
     <!-- 审核状态 -->
