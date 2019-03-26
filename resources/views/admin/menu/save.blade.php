@@ -19,6 +19,7 @@
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="{{  old('name')  }}" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
                     </div>
+                    <span class="error name">请填写汉子</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -37,7 +38,6 @@
                             <?php
                             $nbsp = str_repeat("&nbsp;", substr_count($v -> path, ",")*5);
                             ?>
-
                             <option value="{{ $v -> id }}">{{$nbsp}}|--{{ $v -> name }}</option>
                         @endforeach
                     </select>
@@ -49,6 +49,7 @@
                     <div class="layui-input-inline">
                     <input type="text" name="sort" value="{{  old('sort')  }}" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
+                    <span class="error sort">请填写数字</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -99,6 +100,28 @@
 //        return false;
         $("#formmy").submit();
     });
+    });
+    $("input").blur(function(){
+        var name = $(this).prop("name");
+        var data = $(this).val();
+        $.ajax({
+            url: '{{url("admin/menu/regular")}}',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {"_token":"{{csrf_token()}}" , "name":name , "data":data},
+            success: function (data)
+            {
+
+                if(data)
+                {
+                    $("."+name).css("color","red");
+                    $("."+name).html(data);
+                }else{
+                    $("."+name).css("color","green");
+                    $("."+name).html("√可以使用");
+                }
+            }
+        });
     });
     </script>
 @endsection

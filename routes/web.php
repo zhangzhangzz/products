@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('role/edit/{id}','Role\RoleController@edit');
     Route::any('role/update/{id}','Role\RoleController@update');
     Route::any('role/del/{id}','Role\RoleController@del');
-    Route::any('role/status','Role\RoleController@status');
+    Route::any('role/regular','Role\RoleController@regular');
 
  
     /*TODO:菜单管理*/
@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('menu/edit/{id}','Menu\MenuController@edit');
     Route::any('menu/update/{id}','Menu\MenuController@update');
     Route::any('menu/del/{id}','Menu\MenuController@del');
+    Route::any('menu/regular','Menu\MenuController@regular');
 
 
     /*TODO:会员管理*/

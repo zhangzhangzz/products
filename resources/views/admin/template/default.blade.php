@@ -17,6 +17,9 @@
             background-color: red;
             border: 1px solid red;
         }
+        .error{
+            color:green;
+        }
     </style>
     <script>
         $(function () {

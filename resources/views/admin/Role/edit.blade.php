@@ -18,6 +18,7 @@
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="{{ $lists -> name  }}" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
+                    <span class="error name">请填写汉子</span>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
@@ -196,7 +197,26 @@
             // return false;
           });
         });
-
+        $("input").blur(function() {
+            var name = $(this).prop("name");
+            var data = $(this).val();
+            $.ajax({
+                url: '{{url("admin/role/regular")}}',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {"_token": "{{csrf_token()}}", "name": name, "data": data},
+                success: function (data) {
+                    if(data)
+                    {
+                        $("."+name).css("color","red");
+                        $("."+name).html(data);
+                    }else{
+                        $("."+name).css("color","green");
+                        $("."+name).html("√可以使用");
+                    }
+                }
+            });
+        });
     
 
 

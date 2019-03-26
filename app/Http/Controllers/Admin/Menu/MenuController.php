@@ -221,13 +221,34 @@ class MenuController extends Controller
 
 
     /**
-     * 角色显示
+     * 正则验证
      * 苏鹏
      */
-    public function status()
+    public function regular(Request $request)
     {
-        
-
+        $input = $request -> except("_token");
+        switch ($input['name']){
+            // 角色名称
+            case "name":
+                $data = 0;
+                if(!preg_match('/^[\x{4e00}-\x{9fa5}]+$/u',$input['data']))
+                {
+                    $data = "汉字组成不可以写其他";
+                }
+                echo json_encode($data);
+                break;
+            // 排序
+            case "sort":
+                $data = 0;
+                if(!preg_match('/^\d*$/',$input['data']))
+                {
+                    $data = "只能是数字";
+                }
+                echo json_encode($data);
+                break;
+            default:
+                break;
+        }
     }
 
     
