@@ -19,6 +19,18 @@ if(!function_exists("ajax_success")){
 }
 
 
+if(!function_exists("ajax_error")){
+
+    function ajax_error($msg = '服务器错误，可刷新页面重试',$data=array()){
+        $return = array('status'=>'0');
+        $return['info'] = $msg;
+        $return['data'] = $data;
+        exit(json_encode($return,JSON_UNESCAPED_UNICODE));
+    }
+
+}
+
+
 
 
 
