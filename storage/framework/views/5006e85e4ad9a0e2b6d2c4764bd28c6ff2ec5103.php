@@ -7,11 +7,21 @@
             <form id="formmy" class="layui-form" action="<?php echo e(url('admin/menu/update/'.$list -> id)); ?>" method="post" lay-filter="example">
                 <?php echo e(csrf_field()); ?>
 
+                <?php if(session('errors')): ?>
+                    <div class="errors">
+                        <h3>警告</h3>
+                        <br/>
+                        <?php echo e(session('errors')); ?>
+
+                        <br/>
+                    </div>
+                <?php endif; ?>
                 <div class="layui-form-item">
                     <label class="layui-form-label">菜单名称</label>
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="<?php echo e($list -> name); ?>" required lay-verify="required" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
                     </div>
+                    <span class="error name">请填写汉子</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -39,6 +49,7 @@
                     <div class="layui-input-inline">
                     <input type="text" name="sort" value="<?php echo e($list -> sort); ?>" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
                     </div>
+                    <span class="error sort">请填写数字</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -96,6 +107,27 @@
 //        return false;
         $("#formmy").submit();
     });
+    });
+
+    $("input").blur(function() {
+        var name = $(this).prop("name");
+        var data = $(this).val();
+        $.ajax({
+            url: '<?php echo e(url("admin/role/regular")); ?>',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {"_token": "<?php echo e(csrf_token()); ?>", "name": name, "data": data},
+            success: function (data) {
+                if(data)
+                {
+                    $("."+name).css("color","red");
+                    $("."+name).html(data);
+                }else{
+                    $("."+name).css("color","green");
+                    $("."+name).html("√可以使用");
+                }
+            }
+        });
     });
     </script>
 <?php $__env->stopSection(); ?>

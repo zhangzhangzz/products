@@ -3,27 +3,36 @@
 @section('content')
     <div class="main">
         <div style="padding:30px;">
-            
             <form id="formmy" class="layui-form formBox" action="{{url('admin/role/insert')}}" method="post">
                 {{ csrf_field()  }}
+                @if(session('errors'))
+                    <div class="errors">
+                        <h3>警告</h3>
+                        <br/>
+                        {{ session('errors') }}
+                        <br/>
+                    </div>
+                @endif
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" value="{{ old('name') }}" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
+                    <span class="error name">请填写汉子</span>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="descript" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
+                    <input type="text" name="descript" value="{{ old('descript') }}" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-block">
                         <select name="boss" lay-verify="required">
+                            <option value="/">/</option>
                             @foreach ($name as $v)
-                            <option value="{{ $v -> id }}">{{ $v -> name }}</option>
+                                <option value="{{ $v -> name }}">{{ $v -> name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -91,11 +100,12 @@
     <script>
 
         layui.use('form', function(){
-            var form = layui.form;
-            
+            var form = layui.form
+            $ = layui.$;
+
             //全选选单选      ----------------------------------------
    			form.on('checkbox(allChoose)', function(data) {
-                
+
                 var child = $(data.elem).parents('.list').children('.ultable').find(
                     'ul li input[type="checkbox"]:not([name="show"])');
 
@@ -104,6 +114,9 @@
                 });
                 form.render('checkbox');
                 });
+
+
+
 
 
                 //全部选中来确定全选按钮是否选中
@@ -146,11 +159,11 @@
                         form.render('checkbox');
                 });
 
-            
 
-       
 
-         
+
+
+
 
           //监听提交
           form.on('submit(formDemo)', function(data){
@@ -159,8 +172,28 @@
               $("#formmy").submit();
           });
         });
+        $("input").blur(function(){
+            var name = $(this).prop("name");
+            var data = $(this).val();
+            $.ajax({
+                url: '{{url("admin/role/regular")}}',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {"_token":"{{csrf_token()}}" , "name":name , "data":data},
+                success: function (data)
+                {
+                    if(data)
+                    {
+                        $("."+name).css("color","red");
+                        $("."+name).html(data);
+                    }else{
+                        $("."+name).css("color","green");
+                        $("."+name).html("√可以使用");
+                    }
+                }
+            });
+        });
 
-    
 
 
 
