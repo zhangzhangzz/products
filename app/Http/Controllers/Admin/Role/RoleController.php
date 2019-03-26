@@ -221,8 +221,10 @@ class RoleController extends Controller
         $re = Roles::where('id',$id)->delete();
         $re2 = Action_Roles::where('roles_id',$id)->delete();
         if(!empty($re) && !empty($re2)){
+            DB::commit();  // 提交事务
             return "1";
         }else{
+            DB::rollback();  // 回滚事务
             return "0";
         }    }
 

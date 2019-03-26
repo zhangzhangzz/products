@@ -209,10 +209,12 @@ class MenuController extends Controller
      */
     public function del($id)
     {
-        $re = Action::where('id',$id)->delete();
+        $re = Action::where('id', $id) -> delete();
         if($re){
+            DB::commit();  // 提交事务
             return "1";
         }else{
+            DB::rollback();  // 回滚事务
            return "0";
         }
     }
