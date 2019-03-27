@@ -88,21 +88,33 @@
 
 
         //第二个实例
-        table.render({
-            elem: '#demo2'
-            ,limit:999999
-            ,width:1208
-            ,cols: [[ //表头
-            {field: 'images', title: '头像', width:150,  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
-            ,{field: 'name', title: '名称' , width:150 , align:'center'}
-            ,{field: 'phone', title: '电话' , width:150 , align:'center'}
-            ,{field: 'weixin_qq', title: '微信/QQ', width:130 , align:'center'}
-            ,{field: 'address', title: '地址', width: 300 , align:'center'}
-            ,{field: 'create_time', title: '创建时间', width: 140, sort: true , align:'center'}
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
-            ]]
-
-        });
+        $.ajax({
+            url:"{{url('admin/user/index')}}",
+            type:"POST",
+            dataType:"json",
+            data:{"_token":"{{csrf_token()}}"},
+            success:function (data) {
+                console.log(data);
+                var data = data.data;
+                table.render({
+                    elem: '#demo'
+                    ,limit:999999
+                    ,cols: [[ //表头
+                        {field: 'images', title: '头像', width:150,  fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+                        ,{field: 'name', title: '名称' , width:150 , align:'center'}
+                        ,{field: 'phone', title: '电话' , width:150 , align:'center'}
+                        ,{field: 'weixin_qq', title: '微信/QQ', width:130 , align:'center'}
+                        ,{field: 'address', title: '地址', width: 300 , align:'center'}
+                        ,{field: 'create_time', title: '创建时间', width: 140, sort: true , align:'center'}
+                        ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                    ]]
+                    ,data:data
+                });
+            },
+            error:function (data) {
+                console.log("错误")
+            }
+        })
 
 
         // #table操作事件
@@ -110,23 +122,29 @@
             let tdata = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
-            console.log(tdata);
-            da = obj.data;
+            console.log(tdata.id);
 
             // #数据删除
 
             if(layEvent === 'del'){ //删除
-                layer.confirm('真的删除行么', function(index){
+                layer.confirm('确定要禁用吗？', function(index){
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 layer.close(index);
                 //向服务端发送删除指令
-                console.log("删除");
-
-                $.ajax("",{
-                        id:id
-                    },function(data){
-
-                    });
+                    $.ajax({
+                        url:"{{url('admin/user/status')}}",
+                        type:"POST",
+                        dataType:"json",
+                        data:{"_token":"{{csrf_token()}}","id":tdata.id},
+                        success:function (data) {
+                            if(data.status == 1){
+                                window.location.href = "{{url('admin/user/index')}}"
+                            }
+                        },
+                        error:function (data) {
+                            console.log("错误")
+                        }
+                    })
 
                 });
             } else if(layEvent === 'edit'){

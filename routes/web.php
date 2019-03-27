@@ -76,7 +76,6 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:会员管理*/
     Route::any('user/index','User\UserController@index');
     Route::any('user/status','User\UserController@status');
-    Route::any('user/add','User\UserController@add');
     Route::any('user/look','User\UserController@look');
 
 

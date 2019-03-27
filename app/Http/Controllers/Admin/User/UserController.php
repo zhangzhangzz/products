@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index(Request $request){
 
         if($request->isMethod("post")){
-            $users = DB::table("account")->where("status", "<>", 0)->get()->toArray();
+            $users = DB::table("account")->where("status",1)->get()->toArray();
             foreach ($users as $key => $value) {
                 $users[$key]["create_time"] = date("Y-m-d", $value["create_time"]);
             }
@@ -37,12 +37,38 @@ class UserController extends Controller
     }
 
     /**
-     * 会员添加
+     * 会员禁用
      * 陈绪
      */
-    public function add(){
+    public function status(Request $request){
 
-        return view("admin.user.add");
+        if($request->isMethod("post")){
+            $id = $request->id;
+            $bool = DB::table("account")->where("id",$id)->update(["status"=>0]);
+            if($bool){
+                return ajax_success("修改成功");
+            }else{
+                return ajax_error("修改失败");
+            }
+        }
+
+    }
+
+
+    /**
+     * 会用禁用显示
+     * 陈绪
+     */
+    public function status_index(Request $request){
+
+        if($request->isMethod("post")){
+            $users = DB::table("account")->where("status",0)->get()->toArray();
+            foreach ($users as $key => $value) {
+                $users[$key]["create_time"] = date("Y-m-d", $value["create_time"]);
+            }
+            return ajax_success("获取成功", $users);
+        }
+        return view("admin.user.index");
 
     }
 

@@ -109,23 +109,29 @@
             let tdata = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
-            console.log(tdata);
-            da = obj.data;
+            console.log(tdata.id);
 
             // #数据删除
 
             if(layEvent === 'del'){ //删除
-                layer.confirm('真的删除行么', function(index){
+                layer.confirm('确定要禁用吗？', function(index){
                 obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                 layer.close(index);
                 //向服务端发送删除指令
-                console.log("删除");
-
-                $.ajax("",{
-                        id:id
-                    },function(data){
-
-                    });
+                    $.ajax({
+                        url:"<?php echo e(url('admin/user/status')); ?>",
+                        type:"POST",
+                        dataType:"json",
+                        data:{"_token":"<?php echo e(csrf_token()); ?>","id":tdata.id},
+                        success:function (data) {
+                            if(data.status == 1){
+                                window.location.href = "<?php echo e(url('admin/user/index')); ?>"
+                            }
+                        },
+                        error:function (data) {
+                            console.log("错误")
+                        }
+                    })
 
                 });
             } else if(layEvent === 'edit'){
