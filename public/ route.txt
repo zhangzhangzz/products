@@ -854,3 +854,59 @@
 
 {"date":"2019-04-07 05:31:42","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@save"}
 
+{"date":"2019-04-07 05:39:35","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-07 05:39:39","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-07 05:39:43","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-07 05:40:17","route":"App\\Http\\Controllers\\admin\\User\\UserController@index"}
+
+{"date":"2019-04-07 05:40:17","route":"App\\Http\\Controllers\\admin\\User\\UserController@index"}
+
+{"date":"2019-04-07 05:40:17","route":"App\\Http\\Controllers\\admin\\User\\UserController@disabled"}
+
+{"date":"2019-04-07 05:40:19","route":"App\\Http\\Controllers\\admin\\User\\UserController@index"}
+
+{"date":"2019-04-07 05:40:20","route":"App\\Http\\Controllers\\admin\\User\\UserController@index"}
+
+{"date":"2019-04-07 05:40:20","route":"App\\Http\\Controllers\\admin\\User\\UserController@disabled"}
+
+{"date":"2019-04-07 05:41:10","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:42:16","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:45:55","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:46:25","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@del"}
+
+{"date":"2019-04-07 05:46:28","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:47:17","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:48:33","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:49:30","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:50:19","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:51:32","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:52:17","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:55:58","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:58:31","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 05:59:13","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 06:03:22","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 06:05:09","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-07 06:05:17","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-07 06:05:19","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@index"}
+
+{"date":"2019-04-07 06:05:21","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
