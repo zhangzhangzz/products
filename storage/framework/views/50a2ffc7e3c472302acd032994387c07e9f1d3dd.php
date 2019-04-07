@@ -85,7 +85,7 @@
                                                                     <?php $__currentLoopData = $s['child']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <?php if(is_array($c)): ?>
                                                                             <li>
-                                                                                <?php if(in_array($s['id'], $checkbox)): ?>
+                                                                                <?php if(in_array($c['id'], $checkbox)): ?>
                                                                                 <input type="checkbox" value="<?php echo e($c['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($c['name']); ?>" name="action_id[]" lay-filter="three-choose" checked="checked">
                                                                                 <?php else: ?>
                                                                                 <input type="checkbox" value="<?php echo e($c['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($c['name']); ?>" name="action_id[]" lay-filter="three-choose">

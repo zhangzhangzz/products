@@ -18,8 +18,17 @@ class MenuController extends Controller
      */
     public function index()
     {
-        // 按排序字段排序
-        $list = Action::orderBy("sort") -> get();
+        $data = [];
+        // 搜索所有的菜单,按照路径查询
+        $sql = "select * from action order by concat(path, id)";
+        $arr = arr(DB::select($sql));
+        foreach($arr as $v)
+        {
+            $nbsp = str_repeat("&nbsp;", substr_count($v['path'], ",")*30)."|--";
+            $v['name'] = $nbsp.$v['name'];
+            $data[] = $v;
+        }
+        $list = json_encode($data);
         return view("admin.menu.index",["list" => $list]);
     }
 
@@ -41,6 +50,7 @@ class MenuController extends Controller
     public function insert(Request $request)
     {
         $res = 1;
+        $a = "";
         // 获取所有传参
         $list = $request -> except("_token");
         $boss = $list['boss'];
@@ -51,42 +61,16 @@ class MenuController extends Controller
             $pid = Action::where("id",$boss) -> first();
             // 父辈的路径加上父辈ID存入自己的路径中
             $list['path'] = $pid -> path . $boss . ",";
+            // 形成左侧导航栏A链接跳转
+            $a = explode("\\", $list['url']);
+            $a_function = explode("@", end($a));
+            $Controller = str_replace("Controller","", $a_function[0]);
+            $Controller = strtolower($Controller);
+            $a_path = "/admin/".$Controller."/".$a_function[1];
+            $list['a'] = $a_path;
         }else{
             // 没有父辈路径 0后面加个,号
             $list['path'] = $boss . ",";
-        }
-        if(empty($list['sort']))
-        {
-            // 排序为空,查出最大排序数
-            $list_sort = Action::max("sort");
-            // 数据库最大排序数在加1
-            $list['sort'] = $list_sort + 1;
-        }else{
-            // 排序改动过,进行从新排序
-            // 获取所有的数据
-            $oy = Action::get();
-            foreach($oy as $v)
-            {
-                // 把所有的ID和排序单独拿出来
-                $data[] = [
-                    "id" => $v['id'],
-                    "sort" => $v['sort']
-                ];
-            }
-            // 把排序数传过去,ID设为0,方便修改时候传真ID过去
-            $sort = [
-                "id" => 0,
-                "sort" => $list['sort']
-            ];
-            // 执行重排
-            $put = $this -> sort($data,$sort);
-            // 遍历,进行更新排序数据
-            foreach($put as $p)
-            {
-                $up_action = Action::find($p['id']);
-                $up_action -> sort = $p['sort'];
-                $res = $up_action -> save();
-            }
         }
         // 插入数据
         $re = Action::create($list);
@@ -117,7 +101,6 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $res = 1;
         // 获取所有传参
         $input = $request -> except("_token");
         // 查询单挑数据
@@ -125,6 +108,16 @@ class MenuController extends Controller
         $psort = $action -> sort;
         $action -> name = $input['name'];
         $action -> url = $input['url'];
+        if(!empty($input['url']))
+        {
+            // 形成左侧导航栏A链接跳转
+            $a = explode("\\", $input['url']);
+            $a_function = explode("@", end($a));
+            $Controller = str_replace("Controller","", $a_function[0]);
+            $Controller = strtolower($Controller);
+            $a_path = "/admin/".$Controller."/".$a_function[1];
+            $action -> a = $a_path;
+        }
         // 有没有修改上一级是谁
         if($action -> boss != $input['boss'])
         {
@@ -136,72 +129,14 @@ class MenuController extends Controller
         $action -> state = $input['state'];
         $action -> sort = $input['sort'];
         $re = $action -> save();
-        // 判断排序是否改动
-        if($psort != $input['sort'])
+        if($re)
         {
-            // 排序改动过,进行从新排序
-            $oy = Action::get();
-            foreach($oy as $v)
-            {
-                // 所有人的ID和排序
-                $data[] = [
-                    "id" => $v['id'],
-                    "sort" => $v['sort']
-                ];
-            }
-            // 本人的路径和排序
-            $sort = [
-                "id" => $id,
-                "sort" => $input['sort']
-            ];
-            // 执行重排
-            $put = $this -> sort($data,$sort);
-            foreach($put as $p)
-            {
-                // 将每一个排序进行修改
-                $up_action = Action::find($p['id']);
-                $up_action -> sort = $p['sort'];
-                $res = $up_action -> save();
-            }
-        }
-        if($re && $res){
             DB::commit();  // 提交事务
             return redirect('admin/menu/index');
         }else{
             DB::rollback();  // 回滚事务
             return back() -> with('errors','修改失败');
         }
-    }
-    /**
-     * 菜单排序
-     * 苏鹏
-     */
-    public function sort($sort, $upsort)
-    {
-
-        // 填写的排序$upsort
-        // 已存在的排序$sort
-        $data = [];
-        if(is_array($sort) && is_array($upsort))
-        {
-            $num = $upsort['sort'];
-            foreach($sort as $v)
-            {
-                if(!empty($upsort['id']) && $upsort['id'] == $v['id'])
-                {
-                    unset($v);
-                    continue;
-                }
-                if($upsort['sort'] <= $v['sort'])
-                {
-                    $num++;
-                    $v['sort'] = $num;
-                    $data[] = $v;
-                }
-            }
-            return $data;
-        }
-        return false;
     }
     /**
      * 角色删除

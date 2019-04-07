@@ -38,6 +38,16 @@ class Roles
         // 获取角色权限
         // 获取当前路由
         $route = \Route::current() -> getActionName();
+        // 判断登陆后台首页
+        if($route == "App\Http\Controllers\admin\AdminController@index")
+        {
+            return $next($request);
+        }
+        $file_put = [
+            "date" => date("Y-m-d H:i:s", time()),
+            "route" => $route
+        ];
+        file_put_contents(" route.txt", json_encode($file_put)."\n\n", 8);
         // 拆分当前路由
         $in_up = explode("@",$route);
         // 正则验证,直接通过

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Login;
 
+use App\Http\Model\Admin\Action;
+use App\Http\Model\Admin\Action_Roles;
 use App\Http\Model\Admin\Admin_User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,6 +28,8 @@ class LoginController extends Controller
      */
     public function doLogin(Request $request)
     {
+        $checkbox = [];
+        $name = [];
         $input = $request -> only("account","password");
         $list = Admin_User::where("account",$input['account']) -> first();
         if(empty($list))
@@ -37,7 +41,22 @@ class LoginController extends Controller
         {
             return redirect("admin/login") -> with('errors','密码不正确');
         }
+        // 查询所有角色的权限
+        $che = arr(Action_Roles::where("roles_id", $list['role_id']) -> get());
+        foreach($che as $c)
+        {
+            $checkbox[] = $c['action_id'];
+        }
+        $action = arr(Action::get());
+        foreach($action as $v)
+        {
+            if(in_array($v['id'], $checkbox))
+            {
+                $name[] = $v['name'];
+            }
+        }
         Session::put("user",$list);
+        Session::put("route",$name);
         return redirect("admin");
     }
     /**
