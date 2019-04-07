@@ -6,7 +6,7 @@
             <li class="layui-nav-item layui-nav-itemed">
                 <a href="javascript:;">管理(默认展开)</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/admin/admin/index">账号管理</a></dd>
+                    <dd><a href="/admin/admin_user/index">账号管理</a></dd>
                     <dd><a href="/admin/role/index">角色管理</a></dd>
                     <dd><a href="/admin/menu/index">菜单管理</a></dd>
                 </dl>

@@ -118,7 +118,7 @@
         
         <div class="centerBox">
             <div class="logo">
-                <img src="D:\xampp\htdocs\products\public\image\logo.png" alt="">
+                <img src="" alt="">
             </div>
 
             <div class="input-group input-group-lg lgBox">
@@ -146,8 +146,14 @@
                 </div>
                 
             </div>
-            
 
+            <?php if(session('errors')): ?>
+                <div class="errors">
+                    <?php echo e(session('errors')); ?>
+
+                    <br/>
+                </div>
+            <?php endif; ?>
             <button type="button" class="btn btn-info login " >登录</button>
             <div style="margin:20px 0;font-size: 12px;color: #888;">
                 还没有平台账号？
@@ -212,28 +218,7 @@
                 draw(show_num);
                 return;
             }else{
-                $.ajax({
-                    url:"",
-                    type:"post",
-                    data:{
-                        "uname":uname,
-                        "pwd":pwd
-                    },
-                    success: function(res){
-                        if(res.state=="success"){
-                            
-                        }else{
-                            console.log(res.errmsg);
-                            alert(res.errmsg);
-                        }
-                        
-                    },
-                    error: function(e){
-                        console.log(e);
-                    }
-
-                });
-                
+                window.location.href="<?php echo e(url('admin/login/doLogin')); ?>"+"?account=" + uname + "&" + "password=" + pwd;
             }
         })
 

@@ -1,11 +1,14 @@
 @extends('admin.template.default')
 <link rel="stylesheet" href="{{ asset('css/action.css') }}">
 @section('content')
-    <div>
-        <ul>
-            <li>{{ session('errors') }}</li>
-        </ul>
-    </div>
+    @if(session('errors'))
+        <div class="errors">
+            <h3>警告</h3>
+            <br/>
+            {{ session('errors') }}
+            <br/>
+        </div>
+    @endif
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">

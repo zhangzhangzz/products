@@ -58,8 +58,9 @@
                             </p>
                             <div class="ultable">
                                 <ul>
-                                    @if(is_array($v))
-                                    @foreach ($v as $s)
+
+                                    @if(!empty($v['child']))
+                                    @foreach ($v['child'] as $s)
                                     @if(is_array($s))
                                     <li>
                                         <input type="checkbox" value="{{ $s['id'] }}" data-id="12" lay-skin="primary" title="{{ $s['name'] }}" name="action_id[]" lay-filter="choose"
@@ -67,13 +68,15 @@
 
                                         <div class="list-three">
                                             <ul>
-                                                @foreach ($s as $c)
+                                                @if(!empty($s['child']))
+                                                @foreach ($s['child'] as $c)
                                                  @if(is_array($c))
                                                 <li>
                                                     <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id[]" lay-filter="three-choose">
                                                 </li>
                                                 @endif
                                                 @endforeach
+                                                @endif
                                             </ul>
                                         </div>
                                     </li>
@@ -88,7 +91,7 @@
                 @endforeach
                 <div class="layui-form-item btnBox">
                     <div class="layui-input-block" style="margin: 0;">
-                    <button class="layui-btn pl" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
+                    <button class="layui-btn pl  getBtn" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -186,9 +189,12 @@
                     {
                         $("."+name).css("color","red");
                         $("."+name).html(data);
+                        $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
+
                     }else{
                         $("."+name).css("color","green");
                         $("."+name).html("√可以使用");
+                        $(".getBtn").attr("class","layui-btn getBtn");
                     }
                 }
             });
