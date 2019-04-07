@@ -77,11 +77,14 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('user/index','User\UserController@index');
     Route::any('user/status','User\UserController@status');
     Route::any('user/look','User\UserController@look');
+    Route::any('user/disabled','User\UserController@disabled');
+    Route::any('user/search','User\UserController@search');
 
 
     /*TODO:店铺管理*/
     Route::any('shop/index','Shop\ShopController@index');
     Route::any('shop/check','Shop\ShopController@check');
+
 
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');
@@ -89,9 +92,10 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
 
     Route::any('goods/addclass','Goods\GoodsController@addclass');
-    Route::any('goods/classify','Goods\GoodsController@classify'); 
+    Route::any('goods/classify','Goods\GoodsController@classify');
     Route::any('goods/manage','Goods\GoodsController@manage'); 
     Route::any('goods/recycle','Goods\GoodsController@recycle');
+
 
     /*TODO:平台设置*/
     Route::any('setting/index','Setting\SettingController@index');
@@ -102,9 +106,10 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('category/index','Goods\CategoryController@index');
     Route::any('category/add','Goods\CategoryController@add');
     Route::any('category/save','Goods\CategoryController@save');
-    Route::any('category/edit','Goods\CategoryController@edit');
+    Route::any('category/edit/{id}','Goods\CategoryController@edit');
     Route::any('category/del','Goods\CategoryController@del');
     Route::any('category/updata','Goods\CategoryController@updata');
+    Route::any('category/images','Goods\CategoryController@images');
 
 
 

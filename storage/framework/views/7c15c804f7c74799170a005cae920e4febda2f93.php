@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/addgoodsclass.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/addgoodsclass.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div class="bigbox">
             <form class="layui-form form" action="">
@@ -56,9 +55,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
         layui.use(['form','upload'], function(){
             var form = layui.form
@@ -98,4 +97,5 @@
             });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

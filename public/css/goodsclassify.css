@@ -5,19 +5,23 @@
 }
 
 .form{
+    position: relative;
     padding: 0 30px;
 }
- 
+ .page{
+    width: 100%;
+    text-align: center;
+     margin: 30px 0;
+ }
 .selfnav {
     background-color: #eee!important;
     color: #555!important;
 }
 
-.parentBox{
+.parentBox > div:first-child{
     position: relative;
-    width: 100%;
+    width: 80%;
     border: 1px solid #eee;
-    background-color: #f2f2f2;
     overflow: hidden;
     cursor: pointer;
 }
@@ -34,8 +38,19 @@
 .listdd > dd > div:first-child{
     width: 16%;
 }
-
-.parentBox  > div , .listdd > dd > div{
+.parentBox{
+    position: relative;
+    background-color: #f2f2f2;
+}
+.pbFirst > div {
+    width: 25%;
+    height: 60px;
+    line-height: 60px;
+    overflow: hidden;
+    text-align: center;
+    float: left;
+}
+ .listdd > dd > div{
     width: 20%;
     height: 60px;
     line-height: 60px;
@@ -49,13 +64,13 @@
     line-height: 40px;
 }
 
-.parentBox  > div > img{
+.pbFirst > div > img{
     padding: 10px 0;
 }
 
 
 
-.parentBox  > div > img , .listdd > dd > div > img{
+.pbFirst > div > img , .listdd > dd > div > img{
     width: 40px;
     height: 40px;
 }
@@ -73,4 +88,10 @@
     line-height: 21px!important;
     overflow: hidden;
     color: #888;
+}
+
+.parentBox > .action{
+    position: absolute;
+    top: 20px;
+    left: 87%;
 }

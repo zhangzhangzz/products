@@ -16,5 +16,12 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
-
+//公共方法函数
 require __DIR__ . '/../app/Helps/function.php';
+
+require __DIR__ .'/../bootstrap/aliyun_oss/autoload.php';
+define("accessKeyId","LTAIRsBKJalHvCyq");
+define("accessKeySecret","RcWiY3ovlLuA1SqXsvCWWlUmjqOGpD");
+define("endpoint","http://oss-cn-zhangjiakou.aliyuncs.com");
+define("bucket","yizhangou");
+define("ImagesOssUrl","http://yizhangou.oss-cn-zhangjiakou.aliyuncs.com/");

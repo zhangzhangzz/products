@@ -28,7 +28,7 @@
                 <a href="javascript:;">商品</a>
                 <dl class="layui-nav-child">
                     <dd><a href="/admin/goods/index">商品列表</a></dd>
-                    <dd><a href="/admin/goods/classify">商品分类</a></dd>
+                    <dd><a href="/admin/category/index">商品分类</a></dd>
                     <dd><a href="/admin/goods/manage">商品管理</a></dd>
                     <dd><a href="/admin/goods/recycle ">回收站</a></dd>
                 </dl>
