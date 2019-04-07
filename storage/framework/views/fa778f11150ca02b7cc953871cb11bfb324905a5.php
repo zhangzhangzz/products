@@ -59,8 +59,9 @@
                             </p>
                             <div class="ultable">
                                 <ul>
-                                    <?php if(is_array($v)): ?>
-                                    <?php $__currentLoopData = $v; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                    <?php if(!empty($v['child'])): ?>
+                                    <?php $__currentLoopData = $v['child']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if(is_array($s)): ?>
                                     <li>
                                         <input type="checkbox" value="<?php echo e($s['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($s['name']); ?>" name="action_id[]" lay-filter="choose"
@@ -68,13 +69,15 @@
 
                                         <div class="list-three">
                                             <ul>
-                                                <?php $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if(!empty($s['child'])): ?>
+                                                <?php $__currentLoopData = $s['child']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                  <?php if(is_array($c)): ?>
                                                 <li>
                                                     <input type="checkbox" value="<?php echo e($c['id']); ?>" data-id="12" lay-skin="primary" title="<?php echo e($c['name']); ?>" name="action_id[]" lay-filter="three-choose">
                                                 </li>
                                                 <?php endif; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php endif; ?>
                                             </ul>
                                         </div>
                                     </li>
@@ -89,7 +92,7 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <div class="layui-form-item btnBox">
                     <div class="layui-input-block" style="margin: 0;">
-                    <button class="layui-btn pl" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
+                    <button class="layui-btn pl  getBtn" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -187,9 +190,12 @@
                     {
                         $("."+name).css("color","red");
                         $("."+name).html(data);
+                        $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
+
                     }else{
                         $("."+name).css("color","green");
                         $("."+name).html("√可以使用");
+                        $(".getBtn").attr("class","layui-btn getBtn");
                     }
                 }
             });

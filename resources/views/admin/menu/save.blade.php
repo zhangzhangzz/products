@@ -64,7 +64,7 @@
                 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button class="layui-btn getBtn" lay-submit lay-filter="formDemo">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -116,9 +116,11 @@
                 {
                     $("."+name).css("color","red");
                     $("."+name).html(data);
+                    $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
                 }else{
                     $("."+name).css("color","green");
                     $("."+name).html("√可以使用");
+                    $(".getBtn").attr("class","layui-btn getBtn");
                 }
             }
         });

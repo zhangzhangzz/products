@@ -12,7 +12,7 @@ class Roles extends Model
     public $timestamps      = false; // 不在维护 updated_at    created_at 这两个字段
     public function user()
     {
-            return $this -> belongsToMany('App\Http\Model\Admin\User');
+            return $this -> belongsToMany('App\Http\Model\Admin\Admin_User');
     }
     public function action()
     {

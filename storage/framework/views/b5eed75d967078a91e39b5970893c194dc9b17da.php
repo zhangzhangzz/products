@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/addadmin.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/addadmin.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div class="bigbox">
@@ -91,9 +90,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
     //Demo
     layui.use('form', function(){
@@ -122,4 +121,5 @@
 
     });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

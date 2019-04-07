@@ -31,26 +31,30 @@ Route::group(['namespace'=>'home'],function (){
  * 陈绪
  * 苏鹏
  */
+Route::group(['prefix' => 'admin','namespace'=>'admin'] ,function (){
 
-Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.validate', 'admin.index'],'middleware'=>'role'] ,function (){
+    /*TODO:后台登录*/
+    Route::any('login','Login\LoginController@index');
+    Route::any('login/doLogin','Login\LoginController@doLogin');
+    Route::any('login/logout','Login\LoginController@logout');
+
+});
+
+Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.validate', 'admin.index'],'middleware'=> 'role'] ,function (){
 
 
     /*TODO:后台首页*/
     Route::any('/','AdminController@index');
 
 
-    /*TODO:后台登录*/
-    Route::any('login/index','Login\LoginController@index');
-
-
     /*TODO:账号管理*/
-    Route::any('admin/index','Admin\AdminController@index');
-    Route::any('admin/save','Admin\AdminController@save');
-    Route::any('admin/add','Admin\AdminController@add'); 
-    Route::any('admin/edit','Admin\AdminController@edit');
-    Route::any('admin/del','Admin\AdminController@del');
-    Route::any('admin/status','Admin\AdminController@stauts');
-    Route::any('admin/updata','Admin\AdminController@updata');
+    Route::any('admin_user/index','Admin_User\Admin_UserController@index');
+    Route::any('admin_user/save','Admin_User\Admin_UserController@save');
+    Route::any('admin_user/insert','Admin_User\Admin_UserController@insert');
+    Route::any('admin_user/edit/{id}','Admin_User\Admin_UserController@edit');
+    Route::any('admin_user/del/{id}','Admin_User\Admin_UserController@del');
+    Route::any('admin_user/update/{id}','Admin_User\Admin_UserController@update');
+    Route::any('admin_user/regular','Admin_User\Admin_UserController@regular');
 
 
     /*TODO:角色管理*/
@@ -61,6 +65,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('role/update/{id}','Role\RoleController@update');
     Route::any('role/del/{id}','Role\RoleController@del');
     Route::any('role/regular','Role\RoleController@regular');
+    Route::any('role/state/{id}/{state}','Role\RoleController@state');
 
  
     /*TODO:菜单管理*/

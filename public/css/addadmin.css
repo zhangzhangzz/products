@@ -16,3 +16,7 @@
     font-size: 16px;
     color: #555;
 }
+
+.firstpwd , .surepwd{
+    display: none;
+}

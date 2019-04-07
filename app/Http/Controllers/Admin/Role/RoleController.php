@@ -38,33 +38,8 @@ class RoleController extends Controller
         $li = DB::select($sql);
         // 转换成数组
         $data1 = arr($li);
-        $i = [];
-        $data2 = [];
-        $list = [];
-        foreach($data1 as $v)
-        {
-            // 路径中有几个,号
-            // 组成3维数组
-            if(substr_count($v['path'], ",") == 1)
-            {
-                $list[$v['id']] = $v;
-            }
-            if(substr_count($v['path'], ",") == 2)
-            {
-                $i[] = $v['id'];
-                $data2[] = $v;
-            }
-            if(substr_count($v['path'], ",") == 3)
-            {
-                $key = array_search($v['boss'], $i);
-                $data2[$key][] = $v;
-                $key = "";
-            }
-        }
-        foreach($data2 as $p)
-        {
-            $list[$p['boss']][] = $p;
-        }
+        // 一维数组转多维数组
+        $list = arr2($data1);
         $name = Roles::get();
         return view("admin.role.save",["list" => $list, "name" => $name]);
     }
@@ -124,33 +99,8 @@ class RoleController extends Controller
         $sql = "select * from action order by concat(path, id)";
         $li = DB::select($sql);
         $data1 = arr($li);
-        $i = [];
-        $data2 = [];
-        $list = [];
-        foreach($data1 as $v)
-        {
-            // 路径中有几个,号
-            // 组成3维数组
-            if(substr_count($v['path'], ",") == 1)
-            {
-                $list[$v['id']] = $v;
-            }
-            if(substr_count($v['path'], ",") == 2)
-            {
-                $i[] = $v['id'];
-                $data2[] = $v;
-            }
-            if(substr_count($v['path'], ",") == 3)
-            {
-                $key = array_search($v['boss'], $i);
-                $data2[$key][] = $v;
-                $key = "";
-            }
-        }
-        foreach($data2 as $p)
-        {
-            $list[$p['boss']][] = $p;
-        }
+        // 一维数组转多维数组
+        $list = arr2($data1);
         return view("admin.role.edit",["list" => $list,"lists" => $lists,"data" => $data,"checkbox" => $checkbox]);
     }
 
@@ -248,6 +198,28 @@ class RoleController extends Controller
                 break;
             default:
                 break;
+        }
+    }
+
+
+
+    /**
+     * 状态jquery提交
+     * 苏鹏
+     */
+    public function state($id,$state)
+    {
+        // 进行修改
+        $roles = Roles::find($id);
+        $roles -> state = $state;
+        $re = $roles -> save();
+        if($re)
+        {
+            DB::commit();  // 提交事务
+            return 1;
+        }else{
+            DB::rollback();  // 回滚事务
+            return 0;
         }
     }
 }

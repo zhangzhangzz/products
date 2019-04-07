@@ -1,5 +1,6 @@
-<link rel="stylesheet" href="<?php echo e(asset('css/action.css')); ?>">
-<?php $__env->startSection('content'); ?>
+@extends('admin.template.default')
+<link rel="stylesheet" href="{{ asset('css/action.css') }}">
+@section('content')
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -31,19 +32,19 @@
         
 
         <script type="text/html" id="titleTpl">
-            {{#  if(d.login ==1 ){ }}
+            @{{#  if(d.login ==1 ){ }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
-                    <input type="checkbox" checked lay-skin="switch" lay-filter="filter" data-id="{{ d.id }}">
+                    <input type="checkbox" checked lay-skin="switch" lay-filter="filter" data-id="@{{ d.id }}">
                     </div>
                 </div>
-            {{#  } else { }}
+            @{{#  } else { }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
-                    <input type="checkbox" lay-skin="switch" lay-filter="filter" data-id="{{ d.id }}">
+                    <input type="checkbox" lay-skin="switch" lay-filter="filter" data-id="@{{ d.id }}">
                     </div>
                 </div>
-            {{#  } }}
+            @{{#  } }}
         </script>
 
 
@@ -57,13 +58,13 @@
     
     
       
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('js'); ?>
+@section('js')
  <script>
 
      function addRole(){
-         window.location.href="/admin/admin/add"; 
+         window.location.href="/admin/admin_user/save";
      }
 
 
@@ -90,10 +91,6 @@
 
             }); 
 
-//            var data = [
-//            {id:1,account:88888888,shopName:'桂香私厨',name:'香香1',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:1,action:'-'},
-//            {id:2,account:88888888,shopName:'桂香私厨',name:'香香2',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:0,action:'-'}
-//                ];
          var list = <?php echo $list; ?>;
          var data = [];
          if(list.length == 1)
@@ -109,7 +106,6 @@
              }
          }
 
-         console.log(typeof(parseInt(data[0].time)));
             table.render({
                     elem: '#demo'
                     ,limit:999999
@@ -120,10 +116,16 @@
                         ,{field: 'shopname', title: '店铺名称' , width:150 , align:'center'}
                         ,{field: 'name', title: '姓名', width:100 , align:'center'}
                         ,{field: 'partment', title: '部门', width: 100 , align:'center'}
-                        ,{field: 'role', title: '角色', width: 80 , align:'center'}
-                        ,{field: 'time', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                        ,{field: 'role_name', title: '角色', width: 80 , align:'center'}
+                        ,{field: 'time', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>@{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
                         ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
-                        ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                        ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                            if(d.role_name=="商户"){
+                                return '<a class="layui-btn layui-btn-xs  layui-btn-disabled" >编辑</a><a class="layui-btn  layui-btn-disabled layui-btn-xs">删除</a>';
+                            }else{
+                                return '<a class="layui-btn layui-btn-xs " lay-event="edit" >编辑</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>';
+                            }
+                        }}
                     ]]
                     ,data:data
                 });
@@ -154,38 +156,21 @@
                             ,{field: 'name', title: '姓名', width:100 , align:'center'}
                             ,{field: 'partment', title: '部门', width: 100 , align:'center'}
                             ,{field: 'role', title: '角色', width: 80 , align:'center'}
-                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center',templet : "<div>{{layui.util.toDateString(d.creatdate, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center',templet : "<div>@{{layui.util.toDateString(d.creatdate, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 }
                             ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
-                            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center', templet: function(d){
+                                if(d.role_name=="商户"){
+                                    return '<a class="layui-btn layui-btn-xs  layui-btn-disabled" >编辑</a><a class="layui-btn  layui-btn-disabled layui-btn-xs">删除</a>';
+                                }else{
+                                    return '<a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a><a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>';
+                                }
+                            }}
                         ]]
                         ,data:data
                     });
                 });
 
-                $.ajax({
-                    url: '<?php echo e(url("admin/admin/index")); ?>',
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data:{"_token":"<?php echo e(csrf_token()); ?>"},
-                    success:function (data) {
-                        var data = data.data;
-                        console.log(data);
-                        //第一个实例
-                        
-
-                },
-                error:function (data) {
-
-                }
-            })
-
-        
-
-
-
-        
-        
         // #table操作事件
         table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             let tdata = obj.data; //获得当前行数据
@@ -195,14 +180,24 @@
             da = obj.data;
             if(layEvent === 'del'){ //删除
                 layer.confirm('真的删除行么', function(index){
-                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                    layer.close(index);
                     //向服务端发送删除指令
-                    console.log("删除");
+                    $.get("/admin/admin_user/del/"+tdata.id,{
+
+                    },function(data){
+                        if(data == 1)
+                        {
+                            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        }else{
+                            alert("删除失败");
+                        }
+
+                        layer.close(index);
+                    });
+
                
                 });
             }else if(layEvent === 'edit'){
-                window.location.href="/admin/admin/add"; 
+                window.location.href="/admin/admin_user/edit/"+tdata.id;
             }
         });
         
@@ -212,5 +207,4 @@
 
     
  </script>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

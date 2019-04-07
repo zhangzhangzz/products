@@ -18,8 +18,8 @@
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="<?php echo e($lists -> name); ?>" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
-                    <span class="error name">请填写汉子</span>
                     </div>
+                    <span class="error name">请填写汉子</span>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
@@ -68,8 +68,8 @@
                                     </p>
                                     <div class="ultable">
                                         <ul>
-                                            <?php if(is_array($v)): ?>
-                                                <?php $__currentLoopData = $v; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if(!empty($v['child'])): ?>
+                                                <?php $__currentLoopData = $v['child']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if(is_array($s)): ?>
                                                         <li>
                                                             <?php if(in_array($s['id'], $checkbox)): ?>
@@ -81,7 +81,8 @@
                                                             <?php endif; ?>
                                                             <div class="list-three">
                                                                 <ul>
-                                                                    <?php $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                    <?php if(!empty($s['child'])): ?>
+                                                                    <?php $__currentLoopData = $s['child']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                         <?php if(is_array($c)): ?>
                                                                             <li>
                                                                                 <?php if(in_array($s['id'], $checkbox)): ?>
@@ -92,6 +93,7 @@
                                                                             </li>
                                                                         <?php endif; ?>
                                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                    <?php endif; ?>
                                                                 </ul>
                                                             </div>
                                                         </li>
@@ -107,7 +109,7 @@
                 
                 <div class="layui-form-item btnBox">
                     <div class="layui-input-block" style="margin: 0;">
-                    <button class="layui-btn pl" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
+                    <button class="layui-btn pl getBtn" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -211,9 +213,11 @@
                     {
                         $("."+name).css("color","red");
                         $("."+name).html(data);
+                        $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
                     }else{
                         $("."+name).css("color","green");
                         $("."+name).html("√可以使用");
+                        $(".getBtn").attr("class","layui-btn getBtn");
                     }
                 }
             });
