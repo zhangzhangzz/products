@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/action.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/action.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -32,19 +31,19 @@
         
 
         <script type="text/html" id="titleTpl">
-            @{{#  if(d.login ==1 ){ }}
+            {{#  if(d.login ==1 ){ }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
-                    <input type="checkbox" checked lay-skin="switch" lay-filter="filter" data-id="@{{ d.id }}">
+                    <input type="checkbox" checked lay-skin="switch" lay-filter="filter" data-id="{{ d.id }}">
                     </div>
                 </div>
-            @{{#  } else { }}
+            {{#  } else { }}
                 <div class="layui-form-item">
                     <div class="layui-input-block swichBtn" >
-                    <input type="checkbox" lay-skin="switch" lay-filter="filter" data-id="@{{ d.id }}">
+                    <input type="checkbox" lay-skin="switch" lay-filter="filter" data-id="{{ d.id }}">
                     </div>
                 </div>
-            @{{#  } }}
+            {{#  } }}
         </script>
 
 
@@ -58,9 +57,9 @@
     
     
       
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
  <script>
 
      function addRole(){
@@ -118,7 +117,7 @@
                         ,{field: 'name', title: '姓名', width:100 , align:'center'}
                         ,{field: 'partment', title: '部门', width: 100 , align:'center'}
                         ,{field: 'role_name', title: '角色', width: 80 , align:'center'}
-                        ,{field: 'time', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>@{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                        ,{field: 'time', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
                         ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
                         ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
                             if(d.role_name=="商户"){
@@ -151,7 +150,7 @@
                             ,{field: 'name', title: '姓名', width:100 , align:'center'}
                             ,{field: 'partment', title: '部门', width: 100 , align:'center'}
                             ,{field: 'role', title: '角色', width: 80 , align:'center'}
-                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center',templet : "<div>@{{layui.util.toDateString(d.creatdate, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center',templet : "<div>{{layui.util.toDateString(d.creatdate, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 }
                             ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
                             ,{field: 'action', title: '操作', width: 180 , align:'center', templet: function(d){
@@ -202,4 +201,5 @@
 
     
  </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

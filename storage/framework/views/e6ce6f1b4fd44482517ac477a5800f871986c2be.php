@@ -1,10 +1,14 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/action.css')); ?>">
 <?php $__env->startSection('content'); ?>
-    <div>
-        <ul>
-            <li><?php echo e(session('errors')); ?></li>
-        </ul>
-    </div>
+    <?php if(session('errors')): ?>
+        <div class="errors">
+            <h3>警告</h3>
+            <br/>
+            <?php echo e(session('errors')); ?>
+
+            <br/>
+        </div>
+    <?php endif; ?>
     <div class="main">
         <div style="padding:30px;">
             <div style="margin-bottom:15px;">
@@ -49,7 +53,7 @@
  <script>
 
      function addRole(){
-         window.location.href="/admin/role/edit";
+         window.location.href="/admin/role/save";
      }
 
 
@@ -75,7 +79,7 @@
                  data.push(list[i]);
              }
          }
-        console.log(data);
+
          //第一个实例
          table.render({
              elem: '#demo'
@@ -95,7 +99,7 @@
              let tdata = obj.data; //获得当前行数据
              var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
              var tr = obj.tr; //获得当前行 tr 的DOM对象
-             console.log(tdata);
+
              da = obj.data;
 
              // #数据删除
@@ -125,7 +129,6 @@
          });
 
         // #登录权限事件
-<<<<<<< HEAD
 
          form.on('switch(filter)', function(data){
              var flag = data.elem.checked;
@@ -135,18 +138,17 @@
              }else{
                  var btnTag = 0;
              }
+
+//             $.get("/admin/role/state/"+ id + "/" + btnTag,{
              $.get("/admin/role/state/"+ id + "/" + btnTag,{
              },function(res){
+                 console.log(res);
                  if(res==1)
                  {
-                    // data.elem.checked = !flag;
-                     console.log("here");
+                     data.elem.checked = !flag;
                  }else{
-                     console.log(btnTag+"---"+flag);
                      data.elem.checked = !flag;
                      form.render();
-                     console.log("t");
-
                  }
              });
 
@@ -154,87 +156,6 @@
     });
 
 
-=======
-        
-        form.on('switch(filter)', function(data){
-            var flag = data.elem.checked;
-                console.log(data.elem.checked); //开关是否开启，true或者false
-                console.log(data.elem); //得到checkbox原始DOM对象
-                
-                if(flag){
-                    var btnTag = 1;
-                }else{
-                    var btnTag = 0;
-                }
-                
-                $.post("",{
-                    },function(res){
-
-                    });
-
-            }); 
-        
-        // #table操作事件
-        table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-        let tdata = obj.data; //获得当前行数据
-        var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-        var tr = obj.tr; //获得当前行 tr 的DOM对象
-        console.log(tdata);
-        da = obj.data;
-
-        // #数据删除
-
-        if(layEvent === 'del'){ //删除
-            layer.confirm('真的删除行么', function(index){
-            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-            layer.close(index);
-            //向服务端发送删除指令
-            console.log("删除");
-
-            $.post("",{
-                
-                },function(data){
-
-                });
-
-            });
-        } else if(layEvent === 'edit'){
-            window.location.href="/admin/role/edit";
-        }
-        });
-    });
-
-    layui.use(['table','laytpl'], function(){
-        var table = layui.table
-        ,laytpl = layui.laytpl;
-
-        
-        var data = [
-            {name:'管理员',descript:'管理员1',boss:'香香是个大撒比',status:1,action:'-'},
-            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
-            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
-            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
-            {name:'管理员',descript:'管理员1',boss:'香香',status:1,action:'-'},
-            {name:'群众',descript:'群众2',boss:'香香2',status:1,action:'-'}
-                ];               
-                
-
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            ,limit:999999
-            ,width:666
-            ,cols: [[ //表头
-            {field: 'name', title: '角色名称', width:80, sort: true, fixed: 'left' , align:'center'}
-            ,{field: 'descript', title: '角色描述' , width:150 , align:'center'}
-            ,{field: 'boss', title: '上级名称' , width:150 , align:'center'}
-            ,{field: 'status', title: '状态', width:100 , align:'center' ,  templet: '#titleTpl'} 
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
-            ]]
-            ,data:data
-        });
-    });
->>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
 
  
  </script>
