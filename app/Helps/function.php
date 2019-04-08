@@ -110,19 +110,21 @@ if(!function_exists("_tree_sort")){
      */
     function _tree_sort($arr,$cols){
         //子分类排序
+        echo 1;
+        exit;
         foreach ($arr as $k => &$v) {
             if(!empty($v['sub'])){
                 $v['sub']=_tree_sort($v['sub'],$cols);
             }
             $sort[$k]=$v[$cols];
         }
+        dd($arr);
         if(isset($sort))
             array_multisort($sort,SORT_ASC,$arr);
         return $arr;
     }
 
 }
-
 
 if(!function_exists("getSelectList")){
 
