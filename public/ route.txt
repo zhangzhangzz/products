@@ -972,3 +972,5 @@
 
 {"date":"2019-04-08 06:21:13","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
 
+{"date":"2019-04-08 06:24:06","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
