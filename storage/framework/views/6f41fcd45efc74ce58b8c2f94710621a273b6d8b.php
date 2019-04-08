@@ -59,16 +59,7 @@
         {{#  } }}
     </script>
 
-    <!-- 经营状态 -->
-    <script type="text/html" id="barDemo2">
-        {{#  if(d.status == 1){ }}
-            <div style="color:green">经营中</div>
-        {{#  } else if(d.status == -1){ }}
-        <div style="color:red">已停业</div>
-        {{#  } else if(d.status == 0){ }}
-        <div >审核中</div>
-        {{#  } }}
-    </script>
+
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('js'); ?>
@@ -79,31 +70,55 @@
             table = layui.table
             form = layui.form;
 
-
-        var data = [
-                {shopName:"意国小镇",companyName:"香香1",person:'张三',phone:'13122223333',maintype:'大米',check:1,status:1,action:'-'},
-                {shopName:"意国小镇",companyName:"香香1",person:'张三',phone:'13122223333',maintype:'大米',check:-1,status:0,action:'-'},
-                {shopName:"意国小镇",companyName:"香香1",person:'张三',phone:'13122223333',maintype:'大米',check:0,status:-1,action:'-'}
-                    ];               
-                    
-    
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            ,limit:999999
-            ,width:1189
-            ,cols: [[ //表头
-            {field: 'shopName', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
-            ,{field: 'companyName', title: '公司名称' , width:150 , align:'center'}
-            ,{field: 'person', title: '负责人' , width:150 , align:'center'}
-            ,{field: 'phone', title: '联系电话', width:130 , align:'center'} 
-            ,{field: 'maintype', title: '主营类目', width: 140 , align:'center'}
-            ,{field: 'check', title: '审核状态', width: 140,  align:'center' ,toolbar: '#barDemo1'}
-            ,{field: 'status', title: '经营状态', width: 140,  align:'center' , toolbar: '#barDemo2'}
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
-            ]]
-            ,data:data
+        $.ajax({
+            url:"<?php echo e(url('admin/shop/index')); ?>",
+            type:"POST",
+            dataType:"json",
+            data:{"_token":"<?php echo e(csrf_token()); ?>"},
+            success:function (data) {
+                console.log(data)
+                if(data.status == 1){
+                    var data = data.data;
+                    //第一个实例
+                    table.render({
+                        elem: '#demo'
+                        ,limit:999999
+                        ,width:1189
+                        ,cols: [[ //表头
+                            {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
+                            ,{field: 'company_name', title: '公司名称' , width:150 , align:'center'}
+                            ,{field: 'functionary', title: '负责人' , width:150 , align:'center'}
+                            ,{field: 'phone', title: '联系电话', width:130 , align:'center'}
+                            ,{field: 'goods_type_name', title: '主营类目', width: 140 , align:'center'}
+                            ,{field: 'audit_status', title: '审核状态', width: 140,  align:'center'  , templet: function(d){
+                                if(d.audit_status=="1"){
+                                    return '待审核';
+                                }else if(d.audit_status=="2"){
+                                    return '驳回';
+                                }else if(d.audit_status=="3"){
+                                    return '通过';
+                                }
+                            }}
+                            ,{field: 'manage_status', title: '经营状态', width: 140,  align:'center' , templet: function(d){
+                                if(d.manage_status=="1"){
+                                    return '经营中';
+                                }else if(d.manage_status=="2"){
+                                    return '审核中';
+                                }else if(d.manage_status=="3"){
+                                    return '已停业';
+                                }
+                            }}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                        ]]
+                        ,data:data
+                    });
+                }
+            },
+            error:function (data) {
+                console.log("错误");
+            }
         });
+
 
 
         //第二个实例

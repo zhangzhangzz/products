@@ -17,7 +17,8 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         if($request->isMethod("post")){
-            $shop_data = Shops::selects();
+            $shop = new Shops();
+            $shop_data = $shop->audit_status();
             return ajax_success("获取成功",$shop_data);
         }
         return view("admin.Shop.index");
@@ -30,6 +31,7 @@ class ShopController extends Controller
      */
     public function check()
     {
+
         return view("admin.Shop.check");
     }
 

@@ -49,6 +49,7 @@ class CategoryController extends Controller{
         if($pid == 0){
             $category_list = getSelectList("goods_type");
         }
+
         return view("admin.goods.category_add",["category_list"=>$category_list]);
 
     }
