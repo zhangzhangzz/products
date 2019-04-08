@@ -24,8 +24,7 @@ class CategoryController extends Controller{
     public function index(Request $request){
 
         $category = DB::table("goods_type")->get()->toArray();
-        $category_list = _tree_hTree(_tree_sort($category,"sort_number"));
-        dd($category_list);
+        $category_list = genTree($category);
         $page = $request->page ?: 1;
         //每页的条数
         $perPage = 5;
