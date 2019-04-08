@@ -97,11 +97,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
 
     Route::any('goods/addclass','Goods\GoodsController@addclass');
-<<<<<<< HEAD
-    Route::any('goods/category_index','Goods\GoodsController@category_index'); 
 
-=======
->>>>>>> 5faefa513be461bc0c0e43f5235e88129888dfc5
     Route::any('goods/manage','Goods\GoodsController@manage'); 
     Route::any('goods/recycle','Goods\GoodsController@recycle');
 
