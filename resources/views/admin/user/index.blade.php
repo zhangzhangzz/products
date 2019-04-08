@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ asset('css/user.css') }}">
 @section('content')
     <div class="main" >
-        <div class="layui-tab bigbox">
+        <div class=" bigbox">
             <ul class="layui-tab-title">
                 <li class="layui-this">普通用户</li>
                 <li>禁用用户</li>
@@ -10,10 +10,17 @@
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
                     <form class="layui-form form" action="">
+<<<<<<< HEAD
+                        <input type="text" name="name" required lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
+                        <input type="text" name="phone" required lay-verify="required" placeholder="手机号" autocomplete="off" class="layui-input">
+                        <input type="text" name="wxqq" required lay-verify="required" placeholder="微信/QQ" autocomplete="off" class="layui-input">
+                        <input type="text" name="address" required lay-verify="required" placeholder="收货地址" autocomplete="off" class="layui-input">
+=======
                         <input type="text" name="name"  placeholder="昵称" autocomplete="off" class="layui-input">
                         <input type="text" name="phone" placeholder="手机号" autocomplete="off" class="layui-input">
                         <input type="text" name="wxqq"  placeholder="微信/QQ" autocomplete="off" class="layui-input">
                         <input type="text" name="address"  placeholder="收货地址" autocomplete="off" class="layui-input">
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
                         <button class="layui-btn" lay-submit lay-filter="formDemo1">搜索</button>
                     </form>
 
@@ -22,10 +29,17 @@
                 </div>
                 <div class="layui-tab-item">
                     <form class="layui-form form" action="">
+<<<<<<< HEAD
+                    <input type="text" name="name" required lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
+                        <input type="text" name="phone" required lay-verify="required" placeholder="手机号" autocomplete="off" class="layui-input">
+                        <input type="text" name="wxqq" required lay-verify="required" placeholder="微信/QQ" autocomplete="off" class="layui-input">
+                        <input type="text" name="address" required lay-verify="required" placeholder="收货地址" autocomplete="off" class="layui-input">
+=======
                     <input type="text" name="name"  placeholder="昵称" autocomplete="off" class="layui-input">
                         <input type="text" name="phone"  placeholder="手机号" autocomplete="off" class="layui-input">
                         <input type="text" name="wxqq"  placeholder="微信/QQ" autocomplete="off" class="layui-input">
                         <input type="text" name="address"  placeholder="收货地址" autocomplete="off" class="layui-input">
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
                         <button class="layui-btn" lay-submit lay-filter="formDemo2">搜索</button>
                     </form>
 
@@ -39,7 +53,7 @@
     </div>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="edit" >详情</a>
+        <a class="layui-btn layui-btn-xs" onclick="detail();">详情</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">禁用</a>
     </script>
 
@@ -54,8 +68,93 @@
     layui.use(['table','form','element'], function(){
         var element = layui.element
             table = layui.table
-            form = layui.form;
+            form = layui.form
+            $ = layui.$;
 
+            window.detail=function(){
+                window.location.href="/admin/user/look";
+            }
+
+        //监听提交
+        form.on('submit(formDemo1)', function(data){
+            // layer.msg(JSON.stringify(data.field));
+            // return false;
+
+            var data = [
+                {headimg:"{{ asset('image/logo.png') }}",name:"111111",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'},
+                {headimg:"{{ asset('image/1.jpg') }}",name:"1111111",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'}
+                    ];
+
+            //第一个实例
+            table.render({
+                elem: '#demo'
+                ,limit:999999
+                ,cols: [[ //表头
+                {field: 'headimg', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+                ,{field: 'name', title: '名称' ,  align:'center'}
+                ,{field: 'phone', title: '电话' ,  align:'center'}
+                ,{field: 'wxqq', title: '微信/QQ',  align:'center'}
+                ,{field: 'address', title: '地址',  align:'center'}
+                ,{field: 'creatdate', title: '创建时间', sort: true , align:'center'}
+                ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
+                ]]
+                ,data:data
+            });
+
+            return false;
+
+
+        });
+
+        //监听提交
+        form.on('submit(formDemo2)', function(data){
+            var data = [
+                {headimg:"{{ asset('image/logo.png') }}",name:"22222222",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'},
+                {headimg:"{{ asset('image/1.jpg') }}",name:"2222222",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'}
+                    ];
+            console.log("???");
+            //第一个实例
+            table.render({
+                elem: '#demo2'
+                ,limit:999999
+                ,cols: [[ //表头
+                {field: 'headimg', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+                ,{field: 'name', title: '名称' ,  align:'center'}
+                ,{field: 'phone', title: '电话' ,  align:'center'}
+                ,{field: 'wxqq', title: '微信/QQ',  align:'center'}
+                ,{field: 'address', title: '地址',  align:'center'}
+                ,{field: 'creatdate', title: '创建时间', sort: true , align:'center'}
+                ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
+                ]]
+                ,data:data
+            });
+
+            return false;
+        });
+
+<<<<<<< HEAD
+
+        var data = [
+                {headimg:"{{ asset('image/logo.png') }}",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'},
+                {headimg:"{{ asset('image/1.jpg') }}",name:"香香1",phone:'13122223333',wxqq:'123654',address:'黑龙江省齐齐哈尔市龙山区恒大名都2号楼1单元1502',creatdate:'2019-01-01',action:'-'}
+                    ];
+
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,limit:999999
+            ,cols: [[ //表头
+            {field: 'headimg', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+            ,{field: 'name', title: '名称' ,  align:'center'}
+            ,{field: 'phone', title: '电话' ,  align:'center'}
+            ,{field: 'wxqq', title: '微信/QQ',  align:'center'}
+            ,{field: 'address', title: '地址',  align:'center'}
+            ,{field: 'creatdate', title: '创建时间', sort: true , align:'center'}
+            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
+            ]]
+            ,data:data
+=======
         $.ajax({
             url:"{{url('admin/user/index')}}",
             type:"POST",
@@ -82,11 +181,27 @@
             error:function (data) {
                 console.log("错误")
             }
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
         });
 
 
 
         //第二个实例
+<<<<<<< HEAD
+        table.render({
+            elem: '#demo2'
+            ,limit:999999
+            ,cols: [[ //表头
+            {field: 'headimg', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+            ,{field: 'name', title: '名称' ,  align:'center'}
+            ,{field: 'phone', title: '电话' ,  align:'center'}
+            ,{field: 'wxORqq', title: '微信/QQ', align:'center'}
+            ,{field: 'address', title: '地址',  align:'center'}
+            ,{field: 'creatdate', title: '创建时间',  sort: true , align:'center'}
+            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
+            ]]
+            ,data:data
+=======
         $.ajax({
             url:"{{url('admin/user/disabled')}}",
             type:"POST",
@@ -209,6 +324,7 @@
                 }
             });
             return false;
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
         });
 
 

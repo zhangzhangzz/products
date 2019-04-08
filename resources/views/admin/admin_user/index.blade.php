@@ -91,6 +91,13 @@
 
             }); 
 
+<<<<<<< HEAD:resources/views/admin/admin/index.blade.php
+            var data = [
+            {id:1,account:88888888,shopName:'桂香私厨',name:'1',partment:'入驻商',role:'管理员',creatdate:'1553654760',login:1,action:'-'},
+            {id:2,account:88888888,shopName:'桂香私厨',name:'2',partment:'入驻商',role:'管理员',creatdate:'1553654760',login:0,action:'-'}
+                ];
+
+=======
          var list = <?php echo $list; ?>;
          var data = [];
          if(list.length == 1)
@@ -105,6 +112,7 @@
                  data.push(list[i]);
              }
          }
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200:resources/views/admin/admin_user/index.blade.php
 
             table.render({
                     elem: '#demo'
@@ -113,11 +121,25 @@
                     ,cols: [[ //表头
                         {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
                         ,{field: 'account', title: '账号' , width:150 , align:'center'}
+<<<<<<< HEAD:resources/views/admin/admin/index.blade.php
+                        ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
+                        ,{field: 'name', title: '姓名', width:100 , align:'center' ,templet : function(d){
+                                if(d.name==1){
+                                    return '香香1';
+                                }else{
+                                    return '吃屎2';
+                                }
+                            } }
+                        ,{field: 'partment', title: '部门', width: 100 , align:'center'}
+                        ,{field: 'role', title: '角色', width: 80 , align:'center'}  
+                        ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>@{{layui.util.toDateString(d.creatdate*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>" }
+=======
                         ,{field: 'shopname', title: '店铺名称' , width:150 , align:'center'}
                         ,{field: 'name', title: '姓名', width:100 , align:'center'}
                         ,{field: 'partment', title: '部门', width: 100 , align:'center'}
                         ,{field: 'role_name', title: '角色', width: 80 , align:'center'}
                         ,{field: 'time', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>@{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200:resources/views/admin/admin_user/index.blade.php
                         ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
                         ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
                             if(d.role_name=="商户"){

@@ -28,7 +28,7 @@
                 <a href="javascript:;">商品</a>
                 <dl class="layui-nav-child">
                     <dd><a href="/admin/goods/index">商品列表</a></dd>
-                    <dd><a href="/admin/goods/classify">商品分类</a></dd>
+                    <dd><a href="/admin/goods/category_index">商品分类</a></dd>
                     <dd><a href="/admin/goods/manage">商品管理</a></dd>
                     <dd><a href="/admin/goods/recycle ">回收站</a></dd>
                 </dl>
@@ -42,15 +42,17 @@
             </li>
 
             <li class="layui-nav-item">
-                <a href="javascript:;">解决方案</a>
+                <a href="javascript:;">交易管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">移动模块</a></dd>
-                    <dd><a href="">后台模版</a></dd>
-                    <dd><a href="">电商平台</a></dd>
+                    <dd><a href="/admin/business/index">订单管理</a></dd>
+                    <dd><a href="/admin/business/send">发货管理</a></dd>
+                    <dd><a href="/admin/business/assess">评价管理</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">产品</a></li>
-            <li class="layui-nav-item"><a href="">大数据</a></li>
+
+            
+            <li class="layui-nav-item"><a href="">营销中心</a></li>
+            <li class="layui-nav-item"><a href="/admin/after/index">售后</a></li>
         </ul>
     </div>
 </div>

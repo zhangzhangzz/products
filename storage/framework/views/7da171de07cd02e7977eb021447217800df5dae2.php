@@ -147,6 +147,72 @@
                     id:id
                     },function(res){
 
+<<<<<<< HEAD
+            }); 
+
+            var data = [
+            {id:1,account:88888888,shopName:'桂香私厨',name:'1',partment:'入驻商',role:'管理员',creatdate:'1553654760',login:1,action:'-'},
+            {id:2,account:88888888,shopName:'桂香私厨',name:'2',partment:'入驻商',role:'管理员',creatdate:'1553654760',login:0,action:'-'}
+                ];
+
+
+            table.render({
+                    elem: '#demo'
+                    ,limit:999999
+                    ,width:1120
+                    ,cols: [[ //表头
+                        {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
+                        ,{field: 'account', title: '账号' , width:150 , align:'center'}
+                        ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
+                        ,{field: 'name', title: '姓名', width:100 , align:'center' ,templet : function(d){
+                                if(d.name==1){
+                                    return '香香1';
+                                }else{
+                                    return '吃屎2';
+                                }
+                            } }
+                        ,{field: 'partment', title: '部门', width: 100 , align:'center'}
+                        ,{field: 'role', title: '角色', width: 80 , align:'center'}  
+                        ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>{{layui.util.toDateString(d.creatdate*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>" }
+                        ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
+                        ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                    ]]
+                    ,data:data
+                });
+
+
+                $(".selectBtn").click(function(){
+                    var account = $(".account").val();
+                    var phone = $(".phone").val();
+                    if(account=="" && phone==""){
+                        layer.msg('请至少输入一个查询条件');
+                        return false; 
+                    }
+
+                    var data = [
+                        {id:1,account:11111111,shopName:'222222',name:'香香3',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:0,action:'-'},
+                        {id:2,account:11111111,shopName:'333333',name:'香香4',partment:'入驻商',role:'管理员',creatdate:'2019-01-01',login:0,action:'-'}
+                            ];
+
+
+                    table.render({
+                        elem: '#demo'
+                        ,limit:999999
+                        ,width:1120
+                        ,cols: [[ //表头
+                            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
+                            ,{field: 'account', title: '账号' , width:150 , align:'center'}
+                            ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
+                            ,{field: 'name', title: '姓名', width:100 , align:'center'}
+                            ,{field: 'partment', title: '部门', width: 100 , align:'center'}
+                            ,{field: 'role', title: '角色', width: 80 , align:'center'}
+                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center'}
+                            ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                        ]]
+                        ,data:data
+=======
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
                     });
 
             }); 

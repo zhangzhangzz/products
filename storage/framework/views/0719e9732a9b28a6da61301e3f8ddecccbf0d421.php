@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
-            <div style="margin-bottom:15px;">
+            <div>
                     <button class="layui-btn addUser" onclick="addRole();">添加</button>
                 </div>
                 
