@@ -4,22 +4,29 @@ namespace App\Http\Controllers\Admin\Shop;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Admin\Shops;
 
 class ShopController extends Controller
 {
 
+
     /**
      * 店铺管理显示
-     * 苏鹏
+     * 陈绪
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->isMethod("post")){
+            $shop_data = Shops::selects();
+            return ajax_success("获取成功",$shop_data);
+        }
         return view("admin.Shop.index");
     }
 
+
     /**
      * 店铺审核
-     * 苏鹏
+     * 陈绪
      */
     public function check()
     {
