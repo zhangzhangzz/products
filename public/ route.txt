@@ -974,3 +974,31 @@
 
 {"date":"2019-04-08 06:24:06","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
 
+{"date":"2019-04-08 06:48:47","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 06:49:10","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 06:50:18","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 06:51:05","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 06:54:59","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+
+{"date":"2019-04-08 06:55:44","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@edit"}
+
+{"date":"2019-04-08 06:56:02","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@regular"}
+
+{"date":"2019-04-08 06:56:32","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@regular"}
+
+{"date":"2019-04-08 06:56:43","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@regular"}
+
+{"date":"2019-04-08 06:56:56","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@regular"}
+
+{"date":"2019-04-08 06:57:00","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@regular"}
+
+{"date":"2019-04-08 06:57:03","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@regular"}
+
+{"date":"2019-04-08 06:57:20","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@regular"}
+
+{"date":"2019-04-08 06:57:22","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+

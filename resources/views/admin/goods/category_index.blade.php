@@ -35,8 +35,8 @@
                             <div class="action" data-value="{{$value["id"]}}">操作</div>
                         </div>
                         <div class="listdd">
-                            @if(!empty($value['sub']))
-                            @foreach($value['sub'] as $val)
+                            @if(!empty($value['children']))
+                            @foreach($value['children'] as $val)
                             <dd >
                                 <div>@if(!empty($val["images"]))<img src="{{ImagesOssUrl}}/{{$val["images"]}}" alt="">@endif</div>
                                 <div>{{$val['name']}}</div>

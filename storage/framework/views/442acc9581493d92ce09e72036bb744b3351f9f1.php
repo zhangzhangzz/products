@@ -35,8 +35,8 @@
                             <div class="action" data-value="<?php echo e($value["id"]); ?>">操作</div>
                         </div>
                         <div class="listdd">
-                            <?php if(!empty($value['sub'])): ?>
-                            <?php $__currentLoopData = $value['sub']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(!empty($value['children'])): ?>
+                            <?php $__currentLoopData = $value['children']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <dd >
                                 <div><?php if(!empty($val["images"])): ?><img src="<?php echo e(ImagesOssUrl); ?>/<?php echo e($val["images"]); ?>" alt=""><?php endif; ?></div>
                                 <div><?php echo e($val['name']); ?></div>
