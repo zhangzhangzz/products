@@ -27,7 +27,7 @@ class CategoryController extends Controller{
         $category_list = _tree_hTree(_tree_sort($category,"sort_number"));
         $page = $request->page ?: 1;
         //每页的条数
-        $perPage = 2;
+        $perPage = 5;
         //计算每页分页的初始位置
         $offset = ($page * $perPage) - $perPage;
         //实例化LengthAwarePaginator类，并传入对应的参数
@@ -154,7 +154,7 @@ class CategoryController extends Controller{
         if($request->isMethod("post")){
             $id = $request->id;
             $category_images = DB::table("goods_type")->where("id",$id)->value("images");
-            $bool = ImagesDelete($category_images);
+            $bool = ImagesDelete("uploads"."/".$category_images);
             if($bool){
                 DB::table("goods_type")->where("id",$id)->update(["images"=>null]);
                 return ajax_success("删除成功",$bool);

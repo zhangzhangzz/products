@@ -45,13 +45,12 @@ if(!function_exists("ImagesUrl")){
         $filePath = $images_url["name"];
         $allow_type = ['.jpg', '.jpeg', '.gif', '.bmp', '.png'];
         if (! in_array($str_name, $allow_type)) {
-            echo "文件格式不在允许范围内哦";
-            exit;
+            exit("文件格式不在允许范围内哦");
         }
 
         try{
             $ossClient = new OssClient(accessKeyId, accessKeySecret, endpoint);
-            $result = $ossClient->uploadFile(bucket, $filePath,$images_url['tmp_name']);
+            $result = $ossClient->uploadFile(bucket, "uploads"."/".$filePath,$images_url['tmp_name']);
             $arr = [
                 'oss_url' => $result['info']['url'],  //上传资源地址
             ];

@@ -63,7 +63,7 @@ class Roles
                 $action[] = $route;
             }
         }
-        // 判断是否有权限访问
+       /* // 判断是否有权限访问
         if(!in_array($route, $action))
         {
             dd("没权限");
@@ -72,7 +72,7 @@ class Roles
 //            return redirect('admin/log');
 //            返回上一层
 //            return back();
-        }
+        }*/
         return $next($request);
     }
 }

@@ -84,7 +84,7 @@
                                                                     @foreach ($s['child'] as $c)
                                                                         @if(is_array($c))
                                                                             <li>
-                                                                                @if(in_array($s['id'], $checkbox))
+                                                                                @if(in_array($c['id'], $checkbox))
                                                                                 <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id[]" lay-filter="three-choose" checked="checked">
                                                                                 @else
                                                                                 <input type="checkbox" value="{{ $c['id'] }}" data-id="12" lay-skin="primary" title="{{ $c['name'] }}" name="action_id[]" lay-filter="three-choose">

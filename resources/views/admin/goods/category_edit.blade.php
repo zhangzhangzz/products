@@ -8,7 +8,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品分类：</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="name" required lay-verify="required" placeholder="{{$val->name}}" autocomplete="off" class="layui-input">
+                        <input type="text" name="name" required lay-verify="required" value="{{$val->name}}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
@@ -25,7 +25,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label" >排&emsp;&emsp;序：</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="sort_number" required lay-verify="required" placeholder="{{$val->sort_number}}" autocomplete="off" class="layui-input">
+                        <input type="text" name="sort_number" required lay-verify="required" value="{{$val->sort_number}}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 

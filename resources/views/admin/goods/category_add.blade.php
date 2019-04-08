@@ -1,7 +1,6 @@
 @extends('admin.template.default')
 <link rel="stylesheet" href="{{ asset('css/addgoodsclass.css') }}">
 @section('content')
-    {{ session('message') }}
     <div class="main">
         <div class="bigbox">
             <form class="layui-form form" action="{{url('admin/category/save')}}" method="post" enctype="multipart/form-data">

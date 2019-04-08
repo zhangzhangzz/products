@@ -1,19 +1,14 @@
 .main{
     width: 100%;
     height: 100%;
-<<<<<<< HEAD
     position: relative;
-    
-=======
-    position: relative; 
->>>>>>> 43ad109e2b60f40a056847ec44e43d43366157dd
 }
 
 .formBox{
     position: absolute;
     top: 50px;
     left: 100px;
-    width: 500px;
+    width: 80%;
 }
 
 .checkBigBox{

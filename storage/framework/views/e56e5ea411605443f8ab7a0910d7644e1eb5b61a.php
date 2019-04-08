@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/setting.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/setting.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div style="padding:30px;">
             <div class="titleBox">
@@ -20,9 +19,9 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
         layui.use(['table','layer'], function(id=""){
             var table = layui.table
@@ -74,10 +73,10 @@
             });
             
             $.ajax({
-                url:"{{url('admin/setting/index')}}",
+                url:"<?php echo e(url('admin/setting/index')); ?>",
                 type:"POST",
                 dataType:"json",
-                data:{"_token":"{{csrf_token()}}"},
+                data:{"_token":"<?php echo e(csrf_token()); ?>"},
                 success:function (data) {
                     console.log(data);
                     if(data.status == 1){
@@ -133,4 +132,5 @@
             });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

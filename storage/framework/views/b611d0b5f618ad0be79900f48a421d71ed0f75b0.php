@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/addgoodsclass.css')); ?>">
 <?php $__env->startSection('content'); ?>
-    <?php echo e(session('message')); ?>
-
     <div class="main">
         <div class="bigbox">
             <form class="layui-form form" action="<?php echo e(url('admin/category/save')); ?>" method="post" enctype="multipart/form-data">

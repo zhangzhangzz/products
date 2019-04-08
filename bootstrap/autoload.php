@@ -24,4 +24,4 @@ define("accessKeyId","LTAIRsBKJalHvCyq");
 define("accessKeySecret","RcWiY3ovlLuA1SqXsvCWWlUmjqOGpD");
 define("endpoint","http://oss-cn-zhangjiakou.aliyuncs.com");
 define("bucket","yizhangou");
-define("ImagesOssUrl","http://yizhangou.oss-cn-zhangjiakou.aliyuncs.com/");
+define("ImagesOssUrl","http://yizhangou.oss-cn-zhangjiakou.aliyuncs.com/uploads");
