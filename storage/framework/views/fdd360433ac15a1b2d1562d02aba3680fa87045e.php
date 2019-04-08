@@ -46,14 +46,6 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">排序</label>
-                    <div class="layui-input-inline">
-                    <input type="text" name="sort" value="<?php echo e(old('sort')); ?>" placeholder="请输入上级名称" autocomplete="off" class="layui-input">
-                    </div>
-                    <span class="error sort">请填写数字</span>
-                </div>
-
-                <div class="layui-form-item">
                     <label class="layui-form-label">状态</label>
                     <div class="layui-input-block" style="width: 190px;">
                     <select name="state" lay-verify="required">

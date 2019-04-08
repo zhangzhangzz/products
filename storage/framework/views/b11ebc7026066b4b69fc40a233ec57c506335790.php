@@ -122,7 +122,6 @@
         ,laytpl = layui.laytpl;
 
         var list = <?php echo $list; ?>;
-
         var data = [];
         if(list.length == 1)
         {
@@ -142,7 +141,7 @@
             ,limit:999999
             ,width:666
             ,cols: [[ //表头
-            {field: 'sort', title: '排序', width:80, sort: true, fixed: 'left' , align:'center'}
+            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
             ,{field: 'name', title: '名称' , width:150 , align:'center'}
             ,{field: 'url', title: '路径' , width:150 , align:'center'}
             ,{field: 'boss', title: '上级ID', width:100 , align:'center' }

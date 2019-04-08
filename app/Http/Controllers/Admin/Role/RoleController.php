@@ -56,6 +56,7 @@ class RoleController extends Controller
         // 去除角色中的菜单
         $action = $list['action_id'];
         unset($list['action_id']);
+
         // 进行添加
         $re = Roles::create($list);
         if(empty($re)){
@@ -91,10 +92,12 @@ class RoleController extends Controller
         // 查询所有角色的权限
         $che = Action_Roles::where("roles_id", $id) -> get();
         $che2 = arr($che);
+
         foreach($che2 as $c)
         {
             $checkbox[] = $c['action_id'];
         }
+
         // 菜单分类查询
         $sql = "select * from action order by concat(path, id)";
         $li = DB::select($sql);
@@ -105,7 +108,7 @@ class RoleController extends Controller
     }
 
     /**
-     * 角色修改
+     * 执行角色修改
      * 苏鹏
      */
     public function update(Request $request, $id)

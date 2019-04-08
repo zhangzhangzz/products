@@ -138,12 +138,6 @@
                         return false; 
                     }
 
-                    var data = [
-                        {id:1,account:11111111,shopName:'222222',name:'香香3',partment:'入驻商',role:'管理员',creatdate:'1553656910',login:0,action:'-'},
-                        {id:2,account:11111111,shopName:'333333',name:'香香4',partment:'入驻商',role:'管理员',creatdate:'1553656910',login:0,action:'-'}
-                            ];
-
-
                     table.render({
                         elem: '#demo'
                         ,limit:999999
