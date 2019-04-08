@@ -1,0 +1,67 @@
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.form{
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+.bigForm{
+    width: 100%;
+    position: relative;
+}
+.bigForm > div{
+    padding-top: 15px;
+}
+
+.bigForm > div:last-child{
+    padding-top: 0;
+    
+}
+.bigForm > div > div{
+    display: inline-block;
+    width: 45%;
+}
+.ibox{
+    width: 190px;
+    float: left;
+    margin: 0!important;
+}
+
+.dateBox{
+    width: 190px!important;
+    display: inline-block!important;
+}
+
+.dbox{
+    width: auto!important;
+}
+
+.btnBox{
+    position: absolute;
+    top: 53px;
+    left: 70%;
+}
+
+.layui-table-cell {
+    height: 40px!important;
+    line-height: 40px!important;
+}
+
+.layui-layer-btn0{
+    float: left!important;
+    margin-left: 20px;
+    width: 30%;
+    text-align: center;
+}
+.layui-layer-btn1{
+    margin-right: 20px;
+    width: 30%;
+    text-align: center;
+}
+
+.layui-layer-btn- {
+    padding: 20px!important;
+}

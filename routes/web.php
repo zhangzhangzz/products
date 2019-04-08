@@ -97,7 +97,11 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
 
     Route::any('goods/addclass','Goods\GoodsController@addclass');
+<<<<<<< HEAD
+    Route::any('goods/category_index','Goods\GoodsController@category_index'); 
+=======
     Route::any('goods/classify','Goods\GoodsController@classify');
+>>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
     Route::any('goods/manage','Goods\GoodsController@manage'); 
     Route::any('goods/recycle','Goods\GoodsController@recycle');
 
@@ -115,6 +119,15 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('category/del','Goods\CategoryController@del');
     Route::any('category/updata','Goods\CategoryController@updata');
     Route::any('category/images','Goods\CategoryController@images');
+
+    /*TODO:交易管理*/
+    Route::any('business/index','Business\BusinessController@index');
+    Route::any('business/send','Business\BusinessController@send');
+    Route::any('business/order','Business\BusinessController@order');
+    Route::any('business/assess','Business\BusinessController@assess');
+    
+    /*TODO:售后*/
+    Route::any('after/index','After\AfterController@index');
 
 
 

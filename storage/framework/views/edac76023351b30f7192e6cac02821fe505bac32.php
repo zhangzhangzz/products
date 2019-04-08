@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/goods.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/goods.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main" > 
         <div style="padding:30px">
             <form class="layui-form form" action="">
@@ -56,22 +55,22 @@
 
     <!-- 商品状态 -->
     <script type="text/html" id="barDemo1">
-        @{{#  if(d.status == 1){ }}
+        {{#  if(d.status == 1){ }}
             <div style="color:green">上架中</div>
-        @{{#  } else if(d.status == -1){ }}
+        {{#  } else if(d.status == -1){ }}
         <div style="color:red">已失效</div>
-        @{{#  } else if(d.status == 0){ }}
+        {{#  } else if(d.status == 0){ }}
         <div style="color:red">待审核</div>
-        @{{#  } }}
+        {{#  } }}
     </script>
 
     <!-- 审核状态 -->
     <script type="text/html" id="barDemo2">
-       <img src="@{{d.img}}" alt="">
+       <img src="{{d.img}}" alt="">
     </script>
 
-@endsection
-@section('js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
 <script>
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
     layui.use(['table','form','element'], function(){
@@ -81,11 +80,11 @@
 
 
         var data = [
-                {shopName:"意国小镇",classify:"大米",img:"{{ asset('image/1.jpg') }}",title:'肇州小米',price:'9.9',stock:999,sale:999,
+                {shopName:"意国小镇",classify:"大米",img:"<?php echo e(asset('image/1.jpg')); ?>",title:'肇州小米',price:'9.9',stock:999,sale:999,
                     msale:188,createtime:'2019-01-01',status:1,action:'-'},
-                {shopName:"意国小镇",classify:"大米",img:"{{ asset('image/logo.png') }}",title:'肇州小米',price:'9.9',stock:999,sale:999,
+                {shopName:"意国小镇",classify:"大米",img:"<?php echo e(asset('image/logo.png')); ?>",title:'肇州小米',price:'9.9',stock:999,sale:999,
                     msale:188,createtime:'2019-01-01',status:0,action:'-'},
-                {shopName:"意国小镇",classify:"大米",img:"{{ asset('image/1.jpg') }}",title:'肇州小米',price:'9.9',stock:999,sale:999,
+                {shopName:"意国小镇",classify:"大米",img:"<?php echo e(asset('image/1.jpg')); ?>",title:'肇州小米',price:'9.9',stock:999,sale:999,
                     msale:188,createtime:'2019-01-01',status:-1,action:'-'},
                     ];               
                     
@@ -164,4 +163,6 @@
     
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

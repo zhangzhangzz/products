@@ -1,5 +1,5 @@
-会员详情页面@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/user_look.css') }}">
+@extends('admin.template.default')
+<link rel="stylesheet" href="{{ asset('css/business_order.css') }}">
 @section('content')
     <div class="main" >
         <div style="padding:30px;">
@@ -7,7 +7,10 @@
                 <div>基本信息</div>
             </div>
             <div class="mainBox">
-               
+                <div class="layui-form-item" >
+                    <label class="layui-form-label zlabel">订单编号：</label>
+                    <label class="layui-form-label zlabel">11111111111111</label>
+                </div>
                 <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
                     <legend>收货人信息</legend>
                     <div>

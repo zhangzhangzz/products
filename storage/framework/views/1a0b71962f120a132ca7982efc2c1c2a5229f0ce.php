@@ -1,13 +1,15 @@
-会员详情页面@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/user_look.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/business_order.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main" >
         <div style="padding:30px;">
             <div class="titleBox">
                 <div>基本信息</div>
             </div>
             <div class="mainBox">
-               
+                <div class="layui-form-item" >
+                    <label class="layui-form-label zlabel">订单编号：</label>
+                    <label class="layui-form-label zlabel">11111111111111</label>
+                </div>
                 <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
                     <legend>收货人信息</legend>
                     <div>
@@ -59,16 +61,16 @@
             </div>
         </div>
     </div>
-@endsection
-@section('js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
     <script>
         layui.use('table', function(){
             var table = layui.table
             ,$ = layui.$;
 
             var data = [
-                {img:"{{ asset('image/logo.png') }}",goodsname:'五常大米',price:'9.99',count:88,pay:'8.8',paytype:1,status:0},
-                {img:"{{ asset('image/logo.png') }}",goodsname:'五常大米',price:'9.99',count:88,pay:'8.8',paytype:2,status:1}
+                {img:"<?php echo e(asset('image/logo.png')); ?>",goodsname:'五常大米',price:'9.99',count:88,pay:'8.8',paytype:1,status:0},
+                {img:"<?php echo e(asset('image/logo.png')); ?>",goodsname:'五常大米',price:'9.99',count:88,pay:'8.8',paytype:2,status:1}
             ];
 
             //第一个实例
@@ -103,4 +105,5 @@
            
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
