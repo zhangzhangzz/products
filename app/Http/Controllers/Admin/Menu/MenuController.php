@@ -133,7 +133,7 @@ class MenuController extends Controller
             $action -> path = $pid -> path . $input['boss'] . ",";
         }
         $action -> state = $input['state'];
-        $action -> sort = $input['sort'];
+
         $re = $action -> save();
         if($re)
         {
