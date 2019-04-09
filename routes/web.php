@@ -55,6 +55,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('admin_user/del/{id}','Admin_User\Admin_UserController@del');
     Route::any('admin_user/update/{id}','Admin_User\Admin_UserController@update');
     Route::any('admin_user/regular','Admin_User\Admin_UserController@regular');
+    Route::any('admin_user/state/{id}/{state}','Admin_User\Admin_UserController@state');
 
 
     /*TODO:角色管理*/

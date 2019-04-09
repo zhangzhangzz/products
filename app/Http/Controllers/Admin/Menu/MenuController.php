@@ -24,7 +24,13 @@ class MenuController extends Controller
         $arr = arr(DB::select($sql));
         foreach($arr as $v)
         {
-            $nbsp = str_repeat("&nbsp;", substr_count($v['path'], ",")*30)."|--";
+            $count = substr_count($v['path'], ",");
+            if($count == 1)
+            {
+                $nbsp = str_repeat("&nbsp;", 1)."|--";
+            }else{
+                $nbsp = str_repeat("&nbsp;", $count * 10)."|--";
+            }
             $v['name'] = $nbsp.$v['name'];
             $data[] = $v;
         }

@@ -102,6 +102,17 @@
             }
         }
         });
+
+    //-------------------------------------------------
+
+        $(".layui-input").change(function () {
+            var item = $(this).attr("name");
+            if(item=="account"){
+
+            }
+            console.log(item);
+        })
+
         $("input").blur(function(){
             var name = $(this).prop("name");
             var data = $(this).val();
@@ -126,8 +137,7 @@
                         var patext = $(".partment").css("color");
                         var ntext = $(".name").css("color");
                         console.log(actext+"-"+pstext+"-"+patext+"-"+ntext);
-                        if(actext=="green" || pstext=="green" || patext=="green" || ntext=="green"){
-                            console.log("111111");
+                        if(actext=="rgb(0, 128, 0)" && pstext=="rgb(0, 128, 0)" && patext=="rgb(0, 128, 0)" && ntext=="rgb(0, 128, 0)"){
                             $(".getBtn").attr("class","layui-btn getBtn");
                         }
 

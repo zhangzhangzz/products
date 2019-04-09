@@ -149,14 +149,23 @@
                     }else{
                         $("."+name).css("color","green");
                         $("."+name).html("√可以使用");
-                        $(".getBtn").attr("class","layui-btn getBtn");
+                        var actext = $(".account").css("color");
+                        //var pstext = $(".password").css("color");  || pstext=="green"
+                        var patext = $(".partment").css("color");
+                        var ntext = $(".name").css("color");
+                        console.log(actext=="rgb(0, 128, 0)");
+                        if(actext=="rgb(0, 128, 0)"  && patext=="rgb(0, 128, 0)" && ntext=="rgb(0, 128, 0)"){
+                            $(".getBtn").attr("class","layui-btn getBtn");
+                        }
                     }
                 }
             });
         });
     //监听提交
     form.on('submit(formDemo)', function(data){
-
+        if($(".getBtn").hasClass("layui-btn-disabled")){
+            return false;
+        }
     });
 
 

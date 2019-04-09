@@ -73,16 +73,18 @@ class Roles
                 $action[] = $route;
             }
         }
-       /* // 判断是否有权限访问
+        // 判断是否有权限访问
         if(!in_array($route, $action))
         {
-            dd("没权限");
+            di("没权限");
+            echo "<script>alert('没权限');</script>";
+            return redirect("admin");
 //            没有权限
 //            跳转回登录页面
 //            return redirect('admin/log');
 //            返回上一层
 //            return back();
-        }*/
+        }
 
         return $next($request);
     }
