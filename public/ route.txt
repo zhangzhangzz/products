@@ -1050,3 +1050,221 @@
 
 {"date":"2019-04-08 06:57:22","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
 
+{"date":"2019-04-08 07:40:15","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:40:16","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:43:12","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:43:14","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:43:44","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:43:45","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:44:01","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:44:03","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:51:40","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 07:51:44","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:03:44","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:03:45","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:03:46","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@check"}
+
+{"date":"2019-04-08 08:06:53","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:06:55","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:06:56","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:07:20","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:07:21","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:07:23","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:07:24","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:08:58","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:09:00","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:09:01","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:10:46","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:10:49","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:10:50","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:11:07","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:11:08","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:11:09","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:11:27","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:11:28","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:11:29","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:12:30","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:12:31","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:12:33","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:12:34","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:14:17","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:14:29","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:14:30","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:15:05","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:15:08","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:15:08","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:29","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:44","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:46","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:48","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:49","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:50","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:51","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:16:53","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:31","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:31","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:32","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:32","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:33","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:34","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:35","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:36","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:36","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:37","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:17:38","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:20:23","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:20:40","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:21:31","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:21:44","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:21:46","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:22:44","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:22:46","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:24:21","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:24:23","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:24:27","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 08:25:21","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:25:23","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:25:25","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@check"}
+
+{"date":"2019-04-08 08:32:04","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:32:06","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:32:12","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@check"}
+
+{"date":"2019-04-08 08:32:15","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_pass"}
+
+{"date":"2019-04-08 08:32:17","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_manage"}
+
+{"date":"2019-04-08 08:32:26","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_audit"}
+
+{"date":"2019-04-08 08:32:36","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_down"}
+
+{"date":"2019-04-08 08:32:42","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_audit"}
+
+{"date":"2019-04-08 08:33:07","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:33:08","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:33:11","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_audit"}
+
+{"date":"2019-04-08 08:34:42","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_down"}
+
+{"date":"2019-04-08 08:34:44","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_audit"}
+
+{"date":"2019-04-08 08:35:13","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:35:25","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:35:35","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_audit"}
+
+{"date":"2019-04-08 08:35:37","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_down"}
+
+{"date":"2019-04-08 08:35:40","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_manage"}
+
+{"date":"2019-04-08 08:35:43","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_pass"}
+
+{"date":"2019-04-08 08:35:46","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@check"}
+
+{"date":"2019-04-08 08:35:48","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-08 08:35:51","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_manage"}
+
+{"date":"2019-04-08 08:35:55","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_audit"}
+
+{"date":"2019-04-08 08:35:56","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_down"}
+
+{"date":"2019-04-08 08:35:58","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_pass"}
+
+{"date":"2019-04-09 00:56:59","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-09 00:57:00","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-09 00:57:02","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@check"}
+
+{"date":"2019-04-09 00:57:03","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_pass"}
+
+{"date":"2019-04-09 00:57:05","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_manage"}
+
+{"date":"2019-04-09 00:57:06","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_audit"}
+
+{"date":"2019-04-09 00:57:07","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@shop_down"}
+
+{"date":"2019-04-09 00:57:09","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@index"}
+
+{"date":"2019-04-09 00:57:10","route":"App\\Http\\Controllers\\admin\\Shop\\ShopController@check"}
+
+{"date":"2019-04-09 01:21:09","route":"App\\Http\\Controllers\\admin\\Menu\\MenuController@index"}
+

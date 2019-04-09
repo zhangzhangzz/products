@@ -38,7 +38,7 @@ class Shops extends Model
 
     public function select_pass(){
 
-        $shop = $this->where("audit_status",2)->get()->toArray();
+        $shop = $this->where("audit_status",3)->get()->toArray();
         foreach ($shop as $key=>$value){
             $shop[$key]["goods_type_name"] = Goods_Type::where("id",$value["goods_type_id"])->value("name");
         }
@@ -55,7 +55,7 @@ class Shops extends Model
 
     public function manage_status(){
 
-        $shop = $this->where("audit_status",1)->get()->toArray();
+        $shop = $this->where("manage_status",1)->get()->toArray();
         foreach ($shop as $key=>$value){
             $shop[$key]["goods_type_name"] = Goods_Type::where("id",$value["goods_type_id"])->value("name");
         }
@@ -67,7 +67,7 @@ class Shops extends Model
 
     public function select_manage(){
 
-        $shop = $this->where("audit_status",2)->get()->toArray();
+        $shop = $this->where("manage_status",2)->get()->toArray();
         foreach ($shop as $key=>$value){
             $shop[$key]["goods_type_name"] = Goods_Type::where("id",$value["goods_type_id"])->value("name");
         }
@@ -79,7 +79,7 @@ class Shops extends Model
 
     public function close_down(){
 
-        $shop = $this->where("audit_status",3)->get()->toArray();
+        $shop = $this->where("manage_status",3)->get()->toArray();
         foreach ($shop as $key=>$value){
             $shop[$key]["goods_type_name"] = Goods_Type::where("id",$value["goods_type_id"])->value("name");
         }

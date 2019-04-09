@@ -11,7 +11,7 @@ class ShopController extends Controller
 
 
     /**
-     * 店铺管理显示
+     * 店铺管理待审核显示
      * 陈绪
      */
     public function index(Request $request)
@@ -26,16 +26,94 @@ class ShopController extends Controller
 
 
     /**
-     * 店铺审核
+     * 店铺驳回审核
      * 陈绪
      */
-    public function check()
+    public function check(Request $request)
     {
-
-        return view("admin.Shop.check");
+        if($request->isMethod("post")){
+            $shop = new Shops();
+            $shop_data = $shop->select_reject();
+            return ajax_success("获取成功",$shop_data);
+        }
     }
 
 
+
+    /**
+     * 店铺通过审核
+     * 陈绪
+     */
+    public function shop_pass(Request $request){
+
+        if($request->isMethod("post")){
+            $shop = new Shops();
+            $shop_data = $shop->select_pass();
+            return ajax_success("获取成功",$shop_data);
+        }
+
+    }
+
+
+
+    /**
+     * 店铺经营中
+     * 陈绪
+     */
+    public function shop_manage(Request $request){
+
+        if($request->isMethod("post")){
+            $shop = new Shops();
+            $shop_data = $shop->manage_status();
+            return ajax_success("获取成功",$shop_data);
+        }
+
+    }
+
+
+
+    /**
+     * 店铺审核中
+     * 陈绪
+     */
+    public function shop_audit(Request $request){
+
+        if($request->isMethod("post")){
+            $shop = new Shops();
+            $shop_data = $shop->select_manage();
+            return ajax_success("获取成功",$shop_data);
+        }
+
+    }
+
+
+
+
+    /**
+     * 店铺已停业
+     * 陈绪
+     */
+    public function shop_down(Request $request){
+
+        if($request->isMethod("post")){
+            $shop = new Shops();
+            $shop_data = $shop->close_down();
+            return ajax_success("获取成功",$shop_data);
+        }
+
+    }
+
+
+
+    /**
+     * 店铺审核
+     * 陈绪
+     */
+    public function audit(){
+
+        return view("admin.shop.check");
+
+    }
     
 
     
