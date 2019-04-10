@@ -1,13 +1,9 @@
-<?php
-    $sql = "select * from action order by concat(path, id)";
-    $list = DB::select($sql);
-    $li = 0;
-?>
 <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            @foreach($list as $v)
+            <?php $li = 0; ?>
+            @foreach(menu() as $v)
                 <?php $li++; ?>
                 @if($li != 1 && substr_count($v -> path, ",") == 1)
                     </li>

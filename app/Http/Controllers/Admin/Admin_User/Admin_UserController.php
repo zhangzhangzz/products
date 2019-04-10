@@ -51,7 +51,7 @@ class Admin_UserController extends Controller
         // 密码加密存入数据库
         $list['password'] = Hash::make($list['password']);
         // 日期
-        $list['data'] = date("Y-m-d");
+        $list['date'] = date("Y-m-d");
         // 时间戳
         $list['time'] = time();
         // 插入数据
@@ -200,5 +200,20 @@ class Admin_UserController extends Controller
         }
     }
 
+    public function state($id, $login)
+    {
+        // 进行修改
+        $roles = Admin_User::find($id);
+        $roles -> login = $login;
+        $re = $roles -> save();
+        if($re)
+        {
+            DB::commit();  // 提交事务
+            return 1;
+        }else{
+            DB::rollback();  // 回滚事务
+            return 0;
+        }
+    }
 
 }

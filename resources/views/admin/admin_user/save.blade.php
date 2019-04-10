@@ -17,7 +17,11 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">账号</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="account" style="color: #555!important;" value="{{ old('account') }}" required lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+<<<<<<< HEAD
+                    <input type="text" name="account" style="color: #555!important;" value="{{ old('account') }}"  placeholder="请输入账号" autocomplete="off" class="layui-input">
+=======
+                    <input type="text" name="account" style="color: #555!important;" value="{{ old('account') }}" placeholder="请输入账号" autocomplete="off" class="layui-input">
+>>>>>>> 4730104b48c2a7a2ce52bf1872155991bc3acaf2
                     </div>
                     <span class="error account" >由8-16位数字、字母、下划线组成！</span>
                 </div>
@@ -25,7 +29,11 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" style="color: #555!important;"  name="password" value="{{ old('password') }}" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input password">
+<<<<<<< HEAD
+                        <input type="password" style="color: #555!important;"  name="password" value="{{ old('password') }}"  placeholder="请输入密码" autocomplete="off" class="layui-input password">
+=======
+                        <input type="password" style="color: #555!important;"  name="password" value="{{ old('password') }}" placeholder="请输入密码" autocomplete="off" class="layui-input password">
+>>>>>>> 4730104b48c2a7a2ce52bf1872155991bc3acaf2
                     </div>
                     <span class="error password">由8-16位数字、字母、下划线组成！</span>
                 </div>
@@ -33,14 +41,15 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">确认密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="spass" value="{{ old('spass') }}" required lay-verify="surepwd" placeholder="请输入密码" autocomplete="off" class="layui-input surepwd">
+                        <input type="password" name="spass" value="{{ old('spass') }}"  placeholder="请输入密码" autocomplete="off" class="layui-input surepwd">
                     </div>
+                    <span class="error spass">请确认密码</span>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">部门</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="partment" style="color: #555!important;"  value="{{ old('partment') }}" required lay-verify="required" placeholder="请输入部门" autocomplete="off" class="layui-input">
+                    <input type="text" name="partment" style="color: #555!important;"  value="{{ old('partment') }}"  placeholder="请输入部门" autocomplete="off" class="layui-input partment">
                     </div>
                     <span class="error partment">数字、字母、下划线、汉字都可以</span>
                 </div>
@@ -48,7 +57,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">姓名</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" value="{{ old('name') }}" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" value="{{ old('name') }}"  placeholder="请输入姓名" autocomplete="off" class="layui-input">
                     </div>
                     <span class="error name">汉字组成</span>
                 </div>
@@ -76,15 +85,13 @@
                 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                    <button class="layui-btn getBtn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button class="layui-btn layui-btn-disabled getBtn" lay-submit lay-filter="formDemo">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </form>
     </div>
-</div>  
-
-      
+</div>
 @endsection
 
 @section('js')
@@ -94,47 +101,157 @@
     var form = layui.form
         $= layui.jquery;
 
-    form.verify({
-        spass: function(value, item){ //value：表单的值、item：表单的DOM对象
-            var pwd = $(".password").val();
-            if(value!= pwd){
-                return '两次输入密码不一致，请重新输入';
-            }
-        }
-        });
-        $("input").blur(function(){
-            var name = $(this).prop("name");
-            var data = $(this).val();
-            $.ajax({
-                url: '{{url("admin/admin_user/regular")}}',
-                type: 'POST',
-                dataType: 'JSON',
-                data: {"_token":"{{csrf_token()}}" , "name":name , "data":data},
-                success: function (data)
-                {
+<<<<<<< HEAD
+    // form.verify({
+    //     spass: function(value, item){ //value：表单的值、item：表单的DOM对象
+    //         var pwd = $(".password").val();
+    //         if(value!= pwd){
+    //             return '两次输入密码不一致，请重新输入';
+    //         }
+    //     }
+    //     });
 
-                    if(data)
-                    {
-                        $("."+name).css("color","red");
-                        $("."+name).html(data);
-                        $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
-                    }else{
-                        $("."+name).css("color","green");
-                        $("."+name).html("√可以使用");
-                        var actext = $(".account").css("color");
-                        var pstext = $(".password").css("color");
-                        var patext = $(".partment").css("color");
-                        var ntext = $(".name").css("color");
-                        console.log(actext+"-"+pstext+"-"+patext+"-"+ntext);
-                        if(actext=="green" || pstext=="green" || patext=="green" || ntext=="green"){
-                            console.log("111111");
-                            $(".getBtn").attr("class","layui-btn getBtn");
-                        }
 
-                    }
+=======
+>>>>>>> 4730104b48c2a7a2ce52bf1872155991bc3acaf2
+        var aflag = false,nflag = false,psflag = false,spflag=false;
+        $(".layui-input").change(function(){
+            var item = $(this).attr("name");
+            var value = $(this).val();
+            var partment = $(".partment").val();
+            var error = $($(this).parent()).next();
+            if(item=="account"){
+                var ret = /^[A-Za-z0-9_]{8,16}$/;
+<<<<<<< HEAD
+                console.log(ret.test(value));
+=======
+>>>>>>> 4730104b48c2a7a2ce52bf1872155991bc3acaf2
+                aflag = ret.test(value);
+                if(aflag){
+                    $(error).css({color:"green"});
+                    $(error).html("√可以使用");
+                }else{
+                    $(error).css({color:"red"});
+                    $(error).html("由8-16位数字、字母、下划线组成！");
                 }
-            });
+<<<<<<< HEAD
+            }
+            if(item=="name"){
+                var ret = /^[\u4E00-\u9FA5]+$/;
+                console.log(ret.test(value));
+                nflag = ret.test(value);
+                if(nflag){
+                    $(error).css({color:"green"});
+                    $(error).html("√可以使用");
+                }else{
+                    $(error).css({color:"red"});
+                    $(error).html("汉字组成");
+                }
+            }
+            if(item=="password"){
+                var ret = /^[A-Za-z0-9_]{8,16}$/;
+                console.log(ret.test(value));
+                psflag = ret.test(value);
+                if(psflag){
+                    $(error).css({color:"green"});
+                    $(error).html("√可以使用");
+                }else{
+                    $(error).css({color:"red"});
+                    $(error).html("由8-16位数字、字母、下划线组成！");
+                }
+            }
+
+            if(item=="spass"){
+                if(value!=$(".password").val()){
+                    $(error).css({color:"red"});
+                    $(error).html("两次密码不一致");
+                }else if(value==""){
+                    $(error).css({color:"red"});
+                    $(error).html("请确认密码");
+                }else{
+                    $(error).css({color:"green"});
+                    $(error).html("√密码一致");
+                    spflag = true;
+                }
+            }
+
+            if(item=="partment"){
+                if(value=""){
+                    $(error).css({color:"red"});
+                    $(error).html("请输入部门");
+                }else{
+                    $(error).html("");
+                }
+            }
+            
+
+            if(aflag && nflag && psflag && spflag && partment!=""){
+                $(".getBtn").attr("class","layui-btn getBtn");
+            }
+            // }else{
+            //     $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
+            // }
+
+
+=======
+            }
+            if(item=="name"){
+                var ret = /^[\u4E00-\u9FA5]+$/;
+                nflag = ret.test(value);
+                if(nflag){
+                    $(error).css({color:"green"});
+                    $(error).html("√可以使用");
+                }else{
+                    $(error).css({color:"red"});
+                    $(error).html("汉字组成");
+                }
+            }
+            if(item=="password"){
+                var ret = /^[A-Za-z0-9_]{8,16}$/;
+                psflag = ret.test(value);
+                if(psflag){
+                    $(error).css({color:"green"});
+                    $(error).html("√可以使用");
+                }else{
+                    $(error).css({color:"red"});
+                    $(error).html("由8-16位数字、字母、下划线组成！");
+                }
+            }
+
+            if(item=="spass"){
+                if(value!=$(".password").val()){
+                    $(error).css({color:"red"});
+                    $(error).html("两次密码不一致");
+                }else if(value==""){
+                    $(error).css({color:"red"});
+                    $(error).html("请确认密码");
+                }else{
+                    $(error).css({color:"green"});
+                    $(error).html("√密码一致");
+                    spflag = true;
+                }
+            }
+
+            if(item=="partment"){
+                if(value=""){
+                    $(error).css({color:"red"});
+                    $(error).html("请输入部门");
+                }else{
+                    $(error).html("");
+                }
+            }
+
+            if(aflag && nflag && psflag && spflag && partment!=""){
+                $(".getBtn").attr("class","layui-btn getBtn");
+            }else{
+                $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
+            }
+>>>>>>> 4730104b48c2a7a2ce52bf1872155991bc3acaf2
         });
+
+
+
+        
     //监听提交
     form.on('submit(formDemo)', function(data){
         if($(".getBtn").hasClass("layui-btn-disabled")){

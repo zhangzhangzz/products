@@ -18,7 +18,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">账号</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="account" style="color: #555!important;" value="<?php echo e(old('account')); ?>" placeholder="请输入账号" autocomplete="off" class="layui-input">
+                    <input type="text" name="account" style="color: #555!important;" value="<?php echo e(old('account')); ?>"  placeholder="请输入账号" autocomplete="off" class="layui-input">
                     </div>
                     <span class="error account" >由8-16位数字、字母、下划线组成！</span>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" style="color: #555!important;"  name="password" value="<?php echo e(old('password')); ?>" placeholder="请输入密码" autocomplete="off" class="layui-input password">
+                        <input type="password" style="color: #555!important;"  name="password" value="<?php echo e(old('password')); ?>"  placeholder="请输入密码" autocomplete="off" class="layui-input password">
                     </div>
                     <span class="error password">由8-16位数字、字母、下划线组成！</span>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">确认密码</label>
                     <div class="layui-input-inline">
-                        <input type="password" name="spass" value="<?php echo e(old('spass')); ?>"  placeholder="请输入密码" autocomplete="off" class="layui-input surepwd">
+                        <input type="password" name="spass" value="<?php echo e(old('spass')); ?>" required lay-verify="surepwd" placeholder="请输入密码" autocomplete="off" class="layui-input surepwd">
                     </div>
                     <span class="error spass">请确认密码</span>
                 </div>
@@ -95,6 +95,16 @@
     layui.use('form', function(){
     var form = layui.form
         $= layui.jquery;
+
+    // form.verify({
+    //     spass: function(value, item){ //value：表单的值、item：表单的DOM对象
+    //         var pwd = $(".password").val();
+    //         if(value!= pwd){
+    //             return '两次输入密码不一致，请重新输入';
+    //         }
+    //     }
+    //     });
+
 
         var aflag = false,nflag = false,psflag = false,spflag=false;
         $(".layui-input").change(function(){
@@ -161,13 +171,21 @@
                     $(error).html("");
                 }
             }
+            
 
             if(aflag && nflag && psflag && spflag && partment!=""){
                 $(".getBtn").attr("class","layui-btn getBtn");
-            }else{
-                $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
             }
+            // }else{
+            //     $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
+            // }
+
+
         });
+
+
+
+        
     //监听提交
     form.on('submit(formDemo)', function(data){
         if($(".getBtn").hasClass("layui-btn-disabled")){

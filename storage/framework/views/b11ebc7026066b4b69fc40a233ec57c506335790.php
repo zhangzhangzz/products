@@ -11,7 +11,7 @@
     <?php endif; ?>
     <div class="main">
         <div style="padding:30px;">
-            <div style="margin-bottom:15px;">
+            <div>
                     <button class="layui-btn addUser" onclick="addRole();">添加</button>
                 </div>
                 
@@ -139,13 +139,12 @@
         table.render({
             elem: '#demo'
             ,limit:999999
-            ,width:666
             ,cols: [[ //表头
-            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
-            ,{field: 'name', title: '名称' , width:150 , align:'center'}
-            ,{field: 'url', title: '路径' , width:150 , align:'center'}
-            ,{field: 'boss', title: '上级ID', width:100 , align:'center' }
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+            {field: 'id', title: 'ID', sort: true, fixed: 'left' , align:'center'}
+            ,{field: 'name', title: '名称' ,  align:'left'}
+            ,{field: 'url', title: '路径' ,  align:'center'}
+            ,{field: 'boss', title: '上级ID',  align:'center' }
+            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data
         });
