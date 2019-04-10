@@ -98,7 +98,7 @@
         }else{
             $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
         }
-    })
+    });
 
     form.val("example",{
         "state":<?php echo e($list -> state); ?>,
@@ -112,7 +112,8 @@
 //        return false;
         var boss = $(".boss").val();
         var url = $(".url").val();
-        if(boss!=0 && url==""){
+        var ret = /^[\u4E00-\u9FA5]+$/.test(name);
+        if(boss!=0 && url=="" || !ret){
             $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
             return false;
         }
@@ -151,7 +152,6 @@
             nflag = true;
         }
 
-        //console.log(nflag+"--"+uflag);
 
         if(nflag && uflag){
             $(".getBtn").attr("class","layui-btn getBtn");

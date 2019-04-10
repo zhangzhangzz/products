@@ -129,14 +129,12 @@
                         || item=="url" && value!="" && boss==0 ||url=="" && boss==0 ){
                 $(".url").html("");
                 uflag = true;
-                console.log("222"+uflag);
             }
 
             if(/^[\u4E00-\u9FA5]+$/.test(name)){
                 nflag = true;
             }
 
-            console.log(nflag+"--"+uflag);
 
             if(nflag && uflag){
                 $(".getBtn").attr("class","layui-btn getBtn");
