@@ -30,12 +30,12 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-block">
-                        <select name="boss">
-                            <option value="<?php echo e($lists -> boss); ?>" selected><?php echo e($lists -> boss); ?></option>
+                        <select name="boss" value="<?php echo e($lists -> name); ?>">
                             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($v -> boss); ?>"><?php echo e($v -> boss); ?></option>
+                            <option value="<?php echo e($v -> name); ?>"><?php echo e($v -> name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
+                    </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">状&emsp;&emsp;态：</label>

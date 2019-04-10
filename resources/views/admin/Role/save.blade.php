@@ -30,7 +30,7 @@
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-block">
                         <select name="boss" lay-verify="required">
-                            <option value="/">/</option>
+                            <option value="0">/</option>
                             @foreach ($name as $v)
                                 <option value="{{ $v -> name }}">{{ $v -> name }}</option>
                             @endforeach

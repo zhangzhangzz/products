@@ -60,6 +60,7 @@ class MenuController extends Controller
         // 获取所有传参
         $list = $request -> except("_token");
         $boss = $list['boss'];
+
         // 有没有上一级参数
         if($boss)
         {
