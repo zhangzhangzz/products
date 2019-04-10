@@ -55,6 +55,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('admin_user/del/{id}','Admin_User\Admin_UserController@del');
     Route::any('admin_user/update/{id}','Admin_User\Admin_UserController@update');
     Route::any('admin_user/regular','Admin_User\Admin_UserController@regular');
+    Route::any('admin_user/state/{id}/{state}','Admin_User\Admin_UserController@state');
 
 
     /*TODO:角色管理*/
@@ -89,7 +90,11 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:店铺管理*/
     Route::any('shop/index','Shop\ShopController@index');
     Route::any('shop/check','Shop\ShopController@check');
-
+    Route::any('shop/shop_pass','Shop\ShopController@shop_pass');
+    Route::any('shop/shop_manage','Shop\ShopController@shop_manage');
+    Route::any('shop/shop_audit','Shop\ShopController@shop_audit');
+    Route::any('shop/shop_down','Shop\ShopController@shop_down');
+    Route::any('shop/audit','Shop\ShopController@audit');
 
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');

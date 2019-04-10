@@ -1,13 +1,9 @@
-<?php
-    $sql = "select * from action order by concat(path, id)";
-    $list = DB::select($sql);
-    $li = 0;
-?>
 <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $li = 0; ?>
+            <?php $__currentLoopData = menu(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php $li++; ?>
                 <?php if($li != 1 && substr_count($v -> path, ",") == 1): ?>
                     </li>

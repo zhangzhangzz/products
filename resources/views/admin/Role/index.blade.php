@@ -142,7 +142,6 @@
 //             $.get("/admin/role/state/"+ id + "/" + btnTag,{
              $.get("/admin/role/state/"+ id + "/" + btnTag,{
              },function(res){
-                 console.log(res);
                  if(res==1)
                  {
                      data.elem.checked = !flag;

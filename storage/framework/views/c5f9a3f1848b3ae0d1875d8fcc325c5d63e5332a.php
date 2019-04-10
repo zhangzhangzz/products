@@ -76,19 +76,28 @@
         
         form.on('switch(filter)', function(data){
             var flag = data.elem.checked;
-            var id = $(data.elem).data("id");
-                console.log(data.elem.checked); //开关是否开启，true或者false
-                console.log(data.elem); //得到checkbox原始DOM对象
-                console.log($(data.elem).data("id"));
-                if(flag){
-                    var btnTag = 1;
+            var id =$(data.elem).data("id");
+            if(flag){
+                var btnTag = 1;
+            }else{
+                var btnTag = 0;
+            }
+//             $.get("/admin/role/state/"+ id + "/" + btnTag,{
+            $.get("/admin/admin_user/state/"+ id + "/" + btnTag,{
+            },function(res){
+                if(res==1)
+                {
+                    data.elem.checked = !flag;
                 }else{
-                    var btnTag = 0;
+                    data.elem.checked = !flag;
+                    form.render();
                 }
+            });
                 
                 
 
             }); 
+
 
          var list = <?php echo $list; ?>;
          var data = [];
@@ -104,7 +113,6 @@
                  data.push(list[i]);
              }
          }
-
             table.render({
                     elem: '#demo'
                     ,limit:999999
@@ -112,6 +120,7 @@
                     ,cols: [[ //表头
                         {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
                         ,{field: 'account', title: '账号' , width:150 , align:'center'}
+
                         ,{field: 'shopname', title: '店铺名称' , width:150 , align:'center'}
                         ,{field: 'name', title: '姓名', width:100 , align:'center'}
                         ,{field: 'partment', title: '部门', width: 100 , align:'center'}

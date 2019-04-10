@@ -57,6 +57,7 @@ class LoginController extends Controller
         }
         Session::put("user",$list);
         Session::put("route",$name);
+
         return redirect("admin");
     }
     /**
