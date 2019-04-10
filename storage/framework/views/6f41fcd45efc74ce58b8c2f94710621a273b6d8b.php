@@ -111,7 +111,9 @@
                                     return '已停业';
                                 }
                             }}
-                            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+                            }}
                         ]]
                         ,data:data
                     });
@@ -178,7 +180,9 @@
                                         return '已停业';
                                     }
                                 }}
-                                ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                                ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                                    return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+                                }}
                             ]]
                             ,data:data
                         });

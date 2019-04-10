@@ -90,6 +90,7 @@
 
             }); 
 
+
          var list = <?php echo $list; ?>;
          var data = [];
          if(list.length == 1)
@@ -104,7 +105,6 @@
                  data.push(list[i]);
              }
          }
-
             table.render({
                     elem: '#demo'
                     ,limit:999999
@@ -112,6 +112,7 @@
                     ,cols: [[ //表头
                         {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
                         ,{field: 'account', title: '账号' , width:150 , align:'center'}
+
                         ,{field: 'shopname', title: '店铺名称' , width:150 , align:'center'}
                         ,{field: 'name', title: '姓名', width:100 , align:'center'}
                         ,{field: 'partment', title: '部门', width: 100 , align:'center'}
@@ -137,12 +138,6 @@
                         layer.msg('请至少输入一个查询条件');
                         return false; 
                     }
-
-                    var data = [
-                        {id:1,account:11111111,shopName:'222222',name:'香香3',partment:'入驻商',role:'管理员',creatdate:'1553656910',login:0,action:'-'},
-                        {id:2,account:11111111,shopName:'333333',name:'香香4',partment:'入驻商',role:'管理员',creatdate:'1553656910',login:0,action:'-'}
-                            ];
-
 
                     table.render({
                         elem: '#demo'
