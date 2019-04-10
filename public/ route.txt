@@ -1,0 +1,108 @@
+{"date":"2019-04-08 07:02:02","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 07:02:28","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 07:05:23","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 07:05:56","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 07:06:51","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 07:14:15","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 07:14:50","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-08 07:17:29","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@add"}
+
+{"date":"2019-04-08 07:17:34","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-09 01:54:28","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-09 02:06:42","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:06:57","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@regular"}
+
+{"date":"2019-04-09 02:08:06","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:08:11","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@regular"}
+
+{"date":"2019-04-09 02:08:38","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:08:40","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@regular"}
+
+{"date":"2019-04-09 02:08:47","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@regular"}
+
+{"date":"2019-04-09 02:20:04","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:20:36","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:22:36","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:38:59","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:39:59","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:39:59","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:40:18","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:42:00","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:42:38","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:42:38","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:42:38","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:44:01","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:50:50","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:51:47","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:57:08","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 02:57:37","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:00:06","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:00:45","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:01:13","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:02:35","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:04:32","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:07:11","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:09:41","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:10:09","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:10:37","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:16:56","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:19:17","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:20:26","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:28:42","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-09 03:28:57","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@insert"}
+
+{"date":"2019-04-09 03:28:58","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-09 03:29:04","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@del"}
+
+{"date":"2019-04-10 00:42:08","route":"App\\Http\\Controllers\\admin\\Goods\\CategoryController@index"}
+
+{"date":"2019-04-10 00:43:11","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-10 00:43:14","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-10 00:44:25","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@insert"}
+
+{"date":"2019-04-10 00:44:26","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
