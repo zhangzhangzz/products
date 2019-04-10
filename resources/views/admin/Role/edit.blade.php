@@ -18,7 +18,7 @@
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="{{ $lists -> name  }}" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
-                    <span class="error name">请填写汉子</span>
+                    <span class="error name">请填写汉字</span>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
@@ -28,17 +28,18 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-block seinput">
                         <select name="boss">
                             <option value="{{ $lists -> boss }}" selected>{{ $lists -> boss }}</option>
                             @foreach($data as $v)
                             <option value="{{ $v -> boss }}">{{ $v -> boss }}</option>
                             @endforeach
                         </select>
+                    </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">状&emsp;&emsp;态：</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-block seinput">
                     <select name="state" lay-verify="required">
                         <option value=""></option>
                         <option value="{{ $lists -> state }}" selected>@if($lists -> state == 1)启用
