@@ -19,7 +19,7 @@
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="<?php echo e($lists -> name); ?>" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
-                    <span class="error name">请填写汉子</span>
+                    <span class="error name">请填写汉字</span>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">状&emsp;&emsp;态：</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-block seinput">
                     <select name="state" lay-verify="required">
                         <option value=""></option>
                         <option value="<?php echo e($lists -> state); ?>" selected><?php if($lists -> state == 1): ?>启用
