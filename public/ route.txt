@@ -1,0 +1,20 @@
+{"date":"2019-04-10 01:00:23","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-10 01:02:12","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-10 01:12:03","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-10 01:12:06","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-10 01:12:09","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@save"}
+
+{"date":"2019-04-10 01:12:28","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@insert"}
+
+{"date":"2019-04-10 01:12:29","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@index"}
+
+{"date":"2019-04-10 01:12:37","route":"App\\Http\\Controllers\\admin\\Admin_User\\Admin_UserController@edit"}
+
+{"date":"2019-04-10 01:12:47","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@index"}
+
+{"date":"2019-04-10 01:12:53","route":"App\\Http\\Controllers\\admin\\Role\\RoleController@edit"}
+
