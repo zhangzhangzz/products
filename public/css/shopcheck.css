@@ -91,5 +91,17 @@ label{
 }
 
 .checkMsg{
-    padding: 30px;
+    padding: 0 30px;
 }
+
+.actionLog{
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.acmsg{
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
+

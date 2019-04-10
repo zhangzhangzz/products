@@ -1,8 +1,7 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/shopcheck.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/shopcheck.css')); ?>">
+<?php $__env->startSection('content'); ?>
 <div class="main" >
-    @foreach($shop_list as $value)
+    <?php $__currentLoopData = $shop_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="bigbox">
             <div class="titleBox">
                 <div>基本信息</div>
@@ -11,31 +10,31 @@
                 <div class="leftBox msgBox">
                     <div>
                         <label>店铺信息</label>
-                        <div><img src="{{ asset('image/logo.png') }}" alt=""></div>
+                        <div><img src="<?php echo e(asset('image/logo.png')); ?>" alt=""></div>
                     </div>
                     <div>
                         <label>店铺名称</label>
-                        <div>{{$value["shop_name"]}}</div>
+                        <div><?php echo e($value["shop_name"]); ?></div>
                     </div>
     
                     <div>
                         <label>公司名称</label>
-                        <div>{{$value["company_name"]}}</div>
+                        <div><?php echo e($value["company_name"]); ?></div>
                     </div>
     
                     <div>
                         <label>负责人</label>
-                        <div>{{$value["functionary"]}}</div>
+                        <div><?php echo e($value["functionary"]); ?></div>
                     </div>
     
                     <div>
                         <label>性别</label>
-                        <div>{{$value["sex"]}}</div>
+                        <div><?php echo e($value["sex"]); ?></div>
                     </div>
     
                     <div>
                         <label>联系电话</label>
-                        <div>{{$value["phone"]}}</div>
+                        <div><?php echo e($value["phone"]); ?></div>
                     </div>
     
                 </div>
@@ -44,33 +43,33 @@
 
                     <div>
                         <label>店铺地址</label>
-                        <div>{{$value["shop_address"]}}</div>
+                        <div><?php echo e($value["shop_address"]); ?></div>
                     </div>
                     
                     <div>
                         <label>后台管理账号</label>
-                        @if(!empty($value["admin_name"]))
-                        <div>{{$value["admin_name"]}}</div>
-                        @endif
+                        <?php if(!empty($value["admin_name"])): ?>
+                        <div><?php echo e($value["admin_name"]); ?></div>
+                        <?php endif; ?>
                     </div>
     
                     <div>
                         <label>后台管理密码号</label>
-                        @if(!empty($value["admin_passwd"]))
-                        <div>{{$value["admin_passwd"]}}</div>
-                        @endif
+                        <?php if(!empty($value["admin_passwd"])): ?>
+                        <div><?php echo e($value["admin_passwd"]); ?></div>
+                        <?php endif; ?>
                     </div>
 
                     <div>
                         <label>主营类目</label>
-                        @if(!empty($value["goods_type_name"]))
-                        <div>{{$value["goods_type_name"]}}</div>
-                        @endif
+                        <?php if(!empty($value["goods_type_name"])): ?>
+                        <div><?php echo e($value["goods_type_name"]); ?></div>
+                        <?php endif; ?>
                     </div>
 
                     <div>
                         <label>微信号</label>
-                        <div>{{$value["weixin"]}}</div>
+                        <div><?php echo e($value["weixin"]); ?></div>
                     </div>
                 </div>
                 
@@ -86,12 +85,12 @@
                     <label>申请人身份证</label>
                     <div class="imgBox">
                         <div class="pl">
-                            <img src="{{ asset('image/eg.png') }}" alt="">
+                            <img src="<?php echo e(asset('image/eg.png')); ?>" alt="">
                             <span class="sptext">正面</span>
                         </div>
                         
                         <div class="pl">
-                            <img src="{{ asset('image/eg.png') }}" alt="">
+                            <img src="<?php echo e(asset('image/eg.png')); ?>" alt="">
                             <span class="sptext">反面</span>
                         </div>
                     </div>
@@ -101,7 +100,7 @@
                     <label>企业资质</label>
                     <div class="imgBox">
                         <div class="pl">
-                            <img src="{{ asset('image/eg.png') }}" alt="">
+                            <img src="<?php echo e(asset('image/eg.png')); ?>" alt="">
                             <span class="sptext">营业执照</span>
                         </div>
                     </div>
@@ -111,11 +110,11 @@
                 <div>
                     <label>是否有品牌</label>
                     <div style="margin-left:140px;">
-                        @if($value["is_brand"] == 1)
+                        <?php if($value["is_brand"] == 1): ?>
                             有
-                        @elseif($value["is_brand"] == 2)
+                        <?php elseif($value["is_brand"] == 2): ?>
                             无
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -123,15 +122,15 @@
                     <label>经营资质</label>
                     <div  class="imgBox">
                         <div class="pl">
-                            <img src="{{ asset('image/eg.png') }}" alt="">
+                            <img src="<?php echo e(asset('image/eg.png')); ?>" alt="">
                             <span class="sptext">商标</span>
                         </div>
                         <div class="pl">
-                            <img src="{{ asset('image/eg.png') }}" alt="">
+                            <img src="<?php echo e(asset('image/eg.png')); ?>" alt="">
                             <span class="sptext">授权书</span>
                         </div>
                         <div class="pl">
-                            <img src="{{ asset('image/eg.png') }}" alt="">
+                            <img src="<?php echo e(asset('image/eg.png')); ?>" alt="">
                             <span class="sptext">经营资质</span>
                         </div>
                     </div>
@@ -147,19 +146,19 @@
                     <label>审核员操作</label>
                     <div style="margin-left: 140px;">
                         <button class="layui-btn pass">通过</button>
-                        <button class="layui-btn layui-btn-primary refuse ShopId" data-value="{{$value["id"]}}">驳回</button>
+                        <button class="layui-btn layui-btn-primary refuse ShopId" data-value="<?php echo e($value["id"]); ?>">驳回</button>
                     </div>
                 </div>
 
             </div>
 
         </div>
-    @endforeach
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 <!-- <div id="alertBox">
         <div class="layui-form-item">
             <div class="layui-input-inline" style="margin-left:10px;">
@@ -168,7 +167,7 @@
         </div>
     
     </div> -->
-@section('js')
+<?php $__env->startSection('js'); ?>
 
     <script>
         //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
@@ -192,11 +191,11 @@
                         console.log(data);
                         layer.close(index); //如果设定了yes回调，需进行手工关闭
                         $.ajax({
-                            url:"{{url('admin/shop/opinion')}}",
+                            url:"<?php echo e(url('admin/shop/opinion')); ?>",
                             type:"POST",
                             dataType:"json",
                             data:{
-                                "_token":"{{csrf_token()}}",
+                                "_token":"<?php echo e(csrf_token()); ?>",
                                 "id":id,
                                 "shop_text":data,
                             },
@@ -240,4 +239,5 @@
 
         });
     </script> 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

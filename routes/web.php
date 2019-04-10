@@ -94,7 +94,10 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('shop/shop_manage','Shop\ShopController@shop_manage');
     Route::any('shop/shop_audit','Shop\ShopController@shop_audit');
     Route::any('shop/shop_down','Shop\ShopController@shop_down');
-    Route::any('shop/audit','Shop\ShopController@audit');
+    Route::any('shop/audit/{id}','Shop\ShopController@audit');
+    Route::any('shop/opinion','Shop\ShopController@opinion');
+
+
 
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');
@@ -102,7 +105,6 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
 
     Route::any('goods/addclass','Goods\GoodsController@addclass');
-
     Route::any('goods/manage','Goods\GoodsController@manage'); 
     Route::any('goods/recycle','Goods\GoodsController@recycle');
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Shop;
 
+use App\Http\Model\Admin\Shop_Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Admin\Shops;
@@ -109,12 +110,36 @@ class ShopController extends Controller
      * 店铺审核
      * 陈绪
      */
-    public function audit(){
+    public function audit($id){
 
-        return view("admin.shop.check");
+        $shop = new Shops();
+        $shop_list = $shop->shop_show($id);
+        return view("admin.shop.check",["shop_list"=>$shop_list]);
 
     }
-    
+
+
+    /**
+     * 意见反馈
+     * 陈绪
+     */
+    public function opinion(Request $request){
+
+        if($request->isMethod("post")){
+            $shop = new Shops();
+            $id = $request->id;
+            $time = time();
+            $shop_text = $request->shop_text;
+            $bool = $shop->shop_opinion($id,$time,$shop_text);
+            if(!empty($bool)){
+                return ajax_success("存储成功",$bool);
+            }else{
+                return ajax_error("存储失败");
+            }
+        }
+
+    }
+
 
     
 }
