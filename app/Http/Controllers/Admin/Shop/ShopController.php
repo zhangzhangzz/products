@@ -141,5 +141,17 @@ class ShopController extends Controller
     }
 
 
+
+    /**
+     * 模糊查询
+     * 陈绪
+     */
+    public function search(){
+
+        
+
+    }
+
+
     
 }

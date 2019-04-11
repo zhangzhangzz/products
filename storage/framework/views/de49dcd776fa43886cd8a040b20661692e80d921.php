@@ -210,7 +210,7 @@
                     $(error).html("");
                 }
             }
-            console.log(aflag+"--"+nflag+"---"+partment);
+            //console.log(aflag+"--"+nflag+"---"+partment);
             if(aflag && nflag && partment!=""){
                 $(".getBtn").attr("class","layui-btn getBtn");
             }else{
