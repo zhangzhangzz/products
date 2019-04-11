@@ -31,7 +31,7 @@
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-block">
                         <select name="boss" lay-verify="required">
-                            <option value="/">/</option>
+                            <option value="0">/</option>
                             <?php $__currentLoopData = $name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($v -> name); ?>"><?php echo e($v -> name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

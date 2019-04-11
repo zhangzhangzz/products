@@ -1,15 +1,4 @@
 <?php
-/**
- * 遍历左导航栏
- * 苏鹏
- */
-function menu()
-{
-    $sql = "select * from action order by concat(path, id)";
-    $menu = \Illuminate\Support\Facades\DB::select($sql);
-    return $menu;
-}
-
 
 /**
  * 对象转数组自定义方法
@@ -64,6 +53,17 @@ function arr2($list, $pk = 'id', $boss = 'boss', $child = 'child', $root=0) {
         }
     }
     return $tree;
+}
+
+/**
+ * 遍历左导航栏
+ * 苏鹏
+ */
+function menu()
+{
+    $sql = "select * from action order by concat(path, id)";
+    $menu = \Illuminate\Support\Facades\DB::select($sql);
+    return $menu;
 }
 
 

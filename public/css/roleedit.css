@@ -64,6 +64,7 @@
 body {
     background: #fff;
 }
+
 .title {
     background: #F2F2F2;
     display: block;
@@ -104,11 +105,12 @@ ul {
 
 .list-three ul {
     overflow: hidden;
+    width: 100%;
 }
 
 .list-three ul li {
     text-align: left;
-    width: 220px;
+    width: 24%;
     display: inline-block;
 }
 
@@ -130,3 +132,7 @@ ul {
 .layui-form-checkbox[lay-skin=primary] i {
     margin-top: 18px;
 }
+
+.seinput{
+    width: 30%;
+    }

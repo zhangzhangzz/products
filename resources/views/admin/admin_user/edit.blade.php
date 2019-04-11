@@ -17,9 +17,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">账号</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input">
+<<<<<<< HEAD
+                    <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input" lay-verify="account">
+=======
+                    <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input account">
+>>>>>>> 16796b512ea3e1efa794206bacfdeda0b9c3baa5
                     </div>
-                    <span class="error account">由8-16位数字、字母、下划线组成！</span>
+                    <span class="error erac">由8-16位数字、字母、下划线组成！</span>
                 </div>
 
                 <div class="layui-form-item new pwd">
@@ -46,17 +50,17 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">部门</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="partment" value="{{ $list -> partment }}"  placeholder="请输入部门" autocomplete="off" class="layui-input partment">
+                    <input type="text" name="partment" value="{{ $list -> partment }}"  placeholder="请输入部门" autocomplete="off" class="layui-input partment" lay-verify="partment">
                     </div>
-                    <span class="error partment">数字、字母、下划线、汉字都可以</span>
+                    <span class="error erpa">数字、字母、下划线、汉字都可以</span>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">姓名</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" value="{{ $list -> name }}" placeholder="请输入姓名" autocomplete="off" class="layui-input name">
+                    <input type="text" name="name" value="{{ $list -> name }}" placeholder="请输入姓名" autocomplete="off" class="layui-input name" lay-verify="name">
                     </div>
-                    <span class="error name">汉字组成</span>
+                    <span class="error erna">汉字组成</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -108,28 +112,55 @@
     layui.use('form', function(){
     var form = layui.form
         $= layui.jquery;
-
-    $(".innewpwd").click(function (event) {
-        event.stopPropagation();
-        $(".firstpwd").css({display:"block"});
-        $(".surepwd").css({display:"block"});
+    
+    $(function () {
+        var account = $(".account").val();
+        var partment = $(".partment").val();
+        var name = $(".name").val();
+        if(!(/^[A-Za-z0-9_]{8,16}$/.test(account))){
+            $(".erac").css({color:"red"});
+            $(".erac").html("由8-16位数字、字母、下划线组成！");
+        }
+        if(!(/^[\u4E00-\u9FA5]+$/.test(name))){
+            $(".erna").css({color:"red"});
+            $(".erna").html("必须由汉字组成！");
+        }
+        if(partment==""){
+            $(".erpa").css({color:"red"});
+            $(".erpa").html("请填写部门！");
+        }
     })
 
-    $(window).click(function(){
-        if ($('.innewpwd').val()=="") {
-            $(".firstpwd").css({display:"none"});
-            $(".surepwd").css({display:"none"});
-        }
-    });
+        $(function () {
+            var account = $(".account").val();
+            var partment = $(".partment").val();
+            var name = $(".name").val();
+            if(!(/^[A-Za-z0-9_]{8,16}$/.test(account))){
+                $(".erac").css({color:"red"});
+                $(".erac").html("由8-16位数字、字母、下划线组成！");
+            }
+            if(!(/^[\u4E00-\u9FA5]+$/.test(name))){
+                $(".erna").css({color:"red"});
+                $(".erna").html("必须由汉字组成！");
+            }
+            if(partment==""){
+                $(".erpa").css({color:"red"});
+                $(".erpa").html("请填写部门！");
+            }
+        });
 
-//    form.verify({
-//        spass: function(value, item){ //value：表单的值、item：表单的DOM对象
-//            var pwd = $(".password").val();
-//            if(value!= pwd){
-//                return '两次输入密码不一致，请重新输入';
-//            }
-//        }
-//        });
+        $(".innewpwd").click(function (event) {
+            event.stopPropagation();
+            $(".firstpwd").css({display:"block"});
+            $(".surepwd").css({display:"block"});
+        })
+
+        $(window).click(function(){
+            if ($('.innewpwd').val()=="") {
+                $(".firstpwd").css({display:"none"});
+                $(".surepwd").css({display:"none"});
+            }
+        });
 
         var aflag = false,nflag = false;
         $(".layui-input").change(function(){
@@ -180,6 +211,22 @@
                 $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
             }
         });
+
+    form.verify({
+        name:[
+            /^[\u4E00-\u9FA5]+$/
+            ,'请使用汉字'
+        ] 
+        ,account:[
+            /^[A-Za-z0-9_]{8,16}$/
+            ,'由8-16位数字、字母、下划线组成！'
+        ]
+        ,partment:function(value,item){
+            if(value==""){
+                return "请输入部门";
+            }
+        }
+    });
 
     //监听提交
     form.on('submit(formDemo)', function(data){
