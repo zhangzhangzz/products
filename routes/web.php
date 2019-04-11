@@ -96,6 +96,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('shop/shop_down','Shop\ShopController@shop_down');
     Route::any('shop/audit/{id}','Shop\ShopController@audit');
     Route::any('shop/opinion','Shop\ShopController@opinion');
+    Route::any('shop/search','Shop\ShopController@search');
 
 
 

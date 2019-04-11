@@ -1,28 +1,30 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/goods.css')); ?>">
 <?php $__env->startSection('content'); ?>
     <div class="main" > 
-
-        <form class="layui-form form" action="">
-            <div class="layui-form-item" style="">
-                <label class="layui-form-label" style="width:auto;">产品名称或ID：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="product" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        <div style="padding:30px">
+            <form class="layui-form form" action="">
+                <div class="layui-form-item" style="">
+                    <label class="layui-form-label" style="width:auto;">产品名称或ID：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="product" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">产品分类</label>
-                <div class="layui-input-block">
-                    <select name="proclass" lay-verify="required">
-                        <option value="0">北京</option>
-                        <option value="1">上海</option>
-                        <option value="2">广州</option>
-                        <option value="3">深圳</option>
-                        <option value="4">杭州</option>
-                    </select>
-                </div>
-                </div>
-            <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left:20px;">查询</button>
-        </form>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">产品分类</label>
+                    <div class="layui-input-block">
+                        <select name="proclass" lay-verify="required">
+                            <option value="0">北京</option>
+                            <option value="1">上海</option>
+                            <option value="2">广州</option>
+                            <option value="3">深圳</option>
+                            <option value="4">杭州</option>
+                        </select>
+                    </div>
+                    </div>
+                <button class="layui-btn" lay-submit lay-filter="formDemo" style="margin-left:20px;">查询</button>
+            </form>
+        </div>
+        
         
         <div class="layui-tab bigbox">
             <ul class="layui-tab-title">
