@@ -30,11 +30,16 @@ class Roles
         {
             return redirect('admin/login') -> with('errors', '用户已被禁用');;
         }
+        // 超级管理员 拥有所有权限
+        if($admin_user['role_id'] == 1)
+        {
+            return $next($request);
+        }
         // 根据当前的登录用户获取该用户角色
         $roles = Admin_User::find(session('user') -> id) -> roles() -> get();
-        if(empty($roles))
+        if(empty(arr($roles)))
         {
-            return redirect('admin/login');
+            return redirect('admin/login') -> with('errors', '获取权限数据为空');
         }
         $array = [];
         if($roles[0]['state'] != 1)

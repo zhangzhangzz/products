@@ -67,19 +67,25 @@
 
          var list = <?php echo $list; ?>;
          var data = [];
+
          if(list.length == 1)
          {
              for(var i in  list)
              {
-                 data = [list[i]];
+                 if(list[i]['id'] != 1)
+                 {
+                     data = [list[i]];
+                 }
              }
          }else{
              for(var i in  list)
              {
-                 data.push(list[i]);
+                 if(list[i]['id'] != 1)
+                 {
+                     data.push(list[i]);
+                 }
              }
          }
-
          //第一个实例
          table.render({
              elem: '#demo'

@@ -28,7 +28,7 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-block seinput">
                         <select name="boss" value="{{ $lists -> name }}">
                             @foreach($data as $v)
                             <option value="{{ $v -> name }}">{{ $v -> name }}</option>

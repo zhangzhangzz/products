@@ -60,7 +60,12 @@ class MenuController extends Controller
         // 获取所有传参
         $list = $request -> except("_token");
         $boss = $list['boss'];
-
+        // 菜单名称是否已经存在
+        $not_name = Action::where("name", $list['name']) -> get();
+        if(!empty(arr($not_name)))
+        {
+            return back() -> with('errors','菜单名已存在') -> withInput($list);
+        }
         // 有没有上一级参数
         if($boss)
         {
@@ -151,13 +156,19 @@ class MenuController extends Controller
      */
     public function del($id)
     {
+
+        $boss = Action::where('boss', $id) -> get();
+        if(!empty(arr($boss)))
+        {
+            return "有子分类无法删除";
+        }
         $re = Action::where('id', $id) -> delete();
         if($re){
             DB::commit();  // 提交事务
             return "1";
         }else{
             DB::rollback();  // 回滚事务
-           return "0";
+           return "删除失败";
         }
     }
 

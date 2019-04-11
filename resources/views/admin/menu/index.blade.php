@@ -66,8 +66,8 @@
         
         form.on('switch(filter)', function(data){
             var flag = data.elem.checked;
-                console.log(data.elem.checked); //开关是否开启，true或者false
-                console.log(data.elem); //得到checkbox原始DOM对象
+//                console.log(data.elem.checked); //开关是否开启，true或者false
+//                console.log(data.elem); //得到checkbox原始DOM对象
                 
                 if(flag){
                     var btnTag = 1;
@@ -87,7 +87,7 @@
         let tdata = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var tr = obj.tr; //获得当前行 tr 的DOM对象
-        console.log(tdata);
+//        console.log(tdata);
         da = obj.data;
 
         // #数据删除
@@ -104,7 +104,7 @@
                     {
                         obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     }else{
-                        alert("删除失败");
+                        alert(data);
                     }
 
                 layer.close(index);
