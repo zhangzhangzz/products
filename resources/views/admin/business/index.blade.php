@@ -20,7 +20,7 @@
                                 <input type="text" name="select1_input" placeholder="" autocomplete="off" class="layui-input select1_input">
                             </div>
                         </div>
-        
+
                         <div class="layui-form-item" >
                             <label class="layui-form-label">商品名称：</label>
                             <div class="layui-input-inline">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                            
+
                     <div style="padding-top: 0;">
 
                         <div class="layui-form-item" >
@@ -37,7 +37,7 @@
                                 <input type="text" class="layui-input" name="date" id="test6" placeholder=" - ">
                             </div>
                         </div>
-        
+
                         <div class="layui-form-item" >
                             <label class="layui-form-label">订单状态：</label>
                             <div class="layui-input-block ibox">
@@ -62,51 +62,51 @@
                         <button class="layui-btn" lay-submit  lay-filter="formDemo" style="width: 100px">查询</button>
                     </div>
                 </div>
-               
-                
-                
-                
+
+
+
+
             </form>
 
             <div class="layui-tab" style="margin-top:30px;">
                 <ul class="layui-tab-title">
-                    <li class="layui-this">全部</li>
-                    <li>待付款</li>
-                    <li>待发货</li>
-                    <li>已发货</li>
-                    <li>已完成</li>
-                    <li>待评价</li>
-                    <li>退款中</li>
+                    <li class="layui-this dBox" data-item="1">全部</li>
+                    <li class="dBox" data-item="2">待付款</li>
+                    <li class="dBox" data-item="3">待发货</li>
+                    <li class="dBox" data-item="4">已发货</li>
+                    <li class="dBox" data-item="5">已完成</li>
+                    <li class="dBox" data-item="6">待评价</li>
+                    <li class="dBox" data-item="7">退款中</li>
                 </ul>
                 <div class="layui-tab-content" >
                     <div class="layui-tab-item layui-show">
-                        <table id="demo1" lay-filter="test"></table>
+                        <table class="demo1" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table class="demo2" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table class="demo3" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table class="demo4" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table class="demo5" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table class="demo6" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table class="demo7" lay-filter="test"></table>
                     </div>
                 </div>
             </div>
 
-            
+
 
         </div>
-        
+
     </div>
 @endsection
 @section('js')
@@ -118,23 +118,59 @@
             ,element = layui.element
             ,$ = layui.$
             ,layer = layui.layer;
- 
-            //转换静态表格
-           
+
+
+            $(".dBox").click(function () {
+                var index = $(this).attr("data-item");
+                    var url = "{{url('admin/business/search')}}"+ "/" + index;
+                $.ajax({
+                    url:url,
+                    type:"POST",
+                    dataType:"json",
+                    data:{"_token":"{{csrf_token()}}"},
+                    success:function (data) {
+                            //第一个实例
+                            table.render({
+                                elem: `.demo${index}`
+                                ,cols: [[ //表头
+                                    {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
+                                    ,{field: 'goodsname', title: '商品名称', align:'center' }
+                                    ,{field: 'price', title: '单价',  sort: true, align:'center'}
+                                    ,{field: 'count', title: '数量', align:'center' }
+                                    ,{field: 'realpay', title: '实付金额', align:'center'}
+                                    ,{field: 'time', title: '下单时间', align:'center'}
+                                    ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
+                                        return `<div class="status${d.status}" style="color:${d.status.color}">${d.status.name}</div>`;
+                                    }}
+                                    ,{field: 'ems', title: '物流单号', align:'center'}
+                                    ,{field: 'name', title: '收货人姓名', align:'center'}
+                                    ,{field: 'phone', title: '收货人手机号', align:'center'}
+                                    ,{field: 'address', title: '收货人地址', align:'center'}
+                                ]]
+                                ,data:data
+                            });
+                    },
+                    error:function (data) {
+                        console.log("错误");
+                    }
+                });
+
+            })
+
             //日期
             laydate.render({
                 elem: '#test6'
                 ,range: true
                 ,done: function(value, date, endDate){
-                    console.log(value); //得到日期生成的值，如：2017-08-18
-                    console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-                    console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+//                    console.log(value); //得到日期生成的值，如：2017-08-18
+//                    console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+//                    console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
                     return value;
                 }
             });
 
             form.on('submit(formDemo)', function(data){
-                console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+//                console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
                 if(data.field.select1_input=="" && data.field.gname=="" && data.field.date==""){
                     layer.msg('至少输入一个查询条件');
                     return false;
@@ -142,66 +178,49 @@
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });
 
-            var data1 = [
-                {orderid:11111111111111,goodsname:'五常大米',price:'9.99',count:88,realpay:'8.8',time:'1553654760',status:0,ems:'55555555555',
-                    custname:'丑八怪',custphone:'13122225555',custaddress:'黑龙江省齐齐哈尔市龙沙区xxxxxxxxxxxxxxxx'},
-                {orderid:2,goodsname:'六常大米',price:'1119.99',count:77,realpay:'8.8',time:'1553654760',status:0,ems:'55555555555',
-                    custname:'丑八怪',custphone:'13122225555',custaddress:'黑龙江省齐齐哈尔市龙沙区xxxxxxxxxxxxxxxx'}
-            ];
-
-            var data2 = [
-                {orderid:1,goodsname:'五常大米',price:'9.99',count:88,realpay:'8.8',time:'1553654760',status:1,ems:'55555555555',
-                    custname:'丑八怪',custphone:'13122225555',custaddress:'黑龙江省齐齐哈尔市龙沙区xxxxxxxxxxxxxxxx'},
-                {orderid:2,goodsname:'六常大米',price:'1119.99',count:77,realpay:'8.8',time:'1553654760',status:1,ems:'55555555555',
-                    custname:'丑八怪',custphone:'13122225555',custaddress:'黑龙江省齐齐哈尔市龙沙区xxxxxxxxxxxxxxxx'}
-            ];
-
-            
-
+            var list = <?php
+                if(empty(arr($list)))
+                {
+                    echo 0;
+                }else{
+                    echo $list;
+                }
+                ?>;
+            var s_c_n = <?php echo $s_c_n; ?>;
+            var data = [];
+            if(list.length == 1)
+            {
+                for(var i in  list)
+                {
+                    data = [list[i]];
+                }
+            }else{
+                for(var i in  list)
+                {
+                    data.push(list[i]);
+                }
+            }
             //第一个实例
             table.render({
-                elem: '#demo1'
+                elem: '.demo1'
                 ,cols: [[ //表头
                 {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
                 ,{field: 'goodsname', title: '商品名称', align:'center' }
                 ,{field: 'price', title: '单价',  sort: true, align:'center'}
-                ,{field: 'count', title: '数量', align:'center' } 
+                ,{field: 'count', title: '数量', align:'center' }
                 ,{field: 'realpay', title: '实付金额', align:'center'}
                 ,{field: 'time', title: '下单时间', align:'center'}
                 ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
-                            return "<div style='color:red;'>未发货</div>";
+                            return `<div class="status${d.status}" style="color:${s_c_n[d.status].color}">${s_c_n[d.status].name}</div>`;
                         }}
                 ,{field: 'ems', title: '物流单号', align:'center'}
-                ,{field: 'custname', title: '收货人姓名', align:'center'}
-                ,{field: 'custphone', title: '收货人手机号', align:'center'}
-                ,{field: 'custaddress', title: '收货人地址', align:'center'}
+                ,{field: 'name', title: '收货人姓名', align:'center'}
+                ,{field: 'phone', title: '收货人手机号', align:'center'}
+                ,{field: 'address', title: '收货人地址', align:'center'}
                 ]]
-                ,data:data1
+                ,data:data
             });
 
-            //第二个实例
-            table.render({
-                elem: '#demo2'
-                ,cols: [[ //表头
-                {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
-                ,{field: 'goodsname', title: '商品名称', align:'center' }
-                ,{field: 'price', title: '单价',  sort: true, align:'center'}
-                ,{field: 'count', title: '数量', align:'center' } 
-                ,{field: 'realpay', title: '实付金额', align:'center'}
-                ,{field: 'time', title: '下单时间', align:'center'}
-                ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
-                            return "<div style='color:green;'>已发货</div>";
-                        }}
-                ,{field: 'ems', title: '物流单号', align:'center'}
-                ,{field: 'custname', title: '收货人姓名', align:'center'}
-                ,{field: 'custphone', title: '收货人手机号', align:'center'}
-                ,{field: 'custaddress', title: '收货人地址', align:'center'}
-                ]]
-                ,data:data2
-            });
-
-
-            
 
             window.gosend = function() {
                 layer.open({

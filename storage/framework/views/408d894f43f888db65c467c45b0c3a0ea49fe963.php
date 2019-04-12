@@ -65,7 +65,14 @@
 
          form.render();
 
-         var list = <?php echo $list; ?>;
+         var list = <?php
+             if(empty(arr($list)))
+             {
+                 echo 0;
+             }else{
+                 echo $list;
+             }
+             ?>;
          var data = [];
 
          if(list.length == 1)
