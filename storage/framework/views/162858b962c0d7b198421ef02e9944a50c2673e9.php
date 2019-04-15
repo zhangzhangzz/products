@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/bussiness.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/bussiness.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main" >
         <div style="padding:30px;">
             <form class="layui-form form" action="">
@@ -68,17 +67,37 @@
 
             </form>
 
-            <div class="layui-tab">
+            <div class="layui-tab" style="margin-top:30px;">
                 <ul class="layui-tab-title">
-                    <li class="layui-this dBox" data-item="2">未发货</li>
-                    <li class="dBox" data-item="3">已发货</li>
+                    <li class="layui-this dBox" data-item="1">全部</li>
+                    <li class="dBox" data-item="2">待付款</li>
+                    <li class="dBox" data-item="3">待发货</li>
+                    <li class="dBox" data-item="4">已发货</li>
+                    <li class="dBox" data-item="5">已完成</li>
+                    <li class="dBox" data-item="6">待评价</li>
+                    <li class="dBox" data-item="7">退款中</li>
                 </ul>
-                <div class="layui-tab-content">
+                <div class="layui-tab-content" >
                     <div class="layui-tab-item layui-show">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table class="demo1" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo3" lay-filter="test"></table>
+                        <table class="demo2" lay-filter="test"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table class="demo3" lay-filter="test"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table class="demo4" lay-filter="test"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table class="demo5" lay-filter="test"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table class="demo6" lay-filter="test"></table>
+                    </div>
+                    <div class="layui-tab-item">
+                        <table class="demo7" lay-filter="test"></table>
                     </div>
                 </div>
             </div>
@@ -88,8 +107,8 @@
         </div>
 
     </div>
-@endsection
-@section('js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
     <script>
         layui.use(['laydate','form','element','table','layer'], function(){
             var laydate = layui.laydate
@@ -99,43 +118,36 @@
             ,$ = layui.$
             ,layer = layui.layer;
 
+
             $(".dBox").click(function () {
                 var index = $(this).attr("data-item");
-                var url = "{{url('admin/business/send')}}"+ "/" + index;
+                    var url = "<?php echo e(url('admin/business/search')); ?>"+ "/" + index;
                 $.ajax({
                     url:url,
                     type:"POST",
                     dataType:"json",
-                    data:{"_token":"{{csrf_token()}}"},
+                    data:{"_token":"<?php echo e(csrf_token()); ?>"},
                     success:function (data) {
-                        //第一个实例
-                        table.render({
-                            elem: `#demo${index}`
-                            ,cols: [[ //表头
-                                {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
-                                ,{field: 'goodsname', title: '商品名称', align:'center' }
-                                ,{field: 'price', title: '单价',  sort: true, align:'center'}
-                                ,{field: 'count', title: '数量', align:'center' }
-                                ,{field: 'realpay', title: '实付金额', align:'center'}
-                                ,{field: 'time', title: '下单时间', align:'center'}
-                                ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
-                                    return `<div class="status${d.status}" style="color:${d.status.color}">${d.status.name}</div>`;
-                                }}
-                                ,{field: 'ems', title: '物流单号', align:'center'}
-                                ,{field: 'name', title: '收货人姓名', align:'center'}
-                                ,{field: 'phone', title: '收货人手机号', align:'center'}
-                                ,{field: 'address', title: '收货人地址', align:'center'}
-                                ,{field: 'action', title: '操作' , align:'center', templet : function(d){
-                                    if(d.status.name == "已发货")
-                                    {
-                                        return '<button class="layui-btn layui-btn-disabled">已发货</button>';
-                                    }else{
-                                        return `<button class="layui-btn" style="background-color: red" onclick="gosend(${d.id});">去发货</button>`;
-                                    }
-                                }}
-                            ]]
-                            ,data:data
-                        });
+                            //第一个实例
+                            table.render({
+                                elem: `.demo${index}`
+                                ,cols: [[ //表头
+                                    {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
+                                    ,{field: 'goodsname', title: '商品名称', align:'center' }
+                                    ,{field: 'price', title: '单价',  sort: true, align:'center'}
+                                    ,{field: 'count', title: '数量', align:'center' }
+                                    ,{field: 'realpay', title: '实付金额', align:'center'}
+                                    ,{field: 'time', title: '下单时间', align:'center'}
+                                    ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
+                                        return `<div class="status${d.status}" style="color:${d.status.color}">${d.status.name}</div>`;
+                                    }}
+                                    ,{field: 'ems', title: '物流单号', align:'center'}
+                                    ,{field: 'name', title: '收货人姓名', align:'center'}
+                                    ,{field: 'phone', title: '收货人手机号', align:'center'}
+                                    ,{field: 'address', title: '收货人地址', align:'center'}
+                                ]]
+                                ,data:data
+                            });
                     },
                     error:function (data) {
                         console.log("错误");
@@ -164,6 +176,7 @@
                 }
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });
+
             var list = <?php
                 if(empty(arr($list)))
                 {
@@ -172,6 +185,7 @@
                     echo $list;
                 }
                 ?>;
+            var s_c_n = <?php echo $s_c_n; ?>;
             var data = [];
             if(list.length == 1)
             {
@@ -185,10 +199,9 @@
                     data.push(list[i]);
                 }
             }
-
             //第一个实例
             table.render({
-                elem: '#demo2'
+                elem: '.demo1'
                 ,cols: [[ //表头
                 {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
                 ,{field: 'goodsname', title: '商品名称', align:'center' }
@@ -197,55 +210,28 @@
                 ,{field: 'realpay', title: '实付金额', align:'center'}
                 ,{field: 'time', title: '下单时间', align:'center'}
                 ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
-                        return `<div class="status${d.status}" style="color:${d.status.color}">${d.status.name}</div>`;
-                    }}
+                            return `<div class="status${d.status}" style="color:${s_c_n[d.status].color}">${s_c_n[d.status].name}</div>`;
+                        }}
                 ,{field: 'ems', title: '物流单号', align:'center'}
                 ,{field: 'name', title: '收货人姓名', align:'center'}
                 ,{field: 'phone', title: '收货人手机号', align:'center'}
                 ,{field: 'address', title: '收货人地址', align:'center'}
-                ,{field: 'action', title: '操作' , align:'center', templet : function(d){
-                            return `<button class="layui-btn" style="background-color: red" onclick="gosend(${d.id});">去发货</button>`;
-                        }}
                 ]]
                 ,data:data
             });
 
 
-
-
-            window.gosend = function(id) {
+            window.gosend = function() {
                 layer.open({
                     title: false,
                     type: 1,
                     content: `<div style="padding:30px 15px 0 15px;">
                                 <div class="layui-form-item" >
                                     <label class="layui-form-label">快递公司：</label>
-                                    <div class="layui-input-block ibox">
-                                        <select name="emsName" class="emsName" style="padding: 8px;border-color: #e6e6e6;border-radius:   2px;">
-                                            <option value="圆通快递">圆通快递</option>
-                                            <option value="韵达快递">韵达快递</option>
-                                            <option value="中通快递">中通快递</option>
-                                            <option value="申通快递">申通快递</option>
-                                            <option value="EMS">EMS</option>
-                                            <option value="优速快递">优速快递</option>
-                                            <option value="天天快递">天天快递</option>
-                                            <option value="百世快递">百世快递</option>
-                                            <option value="宅急送">宅急送</option>
-                                            <option value="邮政包裹">邮政包裹</option>
-                                            <option value="全峰快递">全峰快递</option>
-                                            <option value="德邦物流">德邦物流</option>
-                                            <option value="华宇物流">华宇物流</option>
-                                            <option value="龙邦物流">龙邦物流</option>
-                                            <option value="优速物流">优速物流</option>
-                                            <option value="中邮物流">中邮物流</option>
-                                            <option value="申通物流">申通物流</option>
-                                            <option value="传喜物流">传喜物流</option>
-                                            <option value="中铁物流">中铁物流</option>
-                                            <option value="飞康达物流">飞康达物流</option>
-                                        </select>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="emsName" placeholder="" autocomplete="off" class="layui-input emsName">
                                     </div>
                                 </div>
-
                                 <div class="layui-form-item" style="margin-bottom:0;">
                                     <label class="layui-form-label">快递单号：</label>
                                     <div class="layui-input-inline">
@@ -265,24 +251,6 @@
                             layer.msg('请输入快递单号');
                             return false;
                         }
-                        $.ajax({
-                            url:"/admin/business/delivery",
-                            type:"POST",
-                            dataType:"json",
-                            data:{"_token":"{{csrf_token()}}","id":id, "emsID":emsID,"emsName":emsName},
-                            success:function (data) {
-                                if(data)
-                                {
-                                    $(".dBox").click();
-                                }else{
-                                    alert("发货失败");
-                                }
-                            },
-                            error:function (data) {
-                                console.log("错误");
-                            }
-                        });
-
                         //回调成功后关闭窗口
                         layer.close(index);
 
@@ -297,4 +265,5 @@
             }
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

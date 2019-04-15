@@ -15,7 +15,12 @@ function arr($data)
 function di($data)
 {
     echo "<pre>";
-    print_r($data);
+    if(is_array($data))
+    {
+        print_r($data);
+    }else{
+        print_r(arr($data));
+    }
     die;
 }
 /**

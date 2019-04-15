@@ -129,10 +129,12 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
     /*TODO:交易管理*/
     Route::any('business/index','Business\BusinessController@index');
-    Route::any('business/send','Business\BusinessController@send');
+    Route::any('business/send/{search?}','Business\BusinessController@send');
     Route::any('business/order','Business\BusinessController@order');
     Route::any('business/assess','Business\BusinessController@assess');
-    
+    Route::any('business/search/{search}','Business\BusinessController@search');
+    Route::any('business/delivery','Business\BusinessController@delivery');
+
     /*TODO:售后*/
     Route::any('after/index','After\AfterController@index');
 

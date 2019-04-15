@@ -1,6 +1,5 @@
-@extends('admin.template.default')
-<link rel="stylesheet" href="{{ asset('css/bussiness.css') }}">
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('css/bussiness.css')); ?>">
+<?php $__env->startSection('content'); ?>
     <div class="main" >
         <div style="padding:30px;">
             <form class="layui-form form" action="">
@@ -88,8 +87,8 @@
         </div>
 
     </div>
-@endsection
-@section('js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
     <script>
         layui.use(['laydate','form','element','table','layer'], function(){
             var laydate = layui.laydate
@@ -101,12 +100,12 @@
 
             $(".dBox").click(function () {
                 var index = $(this).attr("data-item");
-                var url = "{{url('admin/business/send')}}"+ "/" + index;
+                var url = "<?php echo e(url('admin/business/send')); ?>"+ "/" + index;
                 $.ajax({
                     url:url,
                     type:"POST",
                     dataType:"json",
-                    data:{"_token":"{{csrf_token()}}"},
+                    data:{"_token":"<?php echo e(csrf_token()); ?>"},
                     success:function (data) {
                         //第一个实例
                         table.render({
@@ -269,7 +268,7 @@
                             url:"/admin/business/delivery",
                             type:"POST",
                             dataType:"json",
-                            data:{"_token":"{{csrf_token()}}","id":id, "emsID":emsID,"emsName":emsName},
+                            data:{"_token":"<?php echo e(csrf_token()); ?>","id":id, "emsID":emsID,"emsName":emsName},
                             success:function (data) {
                                 if(data)
                                 {
@@ -297,4 +296,5 @@
             }
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

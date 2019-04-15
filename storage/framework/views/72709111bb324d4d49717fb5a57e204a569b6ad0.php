@@ -4,10 +4,16 @@
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
             <?php
                 $menu = arr2(arr(menu()));
+                $i = 0;
             ?>
             <?php $__currentLoopData = $menu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $i++; ?>
+                <?php if($i == 1): ?>
                 <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
                 <li class="layui-nav-item layui-nav-itemed">
+                <?php else: ?>
+                <li class="layui-nav-item">
+                <?php endif; ?>
                     <?php if(in_array($v['name'], session("route"))): ?>
                         <a href="javascript:;"><?php echo e($v['name']); ?></a>
                     <?php endif; ?>

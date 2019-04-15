@@ -53,6 +53,12 @@ class RoleController extends Controller
         $data = [];
         // 获取所有参数
         $list = $request -> except("_token");
+        // 角色名称是否已经存在
+        $not_name = Roles::where("name", $list['name']) -> get();
+        if(!empty(arr($not_name)))
+        {
+            return back() -> with('errors','角色名已存在') -> withInput($list);
+        }
         // 去除角色中的菜单
         $action = $list['action_id'];
         unset($list['action_id']);
@@ -60,7 +66,7 @@ class RoleController extends Controller
         // 进行添加
         $re = Roles::create($list);
         if(empty($re)){
-            return back() -> with('errors','添加失败');
+            return back() -> with('errors','添加失败') -> withInput($list);
         }
         // 遍历已选中菜单
         foreach($action as $v)
@@ -123,10 +129,16 @@ class RoleController extends Controller
         {
             $checkbox[] = $c['action_id'];
         }
-        // 删除多的权限
-        $diff1 = array_diff($checkbox,$input['action_id']);
-        // 插入新增权限
-        $diff2 = array_diff($input['action_id'],$checkbox);
+        if(empty($input['action_id']))
+        {
+            // 删除全部已选
+            $diff1 = $checkbox;
+        }else{
+            // 删除多的权限
+            $diff1 = array_diff($checkbox,$input['action_id']);
+            // 插入新增权限
+            $diff2 = array_diff($input['action_id'],$checkbox);
+        }
         if(!empty($diff1))
         {
             // 删除多的权限

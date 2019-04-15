@@ -17,11 +17,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">账号</label>
                     <div class="layui-input-inline">
-<<<<<<< HEAD
-                    <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input" lay-verify="account">
-=======
-                    <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input account">
->>>>>>> 16796b512ea3e1efa794206bacfdeda0b9c3baa5
+                    <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input account" lay-verify="account">
                     </div>
                     <span class="error erac">由8-16位数字、字母、下划线组成！</span>
                 </div>
@@ -129,6 +125,10 @@
             $(".erpa").css({color:"red"});
             $(".erpa").html("请填写部门！");
         }
+
+        if(/^[A-Za-z0-9_]{8,16}$/.test(account) && /^[\u4E00-\u9FA5]+$/.test(name) && partment!=""){
+            $(".getBtn").attr("class","layui-btn getBtn");
+        }
     })
 
         $(function () {
@@ -196,6 +196,10 @@
                 nflag = true;
             }
 
+            var account = $(".account").val();
+            if(/^[A-Za-z0-9_]{8,16}$/.test(account)){
+                aflag = true;
+            }
 
             if(item=="partment"){
                 if(value=""){
@@ -205,6 +209,7 @@
                     $(error).html("");
                 }
             }
+            //console.log(aflag+"--"+nflag+"---"+partment);
             if(aflag && nflag && partment!=""){
                 $(".getBtn").attr("class","layui-btn getBtn");
             }else{
