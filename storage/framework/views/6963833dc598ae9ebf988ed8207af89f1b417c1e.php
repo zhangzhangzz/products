@@ -234,7 +234,63 @@
                 });
             });
 
-            $("")
+            $(".pass").click(function () {
+                layer.open({
+                    title: '在线调试'
+                    ,content: `<textarea name="desc" placeholder="例如：店铺资质无问题，已通过，如有疑问，请联系0452-12345678" class="layui-textarea passText"></textarea>`
+                    ,yes: function(index, layero){
+                        //按钮【按钮一】的回调
+                        var data = $(".passText").val();
+                        var id = $(".ShopId").data("value");
+                        console.log(id);
+                        console.log(data);
+                        layer.close(index); //如果设定了yes回调，需进行手工关闭
+                        $.ajax({
+                            url:"<?php echo e(url('admin/shop/opinion_pass')); ?>",
+                            type:"POST",
+                            dataType:"json",
+                            data:{
+                                "_token":"<?php echo e(csrf_token()); ?>",
+                                "id":id,
+                                "shop_text":data,
+                            },
+                            success:function (data) {
+                                console.log(data);
+                                if(data.status == 1){
+                                    var html ="";
+                                    var text = "";
+                                    $.each(data.data,function(index,value){
+                                        var time = layui.util.toDateString(value.create_time*1000, 'yyyy-MM-dd HH:mm:ss');
+                                        text+=`<div class="acmsg">
+                                                    <div>${time}</div>
+                                                    <div>${value.shop_text}</div>
+                                                </div>`;
+                                    });
+                                    html+= `<div>
+                                                <div class="actionLog">
+                                                    <label>审核员操作</label>
+                                                    <div style="margin-left:140px;">已通过</div>
+                                                </div>
+                                                <div style="overflow:hidden">
+                                                    <label>审核日志</label>
+                                                    <div style="margin-left:140px;">
+                                                        ${text}
+                                                    </div>
+                                                </div>
+                                             </div>`;
+                                    $(".checkMsg").html(html);
+                                }
+                            },
+                            error:function (data) {
+                                console.log("错误");
+                            }
+                        })
+                    }
+                });
+
+
+
+            })
 
 
         });

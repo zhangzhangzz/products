@@ -14,7 +14,9 @@
                 <div class="layui-upload" style="margin:0!important;">
                     <div class="layui-upload-list uplist">
                         <span class="closebox">x</span>
+                        <?php if(!empty($val->images)): ?>
                         <img class="layui-upload-img Imgaes" id="demo1" src="<?php echo e(ImagesOssUrl); ?>/<?php echo e($val->images); ?>">
+                        <?php endif; ?>
                         <input type="file" style="display: none;" name="images" onchange="changepic(this)" id="file" class="file imgfile" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" data-id="1" required="required" />
                         <p id="demoText"></p>
                     </div>

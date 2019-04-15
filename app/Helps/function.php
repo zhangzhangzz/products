@@ -168,6 +168,24 @@ if(!function_exists("genTree")){
 
 
 
+if(!function_exists("arr")){
+
+    function arr($arr){
+
+        if(!is_string($arr)){
+            dump($arr);
+            exit();
+        }else{
+            var_dump($arr);
+            exit();
+        }
+
+    }
+
+}
+
+
+
 
 
 
