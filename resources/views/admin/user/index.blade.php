@@ -74,7 +74,15 @@
                             ,{field: 'weixin_qq', title: '微信/QQ', align:'center'}
                             ,{field: 'address', title: '地址',  align:'center'}
                             ,{field: 'create_time', title: '创建时间',  sort: true , align:'center'}
-                            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
+                            ,{field: 'action', title: '操作',  align:'center' , templet: function(d){
+                                if(d.status==1){
+                                    var state = `<a class="layui-btn layui-btn-danger layui-btn-xs acBtn" lay-event="del">禁用</a>`;
+                                }else{
+                                    var state = `<a class="layui-btn layui-btn-danger layui-btn-xs acBtn" lay-event="del">启用</a>`;
+                                }
+
+                                return `<a class="layui-btn layui-btn-xs acBtn" lay-event="edit" >详情</a>`+state;
+                            }}
                         ]]
                         ,data:data
                     });
@@ -107,7 +115,15 @@
                                 ,{field: 'address', title: '地址',  align:'center'}
                                 ,{field: 'create_time', title: '创建时间',  sort: true , align:'center' ,templet : "<div>@{{layui.util.toDateString(d.creatdate*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                                 }
-                                ,{field: 'action', title: '操作', align:'center' , toolbar: '#barDemo'}
+                                ,{field: 'action', title: '操作', align:'center' , templet: function(d){
+                                    if(d.status==1){
+                                        var state = `<a class="layui-btn layui-btn-danger layui-btn-xs acBtn" lay-event="del">禁用</a>`;
+                                    }else{
+                                        var state = `<a class="layui-btn layui-btn-danger layui-btn-xs acBtn" lay-event="del">启用</a>`;
+                                    }
+
+                                    return `<a class="layui-btn layui-btn-xs acBtn" lay-event="edit" >详情</a>`+state;
+                                }}
                             ]]
                             ,data:data
                         });
@@ -218,21 +234,42 @@
                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                 var tr = obj.tr; //获得当前行 tr 的DOM对象
                 console.log(tdata.id);
-
+                var status = tdata.status;
                 // #数据删除
 
                 if(layEvent === 'del'){ //删除
-                    layer.confirm('确定要禁用吗？', function(index){
+                    if(status==1){
+                        var text = '确定要禁用吗？';
+                    }else{
+                        var text = '确定要启用吗？';
+                    }
+                    layer.confirm(text, function(index){
                         obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                         layer.close(index);
                         //向服务端发送删除指令
                         $.ajax({
-                            url:"{{url('admin/user/status')}}",
+                            url:"{{url("admin/user/status")}}",
                             type:"POST",
                             dataType:"json",
-                            data:{"_token":"{{csrf_token()}}","id":tdata.id},
+                            data:{"_token":"{{csrf_token()}}","id":tdata.id,"status":status},
                             success:function (data) {
                                 if(data.status == 1){
+                                    console.log(data);
+                                    table.render({
+                                        elem: '#demo2'
+                                        ,limit:999999
+                                        ,cols: [[ //表头
+                                            {field: 'images', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
+                                            ,{field: 'name', title: '名称' ,  align:'center'}
+                                            ,{field: 'phone', title: '电话' ,  align:'center'}
+                                            ,{field: 'weixin_qq', title: '微信/QQ',  align:'center'}
+                                            ,{field: 'address', title: '地址',  align:'center'}
+                                            ,{field: 'create_time', title: '创建时间',  sort: true , align:'center' ,templet : "<div>@{{layui.util.toDateString(d.creatdate*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                                            }
+                                            ,{field: 'action', title: '操作', align:'center' , toolbar: '#barDemo'}
+                                        ]]
+                                        ,data:data.data
+                                    });
                                     window.location.href = "{{url('admin/user/index')}}"
                                 }
                             },

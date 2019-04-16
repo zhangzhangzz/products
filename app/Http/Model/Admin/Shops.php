@@ -12,6 +12,21 @@ class Shops extends Model
 
 
     /**
+     * 全部数据
+     * 陈绪
+     */
+    public function selects(){
+
+        $shop = $this->get()->toArray();
+        foreach ($shop as $key=>$value){
+            $shop[$key]["goods_type_name"] = Goods_Type::where("id",$value["goods_type_id"])->value("name");
+        }
+        return $shop;
+
+    }
+
+
+    /**
      * 审核状态
      * @return array
      * 陈绪
@@ -106,7 +121,7 @@ class Shops extends Model
 
     public function shop_opinion($id,$time,$shop_text){
 
-        $bool = $this->where("id",$id)->update(["audit_status"=>2]);
+        $bool = $this->where("id",$id)->update(["audit_status"=>2,"manage_status"=>2]);
         $shop_data = array(
             "shop_id"=>$id,
             "shop_text"=>$shop_text,
@@ -120,8 +135,29 @@ class Shops extends Model
             return false;
         }
 
+    }
+
+
+
+    public function pass_button($id,$time,$shop_text){
+
+        $bool = $this->where("id",$id)->update(["audit_status"=>3,"manage_status"=>1]);
+        $shop_data = array(
+            "shop_id"=>$id,
+            "shop_text"=>$shop_text,
+            "create_time"=>$time,
+        );
+        $shop_bool = Shop_Log::insert($shop_data);
+        if($shop_bool) {
+
+            $shop_arr = Shop_Log::where("shop_id",$id)->get()->toArray();
+            return $shop_arr;
+        }else{
+            return false;
+        }
 
     }
+
 
 
 }
