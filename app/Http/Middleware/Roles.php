@@ -51,7 +51,10 @@ class Roles
             $p = $v -> action() -> get();
             foreach($p as $n)
             {
-                $array[] = $n -> url;
+                if($n -> state == 1)
+                {
+                    $array[] = $n -> url;
+                }
             }
         }
         // 去重

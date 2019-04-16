@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Business;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Admin\Business;
+use App\Http\Model\Admin\Goods;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -47,8 +48,10 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        $list = Business::get();
-        return view("admin.business.index",["list" => $list, 's_c_n' => json_encode($this -> s_c_n)]);
+        $list = [];
+        $sql = "select * from business as b inner join goods as g on b.good_id=g.id";
+        $list = arr(DB::select($sql));
+        return view("admin.business.index",["list" => json_encode($list), 's_c_n' => json_encode($this -> s_c_n)]);
     }
 
 
@@ -82,6 +85,13 @@ class BusinessController extends Controller
         {
             foreach($data as $v)
             {
+                $good = [];
+                $good = Goods::find($v['good_id']);
+                if(!empty(arr($good)))
+                {
+                    unset($good['id']);
+                    $v = array_merge(arr($v),arr($good));
+                }
                 $v['status'] = $this -> s_c_n[$v['status']];
                 $list[] = $v;
             }
@@ -121,9 +131,11 @@ class BusinessController extends Controller
      *
      * 苏鹏
      */
-    public function assess(){
-        return view("admin.business.assess");
-
+    public function assess()
+    {
+        $sql = "select a.content,a.time,a.level,b.ems,g.pic,g.goodsname,g.realpay,u.name as username from ((assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4) INNER JOIN goods as g on b.good_id=g.id) INNER JOIN account as u on b.user_id=u.id";
+        $list = DB::select($sql);
+        return view("admin.business.assess",["list" => json_encode($list)]);
     }
     /**
      * 交易管理切换展示
@@ -137,76 +149,90 @@ class BusinessController extends Controller
         switch ($search)
         {
             case 1:
-                $list = Business::get();
+                $list = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id";
+                $list = arr(DB::select($sql));
                 return view("admin.business.index",["list" => $list, 's_c_n' => json_encode($this -> s_c_n)]);
             break;
             case 2:
-                $list = Business::where("status",$s) -> get();
-                if(!empty(arr($list)))
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
                 {
                     foreach($list as $v)
                     {
-                        $v['status'] = $this -> s_c_n[$v['status']];
+                        $v['status'] = $this -> s_c_n[$s];
                         $data[] = $v;
                     }
                 }
                 return json_encode($data);
                 break;
             case 3:
-                $list = Business::where("status",$s) -> get();
-                if(!empty(arr($list)))
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
                 {
                     foreach($list as $v)
                     {
-                        $v['status'] = $this -> s_c_n[$v['status']];
+                        $v['status'] = $this -> s_c_n[$s];
                         $data[] = $v;
                     }
                 }
                 return json_encode($data);
                 break;
             case 4:
-                $list = Business::where("status",$s) -> get();
-                if(!empty(arr($list)))
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
                 {
                     foreach($list as $v)
                     {
-                        $v['status'] = $this -> s_c_n[$v['status']];
+                        $v['status'] = $this -> s_c_n[$s];
                         $data[] = $v;
                     }
                 }
                 return json_encode($data);
                 break;
             case 5:
-                $list = Business::where("status",$s) -> get();
-                if(!empty(arr($list)))
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
                 {
                     foreach($list as $v)
                     {
-                        $v['status'] = $this -> s_c_n[$v['status']];
+                        $v['status'] = $this -> s_c_n[$s];
                         $data[] = $v;
                     }
                 }
                 return json_encode($data);
                 break;
             case 6:
-                $list = Business::where("status",$s) -> get();
-                if(!empty(arr($list)))
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
                 {
                     foreach($list as $v)
                     {
-                        $v['status'] = $this -> s_c_n[$v['status']];
+                        $v['status'] = $this -> s_c_n[$s];
                         $data[] = $v;
                     }
                 }
                 return json_encode($data);
                 break;
             case 7:
-                $list = Business::where("status",$s) -> get();
-                if(!empty(arr($list)))
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
                 {
                     foreach($list as $v)
                     {
-                        $v['status'] = $this -> s_c_n[$v['status']];
+                        $v['status'] = $this -> s_c_n[$s];
                         $data[] = $v;
                     }
                 }
