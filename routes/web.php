@@ -134,6 +134,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('business/assess','Business\BusinessController@assess');
     Route::any('business/search/{search}','Business\BusinessController@search');
     Route::any('business/delivery','Business\BusinessController@delivery');
+    Route::any('business/reply','Business\BusinessController@reply');
 
     /*TODO:售后*/
     Route::any('after/index','After\AfterController@index');

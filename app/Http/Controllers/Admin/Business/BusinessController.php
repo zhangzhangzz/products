@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Business;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Admin\Assess;
 use App\Http\Model\Admin\Business;
 use App\Http\Model\Admin\Goods;
 use Illuminate\Support\Facades\DB;
@@ -125,27 +126,69 @@ class BusinessController extends Controller
             return 0;
         }
     }
-
     /**
-     * 交易管理评价
+     * 交易管理评价首页显示
      *
      * 苏鹏
      */
     public function assess()
     {
-        $sql = "select a.content,a.time,a.level,b.ems,g.pic,g.goodsname,g.realpay,u.name as username from ((assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4) INNER JOIN goods as g on b.good_id=g.id) INNER JOIN account as u on b.user_id=u.id";
+        $sql = "select 
+                    a.content,a.content_time,a.reply_time,a.level,
+                    b.id,b.ems,
+                    g.pic,g.goodsname,g.realpay,
+                    u.name 
+                    as username from 
+                    ((assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4 and a.state=0)
+                     INNER JOIN goods as g on b.good_id=g.id) 
+                     INNER JOIN account as u on b.user_id=u.id";
         $list = DB::select($sql);
         return view("admin.business.assess",["list" => json_encode($list)]);
     }
     /**
-     * 交易管理切换展示
+     * 交易管理(评价管理)回复操作
+     *
+     * 苏鹏
+     */
+    public function reply(Request $request)
+    {
+        $list = $request -> except("_token");
+        $db = Assess::find($list['id']);
+
+        if($list['type'] == 1)
+        {
+            $db -> reply = $list['reply'];
+            $db -> reply_time = time();
+            $db -> state = 1;
+        }else{
+            $db -> state = 2;
+        }
+        $re = $db -> save();
+        if($re){
+            DB::commit();  // 提交事务
+            return 1;
+        }else{
+            DB::rollback();  // 回滚事务
+            return 0;
+        }
+    }
+    /**
+     * 交易管理(订单管理)切换展示
      *
      * 苏鹏
      */
     public function search($search)
     {
         $data = [];
-        $s = $search - 1;
+        $s = 0;
+        if(is_numeric($search))
+        {
+            if($search >= 2)
+            {
+                $s = $search - 1;
+                $search = 2;
+            }
+        }
         switch ($search)
         {
             case 1:
@@ -168,75 +211,23 @@ class BusinessController extends Controller
                 }
                 return json_encode($data);
                 break;
-            case 3:
-                $data = [];
-                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
-                $list = arr(DB::select($sql));
-                if(!empty($list))
-                {
-                    foreach($list as $v)
-                    {
-                        $v['status'] = $this -> s_c_n[$s];
-                        $data[] = $v;
-                    }
-                }
+            case "dcl":
+                $list = Assess::where("state","0") -> get();
+                return json_encode($list);
                 return json_encode($data);
                 break;
-            case 4:
-                $data = [];
-                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
-                $list = arr(DB::select($sql));
-                if(!empty($list))
-                {
-                    foreach($list as $v)
-                    {
-                        $v['status'] = $this -> s_c_n[$s];
-                        $data[] = $v;
-                    }
-                }
-                return json_encode($data);
-                break;
-            case 5:
-                $data = [];
-                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
-                $list = arr(DB::select($sql));
-                if(!empty($list))
-                {
-                    foreach($list as $v)
-                    {
-                        $v['status'] = $this -> s_c_n[$s];
-                        $data[] = $v;
-                    }
-                }
-                return json_encode($data);
-                break;
-            case 6:
-                $data = [];
-                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
-                $list = arr(DB::select($sql));
-                if(!empty($list))
-                {
-                    foreach($list as $v)
-                    {
-                        $v['status'] = $this -> s_c_n[$s];
-                        $data[] = $v;
-                    }
-                }
-                return json_encode($data);
-                break;
-            case 7:
-                $data = [];
-                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
-                $list = arr(DB::select($sql));
-                if(!empty($list))
-                {
-                    foreach($list as $v)
-                    {
-                        $v['status'] = $this -> s_c_n[$s];
-                        $data[] = $v;
-                    }
-                }
-                return json_encode($data);
+            case "qb":
+                $sql = "select 
+                    a.content,a.content_time,a.reply_time,a.level,a.reply,a.state,
+                    b.id,b.ems,
+                    g.pic,g.goodsname,g.realpay,
+                    u.name 
+                    as username from 
+                    ((assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4 and (a.state=1 or a.state=2))
+                     INNER JOIN goods as g on b.good_id=g.id) 
+                     INNER JOIN account as u on b.user_id=u.id";
+                $list = DB::select($sql);
+                return json_encode($list);
                 break;
             default:
                 echo json_encode("错误");
