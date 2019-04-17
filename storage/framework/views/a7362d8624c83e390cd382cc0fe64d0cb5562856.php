@@ -119,7 +119,10 @@
                     ,cols: [[ //表头
                         {field: 'id', title: 'ID',  sort: true, fixed: 'left' , align:'center'}
                         ,{field: 'account', title: '账号' ,  align:'center'}
+<<<<<<< HEAD
+=======
 
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                         ,{field: 'shopname', title: '店铺名称' ,  align:'center'}
                         ,{field: 'name', title: '姓名',  align:'center'}
                         ,{field: 'partment', title: '部门', align:'center'}

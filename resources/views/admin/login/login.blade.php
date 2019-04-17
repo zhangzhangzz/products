@@ -117,6 +117,12 @@
     }
 
 
+    .Incode{
+        overflow:hidden;
+        display: inline-block;
+        width: calc(100% - 110px);
+    }
+
 
 </style>
 <body>
@@ -188,6 +194,10 @@
         }
     });
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
     $(".checkBox").click(function(){
         var itag = $($(this).find("i"));
         var flag = itag.is(':visible');

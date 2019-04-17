@@ -111,8 +111,12 @@
             var boss = $(".boss").val();
             var url = $(".url").val();
             var ret = /^[\u4E00-\u9FA5]+$/.test(name);
+<<<<<<< HEAD
+            if(boss!=0 && url=="" || !ret){
+=======
             console.log(!ret);
             if(boss!=0 && url=="" || ret){
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                 $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
                 return false;
             }

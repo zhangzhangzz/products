@@ -17,7 +17,11 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">账号</label>
                     <div class="layui-input-inline">
+<<<<<<< HEAD
+                    <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input" lay-verify="account">
+=======
                     <input type="text" name="account" value="{{ $list -> account }}"  placeholder="请输入账号" autocomplete="off" class="layui-input account" lay-verify="account">
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                     </div>
                     <span class="error erac">由8-16位数字、字母、下划线组成！</span>
                 </div>
@@ -108,6 +112,32 @@
     layui.use('form', function(){
     var form = layui.form
         $= layui.jquery;
+<<<<<<< HEAD
+
+        $(function () {
+            var account = $(".account").val();
+            var partment = $(".partment").val();
+            var name = $(".name").val();
+            if(!(/^[A-Za-z0-9_]{8,16}$/.test(account))){
+                $(".erac").css({color:"red"});
+                $(".erac").html("由8-16位数字、字母、下划线组成！");
+            }
+            if(!(/^[\u4E00-\u9FA5]+$/.test(name))){
+                $(".erna").css({color:"red"});
+                $(".erna").html("必须由汉字组成！");
+            }
+            if(partment==""){
+                $(".erpa").css({color:"red"});
+                $(".erpa").html("请填写部门！");
+            }
+
+            if(/^[A-Za-z0-9_]{8,16}$/.test(account) && /^[\u4E00-\u9FA5]+$/.test(name) && partment!=""){
+                $(".getBtn").attr("class","layui-btn getBtn");
+            }
+        
+        });
+
+=======
     
     $(function () {
         var account = $(".account").val();
@@ -149,6 +179,7 @@
             }
         });
 
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
         $(".innewpwd").click(function (event) {
             event.stopPropagation();
             $(".firstpwd").css({display:"block"});
@@ -233,6 +264,10 @@
         }
     });
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
     //监听提交
     form.on('submit(formDemo)', function(data){
         if($(".getBtn").hasClass("layui-btn-disabled")){

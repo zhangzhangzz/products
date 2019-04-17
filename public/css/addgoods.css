@@ -139,12 +139,15 @@ label{
 .labelText{
     height: 30px;
     line-height: 30px;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
 }
 
 .reinput{
-    top: 0;
-    right: 0;
+    top: 5px;
+    left: 168px;
 }
 
 .addUdata{
@@ -237,5 +240,14 @@ label{
     color: #38f;
 }
 
+<<<<<<< HEAD
+.cBody{
+    position:relative;
+    overflow:hidden;
+    background-color: #eee;
+    margin: 5px 0;
+}
+=======
 
 
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b

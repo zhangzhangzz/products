@@ -86,7 +86,7 @@ ul {
 .ultable {
     height: auto;
     padding-left: 10px;
-
+    
 }
 
 .layui-form-checkbox[lay-skin=primary] span {
@@ -135,4 +135,8 @@ ul {
 
 .seinput{
     width: 30%;
+<<<<<<< HEAD
+}
+=======
     }
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
