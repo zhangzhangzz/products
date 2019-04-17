@@ -22,7 +22,8 @@ class ShopController extends Controller
     {
         if($request->isMethod("post")){
             $shop = new Shops();
-            $shop_data = $shop->audit_status();
+            $shop_data = $shop->selects();
+
             if($shop_data){
                 return ajax_success("获取成功",$shop_data);
             }else{
@@ -33,100 +34,98 @@ class ShopController extends Controller
     }
 
 
-    /**
-     * 店铺驳回审核
-     * 陈绪
-     */
-    public function check(Request $request)
-    {
-        if($request->isMethod("post")){
-            $shop = new Shops();
-            $shop_data = $shop->select_reject();
-            if($shop_data){
-                return ajax_success("获取成功",$shop_data);
-            }else{
-                return ajax_error("获取失败");
-            }
-
-        }
-    }
-
-
 
     /**
-     * 店铺通过审核
+     * 状态栏显示
      * 陈绪
+     * @param Request $request
      */
-    public function shop_pass(Request $request){
+    public function show(Request $request){
 
         if($request->isMethod("post")){
-            $shop = new Shops();
-            $shop_data = $shop->select_pass();
-            if($shop_data){
-                return ajax_success("获取成功",$shop_data);
-            }else{
-                return ajax_error("获取失败");
-            }
-        }
+            $index = $request->index;
+            switch ($index){
+                case 0:
+                    $shop = new Shops();
+                    $shop_data = $shop->selects();
 
-    }
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
 
+                case 1:
+                    $shop = new Shops();
+                    $shop_data = $shop->audit_status();
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
 
+                case 2:
+                    $shop = new Shops();
+                    $shop_data = $shop->select_reject();
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
 
-    /**
-     * 店铺经营中
-     * 陈绪
-     */
-    public function shop_manage(Request $request){
+                case 3:
+                    $shop = new Shops();
+                    $shop_data = $shop->select_pass();
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
 
-        if($request->isMethod("post")){
-            $shop = new Shops();
-            $shop_data = $shop->manage_status();
-            if($shop_data){
-                return ajax_success("获取成功",$shop_data);
-            }else{
-                return ajax_error("获取失败");
-            }
-        }
+                case 4:
+                    $shop = new Shops();
+                    $shop_data = $shop->manage_status();
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
 
-    }
+                case 5:
+                    $shop = new Shops();
+                    $shop_data = $shop->select_manage();
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
 
+                case 6:
+                    $shop = new Shops();
+                    $shop_data = $shop->close_down();
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
 
+                default:
+                    $shop = new Shops();
+                    $shop_data = $shop->selects();
 
-    /**
-     * 店铺审核中
-     * 陈绪
-     */
-    public function shop_audit(Request $request){
-
-        if($request->isMethod("post")){
-            $shop = new Shops();
-            $shop_data = $shop->select_manage();
-            if($shop_data){
-                return ajax_success("获取成功",$shop_data);
-            }else{
-                return ajax_error("获取失败");
-            }
-        }
-
-    }
-
-
-
-
-    /**
-     * 店铺已停业
-     * 陈绪
-     */
-    public function shop_down(Request $request){
-
-        if($request->isMethod("post")){
-            $shop = new Shops();
-            $shop_data = $shop->close_down();
-            if($shop_data){
-                return ajax_success("获取成功",$shop_data);
-            }else{
-                return ajax_error("获取失败");
+                    if($shop_data){
+                        return ajax_success("获取成功",$shop_data);
+                    }else{
+                        return ajax_error("获取失败");
+                    }
+                break;
             }
         }
 
@@ -297,17 +296,10 @@ class ShopController extends Controller
      * 显示全部数据
      * 陈绪
      */
-    public function show(Request $request){
+    public function shop_show(Request $request){
 
         if($request->isMethod("post")){
-            $shop = new Shops();
-            $shop_data = $shop->selects();
 
-            if($shop_data){
-                return ajax_success("获取成功",$shop_data);
-            }else{
-                return ajax_error("获取失败");
-            }
         }
 
     }

@@ -79,7 +79,7 @@
 
 
         $.ajax({
-            url:"{{url('admin/shop/show')}}",
+            url:"{{url('admin/shop/index')}}",
             type:"POST",
             dataType:"json",
             data:{"_token":"{{csrf_token()}}"},
@@ -134,32 +134,11 @@
 
         $(".dBox").click(function () {
             var index = $(this).attr("data-item");
-            if(index==0){
-                var url = "{{url('admin/shop/show')}}";
-            }
-            if(index==1){
-                var url = "{{url('admin/shop/index')}}";
-            }
-            if(index==2){
-                var url = "{{url('admin/shop/check')}}";
-            }
-            if(index==3){
-                var url = "{{url('admin/shop/shop_pass')}}";
-            }
-            if(index==4){
-                var url = "{{url('admin/shop/shop_manage')}}";
-            }
-            if(index==5){
-                var url = "{{url('admin/shop/shop_audit')}}";
-            }
-            if(index==6){
-                var url = "{{url('admin/shop/shop_down')}}";
-            }
             $.ajax({
-                url:url,
+                url:"{{url('admin/shop/show')}}",
                 type:"POST",
                 dataType:"json",
-                data:{"_token":"{{csrf_token()}}"},
+                data:{"_token":"{{csrf_token()}}","index":index},
                 success:function (data) {
                     console.log(data)
                     if(data.status == 1){
