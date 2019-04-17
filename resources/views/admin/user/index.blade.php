@@ -66,7 +66,8 @@
                     var data = data.data;
                     table.render({
                         elem: '#demo1'
-                        ,limit:999999
+                        ,limit:10
+                        ,page: true
                         ,cols: [[ //表头
                             {field: 'images', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
                             ,{field: 'name', title: '名称' , align:'center'}
@@ -106,7 +107,8 @@
                         var data = data.data;
                         table.render({
                             elem: '#demo2'
-                            ,limit:999999
+                            ,limit:10
+                            ,page: true
                             ,cols: [[ //表头
                                 {field: 'images', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
                                 ,{field: 'name', title: '名称' ,  align:'center'}
@@ -160,7 +162,8 @@
                             var data = data.data;
                             table.render({
                                 elem: '#demo1'
-                                ,limit:999999
+                                ,limit:10
+                                ,page: true
                                 ,cols: [[ //表头
                                     {field: 'images', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
                                     ,{field: 'name', title: '名称' ,  align:'center'}
@@ -205,7 +208,8 @@
                             var data = data.data;
                             table.render({
                                 elem: '#demo2'
-                                ,limit:999999
+                                ,limit:10
+                                ,page: true
                                 ,cols: [[ //表头
                                     {field: 'images', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
                                     ,{field: 'name', title: '名称' ,  align:'center'}
@@ -257,7 +261,8 @@
                                     console.log(data);
                                     table.render({
                                         elem: '#demo2'
-                                        ,limit:999999
+                                        ,limit:10
+                                        ,page: true
                                         ,cols: [[ //表头
                                             {field: 'images', title: '头像',   fixed: 'left' , align:'center' ,toolbar : '#headDemo'}
                                             ,{field: 'name', title: '名称' ,  align:'center'}
@@ -280,7 +285,7 @@
 
                     });
                 } else if(layEvent === 'edit'){
-                    window.location.href="/admin/admin/add";
+                    window.location.href="/admin/user/look/"+tdata.id;
                 }
             });
 

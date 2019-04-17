@@ -29,7 +29,7 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-block seinput">
                         <select name="boss" value="<?php echo e($lists -> name); ?>">
                             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option value="<?php echo e($v -> name); ?>"><?php echo e($v -> name); ?></option>

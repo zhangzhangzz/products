@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\Admin\Shops;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ShopController extends Controller
 {
@@ -22,7 +23,11 @@ class ShopController extends Controller
         if($request->isMethod("post")){
             $shop = new Shops();
             $shop_data = $shop->audit_status();
-            return ajax_success("获取成功",$shop_data);
+            if($shop_data){
+                return ajax_success("获取成功",$shop_data);
+            }else{
+                return ajax_error("获取失败");
+            }
         }
         return view("admin.Shop.index");
     }
@@ -37,7 +42,12 @@ class ShopController extends Controller
         if($request->isMethod("post")){
             $shop = new Shops();
             $shop_data = $shop->select_reject();
-            return ajax_success("获取成功",$shop_data);
+            if($shop_data){
+                return ajax_success("获取成功",$shop_data);
+            }else{
+                return ajax_error("获取失败");
+            }
+
         }
     }
 
@@ -52,7 +62,11 @@ class ShopController extends Controller
         if($request->isMethod("post")){
             $shop = new Shops();
             $shop_data = $shop->select_pass();
-            return ajax_success("获取成功",$shop_data);
+            if($shop_data){
+                return ajax_success("获取成功",$shop_data);
+            }else{
+                return ajax_error("获取失败");
+            }
         }
 
     }
@@ -68,7 +82,11 @@ class ShopController extends Controller
         if($request->isMethod("post")){
             $shop = new Shops();
             $shop_data = $shop->manage_status();
-            return ajax_success("获取成功",$shop_data);
+            if($shop_data){
+                return ajax_success("获取成功",$shop_data);
+            }else{
+                return ajax_error("获取失败");
+            }
         }
 
     }
@@ -84,7 +102,11 @@ class ShopController extends Controller
         if($request->isMethod("post")){
             $shop = new Shops();
             $shop_data = $shop->select_manage();
-            return ajax_success("获取成功",$shop_data);
+            if($shop_data){
+                return ajax_success("获取成功",$shop_data);
+            }else{
+                return ajax_error("获取失败");
+            }
         }
 
     }
@@ -101,7 +123,11 @@ class ShopController extends Controller
         if($request->isMethod("post")){
             $shop = new Shops();
             $shop_data = $shop->close_down();
-            return ajax_success("获取成功",$shop_data);
+            if($shop_data){
+                return ajax_success("获取成功",$shop_data);
+            }else{
+                return ajax_error("获取失败");
+            }
         }
 
     }
@@ -116,7 +142,8 @@ class ShopController extends Controller
 
         $shop = new Shops();
         $shop_list = $shop->shop_show($id);
-        return view("admin.shop.check",["shop_list"=>$shop_list]);
+        $shop_show = Shop_Log::where("shop_id",$id)->get()->toArray();
+        return view("admin.shop.check",["shop_list"=>$shop_list,"shop_show"=>$shop_show]);
 
     }
 
@@ -182,9 +209,9 @@ class ShopController extends Controller
             }else{
                 $goods_type_name = $goods_type_id[0]["id"];
             }
-            $shop_name = Input::get("shop_name") ? Input::get("shop_name") : "";
-            $functionary = Input::get("functionary") ? Input::get("functionary") : "";
-            $phone = Input::get("phone") ? Input::get("phone") : "";
+            $shop_name = trim(Input::get("shop_name")) ? trim(Input::get("shop_name")) : "";
+            $functionary = trim(Input::get("functionary")) ? trim(Input::get("functionary")) : "";
+            $phone = trim(Input::get("phone")) ? trim(Input::get("phone")) : "";
             $where = [];
             if(!empty($shop_name) && empty($functionary) && empty($phone) && empty($goods_type_name)){
                 $where[] = ["shop_name","like","%".$shop_name."%"];
@@ -270,14 +297,17 @@ class ShopController extends Controller
      * 显示全部数据
      * 陈绪
      */
-    public function show(){
+    public function show(Request $request){
 
-        $shop = new Shops();
-        $shop_show = $shop->selects();
-        if($shop_show){
-            return ajax_success("获取成功",$shop_show);
-        }else{
-            return ajax_error("获取失败");
+        if($request->isMethod("post")){
+            $shop = new Shops();
+            $shop_data = $shop->selects();
+
+            if($shop_data){
+                return ajax_success("获取成功",$shop_data);
+            }else{
+                return ajax_error("获取失败");
+            }
         }
 
     }

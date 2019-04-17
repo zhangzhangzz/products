@@ -90,9 +90,10 @@
                     //第一个实例
                     table.render({
                         elem: '.demo1'
-                        ,limit:999999
+                        ,limit:10
                         ,width:1189
                         ,id:'tableOne'
+                        ,page: true
                         ,cols: [[ //表头
                             {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
                             ,{field: 'company_name', title: '公司名称' , width:150 , align:'center'}
@@ -118,7 +119,7 @@
                                 }
                             }}
                             ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
-                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a> `;
                             }}
                         ]]
                         ,data:data
@@ -166,7 +167,8 @@
                         //第一个实例
                         table.render({
                             elem: `.demo${index}`
-                            ,limit:999999
+                            ,limit:10
+                            ,page: true
                             ,width:1189
                             ,cols: [[ //表头
                                 {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}

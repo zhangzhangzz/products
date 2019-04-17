@@ -82,7 +82,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:会员管理*/
     Route::any('user/index','User\UserController@index');
     Route::any('user/status','User\UserController@status');
-    Route::any('user/look','User\UserController@look');
+    Route::any('user/look/{id}','User\UserController@look');
     Route::any('user/disabled','User\UserController@disabled');
     Route::any('user/search','User\UserController@search');
 

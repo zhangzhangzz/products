@@ -27,7 +27,7 @@ class CategoryController extends Controller{
         $category_list = genTree($category);
         $page = $request->page ?: 1;
         //每页的条数
-        $perPage = 5;
+        $perPage = 2;
         //计算每页分页的初始位置
         $offset = ($page * $perPage) - $perPage;
         //实例化LengthAwarePaginator类，并传入对应的参数
