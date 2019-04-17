@@ -177,14 +177,7 @@
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });
 
-            var list = <?php
-                if(empty(arr($list)))
-                {
-                    echo 0;
-                }else{
-                    echo $list;
-                }
-                ?>;
+            var list = <?php echo $list; ?>;
             var s_c_n = <?php echo $s_c_n; ?>;
             var data = [];
             if(list.length == 1)
