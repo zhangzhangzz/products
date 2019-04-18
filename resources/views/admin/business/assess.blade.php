@@ -106,7 +106,7 @@ layui.use(['element','table','rate','layer'], function(){
 
     $(".dBox").click(function () {
         var index = $(this).attr("data-item");
-        var url = "{{url('admin/business/search')}}"+ "/" + index;
+        var url = "{{url('admin/business/show')}}"+ "/" + index;
         $.ajax({
             url:url,
             type:"POST",

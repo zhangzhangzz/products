@@ -36,6 +36,14 @@ class BusinessController extends Controller
             "color" => "blue",
             "name" => "退款中"
         ],
+        "7" => [
+            "color" => "red",
+            "name" => "待分享"
+        ],
+        "8" => [
+            "color" => "#888",
+            "name" => "退款完成"
+        ],
     ];
     // 构造方法
     public function __construct()
@@ -54,8 +62,78 @@ class BusinessController extends Controller
         $list = arr(DB::select($sql));
         return view("admin.business.index",["list" => json_encode($list), 's_c_n' => json_encode($this -> s_c_n)]);
     }
+    /**
+     * 交易管理搜索
+     *
+     * date             日期
+     * gname            商品名称
+     * select1          订单搜索选项
+     * select1_input    订单搜索内容
+     * state            订单状态
+     *
+     * 苏鹏
+     */
+    public function search(Request $request)
+    {
+        $select1 = [
+            // 订单编号
+            "1" => "orderid",
+            // 物流单号
+            "2" => "ems",
+            // 收货人姓名
+            "3" => "name",
+            // 收货人手机号
+            "4" => "phone"
+        ];
+        $list = $request -> except("_token");
+        if(!empty($list['select1_input']))
+        {
 
+        }
+        if(!empty($list['gname']))
+        {
 
+        }
+        if(!empty($list['date']))
+        {
+
+        }
+        return json_encode($list);
+        if(is_numeric($search))
+        {
+            if($search >= 2)
+            {
+                $s = $search - 1;
+                $search = 2;
+            }
+        }
+        switch ($search)
+        {
+            case 1:
+                $list = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id";
+                $list = arr(DB::select($sql));
+                return view("admin.business.index",["list" => $list, 's_c_n' => json_encode($this -> s_c_n)]);
+                break;
+            case 2:
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
+                {
+                    foreach($list as $v)
+                    {
+                        $v['status'] = $this -> s_c_n[$s];
+                        $data[] = $v;
+                    }
+                }
+                return json_encode($data);
+                break;
+            default:
+                echo json_encode("错误");
+                break;
+        }
+    }
     /**
      * 交易管理订单详情
      *
@@ -177,10 +255,11 @@ class BusinessController extends Controller
      *
      * 苏鹏
      */
-    public function search($search)
+    public function show($search)
     {
         $data = [];
         $s = 0;
+        // 判断是否是数字
         if(is_numeric($search))
         {
             if($search >= 2)
@@ -195,8 +274,16 @@ class BusinessController extends Controller
                 $list = [];
                 $sql = "select * from business as b inner join goods as g on b.good_id=g.id";
                 $list = arr(DB::select($sql));
-                return view("admin.business.index",["list" => $list, 's_c_n' => json_encode($this -> s_c_n)]);
-            break;
+                if(!empty($list))
+                {
+                    foreach($list as $v)
+                    {
+                        $v['status'] = $this -> s_c_n[$v['status']];
+                        $data[] = $v;
+                    }
+                }
+                return json_encode($data);
+                break;
             case 2:
                 $data = [];
                 $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
@@ -214,7 +301,6 @@ class BusinessController extends Controller
             case "dcl":
                 $list = Assess::where("state","0") -> get();
                 return json_encode($list);
-                return json_encode($data);
                 break;
             case "qb":
                 $sql = "select 

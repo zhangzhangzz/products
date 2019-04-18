@@ -35,7 +35,7 @@ function di($data)
  * @param  integer $root  根节点ID
  * @return array          转换后的树
  */
-function arr2($list, $pk = 'id', $boss = 'boss', $child = 'child', $root=0) {
+function tree($list, $pk = 'id', $boss = 'boss', $child = 'child', $root=0) {
     $tree = array();// 创建Tree
     if(is_array($list)) {
         // 创建基于主键的数组引用

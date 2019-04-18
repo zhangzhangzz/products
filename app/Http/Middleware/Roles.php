@@ -79,6 +79,11 @@ class Roles
         {
             return $next($request);
         }
+        // 切换显示
+        if($in_up[1] == "show")
+        {
+            return $next($request);
+        }
         // 如果有添加权限就可以使用执行添加
         if($in_up[1] == "insert")
         {

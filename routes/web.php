@@ -132,7 +132,8 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('business/send/{search?}','Business\BusinessController@send');
     Route::any('business/order','Business\BusinessController@order');
     Route::any('business/assess','Business\BusinessController@assess');
-    Route::any('business/search/{search}','Business\BusinessController@search');
+    Route::any('business/search','Business\BusinessController@search');
+    Route::any('business/show/{show}','Business\BusinessController@show');
     Route::any('business/delivery','Business\BusinessController@delivery');
     Route::any('business/reply','Business\BusinessController@reply');
 
