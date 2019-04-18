@@ -79,7 +79,7 @@
 
 
         $.ajax({
-            url:"{{url('admin/shop/show')}}",
+            url:"{{url('admin/shop/index')}}",
             type:"POST",
             dataType:"json",
             data:{"_token":"{{csrf_token()}}"},
@@ -90,9 +90,10 @@
                     //第一个实例
                     table.render({
                         elem: '.demo1'
-                        ,limit:999999
+                        ,limit:10
                         ,width:1189
                         ,id:'tableOne'
+                        ,page: true
                         ,cols: [[ //表头
                             {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
                             ,{field: 'company_name', title: '公司名称' , width:150 , align:'center'}
@@ -118,7 +119,7 @@
                                 }
                             }}
                             ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
-                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a> `;
                             }}
                         ]]
                         ,data:data
@@ -133,32 +134,11 @@
 
         $(".dBox").click(function () {
             var index = $(this).attr("data-item");
-            if(index==0){
-                var url = "{{url('admin/shop/show')}}";
-            }
-            if(index==1){
-                var url = "{{url('admin/shop/index')}}";
-            }
-            if(index==2){
-                var url = "{{url('admin/shop/check')}}";
-            }
-            if(index==3){
-                var url = "{{url('admin/shop/shop_pass')}}";
-            }
-            if(index==4){
-                var url = "{{url('admin/shop/shop_manage')}}";
-            }
-            if(index==5){
-                var url = "{{url('admin/shop/shop_audit')}}";
-            }
-            if(index==6){
-                var url = "{{url('admin/shop/shop_down')}}";
-            }
             $.ajax({
-                url:url,
+                url:"{{url('admin/shop/show')}}",
                 type:"POST",
                 dataType:"json",
-                data:{"_token":"{{csrf_token()}}"},
+                data:{"_token":"{{csrf_token()}}","index":index},
                 success:function (data) {
                     console.log(data)
                     if(data.status == 1){
@@ -166,7 +146,8 @@
                         //第一个实例
                         table.render({
                             elem: `.demo${index}`
-                            ,limit:999999
+                            ,limit:10
+                            ,page: true
                             ,width:1189
                             ,cols: [[ //表头
                                 {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}

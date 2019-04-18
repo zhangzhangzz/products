@@ -117,6 +117,12 @@
     }
 
 
+    .Incode{
+        overflow:hidden;
+        display: inline-block;
+        width: calc(100% - 110px);
+    }
+
 
 </style>
 <body>
@@ -187,7 +193,6 @@
             $(".login").click();
         }
     });
-
     $(".checkBox").click(function(){
         var itag = $($(this).find("i"));
         var flag = itag.is(':visible');

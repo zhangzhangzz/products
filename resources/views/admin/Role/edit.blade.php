@@ -29,7 +29,12 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-block seinput">
+<<<<<<< HEAD
+                        <select name="boss">
+                            <option value="{{ $lists -> boss }}" selected>{{ $lists -> boss }}</option>
+=======
                         <select name="boss" value="{{ $lists -> name }}">
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                             @foreach($data as $v)
                             <option value="{{ $v -> name }}">{{ $v -> name }}</option>
                             @endforeach
@@ -144,11 +149,11 @@
                     item.checked = data.elem.checked;
                 });
                 form.render('checkbox');
-                });
+            });
 
 
-                //全部选中来确定全选按钮是否选中
-                form.on('checkbox(choose)', function(data) {
+            //全部选中来确定全选按钮是否选中
+            form.on('checkbox(choose)', function(data) {
                 var three_child = $(data.elem).siblings().find(
                                     'ul li input[type="checkbox"]:not([name="show"])');
                 three_child.each(function(index, item) {
@@ -167,25 +172,25 @@
                     $(data.elem).parents('.list').children('.title').find(' input.allChoose').get(0).checked = true;
                 }
                 form.render('checkbox');
-                });
+            });
 
-                form.on('checkbox(three-choose)', function(data) {
-                    var child = $(data.elem).parents('li').find(
-                    'input[type="checkbox"]:not([name="show"])');
-                    var childChecked = $(data.elem).parents('li').find(
-                        'ul li input[type="checkbox"]:not([name="show"]):checked')
-                    if (childChecked.length == child.length-1) {
-                        $(data.elem).parents('li').find(' input.aaa').get(0).checked = true;
-                    } else if(childChecked.length==0){
-                            $(data.elem).parents('li').find(' input.aaa').get(0).checked = false;
-
-                        }
-                        else {
+            form.on('checkbox(three-choose)', function(data) {
+                var child = $(data.elem).parents('li').find(
+                'input[type="checkbox"]:not([name="show"])');
+                var childChecked = $(data.elem).parents('li').find(
+                    'ul li input[type="checkbox"]:not([name="show"]):checked')
+                if (childChecked.length == child.length-1) {
                     $(data.elem).parents('li').find(' input.aaa').get(0).checked = true;
+                } else if(childChecked.length==0){
+                        $(data.elem).parents('li').find(' input.aaa').get(0).checked = false;
 
                     }
-                        form.render('checkbox');
-                });
+                    else {
+                $(data.elem).parents('li').find(' input.aaa').get(0).checked = true;
+
+                }
+                    form.render('checkbox');
+            });
 
             
 
@@ -195,34 +200,11 @@
 
           //监听提交
           form.on('submit(formDemo)', function(data){
-            // layer.msg(JSON.stringify(data.field));
-            // return false;
+            layer.msg(JSON.stringify(data.field));
+            return false;
           });
-        });
-        $("input").blur(function() {
-            var name = $(this).prop("name");
-            var data = $(this).val();
-            $.ajax({
-                url: '{{url("admin/role/regular")}}',
-                type: 'POST',
-                dataType: 'JSON',
-                data: {"_token": "{{csrf_token()}}", "name": name, "data": data},
-                success: function (data) {
-                    if(data)
-                    {
-                        $("."+name).css("color","red");
-                        $("."+name).html(data);
-                        $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
-                    }else{
-                        $("."+name).css("color","green");
-                        $("."+name).html("√可以使用");
-                        $(".getBtn").attr("class","layui-btn getBtn");
-                    }
-                }
-            });
-        });
-    
 
+        });
 
 
     </script>

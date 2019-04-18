@@ -63,16 +63,25 @@
                     <div>
                         <div class="warn">*</div>
                         <label>商品规格</label>
-                        <div class="unitBox">
-                            <div class="ubBody">
-
-                            </div>
-                            
-                            <div class="addBtn">
-                                <button class="layui-btn layui-btn-primary addUnit" type="button">添加规格项目</button>
+                        <div id="special_content">
+                            <div class="layui-input-block general-kuang">
+                                <div class="control-group">
+                                    <div class="controls" style="padding: 10px;">
+                                        <a id="add_lv11" class="btn btn-primary" type="button" style="color: #38f;">添加规格项</a>
+                                    </div>
+                                </div>
+                                <div id="lv_table_con1" class="control-group" style="display: none; ">
+                                    <label class="control-label">规格项目表</label>
+                                    <div class="controls" style="">
+                                        <div id="lv_table1" style="padding: 10px;"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <div style="display: none"  id="changeUdata">xx</div>
                     </div>
+
                    
                     <div class="layui-form-item">
                         <div class="layui-input-block">
@@ -110,253 +119,247 @@
             return false;
         });
 
-        var html = "";
-        $(".addUnit").click(function(){
-            var ublen = $(".ubBody").find(".ub").length;
-            if(ublen ==3 ){
-                layer.msg("最多支持3组规格");
-                return false;
-            }
-<<<<<<< HEAD
-            
-            html=`<div class="ub" data-index=${uindex} >
-                    <div class="unitname">
-                        <label class="labelText">规格名：</label>
-                        <input type="text" name="unit" required lay-verify="required" placeholder="净含量" 
-                        autocomplete="off" class="layui-input inBox" onchange="changeUnit(this)" >
-                    </div>
-                    <div class="unitdata">
-                        <div>
-                            <label class="labelText">规格值：</label>
-                            <div class="setUnitBox" >
-                                <a class="addUdata" onclick="addUdata(this)">添加规格值</a>
-                            </div>
-                            
+        var vals = '';
+        var lv1HTML = '';
+        lv1HTML += `<div class="control-group lv1" style="padding: 10px;">
+                        <div class="controls cBody"  onmouseout="reHide(this);" onmouseover="reShow(this);">
+                            <label class="labelText">规格名：</label>
+                            <input type="text" name="lv1[]" class="lvv3"  placeholder="规格名称" onchange="showGdata(this)" style="margin:14px 0 14px 8px;"/>
+                            <a class="btn btn-primary add_lv2" type="button" style="display:none;color: #38f;margin: 0 10px;">添加规格值</a>
+                            <span class="reinput remove remove_lv1"  style="display: none;left:259px">x</span>
                         </div>
-                        
-                        <span class="reudata remove">x</span>
-                    </div>
-                </div>`;
-            $(".ubBody").append(html);
+                        <div class="controls lv2s cBody" >
+                            <label class="labelText lv2stext" style="float:none!important;display:none;">规格值：</label>
+                            <div class="lv2sBody" style="display:inline-block"></div>
+                        </div>
+                    </div>`;
 
-        });
-        var index=0;
-        var index2 = 0;
-        var index3 = 0;
+        window.reShow = function(x) {
+            $(x).find(".remove").css({display:"block"});
+        }
 
-        window.addUdata = function(x) {
-            var uuid = $($($($(x).parent()).parent()).parent()).parent().data("index");
-            var flag = $(x).prev().length;
-            var dex = 0;
-            if(uuid==1){
-                index+=1;
-                dex = index;
-            }else if(uuid==2){
-                index2+=1;
-                dex = index2;
-            }else if(uuid==3){
-                index3+=1;
-                dex = index3;
+        window.reHide = function(x) {
+            $(x).find(".remove").css({display:"none"});
+        }
+
+        window.showGdata = function(x) {
+            $(x).next().css({display:"inline-block"});
+        }
+//           专用
+        var flag=true;
+        $('#add_lv11').on('click', function() {
+            var last = $(this).parent().parent().siblings('.control-group.lv1:last');
+            var length = $(".lv1").length;
+            if(length>=3){
+                alert("最多添加3组规格");
+                return;
             }
 
-            $(x).before(`<div class="addunBox" onmouseout="reHide(this);" onmouseover="reShow(this);">
-                            <input type="text" name="unit" required lay-verify="required" placeholder="kg" 
-                            autocomplete="off" class="layui-input inBox " onchange="changeUdata(this);" data-index=${dex} data-flag=${flag}>
-                            <span class="reinput remove" onclick="remInput(this);">x</span>
-                        </div>`);
-=======
-// ------------------------------------------------------------------------
-            html+=`<div class="ub1 ub">
-                                <div class="unitname">
-                                    <label class="labelText">规格名：</label>
-                                    <input type="text" name="unit" required lay-verify="required" placeholder="净含量" autocomplete="off" class="layui-input inBox">
-                                </div>
-                                <div class="unitdata">
-                                    <div>
-                                        <label class="labelText">规格值：</label>
-                                        <div class="setUnitBox">
-                                            <a class="addUdata" style="color:#38f;" onclick="addUdata()">添加规格值</a>
-                                        </div>
-                                        
-                                    </div>
-                                    
-                                    <span class="reudata remove">x</span>
-                                </div>
-                            </div>`;
-            $(".ubBody").html(html);
+            $('.lvv4').each(function(index, element) {
+                if($(this).val()=="") {
+                    flag=false;
+                }else{
+                    flag=true;
+                }
+            });
 
-        });
->>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
-
-        window.addUdata = function() {
-            // var inLen = $(".setUnitBox").find("input").length;
-            // if(inLen==3){
-            //     layer.msg("最多支持3组规格");
-            //     return false;
-            // }
-            $(".addUdata").before(`<div class="addunBox" onmouseout="reHide();" mouseover="reShow();">
-                                        <input type="text" name="unit" required lay-verify="required" placeholder="kg" autocomplete="off" class="layui-input inBox">
-                                        <span class="reinput remove">x</span>
-                                    </div>`);
-        }
-
-        $(".ub").mouseover(function(){
-            $(this).find(".remove").css({display:"block"});
-        });
-
-        $(".ub").mouseout(function(){
-            $(this).find(".remove").css({display:"none"});
-        });
-
-        window.reShow = function() {
-            $(this).find(".remove").css({display:"block"});
-        }
-
-        window.reHide = function() {
-            $(this).find(".remove").css({display:"block"});
-        }
-
-        $(".reudata").click(function(){
-            $($(this).parent()).parent().remove();
-        });
-
-<<<<<<< HEAD
-        window.changeUnit = function(x) {
-            $($(x).parent()).next().find(".addUdata").css({display:"inline-block"});
-        }
-
-        function addTable(){
-
-        }
-
-        var arr = [];
-        var aindex = 1;
-        var harr1 = [];
-        window.changeUdata = function(x) {
-            //规格值序号，用来判断是否为第一个规格值
-            var flag = $(x).data("flag");
-            //规格值的text
-            var text = $(x).val();
-            //规格值整体div的对象
-            var  unitdata = $($($($(x).parent()).parent()).parent()).parent();
-            var bigMaMa = $(unitdata).parent()
-            var bindex = bigMaMa.data("index");
-            $(x).attr("class",`layui-input inBox cudata${bindex}`);
-            //规格的text
-            var thtext = $(unitdata).prev().find("input").val();
-            //赋值给列
-            var th = `<th>${thtext}</th>`;
-            var tr = `<td class="addhere">
-                            <div class="widget-form__group-row">
-                                <div class="zent-number-input-wrapper input-mini">
-                                    <div class="zent-input-wrapper input-mini">
-                                        <input type="text" class="zent-input" name="price" autocomplete="off" value="">
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-form__group-row">
-                                <div class="zent-number-input-wrapper input-mini">
-                                    <div class="zent-input-wrapper input-mini">
-                                        <input type="text" class="zent-input" name="stock_num" autocomplete="off" value="">
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-form__group-row">
-                                <div class="zent-input-wrapper input-mini2">
-                                    <input type="text" class="zent-input" name="code" autocomplete="off" value="">
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-form__group-row">
-                                <div class="zent-number-input-wrapper input-mini">
-                                    <div class="zent-input-wrapper input-mini">
-                                        <input type="text" class="zent-input" name="cost_price" autocomplete="off" value="">
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>0</td>
-                    </tr>`;
-            var ublen = $(".ub1").length;
-            //为第一个规格值时
             if(!flag){
-                //第一个规格
-                if(bindex==1){
-                    $(".th-price").before(th);
-                    var tr1 = `<tr class="hang">
-                                    <td rowspan="1" class="ud${bindex}" >${text}</td>
-                                `+tr;
-                    $("tbody").append(tr1);
-                //不是第一个规格 增加列
-                }else{
-                    if(ublen==1){
-                        harr1.push(text);
-                    }
-                    arr.push(thtext);
-                    $(".th-price").before(th);
-                    $(`.ud${bindex-1}`).after(`<td rowspan="1" class="ud${bindex}">${text}</td>`);
-                }
-            //不是第一个规格值时 并且为第一个规格里的规格值    
-            }else if(flag && bindex==1 ){
-                //只有一种规格
-                if(ublen==1){
-                    var tr1 = `<tr class="hang">
-                                    <td rowspan="1" class="ud${bindex}" >${text}</td>
-                                `+tr;
-                //有2-3种规格    
-                }else if(ublen==2){
-                    //--------------------
-                    var td2='';
-                    var len = harr1.length;
-                    $.each(harr1, function(i,val){      
-                        var tag = i==0?len:'';
-                        //var cla = len-1==i ?'hang2':'hang';
-                        var td = i==0?`<tr class="hang"><td rowspan="${tag}" class="ud${bindex}" >${text}</td>
-                                <td rowspan="1" class="ud${bindex}" >${val}</td>`:`<tr class="hang"><td rowspan="1" class="ud${bindex}" >${val}</td>`;
-                        td2+=td+tr;
-                    });   
-
-                    var tr1 = td2;
-                }
-                $("tbody").append(tr1);
-            }else if(flag && bindex==2 ){
-                var one = $(".ub").eq(0).find(".cudata1 ").length;
-                
-                var two = $(".ub").eq(1).find(".cudata2 ").length;
-                console.log(one+"--one--"+two+"--two--");
-                harr1.push(text);
-                var td3 = ublen==2?`<td rowspan="1" class="ud${bindex}" >${text}</td>`:`<td rowspan="1" class="ud${bindex}" >${text}</td>
-                                                                                        <td rowspan="1" class="ud${bindex}" >${arr[1]}</td>`
-                var tr1 = `<tr class="hang">`+td3+tr;
-                if(two-1==1){
-                    $("tr[class=hang]:last").after(tr1);
-                    $($(".hang").eq(0)).find("td").eq(0).attr("rowspan",2);
-                }else{
-                    //$("tr[class=hang2]:last").after(tr1);
-                    for(var i=0;i<one;i++){
-                        $(".hang").eq(two*i+1).after(tr1);
-                        console.log((i+1)*two+"---------------------");
-                        $($(".hang").eq(i)).find("td").eq(0).attr("rowspan",two);
-                    }
-                }
-                //aindex+=1;
-
-                //$(".hang").find("td").eq(0).attr("rowspan",aindex);
-                console.log($($(".hang").eq(1)).find("td").eq(0));
-                console.log($(".hang").find("td").eq(0));
+                alert("请先删除无参数的规格项！");
+                return;
             }
-            $(".UD").css({display:"block"});
-            bigMaMa.attr("class","ub ub1");
+
+            if (!last || last.length == 0) {
+                $(this).parent().parent('.control-group').eq(0).after(lv1HTML);
+            } else {
+                last.after(lv1HTML);
+            }
+        });
+        $("#special_content").on('click', '.remove_lv1', function() {
+            $($(this).parent()).parent().remove();
+            var lvv1 = $(".lv1");
+            if (!lvv1 || lvv1.length == 0) {
+                $('#lv_table_con1').hide();
+                $('#lv_table1').html('');
+            }
+            $('#changeUdata').click();
+        });
+        $("#special_content").on('click', '.add_lv2', function() {
+            var vals = $(this).siblings("input").val();
+            var lv2HTML = '';
+            lv2HTML += `<div class="addunBox">
+                            <div style="position:relative;display:inline-block" onmouseout="reHide(this);" onmouseover="reShow(this);">
+                                
+                                <input type="text" name="' + vals + '[]" class="lvv4" placeholder="参数名称" style="margin:14px 0 14px 4px;" onchange="changexx(this);"/>
+                                <span class="reinput remove remove_lv2"  style="display: none;">x</span>
+                            </div>
+                        </div>`;
+            $(this).parents('.lv1').find('.lv2sBody').append(lv2HTML);
+            $(this).parents('.lv1').find('.lv2stext').css({display:"inline"});
+        });
+        $("#special_content").on('click', '.remove_lv2', function() {
+            var ab = $($(this).parent()).parent();
+            var addunbox = $(ab).parent().find(".addunBox");
+            var label = $(ab).parent().prev();
+            ab.remove();
+            if(addunbox.length-1==0){
+                label.css({display:"none"});
+            }
+            $('#changeUdata').click();
+        });
+
+        window.changexx = function(x) {
+            $('#changeUdata').click();
         }
 
+        $('#changeUdata').click(function() {
+            var lv1Arr = $("#special_content").children().children(".lv1").children().children('input[class="lvv3"]');
+            if (!lv1Arr || lv1Arr.length == 0) {
+                $('#lv_table_con').hide();
+                $('#lv_table').html('');
+                return;
+            }
+            // for (var i = 0; i < lv1Arr.length; i++) {
+            //     var lv2Arr = $(lv1Arr[i]).parents('.lv1').find('input[class="lvv4"]');
+            //     if (!lv2Arr || lv2Arr.length == 0) {
+            //         alert('请先删除无参数的规格项！');
+            //         return;
+            //     }
+            // }
 
-=======
->>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
+            var tableHTML = '';
+            tableHTML += '<table class="table table-bordered table-sku-stock">';
+            tableHTML += '	<thead>';
+            tableHTML += '		<tr>';
+            for (var i = 0; i < lv1Arr.length; i++) {
+                tableHTML += '			<th width="50"><input value="' + $(lv1Arr[i]).val() + '"  readonly style="border:0;"></th>';
+            }
+            tableHTML +=`<th class="th-price">
+                            <em class="zent-form__required">*</em>
+                            <!-- react-text: 687 -->价格（元）<!-- /react-text -->
+                        </th>
+                        <th class="th-stock">
+                            <em class="zent-form__required">*</em><!-- react-text: 690 -->库存<!-- /react-text -->
+                            <div class="zent-popover-wrapper zent-pop-wrapper" style="display: inline-block;">
+                                <span class="help-circle">
+                                    <i class="zenticon zenticon-help-circle"></i>
+                                </span><!-- react-empty: 694 -->
+                            </div>
+                        </th>
+                        <th class="th-code"><!-- react-text: 696 -->规格编码<!-- /react-text -->
+                            <div class="zent-popover-wrapper zent-pop-wrapper" style="display: inline-block;">
+                                <span class="help-circle">
+                                    <i class="zenticon zenticon-help-circle"></i>
+                                </span><!-- react-empty: 700 -->
+                            </div>
+                        </th>
+                        <th class="text-cost-price"><!-- react-text: 702 -->成本价<!-- /react-text -->
+                            <div class="zent-popover-wrapper zent-pop-wrapper" style="display: inline-block;">
+                                <span class="help-circle">
+                                    <i class="zenticon zenticon-help-circle"></i>
+                                </span><!-- react-empty: 706 -->
+                            </div>
+                        </th>
+                        <th class="text-right">销量</th>
+                    </tr>
+                </thead>
+            <tbody>`;
+
+            var numsArr = new Array();
+            var idxArr = new Array();
+            for (var i = 0; i < lv1Arr.length; i++) {
+                numsArr.push($(lv1Arr[i]).parents('.lv1').find('input[class="lvv4"]').length);
+                idxArr[i] = 0;
+            }
+
+            var len = 1;
+            var rowsArr = new Array();
+            for (var i = 0; i < numsArr.length; i++) {
+                len = len * numsArr[i];
+
+                var tmpnum = 1;
+                for (var j = numsArr.length - 1; j > i; j--) {
+                    tmpnum = tmpnum * numsArr[j];
+                }
+                rowsArr.push(tmpnum);
+            }
+
+            for (var i = 0; i < len; i++) {
+                tableHTML += '		<tr data-row="' + (i + 1) + '">';
+
+                var name = '';
+                for (var j = 0; j < lv1Arr.length; j++) {
+                    var n = parseInt(i / rowsArr[j]);
+                    if (j == 0) {} else if (j == lv1Arr.length - 1) {
+                        n = idxArr[j];
+                        if (idxArr[j] + 1 >= numsArr[j]) {
+                            idxArr[j] = 0;
+                        } else {
+                            idxArr[j]++;
+                        }
+                    } else {
+                        var m = parseInt(i / rowsArr[j]);
+                        n = m % numsArr[j];
+                    }
+
+                    var text = $(lv1Arr[j]).parents('.lv1').find('input[class="lvv4"]').eq(n).val();
+                    if (j != lv1Arr.length - 1) {
+                        name += text + ',';
+                    } else {
+                        name += text;
+                    }
+
+                    if (i % rowsArr[j] == 0) {
+                        tableHTML += '	<td width="50" rowspan="' + rowsArr[j] + '" data-rc="' + (i + 1) + '_' + (j + 1) + '"><input value="' + text + '"  readonly style="border:0;"></td>';
+                    }
+                }
+
+                tableHTML +=`<td>
+                                <div class="widget-form__group-row">
+                                        <div class="zent-number-input-wrapper input-mini">
+                                            <div class="zent-input-wrapper input-mini">
+                                                <input type="text" class="zent-input" name="price" autocomplete="off" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="widget-form__group-row">
+                                        <div class="zent-number-input-wrapper input-mini">
+                                            <div class="zent-input-wrapper input-mini">
+                                                <input type="text" class="zent-input" name="stock_num" autocomplete="off" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="widget-form__group-row">
+                                        <div class="zent-input-wrapper input-mini2">
+                                            <input type="text" class="zent-input" name="code" autocomplete="off" value="">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="widget-form__group-row">
+                                        <div class="zent-number-input-wrapper input-mini">
+                                            <div class="zent-input-wrapper input-mini">
+                                                <input type="text" class="zent-input" name="cost_price" autocomplete="off" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>0</td>
+                            </tr>`;
+            }
+            tableHTML += '	</tbody>';
+            tableHTML += '</table>';
+
+            $('#lv_table_con1').show();
+            $('#lv_table1').html(tableHTML);
+        });
+
+       
+
+
 
     });
 </script> 

@@ -126,6 +126,14 @@
                 $(".erpa").css({color:"red"});
                 $(".erpa").html("请填写部门！");
             }
+<<<<<<< HEAD
+
+            if(/^[A-Za-z0-9_]{8,16}$/.test(account) && /^[\u4E00-\u9FA5]+$/.test(name) && partment!=""){
+                $(".getBtn").attr("class","layui-btn getBtn");
+            }
+        
+=======
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
         });
 
         $(".innewpwd").click(function (event) {
@@ -207,6 +215,10 @@
         }
     });
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
     //监听提交
     form.on('submit(formDemo)', function(data){
         if($(".getBtn").hasClass("layui-btn-disabled")){

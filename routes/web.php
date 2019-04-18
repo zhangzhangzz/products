@@ -82,18 +82,13 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:会员管理*/
     Route::any('user/index','User\UserController@index');
     Route::any('user/status','User\UserController@status');
-    Route::any('user/look','User\UserController@look');
+    Route::any('user/look/{id}','User\UserController@look');
     Route::any('user/disabled','User\UserController@disabled');
     Route::any('user/search','User\UserController@search');
 
 
     /*TODO:店铺管理*/
     Route::any('shop/index','Shop\ShopController@index');
-    Route::any('shop/check','Shop\ShopController@check');
-    Route::any('shop/shop_pass','Shop\ShopController@shop_pass');
-    Route::any('shop/shop_manage','Shop\ShopController@shop_manage');
-    Route::any('shop/shop_audit','Shop\ShopController@shop_audit');
-    Route::any('shop/shop_down','Shop\ShopController@shop_down');
     Route::any('shop/audit/{id}','Shop\ShopController@audit');
     Route::any('shop/opinion','Shop\ShopController@opinion');
     Route::any('shop/search','Shop\ShopController@search');

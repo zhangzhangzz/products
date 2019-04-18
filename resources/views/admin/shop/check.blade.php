@@ -138,18 +138,49 @@
                 </div>
             </div>
 
+            @if(!empty($shop_show))
             <div class="titleBox">
                 <div>审核日志</div>
             </div>
 
             <div class="checkMsg">
-                <div class="actionLog">
-                    <label>审核员操作</label>
-                    <div style="margin-left: 140px;">
-                        <button class="layui-btn pass">通过</button>
-                        <button class="layui-btn layui-btn-primary refuse ShopId" data-value="{{$value["id"]}}">驳回</button>
+                @if($value["audit_status"] == 1)
+                    <div class="actionLog">
+                        <label>审核员操作</label>
+                        <div style="margin-left: 140px;">
+                            <button class="layui-btn pass">通过</button>
+                            <button class="layui-btn layui-btn-primary refuse ShopId" data-value="{{$value["id"]}}">驳回</button>
+                        </div>
+                    </div>
+                @endif
+
+                <div>
+                    @if($value["audit_status"] == 1)
+                    @else
+                        <div class="actionLog">
+                            <label>审核员操作</label>
+                            @if($value["audit_status"] == 2)
+                                <div style="margin-left:140px;">已驳回</div>
+                            @elseif($value["audit_status"] == 3)
+                                <div style="margin-left:140px;">已通过</div>
+                            @endif
+                        </div>
+                    @endif
+                    <div style="overflow:hidden">
+                        <label>审核日志</label>
+                        <div style="margin-left:140px;">
+                            <div class="acmsg" style="margin-top: 10px">
+                                @foreach($shop_show as $val)
+                                <div style="margin: 10px 0;">
+                                    <div>{{date('Y-m-d,H:i:s',$val['create_time'])}}</div>
+                                    <div>{{$val['shop_text']}}</div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @endif
 
             </div>
 

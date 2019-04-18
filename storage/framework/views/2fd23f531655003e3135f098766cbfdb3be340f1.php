@@ -19,7 +19,11 @@
                     <div class="layui-input-inline">
                     <input type="text" name="name" value="<?php echo e($lists -> name); ?>" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
+<<<<<<< HEAD
+                    <span class="error name">请填写汉字</span>
+=======
                     <span class="error name">请填写汉子</span>
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
@@ -146,11 +150,11 @@
                     item.checked = data.elem.checked;
                 });
                 form.render('checkbox');
-                });
+            });
 
 
-                //全部选中来确定全选按钮是否选中
-                form.on('checkbox(choose)', function(data) {
+            //全部选中来确定全选按钮是否选中
+            form.on('checkbox(choose)', function(data) {
                 var three_child = $(data.elem).siblings().find(
                                     'ul li input[type="checkbox"]:not([name="show"])');
                 three_child.each(function(index, item) {
@@ -169,25 +173,25 @@
                     $(data.elem).parents('.list').children('.title').find(' input.allChoose').get(0).checked = true;
                 }
                 form.render('checkbox');
-                });
+            });
 
-                form.on('checkbox(three-choose)', function(data) {
-                    var child = $(data.elem).parents('li').find(
-                    'input[type="checkbox"]:not([name="show"])');
-                    var childChecked = $(data.elem).parents('li').find(
-                        'ul li input[type="checkbox"]:not([name="show"]):checked')
-                    if (childChecked.length == child.length-1) {
-                        $(data.elem).parents('li').find(' input.aaa').get(0).checked = true;
-                    } else if(childChecked.length==0){
-                            $(data.elem).parents('li').find(' input.aaa').get(0).checked = false;
-
-                        }
-                        else {
+            form.on('checkbox(three-choose)', function(data) {
+                var child = $(data.elem).parents('li').find(
+                'input[type="checkbox"]:not([name="show"])');
+                var childChecked = $(data.elem).parents('li').find(
+                    'ul li input[type="checkbox"]:not([name="show"]):checked')
+                if (childChecked.length == child.length-1) {
                     $(data.elem).parents('li').find(' input.aaa').get(0).checked = true;
+                } else if(childChecked.length==0){
+                        $(data.elem).parents('li').find(' input.aaa').get(0).checked = false;
 
                     }
-                        form.render('checkbox');
-                });
+                    else {
+                $(data.elem).parents('li').find(' input.aaa').get(0).checked = true;
+
+                }
+                    form.render('checkbox');
+            });
 
             
 
@@ -197,9 +201,11 @@
 
           //监听提交
           form.on('submit(formDemo)', function(data){
-            // layer.msg(JSON.stringify(data.field));
-            // return false;
+            layer.msg(JSON.stringify(data.field));
+            return false;
           });
+<<<<<<< HEAD
+=======
         });
         $("input").blur(function() {
             var name = $(this).prop("name");
@@ -224,7 +230,9 @@
             });
         });
     
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
 
+        });
 
 
     </script>

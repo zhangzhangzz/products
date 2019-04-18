@@ -137,18 +137,49 @@
                 </div>
             </div>
 
+            <?php if(!empty($shop_show)): ?>
             <div class="titleBox">
                 <div>审核日志</div>
             </div>
 
             <div class="checkMsg">
-                <div class="actionLog">
-                    <label>审核员操作</label>
-                    <div style="margin-left: 140px;">
-                        <button class="layui-btn pass">通过</button>
-                        <button class="layui-btn layui-btn-primary refuse ShopId" data-value="<?php echo e($value["id"]); ?>">驳回</button>
+                <?php if($value["audit_status"] == 1): ?>
+                    <div class="actionLog">
+                        <label>审核员操作</label>
+                        <div style="margin-left: 140px;">
+                            <button class="layui-btn pass">通过</button>
+                            <button class="layui-btn layui-btn-primary refuse ShopId" data-value="<?php echo e($value["id"]); ?>">驳回</button>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <div>
+                    <?php if($value["audit_status"] == 1): ?>
+                    <?php else: ?>
+                        <div class="actionLog">
+                            <label>审核员操作</label>
+                            <?php if($value["audit_status"] == 2): ?>
+                                <div style="margin-left:140px;">已驳回</div>
+                            <?php elseif($value["audit_status"] == 3): ?>
+                                <div style="margin-left:140px;">已通过</div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                    <div style="overflow:hidden">
+                        <label>审核日志</label>
+                        <div style="margin-left:140px;">
+                            <div class="acmsg" style="margin-top: 10px">
+                                <?php $__currentLoopData = $shop_show; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div style="margin: 10px 0;">
+                                    <div><?php echo e(date('Y-m-d,H:i:s',$val['create_time'])); ?></div>
+                                    <div><?php echo e($val['shop_text']); ?></div>
+                                </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <?php endif; ?>
 
             </div>
 

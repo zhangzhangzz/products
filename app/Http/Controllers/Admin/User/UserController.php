@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Http\Model\Admin\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +32,20 @@ class UserController extends Controller
      * 会员显示
      * 陈绪
      */
-    public function look(){
+    public function look(Request $request){
 
+        if($request->isMethod("post")){
+            $id = $request->id;
+            $account = new Account();
+            $user = $account->user_select($id);
+            $order = array();
+            if($user){
+                return ajax_success("获取成功",array("user"=>$user,"order"=>$order));
+            }else{
+                return ajax_error("获取失败");
+            }
+
+        }
         return view("admin.user.look");
 
     }
