@@ -39,7 +39,7 @@ class RoleController extends Controller
         // 转换成数组
         $data1 = arr($li);
         // 一维数组转多维数组
-        $list = arr2($data1);
+        $list = tree($data1);
         $name = Roles::get();
         return view("admin.role.save",["list" => $list, "name" => $name]);
     }
@@ -109,7 +109,7 @@ class RoleController extends Controller
         $li = DB::select($sql);
         $data1 = arr($li);
         // 一维数组转多维数组
-        $list = arr2($data1);
+        $list = tree($data1);
         return view("admin.role.edit",["list" => $list,"lists" => $lists,"data" => $data,"checkbox" => $checkbox]);
     }
 
