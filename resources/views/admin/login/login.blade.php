@@ -193,6 +193,7 @@
             $(".login").click();
         }
     });
+
     $(".checkBox").click(function(){
         var itag = $($(this).find("i"));
         var flag = itag.is(':visible');

@@ -99,10 +99,8 @@ class CategoryController extends Controller{
         $category = $request->all();
         unset($category["_token"]);
         $images = $_FILES["images"];
-        if(!empty($images["tmp_name"])){
-            $images_url = ImagesUrl($images);
-            $category["images"] = $images_url;
-        }
+        $images_url = ImagesUrl($images);
+        $category["images"] = $images_url;
         $bool = DB::table("goods_type")->where("id",$category["id"])->update($category);
         if($bool){
             return redirect("admin/category/index")->with("message","修改成功");

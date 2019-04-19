@@ -110,6 +110,12 @@
         display: inline-block;
         color: #31b0d5;
     }
+    .Incode{
+        overflow:hidden;
+        display: inline-block;
+        width: calc(100% - 110px);
+    }
+
 
     .Incode{
         overflow:hidden;
@@ -152,7 +158,6 @@
                     <canvas id="canvas" width="100" height="43"></canvas>
                     <div style="font-size:12px;color:#888; cursor: pointer;" onclick="draw(show_num);">看不清？换一张</div>
                 </div>
-                
             </div>
 
             <?php if(session('errors')): ?>
@@ -189,7 +194,6 @@
             $(".login").click();
         }
     });
-
 
     $(".checkBox").click(function(){
         var itag = $($(this).find("i"));

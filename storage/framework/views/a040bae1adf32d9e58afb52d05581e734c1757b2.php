@@ -199,11 +199,8 @@
             var ab = $($(this).parent()).parent();
             var addunbox = $(ab).parent().find(".addunBox");
             var label = $(ab).parent().prev();
-            console.log(label);
             ab.remove();
-            console.log(addunbox.length+"-----------------");
             if(addunbox.length-1==0){
-                console.log("here");
                 label.css({display:"none"});
             }
             $('#changeUdata').click();

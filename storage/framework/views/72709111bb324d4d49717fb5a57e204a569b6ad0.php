@@ -3,7 +3,7 @@
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
             <?php
-                $menu = tree(arr(menu()));
+                $menu = arr2(arr(menu()));
                 $i = 0;
             ?>
             <?php $__currentLoopData = $menu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

@@ -3,17 +3,17 @@
 @section('content')
     <div class="main" >
         <div style="padding:30px;">
-            <form class="layui-form form">
+            <form class="layui-form form" action="">
                 <div class="bigForm">
                     <div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">订单搜索：</label>
                             <div class="layui-input-block ibox">
                                 <select name="select1" class="select1">
-                                    <option value="1">订单编号</option>
-                                    <option value="2">物流单号</option>
-                                    <option value="3">收货人姓名</option>
-                                    <option value="4">收货人手机号</option>
+                                    <option value="0">订单编号</option>
+                                    <option value="1">物流单号</option>
+                                    <option value="2">收货人姓名</option>
+                                    <option value="3">收货人手机号</option>
                                 </select>
                             </div>
                             <div class="layui-input-inline" style="padding-left: 4px;">
@@ -42,15 +42,17 @@
                             <label class="layui-form-label">订单状态：</label>
                             <div class="layui-input-block ibox">
                                 <select name="state" class="select2">
-                                    <option value="1">全部</option>
-                                    <option value="2">待付款</option>
-                                    <option value="3">待发货</option>
-                                    <option value="8">待分享</option>
-                                    <option value="4">已发货</option>
-                                    <option value="5">已完成</option>
-                                    <option value="6">待评价</option>
-                                    <option value="7">退款中</option>
-                                    <option value="9">退款完成</option>
+                                    <option value="0">已取消</option>
+                                    <option value="1">代付款</option>
+                                    <option value="2">已付款</option>
+                                    <option value="3">待分享</option>
+                                    <option value="4">待发货</option>
+                                    <option value="5">已发货</option>
+                                    <option value="6">已完成</option>
+                                    <option value="7">待评价</option>
+                                    <option value="8">已评价</option>
+                                    <option value="9">追加评论</option>
+                                    <option value="10">售后</option>
                                 </select>
                             </div>
                         </div>
@@ -66,17 +68,15 @@
 
             </form>
 
-            <div class="layui-tab" style="margin-top:30px;" lay-filter="demo">
+            <div class="layui-tab" style="margin-top:30px;">
                 <ul class="layui-tab-title">
-                    <li class="layui-this dBox" data-item="1" lay-id="1">全部</li>
-                    <li class="dBox" data-item="2" lay-id="2">待付款</li>
-                    <li class="dBox" data-item="3" lay-id="3">待发货</li>
-                    <li class="dBox" data-item="8" lay-id="8">待分享</li>
-                    <li class="dBox" data-item="4" lay-id="4">已发货</li>
-                    <li class="dBox" data-item="5" lay-id="5">已完成</li>
-                    <li class="dBox" data-item="6" lay-id="6">待评价</li>
-                    <li class="dBox" data-item="7" lay-id="7">退款中</li>
-                    <li class="dBox" data-item="9" lay-id="9">退款完成</li>
+                    <li class="layui-this dBox" data-item="1">全部</li>
+                    <li class="dBox" data-item="2">待付款</li>
+                    <li class="dBox" data-item="3">待发货</li>
+                    <li class="dBox" data-item="4">已发货</li>
+                    <li class="dBox" data-item="5">已完成</li>
+                    <li class="dBox" data-item="6">待评价</li>
+                    <li class="dBox" data-item="7">退款中</li>
                 </ul>
                 <div class="layui-tab-content" >
                     <div class="layui-tab-item layui-show">
@@ -87,9 +87,6 @@
                     </div>
                     <div class="layui-tab-item">
                         <table class="demo3" lay-filter="test"></table>
-                    </div>
-                    <div class="layui-tab-item">
-                        <table class="demo8" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
                         <table class="demo4" lay-filter="test"></table>
@@ -103,11 +100,9 @@
                     <div class="layui-tab-item">
                         <table class="demo7" lay-filter="test"></table>
                     </div>
-                    <div class="layui-tab-item">
-                        <table class="demo9" lay-filter="test"></table>
-                    </div>
                 </div>
             </div>
+
 
 
         </div>
@@ -124,18 +119,10 @@
             ,$ = layui.$
             ,layer = layui.layer;
 
-            //触发事件
-
-
-
-            $('.site-demo-active').on('click', function(){
-                var othis = $(this), type = othis.data('type');
-                active[type] ? active[type].call(this, othis) : '';
-            });
 
             $(".dBox").click(function () {
                 var index = $(this).attr("data-item");
-                    var url = "{{url('admin/business/show')}}"+ "/" + index;
+                    var url = "{{url('admin/business/search')}}"+ "/" + index;
                 $.ajax({
                     url:url,
                     type:"POST",
@@ -160,7 +147,6 @@
                                     ,{field: 'phone', title: '收货人手机号', align:'center'}
                                     ,{field: 'address', title: '收货人地址', align:'center'}
                                 ]]
-                                ,id:`idTest${index}`
                                 ,data:data
                             });
                     },
@@ -183,59 +169,12 @@
                 }
             });
 
-
             form.on('submit(formDemo)', function(data){
 //                console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
                 if(data.field.select1_input=="" && data.field.gname=="" && data.field.date==""){
                     layer.msg('至少输入一个查询条件');
                     return false;
                 }
-                // data.field获取搜索数据
-                var field = data.field;
-                element.tabChange('demo', field.state);
-                var url = "{{url('admin/business/search')}}";
-                {{--table.reload(`idTest${index}`, {--}}
-                    {{--url:url,--}}
-                    {{--method:'post',--}}
-                    {{--where: {"_token":"{{csrf_token()}}","field":field}--}}
-                {{--});--}}
-
-                $.ajax({
-                    url:url,
-                    type:"POST",
-                    dataType:"json",
-                    data:{"_token":"{{csrf_token()}}","data":field},
-                    success:function (data) {
-                        //第一个实例
-                        table.render({
-                            elem: `.demo${field.state}`
-                            ,cols: [[ //表头
-                                {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
-                                ,{field: 'goodsname', title: '商品名称', align:'center' }
-                                ,{field: 'price', title: '单价',  sort: true, align:'center'}
-                                ,{field: 'count', title: '数量', align:'center' }
-                                ,{field: 'realpay', title: '实付金额', align:'center'}
-                                ,{field: 'time', title: '下单时间', align:'center'}
-                                ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
-                                    return `<div class="status${d.status}" style="color:${d.status.color}">${d.status.name}</div>`;
-                                }}
-                                ,{field: 'ems', title: '物流单号', align:'center'}
-                                ,{field: 'name', title: '收货人姓名', align:'center'}
-                                ,{field: 'phone', title: '收货人手机号', align:'center'}
-                                ,{field: 'address', title: '收货人地址', align:'center'}
-                            ]]
-                            ,id:`idTest${field.state}`
-                            ,data:data
-                        });
-                    },
-                    error:function (data) {
-                        console.log("错误");
-                    }
-                });
-
-
-
-
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });
 
@@ -272,7 +211,6 @@
                 ,{field: 'phone', title: '收货人手机号', align:'center'}
                 ,{field: 'address', title: '收货人地址', align:'center'}
                 ]]
-                ,id:`idTest1`
                 ,data:data
             });
 
