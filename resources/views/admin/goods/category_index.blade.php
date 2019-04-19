@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="{{ asset('css/goodsclassify.css') }}">
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 @section('content')
-    {{ session('message') }}
     <div class="main">
         <button class="layui-btn add" lay-submit lay-filter="formDemo" style="margin:30px;" >添加</button>
         <div class="layui-form form">

@@ -137,12 +137,16 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
             <?php if(!empty($shop_show)): ?>
+=======
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d
             <div class="titleBox">
                 <div>审核日志</div>
             </div>
 
             <div class="checkMsg">
+<<<<<<< HEAD
                 <?php if($value["audit_status"] == 1): ?>
                     <div class="actionLog">
                         <label>审核员操作</label>
@@ -180,6 +184,15 @@
                     </div>
                 </div>
                 <?php endif; ?>
+=======
+                <div class="actionLog">
+                    <label>审核员操作</label>
+                    <div style="margin-left: 140px;">
+                        <button class="layui-btn pass">通过</button>
+                        <button class="layui-btn layui-btn-primary refuse ShopId" data-value="<?php echo e($value["id"]); ?>">驳回</button>
+                    </div>
+                </div>
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d
 
             </div>
 

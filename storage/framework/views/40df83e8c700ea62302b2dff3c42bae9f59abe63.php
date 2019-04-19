@@ -1,8 +1,6 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/goodsclassify.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
 <?php $__env->startSection('content'); ?>
-    <?php echo e(session('message')); ?>
-
     <div class="main">
         <button class="layui-btn add" lay-submit lay-filter="formDemo" style="margin:30px;" >添加</button>
         <div class="layui-form form">

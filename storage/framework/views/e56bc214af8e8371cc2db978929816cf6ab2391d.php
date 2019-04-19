@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <link rel="stylesheet" href="<?php echo e(asset('css/user.css')); ?>">
 <?php $__env->startSection('content'); ?>
     <div class="main" >
@@ -294,3 +295,5 @@
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+=======
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d

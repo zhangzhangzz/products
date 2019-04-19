@@ -86,18 +86,7 @@ class BusinessController extends Controller
             "4" => "phone"
         ];
         $list = $request -> except("_token");
-        if(!empty($list['select1_input']))
-        {
-
-        }
-        if(!empty($list['gname']))
-        {
-
-        }
-        if(!empty($list['date']))
-        {
-
-        }
+        if(empty($list['gname']) && empty($list['date']))
         return json_encode($list);
         if(is_numeric($search))
         {

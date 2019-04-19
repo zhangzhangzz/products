@@ -78,7 +78,11 @@
 
 
         $.ajax({
+<<<<<<< HEAD
             url:"<?php echo e(url('admin/shop/index')); ?>",
+=======
+            url:"<?php echo e(url('admin/shop/show')); ?>",
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d
             type:"POST",
             dataType:"json",
             data:{"_token":"<?php echo e(csrf_token()); ?>"},
@@ -89,10 +93,16 @@
                     //第一个实例
                     table.render({
                         elem: '.demo1'
+<<<<<<< HEAD
                         ,limit:10
                         ,width:1189
                         ,id:'tableOne'
                         ,page: true
+=======
+                        ,limit:999999
+                        ,width:1189
+                        ,id:'tableOne'
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d
                         ,cols: [[ //表头
                             {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
                             ,{field: 'company_name', title: '公司名称' , width:150 , align:'center'}
@@ -118,7 +128,11 @@
                                 }
                             }}
                             ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+<<<<<<< HEAD
                                 return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a> `;
+=======
+                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d
                             }}
                         ]]
                         ,data:data
@@ -133,11 +147,40 @@
 
         $(".dBox").click(function () {
             var index = $(this).attr("data-item");
+<<<<<<< HEAD
             $.ajax({
                 url:"<?php echo e(url('admin/shop/show')); ?>",
                 type:"POST",
                 dataType:"json",
                 data:{"_token":"<?php echo e(csrf_token()); ?>","index":index},
+=======
+            if(index==0){
+                var url = "<?php echo e(url('admin/shop/show')); ?>";
+            }
+            if(index==1){
+                var url = "<?php echo e(url('admin/shop/index')); ?>";
+            }
+            if(index==2){
+                var url = "<?php echo e(url('admin/shop/check')); ?>";
+            }
+            if(index==3){
+                var url = "<?php echo e(url('admin/shop/shop_pass')); ?>";
+            }
+            if(index==4){
+                var url = "<?php echo e(url('admin/shop/shop_manage')); ?>";
+            }
+            if(index==5){
+                var url = "<?php echo e(url('admin/shop/shop_audit')); ?>";
+            }
+            if(index==6){
+                var url = "<?php echo e(url('admin/shop/shop_down')); ?>";
+            }
+            $.ajax({
+                url:url,
+                type:"POST",
+                dataType:"json",
+                data:{"_token":"<?php echo e(csrf_token()); ?>"},
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d
                 success:function (data) {
                     console.log(data)
                     if(data.status == 1){
@@ -145,8 +188,12 @@
                         //第一个实例
                         table.render({
                             elem: `.demo${index}`
+<<<<<<< HEAD
                             ,limit:10
                             ,page: true
+=======
+                            ,limit:999999
+>>>>>>> cf0a94a1d12d7a2da1a5f140a983d25f6581340d
                             ,width:1189
                             ,cols: [[ //表头
                                 {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
