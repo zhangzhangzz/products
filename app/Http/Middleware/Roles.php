@@ -14,23 +14,47 @@ class Roles
      */
     public function handle($request, Closure $next)
     {
+        $roles = [];
         //如果用户咩有登录，返回到登录页面
         if(empty(session('user'))){
             return redirect('admin/login');
         }
+        $admin_user = Admin_User::find(session('user') -> id);
+        // 用户不存在
+        if(empty($admin_user))
+        {
+            return redirect('admin/login') -> with('errors', '用户不存在');;
+        }
+        // 用户是否被禁用
+        if($admin_user['login'] == 0)
+        {
+            return redirect('admin/login') -> with('errors', '用户已被禁用');;
+        }
+        // 超级管理员 拥有所有权限
+        if($admin_user['role_id'] == 1)
+        {
+            return $next($request);
+        }
         // 根据当前的登录用户获取该用户角色
         $roles = Admin_User::find(session('user') -> id) -> roles() -> get();
+        if(empty(arr($roles)))
+        {
+            return redirect('admin/login') -> with('errors', '获取权限数据为空');
+        }
         $array = [];
         if($roles[0]['state'] != 1)
         {
-            return redirect("admin/login") -> with('errors', $roles['state'].'已被禁用');
+            return redirect("admin/login") -> with('errors', $roles['state'].'职位已被禁用');
         }
         foreach($roles as $k =>$v)
         {
             $p = $v -> action() -> get();
             foreach($p as $n)
             {
-                $array[] = $n -> url;
+                if($n -> state == 1)
+                {
+                    $array[] = $n -> url;
+                }
             }
         }
         // 去重
@@ -47,11 +71,16 @@ class Roles
             "date" => date("Y-m-d H:i:s", time()),
             "route" => $route
         ];
-        file_put_contents(" route.txt", json_encode($file_put)."\n\n", 8);
+//        file_put_contents(" route.txt", json_encode($file_put)."\n\n", 8);
         // 拆分当前路由
         $in_up = explode("@",$route);
-        // 正则验证,直接通过
-        if($in_up[1] == "regular")
+        // 搜索查询
+        if($in_up[1] == "search")
+        {
+            return $next($request);
+        }
+        // 切换显示
+        if($in_up[1] == "show")
         {
             return $next($request);
         }
@@ -73,16 +102,18 @@ class Roles
                 $action[] = $route;
             }
         }
-       /* // 判断是否有权限访问
+        // 判断是否有权限访问
         if(!in_array($route, $action))
         {
-            dd("没权限");
+            di("没权限");
+            echo "<script>alert('没权限');</script>";
+            return redirect("admin");
 //            没有权限
 //            跳转回登录页面
 //            return redirect('admin/log');
 //            返回上一层
 //            return back();
-        }*/
+        }
 
         return $next($request);
     }

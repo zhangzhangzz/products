@@ -41,11 +41,22 @@ class LoginController extends Controller
         {
             return redirect("admin/login") -> with('errors','密码不正确');
         }
-        // 查询所有角色的权限
-        $che = arr(Action_Roles::where("roles_id", $list['role_id']) -> get());
-        foreach($che as $c)
+        // 查询是否是超级管理员
+        if($list['role_id'] == 1)
         {
-            $checkbox[] = $c['action_id'];
+            // 查询所有角色的权限
+            $che = arr(Action::get());
+            foreach($che as $c)
+            {
+                $checkbox[] = $c['id'];
+            }
+        }else{
+            // 查询所有角色的权限
+            $che = arr(Action_Roles::where("roles_id", $list['role_id']) -> get());
+            foreach($che as $c)
+            {
+                $checkbox[] = $c['action_id'];
+            }
         }
         $action = arr(Action::get());
         foreach($action as $v)
@@ -57,6 +68,7 @@ class LoginController extends Controller
         }
         Session::put("user",$list);
         Session::put("route",$name);
+
         return redirect("admin");
     }
     /**

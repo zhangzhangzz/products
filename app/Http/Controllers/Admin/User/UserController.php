@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Http\Model\Admin\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +32,20 @@ class UserController extends Controller
      * 会员显示
      * 陈绪
      */
-    public function look(){
+    public function look(Request $request){
 
+        if($request->isMethod("post")){
+            $id = $request->id;
+            $account = new Account();
+            $user = $account->user_select($id);
+            $order = array();
+            if($user){
+                return ajax_success("获取成功",array("user"=>$user,"order"=>$order));
+            }else{
+                return ajax_error("获取失败");
+            }
+
+        }
         return view("admin.user.look");
 
     }
@@ -46,7 +59,12 @@ class UserController extends Controller
 
         if($request->isMethod("post")){
             $id = $request->id;
-            $bool = DB::table("account")->where("id",$id)->update(["status"=>0]);
+            $status = $request->status;
+            if($status == 1){
+                $bool = DB::table("account")->where("id",$id)->update(["status"=>0]);
+            }else{
+                $bool = DB::table("account")->where("id",$id)->update(["status"=>1]);
+            }
             if($bool){
                 return ajax_success("修改成功");
             }else{
@@ -55,6 +73,8 @@ class UserController extends Controller
         }
 
     }
+
+
 
 
     /**
@@ -84,10 +104,10 @@ class UserController extends Controller
 
         if($request->isMethod("post")){
 
-            $name = Input::get("name") ? Input::get("name") : "%";
-            $weixin_qq = Input::get("weixin_qq") ? Input::get("weixin_qq") : "";
-            $phone = Input::get("phone") ? Input::get("phone") : "";
-            $address = Input::get("address") ? Input::get("address") : "";
+            $name = trim(Input::get("name")) ? trim(Input::get("name")) : "";
+            $weixin_qq = trim(Input::get("weixin_qq")) ? trim(Input::get("weixin_qq")) : "";
+            $phone = trim(Input::get("phone")) ? trim(Input::get("phone")) : "";
+            $address = trim(Input::get("address")) ? trim(Input::get("address")) : "";
             $where = [];
             if(!empty($name) && empty($weixin_qq) && empty($phone) && empty($address)){
                 $where[] = ["name","like","%".$name."%"];
@@ -133,9 +153,23 @@ class UserController extends Controller
                 $where[] = ["address","like","%".$address."%"];
                 $where[] = ["weixin_qq","like","%".$weixin_qq."%"];
             }
+            if(!empty($phone) && empty($name) && !empty($weixin_qq) && empty($address)){
+                $where[] = ["phone","like","%".$phone."%"];
+                $where[] = ["weixin_qq","like","%".$weixin_qq."%"];
+            }
             if(!empty($phone) && empty($name) && empty($weixin_qq) && !empty($address)){
                 $where[] = ["phone","like","%".$phone."%"];
                 $where[] = ["address","like","%".$address."%"];
+            }
+            if(!empty($phone) && !empty($name) && empty($weixin_qq) && !empty($address)){
+                $where[] = ["phone","like","%".$phone."%"];
+                $where[] = ["address","like","%".$address."%"];
+                $where[] = ["name","like","%".$name."%"];
+            }
+            if(!empty($phone) && empty($name) && !empty($weixin_qq) && !empty($address)){
+                $where[] = ["phone","like","%".$phone."%"];
+                $where[] = ["address","like","%".$address."%"];
+                $where[] = ["weixin_qq","like","%".$weixin_qq."%"];
             }
             $users = DB::table("account")->where($where)->get()->toArray();
             foreach ($users as $key => $value) {

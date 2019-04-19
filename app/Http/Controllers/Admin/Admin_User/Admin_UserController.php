@@ -51,7 +51,7 @@ class Admin_UserController extends Controller
         // 密码加密存入数据库
         $list['password'] = Hash::make($list['password']);
         // 日期
-        $list['data'] = date("Y-m-d");
+        $list['date'] = date("Y-m-d");
         // 时间戳
         $list['time'] = time();
         // 插入数据
@@ -150,55 +150,21 @@ class Admin_UserController extends Controller
             return "0";
         }
     }
-    /**
-     * 正则验证
-     * 苏鹏
-     */
-    public function regular(Request $request)
-    {
-        $input = $request -> except("_token");
-        switch ($input['name']){
-            // 账号
-            case "account":
-                $data = 0;
-                if(!preg_match('/^[A-Za-z0-9_]{8,16}+$/',$input['data']))
-                {
-                    $data = "由8-16位数字、字母、下划线组成！";
-                }
-                echo json_encode($data);
-                break;
-            // 密码
-            case "password":
-                $data = 0;
-                if(!preg_match('/^[A-Za-z0-9_]{8,16}+$/',$input['data']))
-                {
-                    $data = "由8-16位数字、字母、下划线组成！";
-                }
-                echo json_encode($data);
-                break;
-            // 部门
-            case "partment":
-                $data = 0;
-                if(!preg_match('/^[A-Za-z0-9_\x{4e00}-\x{9fa5}]+$/u',$input['data']))
-                {
-                    $data = "数字、字母、下划线、汉字都可以";
-                }
-                echo json_encode($data);
-                break;
-            // 姓名
-            case "name":
-                $data = 0;
-                if(!preg_match('/^[\x{4e00}-\x{9fa5}]+$/u',$input['data']))
-                {
-                    $data = "汉字组成";
-                }
-                echo json_encode($data);
-                break;
 
-            default:
-                break;
+    public function state($id, $login)
+    {
+        // 进行修改
+        $roles = Admin_User::find($id);
+        $roles -> login = $login;
+        $re = $roles -> save();
+        if($re)
+        {
+            DB::commit();  // 提交事务
+            return 1;
+        }else{
+            DB::rollback();  // 回滚事务
+            return 0;
         }
     }
-
 
 }

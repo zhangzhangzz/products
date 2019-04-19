@@ -18,9 +18,9 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">账号</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="account" value="<?php echo e($list -> account); ?>" required lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+                    <input type="text" name="account" value="<?php echo e($list -> account); ?>"  placeholder="请输入账号" autocomplete="off" class="layui-input account" lay-verify="account">
                     </div>
-                    <span class="error account">由8-16位数字、字母、下划线组成！</span>
+                    <span class="error erac">由8-16位数字、字母、下划线组成！</span>
                 </div>
 
                 <div class="layui-form-item new pwd">
@@ -47,17 +47,17 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">部门</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="partment" value="<?php echo e($list -> partment); ?>" required lay-verify="required" placeholder="请输入部门" autocomplete="off" class="layui-input">
+                    <input type="text" name="partment" value="<?php echo e($list -> partment); ?>"  placeholder="请输入部门" autocomplete="off" class="layui-input partment" lay-verify="partment">
                     </div>
-                    <span class="error partment">数字、字母、下划线、汉字都可以</span>
+                    <span class="error erpa">数字、字母、下划线、汉字都可以</span>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">姓名</label>
                     <div class="layui-input-inline">
-                    <input type="text" name="name" value="<?php echo e($list -> name); ?>" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" value="<?php echo e($list -> name); ?>" placeholder="请输入姓名" autocomplete="off" class="layui-input name" lay-verify="name">
                     </div>
-                    <span class="error name">汉字组成</span>
+                    <span class="error erna">汉字组成</span>
                 </div>
 
                 <div class="layui-form-item">
@@ -92,7 +92,7 @@
                 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                    <button class="layui-btn getBtn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button class="layui-btn layui-btn-disabled getBtn" lay-submit lay-filter="formDemo">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -109,55 +109,136 @@
     layui.use('form', function(){
     var form = layui.form
         $= layui.jquery;
+    
+    $(function () {
+        var account = $(".account").val();
+        var partment = $(".partment").val();
+        var name = $(".name").val();
+        if(!(/^[A-Za-z0-9_]{8,16}$/.test(account))){
+            $(".erac").css({color:"red"});
+            $(".erac").html("由8-16位数字、字母、下划线组成！");
+        }
+        if(!(/^[\u4E00-\u9FA5]+$/.test(name))){
+            $(".erna").css({color:"red"});
+            $(".erna").html("必须由汉字组成！");
+        }
+        if(partment==""){
+            $(".erpa").css({color:"red"});
+            $(".erpa").html("请填写部门！");
+        }
 
-    $(".innewpwd").click(function (event) {
-        event.stopPropagation();
-        $(".firstpwd").css({display:"block"});
-        $(".surepwd").css({display:"block"});
+        if(/^[A-Za-z0-9_]{8,16}$/.test(account) && /^[\u4E00-\u9FA5]+$/.test(name) && partment!=""){
+            $(".getBtn").attr("class","layui-btn getBtn");
+        }
     })
 
-    $(window).click(function(){
-        if ($('.innewpwd').val()=="") {
-            $(".firstpwd").css({display:"none"});
-            $(".surepwd").css({display:"none"});
+        $(function () {
+            var account = $(".account").val();
+            var partment = $(".partment").val();
+            var name = $(".name").val();
+            if(!(/^[A-Za-z0-9_]{8,16}$/.test(account))){
+                $(".erac").css({color:"red"});
+                $(".erac").html("由8-16位数字、字母、下划线组成！");
+            }
+            if(!(/^[\u4E00-\u9FA5]+$/.test(name))){
+                $(".erna").css({color:"red"});
+                $(".erna").html("必须由汉字组成！");
+            }
+            if(partment==""){
+                $(".erpa").css({color:"red"});
+                $(".erpa").html("请填写部门！");
+            }
+        });
+
+        $(".innewpwd").click(function (event) {
+            event.stopPropagation();
+            $(".firstpwd").css({display:"block"});
+            $(".surepwd").css({display:"block"});
+        })
+
+        $(window).click(function(){
+            if ($('.innewpwd').val()=="") {
+                $(".firstpwd").css({display:"none"});
+                $(".surepwd").css({display:"none"});
+            }
+        });
+
+        var aflag = false,nflag = false;
+        $(".layui-input").change(function(){
+            var item = $(this).attr("name");
+            var value = $(this).val();
+            var partment = $(".partment").val();
+            var error = $($(this).parent()).next();
+            if(item=="account"){
+                var ret = /^[A-Za-z0-9_]{8,16}$/;
+                aflag = ret.test(value);
+                if(aflag){
+                    $(error).css({color:"green"});
+                    $(error).html("√可以使用");
+                }else{
+                    $(error).css({color:"red"});
+                    $(error).html("由8-16位数字、字母、下划线组成！");
+                }
+            }
+            if(item=="name"){
+                var ret = /^[\u4E00-\u9FA5]+$/;
+                nflag = ret.test(value);
+                if(nflag){
+                    $(error).css({color:"green"});
+                    $(error).html("√可以使用");
+                }else{
+                    $(error).css({color:"red"});
+                    $(error).html("汉字组成");
+                }
+            }
+
+            var name = $(".name").val();
+            if(/^[\u4E00-\u9FA5]+$/.test(name)){
+                nflag = true;
+            }
+
+            var account = $(".account").val();
+            if(/^[A-Za-z0-9_]{8,16}$/.test(account)){
+                aflag = true;
+            }
+
+            if(item=="partment"){
+                if(value=""){
+                    $(error).css({color:"red"});
+                    $(error).html("请输入部门");
+                }else{
+                    $(error).html("");
+                }
+            }
+            //console.log(aflag+"--"+nflag+"---"+partment);
+            if(aflag && nflag && partment!=""){
+                $(".getBtn").attr("class","layui-btn getBtn");
+            }else{
+                $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
+            }
+        });
+
+    form.verify({
+        name:[
+            /^[\u4E00-\u9FA5]+$/
+            ,'请使用汉字'
+        ] 
+        ,account:[
+            /^[A-Za-z0-9_]{8,16}$/
+            ,'由8-16位数字、字母、下划线组成！'
+        ]
+        ,partment:function(value,item){
+            if(value==""){
+                return "请输入部门";
+            }
         }
     });
 
-    form.verify({
-        spass: function(value, item){ //value：表单的值、item：表单的DOM对象
-            var pwd = $(".password").val();
-            if(value!= pwd){
-                return '两次输入密码不一致，请重新输入';
-            }
-        }
-        });
-        $("input").blur(function(){
-            var name = $(this).prop("name");
-            var data = $(this).val();
-            $.ajax({
-                url: '<?php echo e(url("admin/admin_user/regular")); ?>',
-                type: 'POST',
-                dataType: 'JSON',
-                data: {"_token":"<?php echo e(csrf_token()); ?>" , "name":name , "data":data},
-                success: function (data)
-                {
-
-                    if(data)
-                    {
-                        $("."+name).css("color","red");
-                        $("."+name).html(data);
-                        $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
-                    }else{
-                        $("."+name).css("color","green");
-                        $("."+name).html("√可以使用");
-                        $(".getBtn").attr("class","layui-btn getBtn");
-                    }
-                }
-            });
-        });
     //监听提交
     form.on('submit(formDemo)', function(data){
-
+        if($(".getBtn").hasClass("layui-btn-disabled")){
+            return false;
+        }
     });
 
 

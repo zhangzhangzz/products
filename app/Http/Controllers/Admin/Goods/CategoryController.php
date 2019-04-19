@@ -27,7 +27,7 @@ class CategoryController extends Controller{
         $category_list = genTree($category);
         $page = $request->page ?: 1;
         //每页的条数
-        $perPage = 5;
+        $perPage = 2;
         //计算每页分页的初始位置
         $offset = ($page * $perPage) - $perPage;
         //实例化LengthAwarePaginator类，并传入对应的参数
@@ -99,8 +99,10 @@ class CategoryController extends Controller{
         $category = $request->all();
         unset($category["_token"]);
         $images = $_FILES["images"];
-        $images_url = ImagesUrl($images);
-        $category["images"] = $images_url;
+        if(!empty($images["tmp_name"])){
+            $images_url = ImagesUrl($images);
+            $category["images"] = $images_url;
+        }
         $bool = DB::table("goods_type")->where("id",$category["id"])->update($category);
         if($bool){
             return redirect("admin/category/index")->with("message","修改成功");

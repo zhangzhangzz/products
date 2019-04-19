@@ -65,21 +65,34 @@
 
          form.render();
 
-         var list = <?php echo $list; ?>;
+         var list = <?php
+             if(empty(arr($list)))
+             {
+                 echo 0;
+             }else{
+                 echo $list;
+             }
+             ?>;
          var data = [];
+
          if(list.length == 1)
          {
              for(var i in  list)
              {
-                 data = [list[i]];
+                 if(list[i]['id'] != 1)
+                 {
+                     data = [list[i]];
+                 }
              }
          }else{
              for(var i in  list)
              {
-                 data.push(list[i]);
+                 if(list[i]['id'] != 1)
+                 {
+                     data.push(list[i]);
+                 }
              }
          }
-
          //第一个实例
          table.render({
              elem: '#demo'
@@ -142,7 +155,6 @@
 //             $.get("/admin/role/state/"+ id + "/" + btnTag,{
              $.get("/admin/role/state/"+ id + "/" + btnTag,{
              },function(res){
-                 console.log(res);
                  if(res==1)
                  {
                      data.elem.checked = !flag;

@@ -140,11 +140,14 @@ label{
     height: 30px;
     line-height: 30px;
 <<<<<<< HEAD
+=======
+
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
 }
 
 .reinput{
-    top: 0;
-    right: 0;
+    top: 5px;
+    left: 168px;
 }
 
 .addUdata{
@@ -236,6 +239,15 @@ label{
 .addUdata:hover{
     color: #38f;
 }
-=======
+
+<<<<<<< HEAD
+.cBody{
+    position:relative;
+    overflow:hidden;
+    background-color: #eee;
+    margin: 5px 0;
 }
->>>>>>> 531bc972e24293fcf7bd32d688e55e81659f0200
+=======
+
+
+>>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b

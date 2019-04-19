@@ -12,31 +12,31 @@
         
     <div class="layui-tab bigbox">
             <ul class="layui-tab-title">
-                <li class="layui-this">待审核</li>
-                <li>驳回</li>
-                <li>通过</li>
-                <li>经营中</li>
-                <li>审核中</li>
-                <li>已停业</li>
+                <li class="layui-this dBox" data-item="1">待审核</li>
+                <li class="dBox" data-item="2">驳回</li>
+                <li class="dBox" data-item="3">通过</li>
+                <li class="dBox" data-item="4">经营中</li>
+                <li class="dBox" data-item="5">审核中</li>
+                <li class="dBox" data-item="6">已停业</li>
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <table id="demo" lay-filter="test"></table>
+                    <table class="demo1"  lay-filter="test"></table>
                 </div>
                 <div class="layui-tab-item">
-                    <table id="demo2" lay-filter="test"></table>
+                    <table  class="demo2" lay-filter="test"></table>
                 </div>
                 <div class="layui-tab-item">
-                    <table id="demo3" lay-filter="test"></table>
+                    <table class="demo3" lay-filter="test"></table>
                 </div>
                 <div class="layui-tab-item">
-                    <table id="demo4" lay-filter="test"></table>
+                    <table class="demo4" lay-filter="test"></table>
                 </div>
                 <div class="layui-tab-item">
-                    <table id="demo5" lay-filter="test"></table>
+                    <table class="demo5" lay-filter="test"></table>
                 </div>
                 <div class="layui-tab-item">
-                    <table id="demo6" lay-filter="test"></table>
+                    <table class="demo6" lay-filter="test"></table>
                 </div>
             </div>
         </div>
@@ -59,16 +59,7 @@
         {{#  } }}
     </script>
 
-    <!-- 经营状态 -->
-    <script type="text/html" id="barDemo2">
-        {{#  if(d.status == 1){ }}
-            <div style="color:green">经营中</div>
-        {{#  } else if(d.status == -1){ }}
-        <div style="color:red">已停业</div>
-        {{#  } else if(d.status == 0){ }}
-        <div >审核中</div>
-        {{#  } }}
-    </script>
+
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('js'); ?>
@@ -77,52 +68,132 @@
     layui.use(['table','form','element'], function(){
         var element = layui.element
             table = layui.table
-            form = layui.form;
+            form = layui.form
+            $ = layui.$;
 
 
-        var data = [
-                {shopName:"意国小镇",companyName:"香香1",person:'张三',phone:'13122223333',maintype:'大米',check:1,status:1,action:'-'},
-                {shopName:"意国小镇",companyName:"香香1",person:'张三',phone:'13122223333',maintype:'大米',check:-1,status:0,action:'-'},
-                {shopName:"意国小镇",companyName:"香香1",person:'张三',phone:'13122223333',maintype:'大米',check:0,status:-1,action:'-'}
-                    ];               
-                    
-    
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            ,limit:999999
-            ,width:1189
-            ,cols: [[ //表头
-            {field: 'shopName', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
-            ,{field: 'companyName', title: '公司名称' , width:150 , align:'center'}
-            ,{field: 'person', title: '负责人' , width:150 , align:'center'}
-            ,{field: 'phone', title: '联系电话', width:130 , align:'center'} 
-            ,{field: 'maintype', title: '主营类目', width: 140 , align:'center'}
-            ,{field: 'check', title: '审核状态', width: 140,  align:'center' ,toolbar: '#barDemo1'}
-            ,{field: 'status', title: '经营状态', width: 140,  align:'center' , toolbar: '#barDemo2'}
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
-            ]]
-            ,data:data
+
+        $.ajax({
+            url:"<?php echo e(url('admin/shop/index')); ?>",
+            type:"POST",
+            dataType:"json",
+            data:{"_token":"<?php echo e(csrf_token()); ?>"},
+            success:function (data) {
+                console.log(data)
+                if(data.status == 1){
+                    var data = data.data;
+                    //第一个实例
+                    table.render({
+                        elem: '.demo1'
+                        ,limit:999999
+                        ,width:1189
+                        ,cols: [[ //表头
+                            {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
+                            ,{field: 'company_name', title: '公司名称' , width:150 , align:'center'}
+                            ,{field: 'functionary', title: '负责人' , width:150 , align:'center'}
+                            ,{field: 'phone', title: '联系电话', width:130 , align:'center'}
+                            ,{field: 'goods_type_name', title: '主营类目', width: 140 , align:'center'}
+                            ,{field: 'audit_status', title: '审核状态', width: 140,  align:'center'  , templet: function(d){
+                                if(d.audit_status=="1"){
+                                    return '待审核';
+                                }else if(d.audit_status=="2"){
+                                    return '驳回';
+                                }else if(d.audit_status=="3"){
+                                    return '通过';
+                                }
+                            }}
+                            ,{field: 'manage_status', title: '经营状态', width: 140,  align:'center' , templet: function(d){
+                                if(d.manage_status=="1"){
+                                    return '经营中';
+                                }else if(d.manage_status=="2"){
+                                    return '审核中';
+                                }else if(d.manage_status=="3"){
+                                    return '已停业';
+                                }
+                            }}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+                            }}
+                        ]]
+                        ,data:data
+                    });
+                }
+            },
+            error:function (data) {
+                console.log("错误");
+            }
         });
 
 
-        //第二个实例
-        table.render({
-            elem: '#demo2'
-            ,limit:999999
-            ,width:1189
-            ,cols: [[ //表头
-            {field: 'shopName', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
-            ,{field: 'companyName', title: '公司名称' , width:150 , align:'center'}
-            ,{field: 'person', title: '负责人' , width:150 , align:'center'}
-            ,{field: 'phone', title: '联系电话', width:130 , align:'center'} 
-            ,{field: 'maintype', title: '主营类目', width: 140 , align:'center'}
-            ,{field: 'check', title: '审核状态', width: 140,  align:'center' ,toolbar: '#barDemo1'}
-            ,{field: 'status', title: '经营状态', width: 140,  align:'center' , toolbar: '#barDemo2'}
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
-            ]]
-            ,data:data
-        });
+        $(".dBox").click(function () {
+            var index = $(this).attr("data-item");
+            if(index==2){
+                var url = "<?php echo e(url('admin/shop/check')); ?>";
+            }
+            if(index==3){
+                var url = "<?php echo e(url('admin/shop/shop_pass')); ?>";
+            }
+            if(index==4){
+                var url = "<?php echo e(url('admin/shop/shop_manage')); ?>";
+            }
+            if(index==5){
+                var url = "<?php echo e(url('admin/shop/shop_audit')); ?>";
+            }
+            if(index==6){
+                var url = "<?php echo e(url('admin/shop/shop_down')); ?>";
+            }
+            $.ajax({
+                url:url,
+                type:"POST",
+                dataType:"json",
+                data:{"_token":"<?php echo e(csrf_token()); ?>"},
+                success:function (data) {
+                    console.log(data)
+                    if(data.status == 1){
+                        var data = data.data;
+                        //第一个实例
+                        table.render({
+                            elem: `.demo${index}`
+                            ,limit:999999
+                            ,width:1189
+                            ,cols: [[ //表头
+                                {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
+                                ,{field: 'company_name', title: '公司名称' , width:150 , align:'center'}
+                                ,{field: 'functionary', title: '负责人' , width:150 , align:'center'}
+                                ,{field: 'phone', title: '联系电话', width:130 , align:'center'}
+                                ,{field: 'goods_type_name', title: '主营类目', width: 140 , align:'center'}
+                                ,{field: 'audit_status', title: '审核状态', width: 140,  align:'center'  , templet: function(d){
+                                    if(d.audit_status=="1"){
+                                        return '待审核';
+                                    }else if(d.audit_status=="2"){
+                                        return '驳回';
+                                    }else if(d.audit_status=="3"){
+                                        return '通过';
+                                    }
+                                }}
+                                ,{field: 'manage_status', title: '经营状态', width: 140,  align:'center' , templet: function(d){
+                                    if(d.manage_status=="1"){
+                                        return '经营中';
+                                    }else if(d.manage_status=="2"){
+                                        return '审核中';
+                                    }else if(d.manage_status=="3"){
+                                        return '已停业';
+                                    }
+                                }}
+                                ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                                    return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+                                }}
+                            ]]
+                            ,data:data
+                        });
+                    }
+                },
+                error:function (data) {
+                    console.log("错误");
+                }
+            });
+
+        })
 
 
         // #table操作事件

@@ -76,19 +76,28 @@
         
         form.on('switch(filter)', function(data){
             var flag = data.elem.checked;
-            var id = $(data.elem).data("id");
-                console.log(data.elem.checked); //开关是否开启，true或者false
-                console.log(data.elem); //得到checkbox原始DOM对象
-                console.log($(data.elem).data("id"));
-                if(flag){
-                    var btnTag = 1;
+            var id =$(data.elem).data("id");
+            if(flag){
+                var btnTag = 1;
+            }else{
+                var btnTag = 0;
+            }
+//             $.get("/admin/role/state/"+ id + "/" + btnTag,{
+            $.get("/admin/admin_user/state/"+ id + "/" + btnTag,{
+            },function(res){
+                if(res==1)
+                {
+                    data.elem.checked = !flag;
                 }else{
-                    var btnTag = 0;
+                    data.elem.checked = !flag;
+                    form.render();
                 }
+            });
                 
                 
 
             }); 
+
 
          var list = <?php echo $list; ?>;
          var data = [];
@@ -104,21 +113,20 @@
                  data.push(list[i]);
              }
          }
-
             table.render({
                     elem: '#demo'
                     ,limit:999999
-                    ,width:1120
                     ,cols: [[ //表头
-                        {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
-                        ,{field: 'account', title: '账号' , width:150 , align:'center'}
-                        ,{field: 'shopname', title: '店铺名称' , width:150 , align:'center'}
-                        ,{field: 'name', title: '姓名', width:100 , align:'center'}
-                        ,{field: 'partment', title: '部门', width: 100 , align:'center'}
-                        ,{field: 'role_name', title: '角色', width: 80 , align:'center'}
-                        ,{field: 'time', title: '创建时间', width: 140, sort: true , align:'center' ,templet : "<div>{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
-                        ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
-                        ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                        {field: 'id', title: 'ID',  sort: true, fixed: 'left' , align:'center'}
+                        ,{field: 'account', title: '账号' ,  align:'center'}
+
+                        ,{field: 'shopname', title: '店铺名称' ,  align:'center'}
+                        ,{field: 'name', title: '姓名',  align:'center'}
+                        ,{field: 'partment', title: '部门', align:'center'}
+                        ,{field: 'role_name', title: '角色',  align:'center'}
+                        ,{field: 'time', title: '创建时间', sort: true , align:'center' ,templet : "<div>{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                        ,{field: 'login', title: '登录权限',  align:'center' , templet: '#titleTpl'}
+                        ,{field: 'action', title: '操作',  align:'center' , templet: function(d){
                             if(d.role_name=="商户"){
                                 return '<a class="layui-btn layui-btn-xs  layui-btn-disabled" >编辑</a><a class="layui-btn  layui-btn-disabled layui-btn-xs">删除</a>';
                             }else{
@@ -138,27 +146,20 @@
                         return false; 
                     }
 
-                    var data = [
-                        {id:1,account:11111111,shopName:'222222',name:'香香3',partment:'入驻商',role:'管理员',creatdate:'1553656910',login:0,action:'-'},
-                        {id:2,account:11111111,shopName:'333333',name:'香香4',partment:'入驻商',role:'管理员',creatdate:'1553656910',login:0,action:'-'}
-                            ];
-
-
                     table.render({
                         elem: '#demo'
                         ,limit:999999
-                        ,width:1120
                         ,cols: [[ //表头
-                            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
-                            ,{field: 'account', title: '账号' , width:150 , align:'center'}
-                            ,{field: 'shopName', title: '店铺名称' , width:150 , align:'center'}
-                            ,{field: 'name', title: '姓名', width:100 , align:'center'}
-                            ,{field: 'partment', title: '部门', width: 100 , align:'center'}
-                            ,{field: 'role', title: '角色', width: 80 , align:'center'}
-                            ,{field: 'creatdate', title: '创建时间', width: 140, sort: true , align:'center',templet : "<div>{{layui.util.toDateString(d.creatdate, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                            {field: 'id', title: 'ID', sort: true, fixed: 'left' , align:'center'}
+                            ,{field: 'account', title: '账号'  , align:'center'}
+                            ,{field: 'shopName', title: '店铺名称'  , align:'center'}
+                            ,{field: 'name', title: '姓名',  align:'center'}
+                            ,{field: 'partment', title: '部门',  align:'center'}
+                            ,{field: 'role', title: '角色', align:'center'}
+                            ,{field: 'creatdate', title: '创建时间',  sort: true , align:'center',templet : "<div>{{layui.util.toDateString(d.creatdate, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 }
-                            ,{field: 'login', title: '登录权限', width: 130 , align:'center' , templet: '#titleTpl'}
-                            ,{field: 'action', title: '操作', width: 180 , align:'center', templet: function(d){
+                            ,{field: 'login', title: '登录权限',  align:'center' , templet: '#titleTpl'}
+                            ,{field: 'action', title: '操作',  align:'center', templet: function(d){
                                 if(d.role_name=="商户"){
                                     return '<a class="layui-btn layui-btn-xs  layui-btn-disabled" >编辑</a><a class="layui-btn  layui-btn-disabled layui-btn-xs">删除</a>';
                                 }else{

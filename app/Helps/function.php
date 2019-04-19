@@ -110,9 +110,8 @@ if(!function_exists("_tree_sort")){
      */
     function _tree_sort($arr,$cols){
         //子分类排序
-        echo 1;
-        exit;
-        foreach ($arr as $k => &$v) {
+        foreach ($arr as $k => &$v) 
+        {
             if(!empty($v['sub'])){
                 $v['sub']=_tree_sort($v['sub'],$cols);
             }
@@ -143,6 +142,7 @@ if(!function_exists("getSelectList")){
 
 
 
+
 if(!function_exists("genTree")){
 
     function genTree($items,$id='id',$pid='pid',$son = 'children'){
@@ -162,6 +162,24 @@ if(!function_exists("genTree")){
         }
         unset($tmpMap);
         return $tree;
+    }
+
+}
+
+
+
+if(!function_exists("arr")){
+
+    function arr($arr){
+
+        if(!is_string($arr)){
+            dump($arr);
+            exit();
+        }else{
+            var_dump($arr);
+            exit();
+        }
+
     }
 
 }

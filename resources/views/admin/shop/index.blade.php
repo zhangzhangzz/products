@@ -4,16 +4,17 @@
     <div class="main" > 
 
         <form class="layui-form form" action="">
-            <input type="text" name="shopName" required lay-verify="required" placeholder="店铺名称" autocomplete="off" class="layui-input">
-            <input type="text" name="perrson" required lay-verify="required" placeholder="负责人" autocomplete="off" class="layui-input">
-            <input type="text" name="phone" required lay-verify="required" placeholder="联系电话" autocomplete="off" class="layui-input">
-            <input type="text" name="type" required lay-verify="required" placeholder="主营类目" autocomplete="off" class="layui-input">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">筛选</button>
+            <input type="text" name="shop_name"  placeholder="店铺名称" autocomplete="off" class="layui-input">
+            <input type="text" name="functionary" placeholder="负责人" autocomplete="off" class="layui-input">
+            <input type="text" name="phone" placeholder="联系电话" autocomplete="off" class="layui-input">
+            <input type="text" name="goods_type_name" placeholder="主营类目" autocomplete="off" class="layui-input" lay-verify="item">
+            <button class="layui-btn" lay-filter="formDemo" lay-submit>筛选</button>
         </form>
         
     <div class="layui-tab bigbox">
             <ul class="layui-tab-title">
-                <li class="layui-this dBox" data-item="1">待审核</li>
+                <li class="layui-this dBox" data-item="0">全部</li>
+                <li class="dBox" data-item="1">待审核</li>
                 <li class="dBox" data-item="2">驳回</li>
                 <li class="dBox" data-item="3">通过</li>
                 <li class="dBox" data-item="4">经营中</li>
@@ -21,6 +22,9 @@
                 <li class="dBox" data-item="6">已停业</li>
             </ul>
             <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show table1">
+                    <table class="demo0"  lay-filter="test" ></table>
+                </div>
                 <div class="layui-tab-item layui-show">
                     <table class="demo1"  lay-filter="test"></table>
                 </div>
@@ -86,8 +90,10 @@
                     //第一个实例
                     table.render({
                         elem: '.demo1'
-                        ,limit:999999
+                        ,limit:10
                         ,width:1189
+                        ,id:'tableOne'
+                        ,page: true
                         ,cols: [[ //表头
                             {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
                             ,{field: 'company_name', title: '公司名称' , width:150 , align:'center'}
@@ -112,7 +118,9 @@
                                     return '已停业';
                                 }
                             }}
-                            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                            ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                                return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a> `;
+                            }}
                         ]]
                         ,data:data
                     });
@@ -126,26 +134,11 @@
 
         $(".dBox").click(function () {
             var index = $(this).attr("data-item");
-            if(index==2){
-                var url = "{{url('admin/shop/check')}}";
-            }
-            if(index==3){
-                var url = "{{url('admin/shop/shop_pass')}}";
-            }
-            if(index==4){
-                var url = "{{url('admin/shop/shop_manage')}}";
-            }
-            if(index==5){
-                var url = "{{url('admin/shop/shop_audit')}}";
-            }
-            if(index==6){
-                var url = "{{url('admin/shop/shop_down')}}";
-            }
             $.ajax({
-                url:url,
+                url:"{{url('admin/shop/show')}}",
                 type:"POST",
                 dataType:"json",
-                data:{"_token":"{{csrf_token()}}"},
+                data:{"_token":"{{csrf_token()}}","index":index},
                 success:function (data) {
                     console.log(data)
                     if(data.status == 1){
@@ -153,7 +146,8 @@
                         //第一个实例
                         table.render({
                             elem: `.demo${index}`
-                            ,limit:999999
+                            ,limit:10
+                            ,page: true
                             ,width:1189
                             ,cols: [[ //表头
                                 {field: 'shop_name', title: '店铺名称', width:150,  fixed: 'left' , align:'center'}
@@ -179,10 +173,13 @@
                                         return '已停业';
                                     }
                                 }}
-                                ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+                                ,{field: 'action', title: '操作', width: 180 , align:'center' , templet: function(d){
+                                    return `<a class="layui-btn layui-btn-xs" lay-event="" style="margin-top: 14px;" href="/admin/shop/audit/${d.id}" >审核</a>`;
+                                }}
                             ]]
                             ,data:data
                         });
+
                     }
                 },
                 error:function (data) {
@@ -220,6 +217,38 @@
             } else if(layEvent === 'edit'){
                 window.location.href="/admin/admin/add"; 
             }
+        });
+
+        form.verify({
+            item:function (value,item) {
+                var ret = /^[\u4E00-\u9FA5]{2,}$/;
+                console.log(ret.test(value));
+                if(value!="" && !ret.test(value)){
+                    return '至少输入两个汉字';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            var shop_name = data.field.shop_name;
+            var functionary = data.field.functionary;
+            var phone = data.field.phone;
+            var goods_type_name = data.field.goods_type_name;
+            table.reload('tableOne', {
+                url:'{{url('admin/shop/search')}}',
+                method: 'post'
+                , where: {
+                    "_token":"{{csrf_token()}}",
+                    "shop_name":shop_name,
+                    "functionary":functionary,
+                    "phone":phone,
+                    "goods_type_name":goods_type_name
+                }
+
+            });
+            return false;
+
         });
     
     });

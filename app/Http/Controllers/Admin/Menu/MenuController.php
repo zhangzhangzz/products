@@ -24,7 +24,13 @@ class MenuController extends Controller
         $arr = arr(DB::select($sql));
         foreach($arr as $v)
         {
-            $nbsp = str_repeat("&nbsp;", substr_count($v['path'], ",")*30)."|--";
+            $count = substr_count($v['path'], ",");
+            if($count == 1)
+            {
+                $nbsp = str_repeat("&nbsp;", 1)."|--";
+            }else{
+                $nbsp = str_repeat("&nbsp;", $count * 10)."|--";
+            }
             $v['name'] = $nbsp.$v['name'];
             $data[] = $v;
         }
@@ -54,6 +60,12 @@ class MenuController extends Controller
         // 获取所有传参
         $list = $request -> except("_token");
         $boss = $list['boss'];
+        // 菜单名称是否已经存在
+        $not_name = Action::where("name", $list['name']) -> get();
+        if(!empty(arr($not_name)))
+        {
+            return back() -> with('errors','菜单名已存在') -> withInput($list);
+        }
         // 有没有上一级参数
         if($boss)
         {
@@ -127,7 +139,7 @@ class MenuController extends Controller
             $action -> path = $pid -> path . $input['boss'] . ",";
         }
         $action -> state = $input['state'];
-        $action -> sort = $input['sort'];
+
         $re = $action -> save();
         if($re)
         {
@@ -144,13 +156,19 @@ class MenuController extends Controller
      */
     public function del($id)
     {
+
+        $boss = Action::where('boss', $id) -> get();
+        if(!empty(arr($boss)))
+        {
+            return "有子分类无法删除";
+        }
         $re = Action::where('id', $id) -> delete();
         if($re){
             DB::commit();  // 提交事务
             return "1";
         }else{
             DB::rollback();  // 回滚事务
-           return "0";
+           return "删除失败";
         }
     }
 

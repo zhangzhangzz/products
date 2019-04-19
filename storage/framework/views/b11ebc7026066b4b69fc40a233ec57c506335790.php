@@ -11,7 +11,7 @@
     <?php endif; ?>
     <div class="main">
         <div style="padding:30px;">
-            <div style="margin-bottom:15px;">
+            <div>
                     <button class="layui-btn addUser" onclick="addRole();">添加</button>
                 </div>
                 
@@ -66,8 +66,8 @@
         
         form.on('switch(filter)', function(data){
             var flag = data.elem.checked;
-                console.log(data.elem.checked); //开关是否开启，true或者false
-                console.log(data.elem); //得到checkbox原始DOM对象
+//                console.log(data.elem.checked); //开关是否开启，true或者false
+//                console.log(data.elem); //得到checkbox原始DOM对象
                 
                 if(flag){
                     var btnTag = 1;
@@ -87,7 +87,7 @@
         let tdata = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var tr = obj.tr; //获得当前行 tr 的DOM对象
-        console.log(tdata);
+//        console.log(tdata);
         da = obj.data;
 
         // #数据删除
@@ -104,7 +104,7 @@
                     {
                         obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     }else{
-                        alert("删除失败");
+                        alert(data);
                     }
 
                 layer.close(index);
@@ -121,7 +121,14 @@
         var table = layui.table
         ,laytpl = layui.laytpl;
 
-        var list = <?php echo $list; ?>;
+        var list = <?php
+            if(empty(arr($list)))
+            {
+                echo 0;
+            }else{
+                echo $list;
+            }
+            ?>;
         var data = [];
         if(list.length == 1)
         {
@@ -139,13 +146,12 @@
         table.render({
             elem: '#demo'
             ,limit:999999
-            ,width:666
             ,cols: [[ //表头
-            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left' , align:'center'}
-            ,{field: 'name', title: '名称' , width:150 , align:'center'}
-            ,{field: 'url', title: '路径' , width:150 , align:'center'}
-            ,{field: 'boss', title: '上级ID', width:100 , align:'center' }
-            ,{field: 'action', title: '操作', width: 180 , align:'center' , toolbar: '#barDemo'}
+            {field: 'id', title: 'ID', sort: true, fixed: 'left' , align:'center'}
+            ,{field: 'name', title: '名称' ,  align:'left'}
+            ,{field: 'url', title: '路径' ,  align:'center'}
+            ,{field: 'boss', title: '上级ID',  align:'center' }
+            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data
         });

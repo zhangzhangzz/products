@@ -88,7 +88,7 @@
         overflow: hidden;
         }
     .input-val{
-        width: 65%;
+        width: 100%;
         background: #ffffff;
         height: 45px;
         padding: 0 2%;
@@ -109,6 +109,18 @@
     .registered{
         display: inline-block;
         color: #31b0d5;
+    }
+    .Incode{
+        overflow:hidden;
+        display: inline-block;
+        width: calc(100% - 110px);
+    }
+
+
+    .Incode{
+        overflow:hidden;
+        display: inline-block;
+        width: calc(100% - 110px);
     }
 
 
@@ -139,12 +151,13 @@
             </div>
 
             <div class="code">
-                <input type="text" class="form-control iBox input-val" placeholder="请输入验证码" aria-describedby="sizing-addon1">
+                <div class="Incode">
+                    <input type="text" class="form-control iBox input-val" placeholder="请输入验证码" aria-describedby="sizing-addon1">
+                </div>
                 <div class="pr">
                     <canvas id="canvas" width="100" height="43"></canvas>
                     <div style="font-size:12px;color:#888; cursor: pointer;" onclick="draw(show_num);">看不清？换一张</div>
                 </div>
-                
             </div>
 
             <?php if(session('errors')): ?>
@@ -176,6 +189,11 @@
         })
     })
 
+    $("body").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            $(".login").click();
+        }
+    });
     $(".checkBox").click(function(){
         var itag = $($(this).find("i"));
         var flag = itag.is(':visible');

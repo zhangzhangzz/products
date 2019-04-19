@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 对象转数组自定义方法
  * 苏鹏
@@ -14,7 +15,12 @@ function arr($data)
 function di($data)
 {
     echo "<pre>";
-    print_r($data);
+    if(is_array($data))
+    {
+        print_r($data);
+    }else{
+        print_r(arr($data));
+    }
     die;
 }
 /**
@@ -29,7 +35,7 @@ function di($data)
  * @param  integer $root  根节点ID
  * @return array          转换后的树
  */
-function arr2($list, $pk = 'id', $boss = 'boss', $child = 'child', $root=0) {
+function tree($list, $pk = 'id', $boss = 'boss', $child = 'child', $root=0) {
     $tree = array();// 创建Tree
     if(is_array($list)) {
         // 创建基于主键的数组引用
@@ -52,6 +58,17 @@ function arr2($list, $pk = 'id', $boss = 'boss', $child = 'child', $root=0) {
         }
     }
     return $tree;
+}
+
+/**
+ * 遍历左导航栏
+ * 苏鹏
+ */
+function menu()
+{
+    $sql = "select * from action order by concat(path, id)";
+    $menu = \Illuminate\Support\Facades\DB::select($sql);
+    return $menu;
 }
 
 

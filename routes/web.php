@@ -55,6 +55,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('admin_user/del/{id}','Admin_User\Admin_UserController@del');
     Route::any('admin_user/update/{id}','Admin_User\Admin_UserController@update');
     Route::any('admin_user/regular','Admin_User\Admin_UserController@regular');
+    Route::any('admin_user/state/{id}/{state}','Admin_User\Admin_UserController@state');
 
 
     /*TODO:角色管理*/
@@ -81,19 +82,20 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:会员管理*/
     Route::any('user/index','User\UserController@index');
     Route::any('user/status','User\UserController@status');
-    Route::any('user/look','User\UserController@look');
+    Route::any('user/look/{id}','User\UserController@look');
     Route::any('user/disabled','User\UserController@disabled');
     Route::any('user/search','User\UserController@search');
 
 
     /*TODO:店铺管理*/
     Route::any('shop/index','Shop\ShopController@index');
-    Route::any('shop/check','Shop\ShopController@check');
-    Route::any('shop/shop_pass','Shop\ShopController@shop_pass');
-    Route::any('shop/shop_manage','Shop\ShopController@shop_manage');
-    Route::any('shop/shop_audit','Shop\ShopController@shop_audit');
-    Route::any('shop/shop_down','Shop\ShopController@shop_down');
-    Route::any('shop/audit','Shop\ShopController@audit');
+    Route::any('shop/audit/{id}','Shop\ShopController@audit');
+    Route::any('shop/opinion','Shop\ShopController@opinion');
+    Route::any('shop/search','Shop\ShopController@search');
+    Route::any('shop/show','Shop\ShopController@show');
+    Route::any('shop/opinion_pass','Shop\ShopController@opinion_pass');
+
+
 
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');
@@ -101,7 +103,6 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
 
 
     Route::any('goods/addclass','Goods\GoodsController@addclass');
-
     Route::any('goods/manage','Goods\GoodsController@manage'); 
     Route::any('goods/recycle','Goods\GoodsController@recycle');
 
@@ -120,12 +121,17 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('category/updata','Goods\CategoryController@updata');
     Route::any('category/images','Goods\CategoryController@images');
 
+
     /*TODO:交易管理*/
     Route::any('business/index','Business\BusinessController@index');
-    Route::any('business/send','Business\BusinessController@send');
+    Route::any('business/send/{search?}','Business\BusinessController@send');
     Route::any('business/order','Business\BusinessController@order');
     Route::any('business/assess','Business\BusinessController@assess');
-    
+    Route::any('business/search','Business\BusinessController@search');
+    Route::any('business/show/{show}','Business\BusinessController@show');
+    Route::any('business/delivery','Business\BusinessController@delivery');
+    Route::any('business/reply','Business\BusinessController@reply');
+
     /*TODO:售后*/
     Route::any('after/index','After\AfterController@index');
 

@@ -1,36 +1,33 @@
-<?php
-    $sql = "select * from action order by concat(path, id)";
-    $list = DB::select($sql);
-    $li = 0;
-?>
 <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            @foreach($list as $v)
-                <?php $li++; ?>
-                @if($li != 1 && substr_count($v -> path, ",") == 1)
-                    </li>
+            <?php
+                $menu = tree(arr(menu()));
+                $i = 0;
+            ?>
+            @foreach($menu as $v)
+                <?php $i++; ?>
+                @if($i == 1)
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed">
+                @else
+                <li class="layui-nav-item">
                 @endif
-                @if($li == 1 ||  substr_count($v -> path, ",") == 1)
-                    <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-                    <li class="layui-nav-item layui-nav-itemed">
-                @endif
-
-                @if(substr_count($v -> path, ",") == 1)
-                    @if(in_array($v -> name, session("route")))
-                        <a href="javascript:;">{{ $v -> name }}</a>
+                    @if(in_array($v['name'], session("route")))
+                        <a href="javascript:;">{{ $v['name'] }}</a>
                     @endif
-                @endif
-                    @if(substr_count($v -> path, ",") == 2)
+                    @if(!empty($v['child']))
                         <dl class="layui-nav-child">
-                            @if(in_array($v -> name, session("route")))
-                                <dd><a href="{{ $v -> a }}">{{ $v -> name }}</a></dd>
-                            @endif
+                            @foreach($v['child'] as $e)
+                                @if(in_array($e['name'], session("route")))
+                                    <dd><a href="{{ $e['a'] }}">{{ $e['name'] }}</a></dd>
+                                @endif
+                            @endforeach
                         </dl>
                     @endif
+                </li>
             @endforeach
-            </li>
         </ul>
     </div>
 </div>
