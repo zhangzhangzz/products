@@ -10,10 +10,10 @@
                             <label class="layui-form-label">订单搜索：</label>
                             <div class="layui-input-block ibox">
                                 <select name="select1" class="select1">
-                                    <option value="0">订单编号</option>
-                                    <option value="1">物流单号</option>
-                                    <option value="2">收货人姓名</option>
-                                    <option value="3">收货人手机号</option>
+                                    <option value="1">订单编号</option>
+                                    <option value="2">物流单号</option>
+                                    <option value="3">收货人姓名</option>
+                                    <option value="4">收货人手机号</option>
                                 </select>
                             </div>
                             <div class="layui-input-inline" style="padding-left: 4px;">
@@ -42,17 +42,8 @@
                             <label class="layui-form-label">订单状态：</label>
                             <div class="layui-input-block ibox">
                                 <select name="state" class="select2">
-                                    <option value="0">已取消</option>
-                                    <option value="1">代付款</option>
-                                    <option value="2">已付款</option>
-                                    <option value="3">待分享</option>
-                                    <option value="4">待发货</option>
-                                    <option value="5">已发货</option>
-                                    <option value="6">已完成</option>
-                                    <option value="7">待评价</option>
-                                    <option value="8">已评价</option>
-                                    <option value="9">追加评论</option>
-                                    <option value="10">售后</option>
+                                    <option value="3">未发货</option>
+                                    <option value="4">已发货</option>
                                 </select>
                             </div>
                         </div>
@@ -68,23 +59,20 @@
 
             </form>
 
-            <div class="layui-tab">
+            <div class="layui-tab" lay-filter="demo">
                 <ul class="layui-tab-title">
-                    <li class="layui-this dBox" data-item="2">未发货</li>
-                    <li class="dBox" data-item="3">已发货</li>
+                    <li class="layui-this dBox" data-item="3" lay-id="3">未发货</li>
+                    <li class="dBox" data-item="4" lay-id="4">已发货</li>
                 </ul>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                        <table id="demo2" lay-filter="test"></table>
+                        <table id="demo3" lay-filter="test"></table>
                     </div>
                     <div class="layui-tab-item">
-                        <table id="demo3" lay-filter="test"></table>
+                        <table id="demo4" lay-filter="test"></table>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
 
     </div>
@@ -98,6 +86,12 @@
             ,element = layui.element
             ,$ = layui.$
             ,layer = layui.layer;
+
+            //触发事件
+            $('.site-demo-active').on('click', function(){
+                var othis = $(this), type = othis.data('type');
+                active[type] ? active[type].call(this, othis) : '';
+            });
 
             $(".dBox").click(function () {
                 var index = $(this).attr("data-item");
@@ -162,6 +156,50 @@
                     layer.msg('至少输入一个查询条件');
                     return false;
                 }
+                var field = data.field;
+
+                element.tabChange('demo', field.state);
+                var url = "{{url('admin/business/search')}}";
+                $.ajax({
+                    url:url,
+                    type:"POST",
+                    dataType:"json",
+                    data:{"_token":"{{csrf_token()}}","data":field},
+                    success:function (data) {
+                        console.log(data);
+                        //第一个实例
+                        table.render({
+                            elem: `#demo${field.state}`
+                            ,cols: [[ //表头
+                                {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
+                                ,{field: 'goodsname', title: '商品名称', align:'center' }
+                                ,{field: 'price', title: '单价',  sort: true, align:'center'}
+                                ,{field: 'count', title: '数量', align:'center' }
+                                ,{field: 'realpay', title: '实付金额', align:'center'}
+                                ,{field: 'time', title: '下单时间', align:'center' ,templet : "<div>@{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                                ,{field: 'status', title: '订单状态', align:'center', templet : function(d){
+                                    return `<div class="status${d.status}" style="color:${d.status.color}">${d.status.name}</div>`;
+                                }}
+                                ,{field: 'ems', title: '物流单号', align:'center'}
+                                ,{field: 'name', title: '收货人姓名', align:'center'}
+                                ,{field: 'phone', title: '收货人手机号', align:'center'}
+                                ,{field: 'address', title: '收货人地址', align:'center'}
+                                ,{field: 'action', title: '操作' , align:'center', templet : function(d){
+                                    if(d.status.name == "已发货")
+                                    {
+                                        return '<button class="layui-btn layui-btn-disabled">已发货</button>';
+                                    }else{
+                                        return `<button class="layui-btn" style="background-color: red" onclick="gosend(${d.id});">去发货</button>`;
+                                    }
+                                }}
+                            ]]
+                            ,data:data
+                        });
+                    },
+                    error:function (data) {
+                        console.log("错误");
+                    }
+                });
                 return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             });
             var list = <?php

@@ -1,11 +1,10 @@
-@extends('admin.template.default')
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/addgoodsclass.css') }}">
-@endsection
-@section('content')
+<?php $__env->startSection('css'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/addgoodsclass.css')); ?>">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="main">
         <div class="bigbox">
-            <form class="layui-form form" action="{{url('admin/category/save')}}" method="post" enctype="multipart/form-data">
+            <form class="layui-form form" action="<?php echo e(url('admin/category/save')); ?>" method="post" enctype="multipart/form-data">
                 <div class="layui-form-item">
                     <label class="layui-form-label " >商品分类：</label>
                     <div class="layui-input-inline">
@@ -34,15 +33,16 @@
                     <div class="layui-input-block" style="width:190px;margin-left: 110px;">
                         <select name="pid" lay-verify="required">
                             <option value="0">顶级</option>
-                            @foreach($category_list as $value)
-                                <option value="{{$value["id"]}}" @if($value["pid"] != 0) disabled @endif>{{$value["name"]}}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $category_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($value["id"]); ?>" <?php if($value["pid"] != 0): ?> disabled <?php endif; ?>><?php echo e($value["name"]); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                 </div>
 
                 <div class="layui-input-block btnbox" style="margin-left: 110px!important;">
-                    {{ csrf_field() }}
+                    <?php echo e(csrf_field()); ?>
+
                     <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">保存</button>
                     <button  class="layui-btn layui-btn-primary">取消</button>
                 </div>
@@ -59,9 +59,9 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
     <script>
         layui.use(['form','upload'], function(){
             var form = layui.form
@@ -99,4 +99,5 @@
             });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.template.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

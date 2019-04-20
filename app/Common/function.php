@@ -71,5 +71,3 @@ function menu()
     return $menu;
 }
 
-
-

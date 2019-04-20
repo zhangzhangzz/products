@@ -27,7 +27,7 @@ class CategoryController extends Controller{
         $category_list = genTree($category);
         $page = $request->page ?: 1;
         //每页的条数
-        $perPage = 2;
+        $perPage = 5;
         //计算每页分页的初始位置
         $offset = ($page * $perPage) - $perPage;
         //实例化LengthAwarePaginator类，并传入对应的参数
@@ -58,21 +58,24 @@ class CategoryController extends Controller{
     /**
      * 商品分类入库
      * 陈绪
+     * 苏鹏
      */
-    public function save(Request $request){
-
+    public function save(Request $request)
+    {
         $category = $request->all();
         unset($category["_token"]);
         $images = $_FILES["images"];
-        $images_url = imagesUrl($images);
-        $category["images"] = $images_url;
+        if(!empty($images['name']))
+        {
+            $images_url = imagesUrl($images);
+            $category["images"] = $images_url;
+        }
         $bool = DB::table("goods_type")->insert($category);
         if($bool){
             return redirect("admin/category/index")->with("message","添加成功");
         }else{
             return redirect("admin/category/index")->with("message","添加失败");
         }
-
     }
 
 
@@ -116,7 +119,6 @@ class CategoryController extends Controller{
      * 陈绪
      */
     public function del(Request $request){
-
         if($request->isMethod("post")){
             $id = $request->id;
             $pid = DB::table("goods_type")->where("id",$id)->get()->toArray();
@@ -125,6 +127,10 @@ class CategoryController extends Controller{
                 if(count($category_pid) > 1){
                     exit(json_encode(array("status"=>3,"info"=>"请删除子分类"),JSON_UNESCAPED_UNICODE));
                 }else{
+                    if(!empty($pid[0]['images']))
+                    {
+                        ImagesDelete($pid[0]['images']);
+                    }
                     $bool = DB::table("goods_type")->where("id",$id)->delete();
                     if($bool){
                         return ajax_success("删除成功");
@@ -133,6 +139,10 @@ class CategoryController extends Controller{
                     }
                 }
             }else{
+                if(!empty($pid[0]['images']))
+                {
+                    ImagesDelete($pid[0]['images']);
+                }
                 $category_bool = DB::table("goods_type")->where("id",$id)->delete();
                 if($category_bool){
                     return ajax_success("删除成功");
