@@ -131,7 +131,15 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('business/show/{show}','Business\BusinessController@show');
     Route::any('business/reply','Business\BusinessController@reply');
     Route::any('business/delivery','Business\BusinessController@delivery');
-
+    /*营销中心*/
+    Route::any('marketing/seconds','Marketing\MarketingController@seconds');
+    Route::any('marketing/seconds_save','Marketing\MarketingController@seconds_save');
+    Route::any('marketing/farmhouse','Marketing\MarketingController@farmhouse');
+    Route::any('marketing/farmhouse_save','Marketing\MarketingController@farmhouse_save');
+    Route::any('marketing/group','Marketing\MarketingController@group');
+    Route::any('marketing/group_save','Marketing\MarketingController@group_save');
+    Route::any('marketing/nutrition','Marketing\MarketingController@nutrition');
+    Route::any('marketing/nutrition_save','Marketing\MarketingController@nutrition_save');
     /*TODO:售后*/
     Route::any('after/index','After\AfterController@index');
 
