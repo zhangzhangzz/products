@@ -17,31 +17,25 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色名称：</label>
                     <div class="layui-input-inline">
-<<<<<<< HEAD
                     <input type="text" name="name" value="<?php echo e(old('name')); ?>" lay-verify="name" placeholder="请输入名称" autocomplete="off" class="layui-input">
                     </div>
-                    <span class="error name">请填写至少2个汉字</span>
+<<<<<<< HEAD
+                    <span class="error erna">请填写至少2个汉字</span>
 =======
-                    <input type="text" name="name" value="<?php echo e(old('name')); ?>" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
-                    </div>
                     <span class="error name">请填写汉字</span>
 >>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">角色描述：</label>
                     <div class="layui-input-inline">
-<<<<<<< HEAD
                     <input type="text" name="descript" value="<?php echo e(old('descript')); ?>" lay-verify="describe" placeholder="请输入描述" autocomplete="off" class="layui-input">
-=======
-                    <input type="text" name="descript" value="<?php echo e(old('descript')); ?>" required lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
->>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                     </div>
+                    <span class="error erde">请填写相关描述</span>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称：</label>
                     <div class="layui-input-block seinput">
                         <select name="boss" lay-verify="required">
-                            <option value="/">/</option>
                             <?php $__currentLoopData = $name; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($v -> name); ?>"><?php echo e($v -> name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -100,7 +94,7 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <div class="layui-form-item btnBox">
                     <div class="layui-input-block" style="margin: 0;">
-                    <button class="layui-btn pl  getBtn" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
+                    <button class="layui-btn layui-btn-disabled getBtn" lay-submit lay-filter="formDemo" style="margin-left:130px;">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -118,7 +112,7 @@
             //全选选单选      ----------------------------------------
             var num = false;
    			form.on('checkbox(allChoose)', function(data) {
-
+                
                 var child = $(data.elem).parents('.list').children('.ultable').find(
                     'ul li input[type="checkbox"]:not([name="show"])');
 
@@ -130,16 +124,8 @@
             });
 
 
-<<<<<<< HEAD
             //全部选中来确定全选按钮是否选中
             form.on('checkbox(choose)', function(data) {
-=======
-
-
-
-                //全部选中来确定全选按钮是否选中
-                form.on('checkbox(choose)', function(data) {
->>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                 var three_child = $(data.elem).siblings().find(
                                     'ul li input[type="checkbox"]:not([name="show"])');
                 three_child.each(function(index, item) {
@@ -175,6 +161,42 @@
                 form.render('checkbox');
             });
 
+            var dflag = false,nflag = false;
+            $(".layui-input").change(function(){
+                var item = $(this).attr("name");
+                var value = $(this).val();
+                var error = $($(this).parent()).next();
+                
+                if(item=="name"){
+                    var ret = /^[\u4E00-\u9FA5]+$/;
+                    nflag = ret.test(value);
+                    if(nflag){
+                        $(error).css({color:"green"});
+                        $(error).html("√可以使用");
+                    }else{
+                        $(error).css({color:"red"});
+                        $(error).html("汉字组成");
+                    }
+                }
+
+                if(item=="descript"){
+                    if(value!=""){
+                        $(error).css({color:"red"});
+                        $(error).html("请填写角色描述");
+                    }else{
+                        $(error).css({color:"green"});
+                        $(error).html("√可以使用");
+                        dflag=true;
+                    }
+                }
+
+                if(aflag && nflag && psflag && spflag && partment!=""){
+                    $(".getBtn").attr("class","layui-btn getBtn");
+                }else{
+                    $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
+                }
+            });
+
             form.verify({
                 name: [
                     /^[\u4E00-\u9FA5]{2,}$/
@@ -184,20 +206,9 @@
                     if(value==""){
                         return '请填写角色描述';
                     }
-<<<<<<< HEAD
                 }
             });      
       
-=======
-                        form.render('checkbox');
-                });
-
-
-
-
-
-
->>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
 
           //监听提交
           form.on('submit(formDemo)', function(data){
@@ -207,36 +218,6 @@
               }
                 $("#formmy").submit();
           });
-<<<<<<< HEAD
-=======
-        });
-        $("input").blur(function(){
-            var name = $(this).prop("name");
-            var data = $(this).val();
-            $.ajax({
-                url: '<?php echo e(url("admin/role/regular")); ?>',
-                type: 'POST',
-                dataType: 'JSON',
-                data: {"_token":"<?php echo e(csrf_token()); ?>" , "name":name , "data":data},
-                success: function (data)
-                {
-                    if(data)
-                    {
-                        $("."+name).css("color","red");
-                        $("."+name).html(data);
-                        $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
-
-                    }else{
-                        $("."+name).css("color","green");
-                        $("."+name).html("√可以使用");
-                        $(".getBtn").attr("class","layui-btn getBtn");
-                    }
-                }
-            });
-        });
-
-
->>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
 
         });
         

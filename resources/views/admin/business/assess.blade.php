@@ -14,9 +14,15 @@
 
             <div class="layui-tab">
                 <ul class="layui-tab-title">
+<<<<<<< HEAD
+                    <li class="layui-this">待处理</li>
+                    <li>全部</li>
+                </ul> 
+=======
                     <li class="layui-this dBox" data-item="dcl">待处理</li>
                     <li class="dBox" data-item="qb">全部</li>
                 </ul>
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
                         <table id="demo1" lay-filter="test"></table>
@@ -33,6 +39,48 @@
 
         @endsection
 
+<<<<<<< HEAD
+        var list = <?php echo $list; ?>;
+        var data = [];
+        if(list.length == 1)
+        {
+            for(var i in  list)
+            {
+                data = [list[i]];
+            }
+        }else{
+            for(var i in  list)
+            {
+                data.push(list[i]);
+            }
+        }
+        //第一个实例
+        table.render({
+            elem: '#demo1'
+            ,cols: [[ //表头
+            {field: 'pic', title: '图片',  align:'center' ,  templet : function(d){
+                        return `<img src='${d.pic}' style='width:100%;height:100%'>`;
+                    }}
+            ,{field: 'goodsname', title: '商品名称', align:'center' }
+            ,{field: 'realpay', title: '价格', align:'center'}
+            ,{field: 'username', title: '买家信息', align:'center', templet : function(d){
+                        return `<div>用户昵称: ${d.username}</div><div>物流单号: ${d.ems}</div>`;
+                    }}
+            ,{field: 'content', title: '商品评价', align:'center', templet : function(d){
+                        var date = layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss');
+                        return `<div>${d.content}</div><div>${date}</div>`;
+                    }}
+            ,{field: 'asspic', title: '评价图片',  align:'center' ,  templet : function(d){
+                return `<img src='${d.asspic}' style='width:100%;height:100%'>`;
+            }}
+            ,,{field: 'level', title: '评价等级', align:'center', templet : function(d){
+                        return `<div id="star${d.level}" ></div>`;
+                    }}
+            ,{field: 'action', title: '操作' , align:'center', templet : function(d){
+                        return `<div class="btnBox">
+                                    <a class="layui-btn layui-btn-xs reply"  >回复</a>
+                                    <a class="layui-btn layui-btn-primary layui-btn-xs cancle" >忽略</a>
+=======
         @section('js')
             <script>
                 layui.use(['element','table','rate','layer'], function(){
@@ -78,6 +126,7 @@
                                 return `<div class="btnBox">
                                     <a class="layui-btn layui-btn-xs"  data-id=${d.id} lay-event="reply">回复</a>
                                     <a class="layui-btn layui-btn-primary layui-btn-xs" data-id=${d.id} lay-event="hulv">忽略</a>
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
                                 </div>`;
                             }}
                         ]]

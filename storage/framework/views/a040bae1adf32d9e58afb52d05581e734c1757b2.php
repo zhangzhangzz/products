@@ -13,7 +13,7 @@
                         <div class="warn">*</div>
                         <label class="layui-form-label" style="text-align:left">商品名称：</label>
                         <div class="layui-input-inline">
-                        <input type="text" name="goodsname" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                        <input type="text" name="goodsname" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-form-mid layui-word-aux">最多30个字</div>
                     </div>
@@ -22,6 +22,8 @@
                         <label>商品展示图</label>
                         <div  class="imgBox">
                             <div class="pl">
+                                <div id="toppic"></div>
+                                <div id="toptext">封</div>
                                 <img src="<?php echo e(asset('image/eg.png')); ?>">
                             </div>
                             <div class="pl">
@@ -29,6 +31,10 @@
                             </div>
                             <div class="pl">
                                 <img src="<?php echo e(asset('image/eg.png')); ?>">
+                            </div>
+                            <div class="pl">
+                                <button class="layui-btn layui-btn-primary" style="margin-top: 34px;" id="test1">+ 添加图片</button>
+                                <input type="file" style="display: none;" name="images" onchange="changepic(this)" id="file" class="file imgfile" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" data-id="1" />
                             </div>
                             <div class="stext">建议尺寸：800 * 800像素，点击图片可设置为商品封面，最多上传10张</div>
                         </div>
@@ -65,9 +71,10 @@
                         <div id="special_content">
                             <div class="layui-input-block general-kuang">
                                 <div class="control-group">
-                                    <div class="controls" style="padding: 10px;">
-                                        <a id="add_lv11" class="btn btn-primary" type="button" style="color: #38f;">添加规格项</a>
+                                    <div class="controls" style="padding: 10px;border: 1px solid #ccc;border-radius: 5px;margin-bottom: 5px">
+                                        <button id="add_lv11" class="layui-btn layui-btn-primary" type="button" >添加规格项</button>
                                     </div>
+                                    <span style="color: #888;font-size: 12px;">如有净含量、套餐等多种规格，请添加商品规格</span>
                                 </div>
                                 <div id="lv_table_con1" class="control-group" style="display: none; ">
                                     <label class="control-label">规格项目表</label>
@@ -76,9 +83,37 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
 
                         <div style="display: none"  id="changeUdata">xx</div>
+                    </div>
+
+                    <div class="basicBox">物流信息</div>
+                    <div>
+                        <div class="divBox1">
+                            <div class="divBox2">
+                                <div class="warn">*</div>
+                                <label>配送方式：</label> 
+                            </div>
+                            <div class="divBox2">
+                                <input type="radio" name="send" value="1" title="快递发货">
+                            </div>
+                        </div>
+                        <div class="divBox1">
+                            <div class="divBox2">
+                                <div class="warn">*</div>
+                                <label>快递运费：</label> 
+                            </div>
+                            <div class="sendPrice divBox2">
+                                <span>￥</span><input type="text" style="border: 1px solid #ccc;border-left: none;width: 70px;padding: 3px;"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="basicBox">商品信息</div>
+                    <div>
+                        <textarea id="textDemo" style="display: none;"></textarea>
                     </div>
 
                    
@@ -98,10 +133,31 @@
 
 <?php $__env->startSection('js'); ?>
 <script>
-    layui.use(['form','upload'], function(){
+    layui.use(['form','upload','layedit'], function(){
         var form = layui.form
         ,upload = layui.upload
-            ,$  = layui.$;
+            ,$  = layui.$
+        ,layedit = layui.layedit;
+
+        //文本编辑器图片接口
+        layedit.set({
+            uploadImage: {
+                url: '' //接口url
+                ,type: '' //默认post
+            }
+        });
+
+        //返回的格式
+        // {
+        //     "code": 0 //0表示成功，其它失败
+        //     ,"msg": "" //提示信息 //一般上传失败后返回
+        //     ,"data": {
+        //         "src": "图片路径"
+        //         ,"title": "图片名称" //可选
+        //     }
+        // }
+
+        var index = layedit.build('textDemo');
 
         var uploadInst =  upload.render({
                 elem: '#test5'
@@ -111,10 +167,16 @@
                 console.log(res)
                 }
             });
+
+        $("#test1").click(function () {
+            $(".imgfile").click();
+            return false;
+        })
         
         //监听提交
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+            //layer.msg(JSON.stringify(data.field));
+            console.log(layedit.getContent(index));
             return false;
         });
 
@@ -234,7 +296,11 @@
             }
             tableHTML +=`<th class="th-price">
                             <em class="zent-form__required">*</em>
-                            <!-- react-text: 687 -->价格（元）<!-- /react-text -->
+                            <!-- react-text: 687 -->单独购买价格（元）<!-- /react-text -->
+                        </th>
+                        <th class="th-ptprice">
+                            <em class="zent-form__required">*</em>
+                            <!-- react-text: 687 -->拼团价格（元）<!-- /react-text -->
                         </th>
                         <th class="th-stock">
                             <em class="zent-form__required">*</em><!-- react-text: 690 -->库存<!-- /react-text -->
@@ -317,6 +383,15 @@
                                         <div class="zent-number-input-wrapper input-mini">
                                             <div class="zent-input-wrapper input-mini">
                                                 <input type="text" class="zent-input" name="price" autocomplete="off" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="widget-form__group-row">
+                                        <div class="zent-number-input-wrapper input-mini">
+                                            <div class="zent-input-wrapper input-mini">
+                                                <input type="text" class="zent-input" name="ptprice" autocomplete="off" value="">
                                             </div>
                                         </div>
                                     </div>

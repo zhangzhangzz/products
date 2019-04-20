@@ -37,6 +37,8 @@
     float: left;
 }
 
+
+
 label{
     float: left;
     padding: 9px 15px;
@@ -139,10 +141,6 @@ label{
 .labelText{
     height: 30px;
     line-height: 30px;
-<<<<<<< HEAD
-=======
-
->>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
 }
 
 .reinput{
@@ -240,14 +238,49 @@ label{
     color: #38f;
 }
 
-<<<<<<< HEAD
 .cBody{
     position:relative;
     overflow:hidden;
     background-color: #eee;
     margin: 5px 0;
 }
-=======
 
+.sendPrice{
+    height: 37px;
+    line-height: 37px;
+    border-radius: 2px;
+}
 
->>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
+.sendPrice > span{
+    border: 1px solid rgb(161, 161, 161);
+    color: #555;
+    padding: 3px;
+}
+
+.divBox2{
+    float: left;
+}
+
+.layui-form-radio > div{
+    color: #555;
+}
+
+.divBox1{
+    overflow: hidden;
+}
+
+#toppic{
+    position: absolute;
+    border-style: solid;
+    border-width: 40px 50px 0px 0;
+    border-color: rgb(230, 20, 55)transparent transparent transparent;
+    width: 0px;
+    height: 0px;
+}
+
+#toptext{
+    position: absolute;
+    color: #fff;
+    font-weight: bold;
+    padding: 3px 6px;
+}
