@@ -221,29 +221,6 @@
                                 <div class="layui-form-item" >
                                     <label class="layui-form-label">快递公司：</label>
                                     <div class="layui-input-block ibox">
-<<<<<<< HEAD
-                                        <select name="" class="" style="padding: 8px;border-color: #e6e6e6;border-radius:   2px;">
-                                            <option value="0">圆通快递</option>
-                                            <option value="1">韵达快递</option>
-                                            <option value="2">中通快递</option>
-                                            <option value="3">申通快递</option>
-                                            <option value="4">EMS</option>
-                                            <option value="5">优速快递</option>
-                                            <option value="6">天天快递</option>
-                                            <option value="7">百世快递</option>
-                                            <option value="8">宅急送</option>
-                                            <option value="9">邮政包裹</option>
-                                            <option value="10">全峰快递</option>
-                                            <option value="11">德邦物流</option>
-                                            <option value="12">华宇物流</option>
-                                            <option value="13">龙邦物流</option>
-                                            <option value="14">优速物流</option>
-                                            <option value="15">中邮物流</option>
-                                            <option value="16">申通物流</option>
-                                            <option value="17">传喜物流</option>
-                                            <option value="18">中铁物流</option>
-                                            <option value="19">飞康达物流</option>
-=======
                                         <select name="emsName" class="emsName" style="padding: 8px;border-color: #e6e6e6;border-radius:   2px;">
                                             <option value="圆通快递">圆通快递</option>
                                             <option value="韵达快递">韵达快递</option>
@@ -264,8 +241,6 @@
                                             <option value="申通物流">申通物流</option>
                                             <option value="传喜物流">传喜物流</option>
                                             <option value="中铁物流">中铁物流</option>
-                                            <option value="飞康达物流">飞康达物流</option>
->>>>>>> 69fbb80c0d6d5ababe6c8c3af23a368ca11c768b
                                         </select>
                                     </div>
                                 </div>

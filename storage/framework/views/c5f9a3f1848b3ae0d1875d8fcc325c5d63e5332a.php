@@ -119,7 +119,6 @@
                     ,cols: [[ //表头
                         {field: 'id', title: 'ID',  sort: true, fixed: 'left' , align:'center'}
                         ,{field: 'account', title: '账号' ,  align:'center'}
-
                         ,{field: 'shopname', title: '店铺名称' ,  align:'center'}
                         ,{field: 'name', title: '姓名',  align:'center'}
                         ,{field: 'partment', title: '部门', align:'center'}

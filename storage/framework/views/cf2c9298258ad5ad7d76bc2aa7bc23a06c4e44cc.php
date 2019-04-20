@@ -240,7 +240,6 @@
                                             <option value="申通物流">申通物流</option>
                                             <option value="传喜物流">传喜物流</option>
                                             <option value="中铁物流">中铁物流</option>
-                                            <option value="飞康达物流">飞康达物流</option>
                                         </select>
                                     </div>
                                 </div>
