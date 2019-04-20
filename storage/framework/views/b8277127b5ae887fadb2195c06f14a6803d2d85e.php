@@ -34,7 +34,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">上级名称</label>
                     <div class="layui-input-block" style="width: 190px;">
-                    <select name="boss" lay-verify="required" lay-filter="filter" class="boss" lay-verify="boss">
+                    <select name="boss" lay-verify="required" lay-filter="filter" class="boss" >
                         <option value="0">/</option>
                         <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php
@@ -95,7 +95,10 @@
                 ,'请使用汉字'
             ]
             ,url:function(value,item){
-                
+                var boss = $(".boss").val();
+                if(boss!=0 && value==""){
+                    return "URL不能为空";
+                }
             }
         });
 
@@ -143,6 +146,10 @@
 
             if(/^[\u4E00-\u9FA5]+$/.test(name)){
                 nflag = true;
+            }
+
+            if(boss==0 && url=="" || boss!=0 && url!="" || boss==0 && url!=""){
+                uflag = true;
             }
 
 
