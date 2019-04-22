@@ -17,7 +17,7 @@
                         <?php if(!empty($val->images)): ?>
                         <img class="layui-upload-img Imgaes" id="demo1" src="<?php echo e(ImagesOssUrl); ?>/<?php echo e($val->images); ?>">
                         <?php endif; ?>
-                        <input type="file" style="display: none;" name="images" onchange="changepic(this)" id="file" class="file imgfile" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" data-id="1" required="required" />
+                        <input type="file" style="display: none;" name="images" onchange="changepic(this)" id="file" class="file imgfile" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" data-id="1"  />
                         <p id="demoText"></p>
                     </div>
                     <button type="button" class="layui-btn" id="test1">上传图片</button>

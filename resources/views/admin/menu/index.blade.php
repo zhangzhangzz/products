@@ -5,7 +5,7 @@
         <div class="errors">
             <h3>警告</h3>
             <br/>
-            {{ session('errors') }}
+                {{ session('errors') }}
             <br/>
         </div>
     @endif
@@ -58,9 +58,19 @@
      }
 
 
-     layui.use(['table','form'], function(id=""){
+
+     layui.use(['table','form'], function(){
         var table = layui.table
-        form = layui.form;
+        form = layui.form
+        $ = layui.$;
+         $(function(){
+             var mag = "<?php echo session('msg') ?>";
+             if(mag!='')
+             {
+                 layer.msg("添加成功");
+             }
+         });
+
 
         // #登录权限事件
         

@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers\Admin\Goods;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Admin\Goods_Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -96,14 +97,28 @@ class CategoryController extends Controller{
     /**
      * 商品分类更新
      * 陈绪
+     * 苏鹏
      */
-    public function updata(Request $request){
-
-        $category = $request->all();
-        unset($category["_token"]);
+    public function updata(Request $request)
+    {
+        $category = $request -> except("_token","images");
         $images = $_FILES["images"];
-        $images_url = ImagesUrl($images);
-        $category["images"] = $images_url;
+        // 判断有图片上传吗
+        if($images['size'] > 0)
+        {
+            // 有图片上传
+            $img = Goods_Type::find($category['id']);
+            // 是否更改了图片
+            if($images['name'] != $img['images'])
+            {
+                // 更改过图片,删除之前图片
+                ImagesDelete($img['images']);
+                // 上传新图片
+                $images_url = ImagesUrl($images);
+                $category["images"] = $images_url;
+            }
+
+        }
         $bool = DB::table("goods_type")->where("id",$category["id"])->update($category);
         if($bool){
             return redirect("admin/category/index")->with("message","修改成功");

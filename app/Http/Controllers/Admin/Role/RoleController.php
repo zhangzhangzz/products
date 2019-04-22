@@ -80,7 +80,7 @@ class RoleController extends Controller
         $res = DB::table("action_roles") -> insert($data);
         if($re && $res){
             DB::commit();  // 提交事务
-            return redirect('admin/role/index');
+            return redirect('admin/role/index') -> with('msg','添加成功');
         }else{
             DB::rollback();  // 回滚事务
             return back() -> with('errors',"添加角色权限关联表失败") -> withInput($list);
@@ -169,7 +169,7 @@ class RoleController extends Controller
         $re = $roles -> save();
         if($re && $res){
             DB::commit();  // 提交事务
-            return redirect('admin/role/index');
+            return redirect('admin/role/index') -> with('msg','修改成功');
         }else{
             DB::rollback();  // 回滚事务
             return back() -> with('errors','修改失败');

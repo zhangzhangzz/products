@@ -66,12 +66,12 @@ class Admin_UserController extends Controller
             if($res)
             {
                 DB::commit();  // 提交事务
-                return redirect('admin/admin_user/index');
+                return redirect('admin/admin_user/index') -> with('msg','添加成功');
             }
             return back() -> with('errors','插入角色中间表失败') -> withInput($list);
         }else{
             DB::rollback();  // 回滚事务
-            return back() -> with('errors','修改失败') -> withInput($list);
+            return back() -> with('errors','添加失败') -> withInput($list);
         }
     }
     /**
@@ -129,7 +129,7 @@ class Admin_UserController extends Controller
         if($re && $res)
         {
             DB::commit();  // 提交事务
-            return redirect('admin/admin_user/index');
+            return redirect('admin/admin_user/index') -> with('msg','修改成功');
         }else{
             DB::rollback();  // 回滚事务
             return back() -> with('errors','修改失败') -> withInput($list);

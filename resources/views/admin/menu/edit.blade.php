@@ -87,7 +87,6 @@
     layui.use('form', function(){
         var form = layui.form
         $ = layui.$;
-
         $(function () {
             var name = $(".name").val();
             var boss = $(".boss").val();
@@ -111,7 +110,7 @@
             var boss = $(".boss").val();
             var url = $(".url").val();
             var ret = /^[\u4E00-\u9FA5]+$/.test(name);
-            if(boss!=0 && url=="" || !ret){
+            if(boss!=0 && url=="" && !ret){
                 $(".getBtn").attr("class","layui-btn layui-btn-disabled getBtn");
                 return false;
             }

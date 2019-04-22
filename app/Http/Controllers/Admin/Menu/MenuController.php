@@ -88,7 +88,7 @@ class MenuController extends Controller
         $re = Action::create($list);
         if($re && $res){
             DB::commit();  // 提交事务
-            return redirect('admin/menu/index');
+            return redirect('admin/menu/index') -> with('msg','添加成功');
         }else{
             DB::rollback();  // 回滚事务
             return back() -> with('errors','添加失败') -> withInput($list);
@@ -144,7 +144,7 @@ class MenuController extends Controller
         if($re)
         {
             DB::commit();  // 提交事务
-            return redirect('admin/menu/index');
+            return redirect('admin/menu/index') -> with('msg','修改成功');
         }else{
             DB::rollback();  // 回滚事务
             return back() -> with('errors','修改失败');
