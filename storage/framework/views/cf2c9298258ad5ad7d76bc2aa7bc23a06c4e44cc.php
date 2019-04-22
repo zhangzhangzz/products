@@ -119,7 +119,7 @@
                                 ,{field: 'phone', title: '收货人手机号', align:'center'}
                                 ,{field: 'address', title: '收货人地址', align:'center'}
                                 ,{field: 'action', title: '操作' , align:'center', templet : function(d){
-                                    if(d.status.name == "已发货")
+                                    if(d.status.name == "已发货" || d.status.name == "已完成")
                                     {
                                         return '<button class="layui-btn layui-btn-disabled">已发货</button>';
                                     }else{
@@ -225,7 +225,7 @@
 
             //第一个实例
             table.render({
-                elem: '#demo2'
+                elem: '#demo3'
                 ,cols: [[ //表头
                 {field: 'orderid', title: '订单编号',  sort: true, fixed: 'left', align:'center'}
                 ,{field: 'goodsname', title: '商品名称', align:'center' }
