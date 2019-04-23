@@ -62,13 +62,7 @@
             ,form = layui.form
             ,laytpl = layui.laytpl
             ,$ = layui.$;
-         $(function(){
-             var mag = "<?php echo session('msg') ?>";
-             if(mag!='')
-             {
-                 layer.msg("添加成功");
-             }
-         });
+
          form.render();
 
          var list = <?php

@@ -1,7 +1,5 @@
 @extends('admin.template.default')
-@section('css')
 <link rel="stylesheet" href="{{ asset('css/addgoodsclass.css') }}">
-@endsection
 @section('content')
     <div class="main">
         <div class="bigbox">

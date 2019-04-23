@@ -36,23 +36,21 @@ if(!function_exists("ajax_error")){
 //oss 图片上传
 if(!function_exists("ImagesUrl")){
 
-    function ImagesUrl($images_url)
-    {
-        // 后缀名
+    function ImagesUrl($images_url){
+
         $str_name = strrchr($images_url["name"],".");
         // 存储空间名称
-        // 图片名称
-        $name = md5(time().rand(1000,9999).$images_url["name"]).$str_name;
-        $filePath = "uploads"."/".$name;
+        // 文件名称
+        // 文件内容
+        $filePath = $images_url["name"];
         $allow_type = ['.jpg', '.jpeg', '.gif', '.bmp', '.png'];
-        $img_contents = file_get_contents($images_url['tmp_name']);
         if (! in_array($str_name, $allow_type)) {
             exit("文件格式不在允许范围内哦");
         }
 
         try{
             $ossClient = new OssClient(accessKeyId, accessKeySecret, endpoint);
-            $result = $ossClient -> putObject(bucket, $filePath, $img_contents);
+            $result = $ossClient->uploadFile(bucket, "uploads"."/".$filePath,$images_url['tmp_name']);
             $arr = [
                 'oss_url' => $result['info']['url'],  //上传资源地址
             ];
@@ -61,8 +59,12 @@ if(!function_exists("ImagesUrl")){
         }
         $images_url_name = substr(strrchr($arr["oss_url"],"/"),1);
         return $images_url_name;
+
     }
+
 }
+
+
 
 //oss图片删除
 if(!function_exists("ImagesDelete")){
@@ -71,7 +73,7 @@ if(!function_exists("ImagesDelete")){
 
         try{
             $ossClient = new OssClient(accessKeyId, accessKeySecret, endpoint);
-            $bool = $ossClient->deleteObject(bucket, "uploads/".$images_url);
+            $bool = $ossClient->deleteObject(bucket, $images_url);
         } catch(OssException $e) {
             $bool = $e->getMessage();
         }

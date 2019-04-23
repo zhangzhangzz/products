@@ -75,10 +75,13 @@ class BusinessController extends Controller
      */
     public function search(Request $request)
     {
+<<<<<<< HEAD
+=======
         $se = "";
         $state = 0;
         $and = "";
         $list = [];
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
         $select1 = [
             // 订单编号
             "1" => "orderid",
@@ -89,6 +92,49 @@ class BusinessController extends Controller
             // 收货人手机号
             "4" => "phone"
         ];
+<<<<<<< HEAD
+        $list = $request -> except("_token");
+        // 是不是就填写了
+//        if(empty($list['gname']) && empty($list['date']) && !empty($list['select1_input']))
+//        {
+//
+//        }
+        return json_encode($list);
+        if(is_numeric($search))
+        {
+            if($search >= 2)
+            {
+                $s = $search - 1;
+                $search = 2;
+            }
+        }
+        switch ($search)
+        {
+            case 1:
+                $list = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id";
+                $list = arr(DB::select($sql));
+                return view("admin.business.index",["list" => $list, 's_c_n' => json_encode($this -> s_c_n)]);
+                break;
+            case 2:
+                $data = [];
+                $sql = "select * from business as b inner join goods as g on b.good_id=g.id and b.status='{$s}'";
+                $list = arr(DB::select($sql));
+                if(!empty($list))
+                {
+                    foreach($list as $v)
+                    {
+                        $v['status'] = $this -> s_c_n[$s];
+                        $data[] = $v;
+                    }
+                }
+                return json_encode($data);
+                break;
+            default:
+                echo json_encode("错误");
+                break;
+        }
+=======
         // 获取所有参数
         $input = $request -> except("_token");
         if($input['data']['state'] != 1)
@@ -266,6 +312,7 @@ class BusinessController extends Controller
             }
         }
         return json_encode($list);
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
     }
     /**
      * 交易管理订单详情
@@ -290,9 +337,8 @@ class BusinessController extends Controller
         {
             $i = 1;
             $status = 2;
-        }else{
-            $status = $status - 1;
         }
+
         $data = Business::where("status", $status) -> get();
         if(!empty(arr($data)))
         {
@@ -347,16 +393,58 @@ class BusinessController extends Controller
     {
         $sql = "select 
                     a.content,a.content_time,a.reply_time,a.level,
+<<<<<<< HEAD
+                    b.id,b.ems,
+                    g.pic,g.goodsname,g.realpay,
+                    u.name 
+                    as username from 
+                    ((assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4 and a.state=0)
+                     INNER JOIN goods as g on b.good_id=g.id) 
+                     INNER JOIN account as u on b.user_id=u.id";
+=======
                     b.id,b.ems,b.name,
                     g.pic,g.goodsname,g.realpay
                     from 
                     (assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4 and a.state=0)
                      INNER JOIN goods as g on b.good_id=g.id";
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
         $list = DB::select($sql);
         return view("admin.business.assess",["list" => json_encode($list)]);
     }
     /**
      * 交易管理(评价管理)回复操作
+<<<<<<< HEAD
+     *
+     * 苏鹏
+     */
+    public function reply(Request $request)
+    {
+        $list = $request -> except("_token");
+        $db = Assess::find($list['id']);
+
+        if($list['type'] == 1)
+        {
+            $db -> reply = $list['reply'];
+            $db -> reply_time = time();
+            $db -> state = 1;
+        }else{
+            $db -> state = 2;
+        }
+        $re = $db -> save();
+        if($re){
+            DB::commit();  // 提交事务
+            return 1;
+        }else{
+            DB::rollback();  // 回滚事务
+            return 0;
+        }
+    }
+    /**
+     * 交易管理(订单管理)切换展示
+     *
+     * 苏鹏
+     */
+=======
      *
      * 苏鹏
      */
@@ -386,6 +474,7 @@ class BusinessController extends Controller
      *
      * 苏鹏
      */
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
     public function show($search)
     {
         $data = [];
@@ -436,11 +525,21 @@ class BusinessController extends Controller
             case "qb":
                 $sql = "select 
                     a.content,a.content_time,a.reply_time,a.level,a.reply,a.state,
+<<<<<<< HEAD
+                    b.id,b.ems,
+                    g.pic,g.goodsname,g.realpay,
+                    u.name 
+                    as username from 
+                    ((assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4 and (a.state=1 or a.state=2))
+                     INNER JOIN goods as g on b.good_id=g.id) 
+                     INNER JOIN account as u on b.user_id=u.id";
+=======
                     b.id,b.ems,b.name,
                     g.pic,g.goodsname,g.realpay
                     from 
                     (assess as a INNER JOIN business as b on a.bus_id=b.id and b.status=4 and (a.state=1 or a.state=2))
                      INNER JOIN goods as g on b.good_id=g.id";
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
                 $list = DB::select($sql);
                 return json_encode($list);
                 break;

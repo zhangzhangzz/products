@@ -14,9 +14,15 @@
 
             <div class="layui-tab">
                 <ul class="layui-tab-title">
+<<<<<<< HEAD
+                    <li class="layui-this">待处理</li>
+                    <li>全部</li>
+                </ul> 
+=======
                     <li class="layui-this dBox" data-item="dcl">待处理</li>
                     <li class="dBox" data-item="qb">全部</li>
                 </ul>
+>>>>>>> 8144c582815c7def43e43976de9e0c6f7a1338dd
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
                         <table id="demo1" lay-filter="test"></table>
@@ -32,6 +38,7 @@
 
 
         @endsection
+
         @section('js')
             <script>
                 layui.use(['element','table','rate','layer'], function(){
@@ -89,7 +96,7 @@
                                     elem: '#star'+data[item].level         //绑定元素
                                     , length: 5           //星星个数
                                     , value: data[item].level              //初始化值
-//                      , half: true           //支持半颗星
+            //                      , half: true           //支持半颗星
                                     , text: false           //显示文本，默认显示 '3.5星'
                                     , readonly: true      //只读
                                 });
@@ -142,7 +149,7 @@
                                                     elem: '#star'+data[item].level         //绑定元素
                                                     , length: 5           //星星个数
                                                     , value: data[item].level              //初始化值
-//                      , half: true           //支持半颗星
+                            //                      , half: true           //支持半颗星
                                                     , text: false           //显示文本，默认显示 '3.5星'
                                                     , readonly: true      //只读
                                                 });
@@ -233,7 +240,7 @@
                                         success:function (data) {
                                             if(data)
                                             {
-//                                location = location;
+            //                                location = location;
                                                 obj.del();
                                             }else{
                                                 alert("回复失败");
@@ -270,7 +277,7 @@
                                         success:function (data) {
                                             if(data)
                                             {
-//                                location = location;
+            //                                location = location;
                                                 obj.del();
                                             }else{
                                                 alert("忽略失败");

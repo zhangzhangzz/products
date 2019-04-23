@@ -100,9 +100,10 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     /*TODO:商品*/
     Route::any('goods/index','Goods\GoodsController@index');
     Route::any('goods/add','Goods\GoodsController@add');
+
+
     Route::any('goods/addclass','Goods\GoodsController@addclass');
-    Route::any('manage/show/{show}','Goods\ManageController@show');
-    Route::any('manage/index','Goods\ManageController@index');
+    Route::any('manage/index','Goods\ManageController@index'); 
     Route::any('goods/recycle','Goods\GoodsController@recycle');
 
 
@@ -130,7 +131,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin', 'permissions'=>['admin.v
     Route::any('business/show/{show}','Business\BusinessController@show');
     Route::any('business/reply','Business\BusinessController@reply');
     Route::any('business/delivery','Business\BusinessController@delivery');
-    /*TODO:营销中心*/
+    /*营销中心*/
     Route::any('marketing/seconds','Marketing\MarketingController@seconds');
     Route::any('marketing/seconds_save','Marketing\MarketingController@seconds_save');
     Route::any('marketing/farmhouse','Marketing\MarketingController@farmhouse');

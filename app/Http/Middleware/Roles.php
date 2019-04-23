@@ -67,6 +67,11 @@ class Roles
         {
             return $next($request);
         }
+        $file_put = [
+            "date" => date("Y-m-d H:i:s", time()),
+            "route" => $route
+        ];
+//        file_put_contents(" route.txt", json_encode($file_put)."\n\n", 8);
         // 拆分当前路由
         $in_up = explode("@",$route);
         // 搜索查询
@@ -109,6 +114,7 @@ class Roles
 //            返回上一层
 //            return back();
         }
+
         return $next($request);
     }
 }

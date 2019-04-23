@@ -18,7 +18,7 @@
                         @if(!empty($val->images))
                         <img class="layui-upload-img Imgaes" id="demo1" src="{{ImagesOssUrl}}/{{$val->images}}">
                         @endif
-                        <input type="file" style="display: none;" name="images" onchange="changepic(this)" id="file" class="file imgfile" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" data-id="1"  />
+                        <input type="file" style="display: none;" name="images" onchange="changepic(this)" id="file" class="file imgfile" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" data-id="1" required="required" />
                         <p id="demoText"></p>
                     </div>
                     <button type="button" class="layui-btn" id="test1">上传图片</button>

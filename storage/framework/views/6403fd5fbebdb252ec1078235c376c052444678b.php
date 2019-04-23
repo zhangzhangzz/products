@@ -31,6 +31,7 @@
 
 
         <?php $__env->stopSection(); ?>
+
         <?php $__env->startSection('js'); ?>
             <script>
                 layui.use(['element','table','rate','layer'], function(){

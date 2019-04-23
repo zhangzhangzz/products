@@ -9,7 +9,7 @@
             <div style="padding:0 30px;">
                 <form class="layui-form form" action="">
                     <div class="basicBox">基本信息</div>
-                    <div class="layui-form-item">
+                    <div class="layui-form-item"> 
                         <div class="warn">*</div>
                         <label class="layui-form-label" style="text-align:left">商品名称：</label>
                         <div class="layui-input-inline">
@@ -21,10 +21,22 @@
                         <div class="warn">*</div>
                         <label>商品展示图</label>
                         <div  class="imgBox">
-                            <span class="pl btnBox">
-                                <button class="layui-btn layui-btn-primary" style="margin-top: 14px;" id="test1">+ 添加图片</button>
-                            </span>                          
-                            <span class="stext">建议尺寸：800 * 800像素，点击图片可设置为商品封面，最多上传10张,点击图片设为封面图片，默认第一张为封面图片</span>
+                            <div class="pl">
+                                <div id="toppic"></div>
+                                <div id="toptext">封</div>
+                                <img src="<?php echo e(asset('image/eg.png')); ?>">
+                            </div>
+                            <div class="pl">
+                                <img src="<?php echo e(asset('image/eg.png')); ?>">
+                            </div>
+                            <div class="pl">
+                                <img src="<?php echo e(asset('image/eg.png')); ?>">
+                            </div>
+                            <div class="pl">
+                                <button class="layui-btn layui-btn-primary" style="margin-top: 34px;" id="test1">+ 添加图片</button>
+                                <input type="file" style="display: none;" name="images" onchange="changepic(this)" id="file" class="file imgfile" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" data-id="1" />
+                            </div>
+                            <div class="stext">建议尺寸：800 * 800像素，点击图片可设置为商品封面，最多上传10张</div>
                         </div>
                     </div>
 
@@ -111,10 +123,6 @@
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
-
-                    <div class="uploadImgBtn" id="uploadImgBtn">
-                        <input class="uploadImg" type="file" name="file" multiple id="file" onchange="changepic(this)">
-                    </div>
                 </form>
 
             </div>
@@ -161,53 +169,9 @@
             });
 
         $("#test1").click(function () {
-            var imgss = $(".imgPl").length;
-            console.log(imgss);
-            if(imgss>=10){
-                alert("最多上传10张图片");
-                return false;
-            }
-            $("#file").click();
+            $(".imgfile").click();
             return false;
         })
-
-
-        //-------------------------------------------------
-
-        //-------------------------------------------------
-
-
-        window.changepic = function (xx) {
-            var img = $(".imgPl").length;
-            console.log(img);
-            var files = xx.files;
-                var length = files.length;
-                if(img>10||img+length>10){
-                    alert("最多上传10张图片");
-                    return false;
-                }
-                console.log("选择了"+length+"张图片");
-                //3、回显
-                for( var i = 0 ; i < length ; i++ ){
-                    var fr = new FileReader(),
-                        div = document.createElement("div"),
-                        img = document.createElement("img");
-
-                    div.className = 'pl';
-
-                    fr.onload = function(e){
-                        console.log("回显了图片")
-                        var html=`<div class="pl imgPl" onmouseout="rimgHide(this);" onmouseover="rimgShow(this);" onclick="topImg(this)">
-                                    <img src="${this.result}" data-id="${i}">
-                                    <span class="delimg" onclick="delimg(this)" >x</span>
-                                </div>`;
-                        $(".imgBox").prepend(html);
-                    }
-                    fr.readAsDataURL(files[i]);//读取文件
-                }
-        }
-
-        
         
         //监听提交
         form.on('submit(formDemo)', function(data){
@@ -237,27 +201,6 @@
 
         window.reHide = function(x) {
             $(x).find(".remove").css({display:"none"});
-        }
-
-        window.rimgShow = function(x) {
-            $(x).find(".delimg").css({display:"block"});
-        }
-
-        window.topImg = function(x){
-            $("#toppic").remove();
-            $("#toptext").remove();
-            var html = `<div id="toppic"></div>
-                        <div id="toptext">封</div>`;
-            $(x).prepend(html);
-        }
-
-        window.rimgHide = function(x) {
-            $(x).find(".delimg").css({display:"none"});
-        }
-
-        window.delimg = function(x) {
-            $(x).parent().remove();
-            //后台也删除
         }
 
         window.showGdata = function(x) {
@@ -353,7 +296,7 @@
             }
             tableHTML +=`<th class="th-price">
                             <em class="zent-form__required">*</em>
-                            <!-- react-text: 687 -->单独购买价格（元）<!-- /react-text -->
+                            <!-- react-text: 687 -->原价（元）<!-- /react-text -->
                         </th>
                         <th class="th-ptprice">
                             <em class="zent-form__required">*</em>

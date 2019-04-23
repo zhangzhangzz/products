@@ -7,7 +7,6 @@
  */
 namespace App\Http\Controllers\Admin\Goods;
 use App\Http\Controllers\Controller;
-use App\Http\Model\Admin\Goods_Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -28,7 +27,7 @@ class CategoryController extends Controller{
         $category_list = genTree($category);
         $page = $request->page ?: 1;
         //每页的条数
-        $perPage = 5;
+        $perPage = 2;
         //计算每页分页的初始位置
         $offset = ($page * $perPage) - $perPage;
         //实例化LengthAwarePaginator类，并传入对应的参数
@@ -59,24 +58,21 @@ class CategoryController extends Controller{
     /**
      * 商品分类入库
      * 陈绪
-     * 苏鹏
      */
-    public function save(Request $request)
-    {
+    public function save(Request $request){
+
         $category = $request->all();
         unset($category["_token"]);
         $images = $_FILES["images"];
-        if(!empty($images['name']))
-        {
-            $images_url = imagesUrl($images);
-            $category["images"] = $images_url;
-        }
+        $images_url = imagesUrl($images);
+        $category["images"] = $images_url;
         $bool = DB::table("goods_type")->insert($category);
         if($bool){
             return redirect("admin/category/index")->with("message","添加成功");
         }else{
             return redirect("admin/category/index")->with("message","添加失败");
         }
+
     }
 
 
@@ -97,28 +93,14 @@ class CategoryController extends Controller{
     /**
      * 商品分类更新
      * 陈绪
-     * 苏鹏
      */
-    public function updata(Request $request)
-    {
-        $category = $request -> except("_token","images");
-        $images = $_FILES["images"];
-        // 判断有图片上传吗
-        if($images['size'] > 0)
-        {
-            // 有图片上传
-            $img = Goods_Type::find($category['id']);
-            // 是否更改了图片
-            if($images['name'] != $img['images'])
-            {
-                // 更改过图片,删除之前图片
-                ImagesDelete($img['images']);
-                // 上传新图片
-                $images_url = ImagesUrl($images);
-                $category["images"] = $images_url;
-            }
+    public function updata(Request $request){
 
-        }
+        $category = $request->all();
+        unset($category["_token"]);
+        $images = $_FILES["images"];
+        $images_url = ImagesUrl($images);
+        $category["images"] = $images_url;
         $bool = DB::table("goods_type")->where("id",$category["id"])->update($category);
         if($bool){
             return redirect("admin/category/index")->with("message","修改成功");
@@ -134,6 +116,7 @@ class CategoryController extends Controller{
      * 陈绪
      */
     public function del(Request $request){
+
         if($request->isMethod("post")){
             $id = $request->id;
             $pid = DB::table("goods_type")->where("id",$id)->get()->toArray();
@@ -142,10 +125,6 @@ class CategoryController extends Controller{
                 if(count($category_pid) > 1){
                     exit(json_encode(array("status"=>3,"info"=>"请删除子分类"),JSON_UNESCAPED_UNICODE));
                 }else{
-                    if(!empty($pid[0]['images']))
-                    {
-                        ImagesDelete($pid[0]['images']);
-                    }
                     $bool = DB::table("goods_type")->where("id",$id)->delete();
                     if($bool){
                         return ajax_success("删除成功");
@@ -154,10 +133,6 @@ class CategoryController extends Controller{
                     }
                 }
             }else{
-                if(!empty($pid[0]['images']))
-                {
-                    ImagesDelete($pid[0]['images']);
-                }
                 $category_bool = DB::table("goods_type")->where("id",$id)->delete();
                 if($category_bool){
                     return ajax_success("删除成功");

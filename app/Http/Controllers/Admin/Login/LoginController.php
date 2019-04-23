@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Login;
 
-use \App\Http\Model\Admin\Roles;
 use App\Http\Model\Admin\Action;
 use App\Http\Model\Admin\Action_Roles;
 use App\Http\Model\Admin\Admin_User;
@@ -42,9 +41,6 @@ class LoginController extends Controller
         {
             return redirect("admin/login") -> with('errors','密码不正确');
         }
-        $role = Roles::find($list['role_id']);
-        // 角色展示权限
-        $list['show'] = $role['show'];
         // 查询是否是超级管理员
         if($list['role_id'] == 1)
         {

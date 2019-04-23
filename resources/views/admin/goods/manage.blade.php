@@ -20,12 +20,12 @@
 
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
-                        <li class="layui-this dBox" data-item="1" lay-id="1">出售中</li>
-                        <li class="dBox" data-item="2" lay-id="2">已售罄</li>
+                        <li class="layui-this">出售中</li>
+                        <li>已售罄</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            <table id="demo1" lay-filter="test"  class="tableBox"></table>
+                            <table id="demo" lay-filter="test"  class="tableBox"></table>
                         </div>
                         <div class="layui-tab-item">
                             <table id="demo2" lay-filter="test" class="tableBox"></table>
@@ -44,7 +44,9 @@
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
 
-
+    <script type="text/html" id="imgDemo">
+        <img src="@{{d.img}}" >
+    </script>
 
     
 
@@ -52,97 +54,58 @@
 
 @section('js')
 <script>
-    layui.use(['table','element'], function(){
+    layui.use(['table','element'], function(id=""){
         var table = layui.table
         ,element = layui.element
         ,$ = layui.$;
-
-
 
         $(".addgoods").click(function(){
             window.location.href="/admin/goods/add";
 
         });
-        var img = "<?php echo ImagesOssUrl; ?>";
-        var list = <?php
-            if(empty(arr($list)))
-            {
-                echo 0;
-            }else{
-                echo $list;
-            }
-            ?>;
-        var data = [];
-        if(list.length == 1)
-        {
-            for(var i in  list)
-            {
-                data = [list[i]];
-            }
-        }else{
-            for(var i in  list)
-            {
-                 data.push(list[i]);
-            }
-        }
+        
+
+        var data = [
+        {img:'{{ asset('image/logo.png') }}',title:'这是中央人民广播电视台',price:'5.00',stock: 999, sale: 999, monsale: 999, createdate:'2019-01-01' , action:'-'},
+        {img:'{{ asset('image/logo.png') }}',title:'这是中央人民广播电视台',price:'5.00',stock: 999, sale: 999, monsale: 999, createdate:'2019-01-01' , action:'-'},
+        {img:'{{ asset('image/logo.png') }}',title:'这是中央人民广播电视台',price:'5.00',stock: 999, sale: 999, monsale: 999, createdate:'2019-01-01' , action:'-'}
+            ];               
+            
 
         //第一个实例
         table.render({
-            elem: '#demo1'
+            elem: '#demo'
             ,limit:999999
             ,cols: [[ //表头
-            {field: 'pic', title: '图片',   align:'center' ,  templet:function(d){
-                if(d.pic!=""){
-                    return `<img src="${img}/${d.pic}">`;
-                }
-            }}
-            ,{field: 'goodsname', title: '标题' ,  align:'center'}
+            {field: 'img', title: '图片',   align:'center' , toolbar: '#imgDemo'}
+            ,{field: 'title', title: '标题' ,  align:'center'}
             ,{field: 'price', title: '价格' ,  align:'center'}
-            ,{field: 'num', title: '库存' ,  align:'center'}
-            ,{field: 'total_num', title: '总销量' ,  align:'center'}
-            ,{field: 'month_num', title: '月销量' ,  align:'center'}
-            ,{field: 'time', title: '创建时间' ,  align:'center' ,templet : "<div>@{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+            ,{field: 'stock', title: '库存' ,  align:'center'}
+            ,{field: 'sale', title: '总销量' ,  align:'center'}
+            ,{field: 'monsale', title: '月销量' ,  align:'center'}
+            ,{field: 'createdate', title: '创建时间' ,  align:'center'}
             ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
             ]]
             ,data:data
         });
 
-        $(".dBox").click(function () {
-            var index = $(this).attr("data-item");
-            var url = "{{url('admin/manage/show')}}"+ "/" + index;
-            $.ajax({
-                url:url,
-                type:"POST",
-                dataType:"json",
-                data:{"_token":"{{csrf_token()}}"},
-                success:function (data) {
-                    //第一个实例
-                    table.render({
-                        elem: `#demo${index}`
-                        ,limit:999999
-                        ,cols: [[ //表头
-                            {field: 'pic', title: '图片',   align:'center' ,  templet:function(d){
-                                if(d.pic!=""){
-                                    return `<img src="${img}/${d.pic}">`;
-                                }
-                            }}
-                            ,{field: 'goodsname', title: '标题' ,  align:'center'}
-                            ,{field: 'price', title: '价格' ,  align:'center'}
-                            ,{field: 'num', title: '库存' ,  align:'center'}
-                            ,{field: 'total_num', title: '总销量' ,  align:'center'}
-                            ,{field: 'month_num', title: '月销量' ,  align:'center'}
-                            ,{field: 'time', title: '创建时间' ,  align:'center' ,templet : "<div>@{{layui.util.toDateString(d.time*1000, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
-                            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
-                        ]]
-                        ,id:`idTest${index}`
-                        ,data:data
-                    });
-                },
-                error:function (data) {
-                    console.log("错误");
-                }
-            });
-        })
+        //第一个实例
+        table.render({
+            elem: '#demo2'
+            ,limit:999999
+            ,cols: [[ //表头
+            {field: 'img', title: '图片',   align:'center' , toolbar: '#imgDemo'}
+            ,{field: 'title', title: '标题' ,  align:'center'}
+            ,{field: 'price', title: '价格' ,  align:'center'}
+            ,{field: 'stock', title: '库存' ,  align:'center'}
+            ,{field: 'sale', title: '总销量' ,  align:'center'}
+            ,{field: 'monsale', title: '月销量' ,  align:'center'}
+            ,{field: 'createdate', title: '创建时间' ,  align:'center'}
+            ,{field: 'action', title: '操作',  align:'center' , toolbar: '#barDemo'}
+            ]]
+            ,data:data
+        });
+        
         // #table操作事件
         table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         let tdata = obj.data; //获得当前行数据

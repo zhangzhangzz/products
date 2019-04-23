@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Goods;
 
-use App\Http\Model\Admin\Goods;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -44,7 +43,17 @@ class GoodsController extends Controller
     {
         return view("admin.goods.classify");
     }
+    
+    /**
+     * 角色显示
+     * 苏鹏
+     */
+    public function manage()
+    {
+        return view("admin.Goods.manage");
+    }
 
+    
     /**
      * 角色显示
      * 苏鹏

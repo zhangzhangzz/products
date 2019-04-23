@@ -23,13 +23,13 @@
 
 .imgBox{
     float: left;
-    overflow: hidden;
     position: relative;
 }
 
 .imgBox > div{
     margin: 0 10px;
-    padding-bottom: 25px;
+    padding: 10px 0 25px;
+    margin-bottom: 20px;
 }
 
 
@@ -46,9 +46,11 @@ label{
 
 .stext{
     position: absolute;
+    bottom: 0;
+    display: block;
+    width: 500px;
     color: #999;
-    text-align: center;
-    bottom: -25px;
+    text-align: left;
 }
 
 .layui-form-select{
@@ -284,3 +286,53 @@ label{
     font-weight: bold;
     padding: 3px 6px;
 }
+
+.imgBox > .pl{
+    width: 187px;
+    height: 100px;
+    position: relative;
+}
+
+.imgBox > div > img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+.uploadImgBtn {
+
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    position: absolute;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.uploadImgBtn .uploadImg {
+    position: absolute;
+    right: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.delimg{
+    position: absolute;
+    top: 0px;
+    right: -8px;
+    background-color: #ccc;
+    color: #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    display: none;
+    cursor: pointer;
+}
+
